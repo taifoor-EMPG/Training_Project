@@ -80,6 +80,9 @@ extension MenuVC
         //optionalLists.register(OptionalListCell.self, forCellReuseIdentifier: Constants.UIDefaults.labels.optionalListCell)
         optionalLists.delegate = self
         optionalLists.dataSource = self
+        
+        //Set Navigation Bar Title
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.navBarReturnTitle, style: .plain, target: nil, action: nil)
     }
 }
 

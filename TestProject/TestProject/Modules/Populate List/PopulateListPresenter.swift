@@ -49,4 +49,8 @@ class PopulateListPresenter: Proto_VTOP_PopulateList, Proto_ITOP_PopulateList
         print("This is tapped")
     }
     
+    func getListName() -> String
+    {
+        return "    " + listName
+    }
 }

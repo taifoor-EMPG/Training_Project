@@ -13,6 +13,7 @@ class PopulateList: UIViewController, Proto_PTOV_PopulateList, UITableViewDelega
     
     var presenter: (Proto_ITOP_PopulateList & Proto_VTOP_PopulateList)?
     @IBOutlet weak var listItems: UITableView!
+    @IBOutlet weak var listTitle: UILabel!
     
     //END OF DATA MEMBERS
     
@@ -32,6 +33,7 @@ extension PopulateList
         //listItems.register(OptionalListCell.self, forCellReuseIdentifier: Constants.UIDefaults.labels.optionalListCell)
         listItems.delegate = self
         listItems.dataSource = self
+        listTitle.text = presenter?.getListName()
     }
 }
 
@@ -49,7 +51,7 @@ extension PopulateList
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = tableView.cellForRow(at: indexPath) as! ListItemCell
+        //let cell = tableView.cellForRow(at: indexPath) as! ListItemCell
         presenter?.pushToEditText(itemNumber: indexPath.row)
     }
 }

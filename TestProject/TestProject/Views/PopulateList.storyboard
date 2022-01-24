@@ -121,6 +121,7 @@
                     </view>
                     <connections>
                         <outlet property="listItems" destination="JLU-zQ-gZw" id="GBX-T6-sUc"/>
+                        <outlet property="listTitle" destination="dPo-2D-Ibi" id="thn-b2-DFd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

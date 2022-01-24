@@ -28,7 +28,7 @@ protocol Proto_VTOP_PopulateList
     
     
     //Misc Functions to Populate View
-    
+    func getListName() -> String
 }
 
 

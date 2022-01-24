@@ -25,6 +25,7 @@
 		7805897F2796CBAD007A327E /* PopulateMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805897E2796CBAD007A327E /* PopulateMenuInteractor.swift */; };
 		780589812796CE3A007A327E /* PopulateMenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780589802796CE3A007A327E /* PopulateMenuRouter.swift */; };
 		780589842796FD53007A327E /* AddNewListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780589832796FD53007A327E /* AddNewListRouter.swift */; };
+		780C7CC2279EE06D008C8D53 /* File.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 780C7CC1279EE06D008C8D53 /* File.rtf */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
 		78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F10279A979300AC6182 /* PopulateListRouter.swift */; };
@@ -61,6 +62,7 @@
 		7805897E2796CBAD007A327E /* PopulateMenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateMenuInteractor.swift; sourceTree = "<group>"; };
 		780589802796CE3A007A327E /* PopulateMenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateMenuRouter.swift; sourceTree = "<group>"; };
 		780589832796FD53007A327E /* AddNewListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewListRouter.swift; sourceTree = "<group>"; };
+		780C7CC1279EE06D008C8D53 /* File.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = File.rtf; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		78CF7F10279A979300AC6182 /* PopulateListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListRouter.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				7805891027954959007A327E /* Assets.xcassets */,
 				7805891227954959007A327E /* LaunchScreen.storyboard */,
 				7805891527954959007A327E /* Info.plist */,
+				780C7CC1279EE06D008C8D53 /* File.rtf */,
 			);
 			path = TestProject;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 			files = (
 				78CF7F1E279AA3FC00AC6182 /* PopulateList.storyboard in Resources */,
 				7805891427954959007A327E /* LaunchScreen.storyboard in Resources */,
+				780C7CC2279EE06D008C8D53 /* File.rtf in Resources */,
 				78CF7F25279E7AF300AC6182 /* GetText.storyboard in Resources */,
 				7805893A27958BF2007A327E /* Menu.storyboard in Resources */,
 				7805891127954959007A327E /* Assets.xcassets in Resources */,

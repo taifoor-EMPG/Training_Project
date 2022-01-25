@@ -34,7 +34,7 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu, P
     
     //MARK: - The next 4 functions perform screen switching
     func pushToSearch() {
-        router?.pushToSearch(view: self)
+        router?.pushToSearch(view: view)
     }
     
     func pushToProfile() {

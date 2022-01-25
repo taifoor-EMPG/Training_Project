@@ -44,7 +44,13 @@ struct Utilities
         }
         popAnError(_self, errorList[0]!)
     }
+    
+    static func newList() -> String
+    {
+        return Constants.newListTitle
+    }
 }
+
 
 extension Utilities
 {

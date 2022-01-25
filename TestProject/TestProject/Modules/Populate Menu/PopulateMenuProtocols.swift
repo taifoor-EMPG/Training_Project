@@ -42,6 +42,7 @@ protocol Proto_PTOV_PopulateMenu: AnyObject
     var presenter: (Proto_VTOP_PopulateMenu & Proto_ITOP_PopulateMenu)? {get set}
     
     //Function to Open List Should be here and implemented on the backend
+    func showActivity()
 }
 
 
@@ -55,6 +56,7 @@ protocol Proto_PTOI_PopulateMenu
     func getOptionalListCount() -> Int
     func getOptionalListTitleArray() -> [String]
     func getListSize(listName: String) -> String?
+    func createNewList(listName: String) -> Bool
 }
 
 protocol Proto_ITOP_PopulateMenu
@@ -69,6 +71,7 @@ protocol Proto_PTOR_PopulateMenu
     func pushToProfile()
     func pushToSearch()
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
+    func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String, editable: Bool)
     func pushToAddNewList()
 }
 

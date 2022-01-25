@@ -59,6 +59,6 @@ protocol Proto_ITOP_PopulateList
 //MARK: - Router Protocol - All functionalities from Router come here
 protocol Proto_PTOR_PopulateList
 {
-    static func createModule(with listName: String) -> UIViewController?
+    static func createModule(with listName: String, editable: Bool) -> UIViewController?
 }
 

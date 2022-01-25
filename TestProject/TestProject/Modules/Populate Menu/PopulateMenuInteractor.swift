@@ -30,4 +30,8 @@ class PopulateMenuInteractor: Proto_PTOI_PopulateMenu
     func getListSize(listName: String) -> String? {
         return ListDataBase.getListSize(listName: listName)
     }
+    
+    func createNewList(listName: String) -> Bool {
+        return ListDataBase.addOptionalList(title: listName)
+    }
 }

@@ -44,6 +44,7 @@ class MenuVC: UIViewController
     
     @IBAction func createNewList(_ sender: UIButton) {
         presenter?.pushToAddNewList()
+        presenter?.viewDidLoad()
     }
     
     @IBAction func loadProfile(_ sender: UIButton) {
@@ -91,6 +92,10 @@ extension MenuVC
 //For View to Communicate User Responses to Presenter
 extension MenuVC: Proto_PTOV_PopulateMenu
 {
+    func showActivity() {
+        optionalLists.reloadData()
+    }
+    
     
 }
 
@@ -99,13 +104,6 @@ extension MenuVC: Proto_PTOV_PopulateMenu
 //For View to conform to Table View
 extension MenuVC: UITableViewDelegate, UITableViewDataSource
 {
-    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0
-        {
-            return
-        }
-    }*/
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.numberOfRowsInSection() ?? 0
     }

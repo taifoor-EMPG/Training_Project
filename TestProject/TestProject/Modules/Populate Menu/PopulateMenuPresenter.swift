@@ -21,8 +21,7 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu
     
     
     func viewDidLoad() {
-        //view?.showActivity()
-        
+        view?.showActivity()
         //Presenter is asking to Interact to load new data
         optionalListTitle = interactor?.getOptionalListTitleArray() ?? []
     }
@@ -37,7 +36,21 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu
     }
     
     func pushToAddNewList() {
-        print("Will work on creating a new list")
+        
+        //Create New List
+        
+        var name = Utilities.newList()
+        var count = 1
+        var result = interactor?.createNewList(listName: name)
+        
+        while result == false
+        {
+            name = Utilities.newList() + "(" + String(count) + ")"
+            result = interactor?.createNewList(listName: name)
+            count += 1
+        }
+        
+        router?.pushToOpenList(view: view, with: name, editable: true)
     }
     
     func pushToOpenList(listName: String) {

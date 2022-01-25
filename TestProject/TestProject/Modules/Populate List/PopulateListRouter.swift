@@ -10,7 +10,7 @@ import UIKit
 
 class PopulateListRouter: Proto_PTOR_PopulateList
 {
-    static func createModule(with listName: String) -> UIViewController?
+    static func createModule(with listName: String, editable: Bool) -> UIViewController?
     {
         let storyBoard: UIStoryboard = UIStoryboard(name: "PopulateList", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "PopulateList") as! PopulateList

@@ -9,7 +9,6 @@ import UIKit
 
 class PopulateMenuRouter: Proto_PTOR_PopulateMenu
 {
-    
     static func createModule() -> UINavigationController? {
         
         //This all should come from a Factory >> Dependency Injection
@@ -49,12 +48,18 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
     
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
     {
-        if let openListVC = PopulateListRouter.createModule(with: listName)
+        pushToOpenList(view: view, with: listName, editable: false)
+    }
+    
+    func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String, editable: Bool) {
+        
+        if let openListVC = PopulateListRouter.createModule(with: listName, editable: editable)
         {
             let viewController = view as! MenuVC
             viewController.navigationController?.pushViewController(openListVC, animated: true)
         }
     }
+    
     
     func pushToAddNewList() {
         return

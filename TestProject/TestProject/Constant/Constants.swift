@@ -15,6 +15,8 @@ struct Constants
     static let listsTitleArray = ["My Day", "Important", "Planned", "Assigned to Me", "Tasks"]
     private static var optionalListsTitleArray:[String] = ["Travel Items"]
     
+    static let newListTitle = "Untitled List"
+    
     struct UIDefaults
     {
         struct images

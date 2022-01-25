@@ -42,7 +42,7 @@ class MenuVC: UIViewController
         presenter?.pushToOpenList(listName: (sender.titleLabel?.text)!)
     }
     
-    @IBAction func createNewList(_ sender: UITableViewCell) {
+    @IBAction func createNewList(_ sender: UIButton) {
         presenter?.pushToAddNewList()
     }
     

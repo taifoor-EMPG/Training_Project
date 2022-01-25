@@ -7,9 +7,10 @@
 
 import UIKit
 
-class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu
+class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu, Proto_PTOV_PopulateMenu
 {
-
+    var presenter: (Proto_ITOP_PopulateMenu & Proto_VTOP_PopulateMenu)?
+    
     //Data Members
     var view: Proto_PTOV_PopulateMenu?
     var interactor: Proto_PTOI_PopulateMenu?
@@ -26,9 +27,14 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu
         optionalListTitle = interactor?.getOptionalListTitleArray() ?? []
     }
     
+    func showActivity() {
+        return
+    }
+    
+    
     //MARK: - The next 4 functions perform screen switching
     func pushToSearch() {
-        print("Search Should be performed")
+        router?.pushToSearch(view: self)
     }
     
     func pushToProfile() {
@@ -36,9 +42,7 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu
     }
     
     func pushToAddNewList() {
-        
         //Create New List
-        
         var name = Utilities.newList()
         var count = 1
         var result = interactor?.createNewList(listName: name)

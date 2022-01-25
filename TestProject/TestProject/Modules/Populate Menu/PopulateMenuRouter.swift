@@ -42,10 +42,16 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
         return
     }
     
-    func pushToSearch() {
-        return
+    func pushToSearch(view: Proto_PTOV_PopulateMenu?) {
+        
+        if let searchVC = SearchRouter.createModule()
+        {
+            let viewController = view as! MenuVC
+            viewController.navigationController?.pushViewController(searchVC, animated: true)
+        }
     }
     
+    //Wrapper Function
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
     {
         pushToOpenList(view: view, with: listName, editable: false)

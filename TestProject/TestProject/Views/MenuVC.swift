@@ -99,6 +99,13 @@ extension MenuVC: Proto_PTOV_PopulateMenu
 //For View to conform to Table View
 extension MenuVC: UITableViewDelegate, UITableViewDataSource
 {
+    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0
+        {
+            return
+        }
+    }*/
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.numberOfRowsInSection() ?? 0
     }

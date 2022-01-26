@@ -7,7 +7,12 @@
 
 import UIKit
 
-class Profile: UIViewController
+class Profile: UIViewController, Proto_PTOV_Profile
 {
+    //DATA MEMBERS
+    
+    var presenter: (Proto_ITOP_Profile & Proto_VTOP_Profile)?
+    
+    //END OF DATA MEMBERS
     
 }

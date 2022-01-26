@@ -29,19 +29,16 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
         return NavigationController
     }
     
-    //func pushToMovieDetail(on view: Proto_PTOV_PopulateMenu?, with: List) {
-        
-        //if let movieDetailViewController = AddNewListRouter.createModule(with: with)
-        
-            //let viewController = view as! MovieListViewController
-            //viewController.navigationController?.pushViewController(movieDetailViewController, animated: true)
-      
-    //}
-    
-    func pushToProfile() {
-        return
+    //Changes to Profile Screen
+    func pushToProfile(view: Proto_PTOV_PopulateMenu?) {
+        if let profileVC = ProfileRouter.createModule()
+        {
+            let viewController = view as! MenuVC
+            viewController.navigationController?.pushViewController(profileVC, animated: true)
+        }
     }
     
+    //Changes to Search Screen
     func pushToSearch(view: Proto_PTOV_PopulateMenu?) {
         
         if let searchVC = SearchRouter.createModule()
@@ -52,6 +49,7 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
     }
     
     //Wrapper Function
+    //Changes to OpenList - Also acts as NewList Creater
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
     {
         pushToOpenList(view: view, with: listName, editable: false)
@@ -64,10 +62,5 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
             let viewController = view as! MenuVC
             viewController.navigationController?.pushViewController(openListVC, animated: true)
         }
-    }
-    
-    
-    func pushToAddNewList() {
-        return
     }
 }

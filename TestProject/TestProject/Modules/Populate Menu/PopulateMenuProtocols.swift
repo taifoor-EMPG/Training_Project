@@ -68,10 +68,9 @@ protocol Proto_ITOP_PopulateMenu
 protocol Proto_PTOR_PopulateMenu
 {
     static func createModule() -> UINavigationController?
-    func pushToProfile()
+    func pushToProfile(view: Proto_PTOV_PopulateMenu?)
     func pushToSearch(view: Proto_PTOV_PopulateMenu?)
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String, editable: Bool)
-    func pushToAddNewList()
 }
 

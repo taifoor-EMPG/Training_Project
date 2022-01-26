@@ -38,7 +38,7 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu, P
     }
     
     func pushToProfile() {
-        print("Show Proxy Here")
+        router?.pushToProfile(view: view)
     }
     
     func pushToAddNewList() {

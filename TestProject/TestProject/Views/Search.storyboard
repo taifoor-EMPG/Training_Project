@@ -66,6 +66,9 @@
                             <constraint firstItem="h8P-MU-fQu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="rtu-EN-aqI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="searchBox" destination="Bk4-bt-WZo" id="3Gk-fv-cuh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

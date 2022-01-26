@@ -271,16 +271,10 @@ struct ListDataBase
         let index = Constants.removeList(listName: listName)
         if index != nil
         {
-            let optionalListNames = Constants.getOptionalListTitles()
+            optionalLists.remove(at: index!)
+            optionalListCount -= 1
             
-            for i in 0..<optionalListCount
-            {
-                if optionalListNames[i] == listName
-                {
-                    optionalLists.remove(at: index!)
-                    optionalListCount -= 1
-                }
-            }
+            return true
         }
         return false
     }

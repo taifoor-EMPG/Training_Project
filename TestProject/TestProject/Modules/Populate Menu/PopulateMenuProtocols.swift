@@ -29,6 +29,7 @@ protocol Proto_VTOP_PopulateMenu
     //Setting View Table
     func numberOfRowsInSection() -> Int
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell
+    func setDeleteAction(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     
     //Misc Functions to Populate View
     func getListSize(listName: String) -> String?
@@ -57,6 +58,7 @@ protocol Proto_PTOI_PopulateMenu
     func getOptionalListTitleArray() -> [String]
     func getListSize(listName: String) -> String?
     func createNewList(listName: String) -> Bool
+    func removeOptionalList(listName: String) -> [String]
 }
 
 protocol Proto_ITOP_PopulateMenu

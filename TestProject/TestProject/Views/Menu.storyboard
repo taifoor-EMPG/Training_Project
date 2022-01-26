@@ -310,6 +310,7 @@
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKU-no-I4Z" userLabel="List Title">
                                                                     <rect key="frame" x="50" y="0.0" width="284" height="40"/>
+                                                                    <gestureRecognizers/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" systemColor="linkColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -325,6 +326,7 @@
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <gestureRecognizers/>
                                                             <constraints>
                                                                 <constraint firstItem="ONS-UV-WfX" firstAttribute="top" secondItem="ckS-Dn-PGZ" secondAttribute="top" id="62G-at-drh"/>
                                                                 <constraint firstItem="nkv-8k-czH" firstAttribute="top" secondItem="ckS-Dn-PGZ" secondAttribute="top" id="GUQ-D8-fOS"/>

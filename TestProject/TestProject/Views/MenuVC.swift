@@ -95,8 +95,6 @@ extension MenuVC: Proto_PTOV_PopulateMenu
     func showActivity() {
         optionalLists.reloadData()
     }
-    
-    
 }
 
 
@@ -115,5 +113,13 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
         presenter?.pushToOpenList(listName: cell.listTitle.text!)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        presenter?.setDeleteAction(tableView, commit: editingStyle, forRowAt: indexPath)
     }
 }

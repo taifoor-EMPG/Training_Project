@@ -34,7 +34,8 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
         if let profileVC = ProfileRouter.createModule()
         {
             let viewController = view as! MenuVC
-            viewController.navigationController?.pushViewController(profileVC, animated: true)
+            viewController.present(profileVC, animated: true, completion: nil)
+            //viewController.navigationController?.pushViewController(profileVC, animated: true)
         }
     }
     
@@ -44,7 +45,10 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
         if let searchVC = SearchRouter.createModule()
         {
             let viewController = view as! MenuVC
-            viewController.navigationController?.pushViewController(searchVC, animated: true)
+            searchVC.modalPresentationStyle = .fullScreen
+            viewController.present(searchVC, animated: true, completion: nil)
+            
+            //viewController.navigationController?.pushViewController(searchVC, animated: true)
         }
     }
     

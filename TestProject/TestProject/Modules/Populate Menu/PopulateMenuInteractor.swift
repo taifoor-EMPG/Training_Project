@@ -34,4 +34,12 @@ class PopulateMenuInteractor: Proto_PTOI_PopulateMenu
     func createNewList(listName: String) -> Bool {
         return ListDataBase.addOptionalList(title: listName)
     }
+    
+    func removeOptionalList(listName: String) -> [String] {
+        if ListDataBase.removeOptionalList(listName: listName) == true
+        {
+            return ListDataBase.getOptionalListTitles()
+        }
+        return []
+    }
 }

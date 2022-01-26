@@ -21,5 +21,8 @@ class Search: UIViewController, Proto_PTOV_Search
         //searchBox.becomeFirstResponder()
     }
     
+    @IBAction func cancelTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
 }

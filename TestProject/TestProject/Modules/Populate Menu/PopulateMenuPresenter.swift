@@ -9,6 +9,7 @@ import UIKit
 
 class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu, Proto_PTOV_PopulateMenu
 {
+
     var presenter: (Proto_ITOP_PopulateMenu & Proto_VTOP_PopulateMenu)?
     
     //Data Members
@@ -74,21 +75,17 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu, P
         return UITableViewCell()
     }
     
+    func setDeleteAction(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete
+        {
+            tableView.beginUpdates()
+            optionalListTitle = (interactor?.removeOptionalList(listName: optionalListTitle[indexPath.row]))!
+            tableView.deleteRows(at: [indexPath], with: .middle)
+            tableView.endUpdates()
+        }
+    }
+    
     func getListSize(listName: String) -> String? {
         interactor?.getListSize(listName: listName)
     }
-}
-
-
-
-//Extending to Implement Proto_VTOP_PopulateMenu
-extension PopulateMenuPresenter
-{
-    
-}
-
-//Extending to Implement Proto_ITOP_PopulateMenu
-extension PopulateMenuPresenter
-{
-    
 }

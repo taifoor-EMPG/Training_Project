@@ -282,12 +282,22 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </stackView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VhK-Tp-Mg0">
+                                                    <rect key="frame" x="20" y="238" width="344" height="1"/>
+                                                    <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="ugk-Xl-5gD"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="qmK-95-rzZ" firstAttribute="leading" secondItem="Bjz-4p-8j1" secondAttribute="leading" id="2LH-ZJ-6a0"/>
                                                 <constraint firstAttribute="trailing" secondItem="qmK-95-rzZ" secondAttribute="trailing" id="Jev-4a-obw"/>
+                                                <constraint firstItem="VhK-Tp-Mg0" firstAttribute="leading" secondItem="Bjz-4p-8j1" secondAttribute="leading" constant="20" id="mtf-se-6YB"/>
+                                                <constraint firstItem="VhK-Tp-Mg0" firstAttribute="top" secondItem="qmK-95-rzZ" secondAttribute="bottom" id="oBM-LG-ew4"/>
                                                 <constraint firstAttribute="bottom" secondItem="qmK-95-rzZ" secondAttribute="bottom" id="qVZ-sM-CqG"/>
+                                                <constraint firstAttribute="trailing" secondItem="VhK-Tp-Mg0" secondAttribute="trailing" constant="20" id="s3M-CC-9Dv"/>
                                                 <constraint firstItem="qmK-95-rzZ" firstAttribute="top" secondItem="Bjz-4p-8j1" secondAttribute="top" constant="5" id="zbi-xC-Pf7"/>
                                             </constraints>
                                         </view>
@@ -440,6 +450,9 @@
         </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

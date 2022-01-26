@@ -278,6 +278,17 @@ struct ListDataBase
         }
         return false
     }
+    
+    //Rename a List
+    static func changeOptionalListName(oldName: String, newName: String) -> Bool
+    {
+        return Constants.changeOptionalListName(oldName: oldName, newName: newName)
+    }
+    
+    static func isPermanentList(_ listName: String) -> Bool
+    {
+        return !Constants.listsTitleArray.contains(listName)
+    }
 }
 
 

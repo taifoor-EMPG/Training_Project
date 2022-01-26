@@ -20,5 +20,14 @@ class PopulateListInteractor: Proto_PTOI_PopulateList
         return ListDataBase.getList(listName: listName)
     }
     
+    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+    {
+        return ListDataBase.changeOptionalListName(oldName: oldTitle, newName: newTitle)
+    }
+    
+    func allowEditing(_ listName: String) -> Bool {
+        return ListDataBase.isPermanentList(listName)
+    }
+    
     
 }

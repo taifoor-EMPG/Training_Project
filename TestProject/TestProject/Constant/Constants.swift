@@ -70,4 +70,24 @@ struct Constants
         }
         return nil
     }
+    
+    //Changes a name in the list
+    static func changeOptionalListName(oldName: String, newName: String) -> Bool
+    {
+        for i in listsTitleArray
+        {
+            if i == newName
+            {
+                return false
+            }
+        }
+        if optionalListsTitleArray.contains(newName)
+        {
+            return false
+        }
+        
+        let index = optionalListsTitleArray.firstIndex(of: oldName)
+        optionalListsTitleArray[index!] = newName
+        return true
+    }
 }

@@ -20,16 +20,19 @@ class PopulateListPresenter: Proto_VTOP_PopulateList, Proto_ITOP_PopulateList
     private var listItems:[String] = []
     private var listItemsStatus:[Bool] = []
     
+    private var firstOpen: Bool = false
+    
     //END OF DATA MEMBERS
     
     
     //Setting up screen
-    func viewDidLoad(_ listName: String) {
+    func viewDidLoad(_ listName: String, firstOpen: Bool) {
         //Presenter is asking to Interact to load new data
         self.listName = listName
         openedList = interactor?.getList(listName: listName)
         listItems = openedList?.getListItemsText() ?? []
         listItemsStatus = openedList?.getListItemStauts() ?? []
+        self.firstOpen = firstOpen
     }
     
     //Setting up Table
@@ -51,6 +54,34 @@ class PopulateListPresenter: Proto_VTOP_PopulateList, Proto_ITOP_PopulateList
     
     func getListName() -> String
     {
-        return "    " + listName
+        return listName
     }
+    
+    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+    {
+        let result = interactor?.changeListTitle(oldTitle: oldTitle, newTitle: newTitle)
+        
+        if result == nil
+        {
+            return false
+        }
+        
+        return result!
+    }
+    
+    func allowEditing(_ listName: String) -> Bool {
+        let result = interactor?.allowEditing(listName)
+        
+        if result == nil
+        {
+            return false
+        }
+        return result!
+    }
+    
+    func isFirstOpen() -> Bool {
+        return firstOpen
+    }
+    
+    
 }

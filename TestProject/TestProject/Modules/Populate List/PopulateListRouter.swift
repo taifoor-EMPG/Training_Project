@@ -22,7 +22,7 @@ class PopulateListRouter: Proto_PTOR_PopulateList
         viewController.presenter?.interactor = PopulateListInteractor()
             
         //Set Data Members HerePopulateList
-        presenter.viewDidLoad(listName)
+        presenter.viewDidLoad(listName, firstOpen: editable)
         
         return viewController
     }

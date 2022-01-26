@@ -17,7 +17,7 @@ protocol Proto_VTOP_PopulateList
     var router: Proto_PTOR_PopulateList? {get set}
     
     //Setting Up View
-    func viewDidLoad(_ listName: String)
+    func viewDidLoad(_ listName: String, firstOpen: Bool)
     
     //Setting View Table
     func numberOfRowsInSection() -> Int
@@ -29,6 +29,9 @@ protocol Proto_VTOP_PopulateList
     
     //Misc Functions to Populate View
     func getListName() -> String
+    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+    func allowEditing(_ listName:String) -> Bool
+    func isFirstOpen() -> Bool
 }
 
 
@@ -49,6 +52,8 @@ protocol Proto_PTOI_PopulateList
     var presenter: Proto_ITOP_PopulateList? {get set}
     
     func getList(listName: String) -> List?
+    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+    func allowEditing(_ listName: String) -> Bool
 }
 
 protocol Proto_ITOP_PopulateList

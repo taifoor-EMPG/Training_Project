@@ -283,7 +283,7 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 </stackView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VhK-Tp-Mg0">
-                                                    <rect key="frame" x="20" y="238" width="344" height="1"/>
+                                                    <rect key="frame" x="15" y="241" width="354" height="1"/>
                                                     <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="ugk-Xl-5gD"/>
@@ -294,10 +294,10 @@
                                             <constraints>
                                                 <constraint firstItem="qmK-95-rzZ" firstAttribute="leading" secondItem="Bjz-4p-8j1" secondAttribute="leading" id="2LH-ZJ-6a0"/>
                                                 <constraint firstAttribute="trailing" secondItem="qmK-95-rzZ" secondAttribute="trailing" id="Jev-4a-obw"/>
-                                                <constraint firstItem="VhK-Tp-Mg0" firstAttribute="leading" secondItem="Bjz-4p-8j1" secondAttribute="leading" constant="20" id="mtf-se-6YB"/>
-                                                <constraint firstItem="VhK-Tp-Mg0" firstAttribute="top" secondItem="qmK-95-rzZ" secondAttribute="bottom" id="oBM-LG-ew4"/>
+                                                <constraint firstItem="VhK-Tp-Mg0" firstAttribute="leading" secondItem="Bjz-4p-8j1" secondAttribute="leading" constant="15" id="mtf-se-6YB"/>
+                                                <constraint firstItem="VhK-Tp-Mg0" firstAttribute="top" secondItem="qmK-95-rzZ" secondAttribute="bottom" constant="3" id="oBM-LG-ew4"/>
                                                 <constraint firstAttribute="bottom" secondItem="qmK-95-rzZ" secondAttribute="bottom" id="qVZ-sM-CqG"/>
-                                                <constraint firstAttribute="trailing" secondItem="VhK-Tp-Mg0" secondAttribute="trailing" constant="20" id="s3M-CC-9Dv"/>
+                                                <constraint firstAttribute="trailing" secondItem="VhK-Tp-Mg0" secondAttribute="trailing" constant="15" id="s3M-CC-9Dv"/>
                                                 <constraint firstItem="qmK-95-rzZ" firstAttribute="top" secondItem="Bjz-4p-8j1" secondAttribute="top" constant="5" id="zbi-xC-Pf7"/>
                                             </constraints>
                                         </view>
@@ -358,7 +358,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="ckS-Dn-PGZ" secondAttribute="trailing" id="iJb-H1-djZ"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
-                                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <accessibility key="accessibilityConfiguration">
                                                     <accessibilityTraits key="traits" image="YES"/>
                                                 </accessibility>
@@ -459,9 +459,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGroupedBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -96,6 +96,14 @@ extension PopulateList
         Utilities.popAnError(self, 1)
         return false
     }
+    
+    override func viewWillDisappear(_ animated : Bool) {
+        super.viewWillDisappear(animated)
+
+        if (self.isMovingFromParent){
+            print("I am going back")
+        }
+    }
 }
 
 

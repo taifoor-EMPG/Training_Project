@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController storyboardIdentifier="Search" id="Y6W-OH-hqX" customClass="Search" customModule="TestProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8P-MU-fQu">
-                                <rect key="frame" x="10" y="54" width="394" height="50"/>
+                                <rect key="frame" x="54" y="10" width="788" height="50"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="TdE-zB-n74">
                                         <rect key="frame" x="0.0" y="0.5" width="30" height="48.5"/>
@@ -27,12 +27,12 @@
                                         </constraints>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bk4-bt-WZo">
-                                        <rect key="frame" x="30" y="0.0" width="288" height="50"/>
+                                        <rect key="frame" x="30" y="0.0" width="682" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT4-Xv-QmS">
-                                        <rect key="frame" x="318" y="0.0" width="76" height="50"/>
+                                        <rect key="frame" x="712" y="0.0" width="76" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="76" id="les-Hl-adc"/>
                                         </constraints>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search Title" translatesAutoresizingMaskIntoConstraints="NO" id="CL1-34-h7T">
-                                <rect key="frame" x="57" y="298" width="300" height="300"/>
+                                <rect key="frame" x="298" y="57" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="B2X-3f-l59"/>
                                     <constraint firstAttribute="height" constant="300" id="XRk-bs-zS5"/>
@@ -70,6 +70,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bar" destination="h8P-MU-fQu" id="bfe-vY-BLt"/>
                         <outlet property="searchBox" destination="Bk4-bt-WZo" id="3Gk-fv-cuh"/>
                     </connections>
                 </viewController>

@@ -24,7 +24,6 @@
 		7805897C2796B8DC007A327E /* PopulateMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805897B2796B8DC007A327E /* PopulateMenuPresenter.swift */; };
 		7805897F2796CBAD007A327E /* PopulateMenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7805897E2796CBAD007A327E /* PopulateMenuInteractor.swift */; };
 		780589812796CE3A007A327E /* PopulateMenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780589802796CE3A007A327E /* PopulateMenuRouter.swift */; };
-		780589842796FD53007A327E /* AddNewListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780589832796FD53007A327E /* AddNewListRouter.swift */; };
 		780C7CC727A01AB9008C8D53 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 780C7CC627A01AB9008C8D53 /* Profile.storyboard */; };
 		780C7CC927A01AC4008C8D53 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CC827A01AC4008C8D53 /* Profile.swift */; };
 		780C7CCC27A01B87008C8D53 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 780C7CCB27A01B87008C8D53 /* Search.storyboard */; };
@@ -33,13 +32,13 @@
 		780C7CD227A02E98008C8D53 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD127A02E98008C8D53 /* SearchInteractor.swift */; };
 		780C7CD427A11D7C008C8D53 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD327A11D7C008C8D53 /* ProfileInteractor.swift */; };
 		780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD527A11D96008C8D53 /* ProfilePresenter.swift */; };
+		780C7D1827A2D483008C8D53 /* Core.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
 		78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F10279A979300AC6182 /* PopulateListRouter.swift */; };
 		78CF7F13279A98EB00AC6182 /* PopulateListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F12279A98EB00AC6182 /* PopulateListProtocols.swift */; };
 		78CF7F15279A98F700AC6182 /* ProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F14279A98F700AC6182 /* ProfileProtocols.swift */; };
 		78CF7F17279A990300AC6182 /* SearchProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F16279A990300AC6182 /* SearchProtocols.swift */; };
-		78CF7F19279A991300AC6182 /* AddNewListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F18279A991300AC6182 /* AddNewListProtocols.swift */; };
 		78CF7F1B279AA3C700AC6182 /* PopulateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F1A279AA3C700AC6182 /* PopulateList.swift */; };
 		78CF7F1E279AA3FC00AC6182 /* PopulateList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */; };
 		78CF7F20279AC91B00AC6182 /* PopulateListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F1F279AC91B00AC6182 /* PopulateListPresenter.swift */; };
@@ -66,7 +65,6 @@
 		7805897B2796B8DC007A327E /* PopulateMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateMenuPresenter.swift; sourceTree = "<group>"; };
 		7805897E2796CBAD007A327E /* PopulateMenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateMenuInteractor.swift; sourceTree = "<group>"; };
 		780589802796CE3A007A327E /* PopulateMenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateMenuRouter.swift; sourceTree = "<group>"; };
-		780589832796FD53007A327E /* AddNewListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewListRouter.swift; sourceTree = "<group>"; };
 		780C7CC627A01AB9008C8D53 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		780C7CC827A01AC4008C8D53 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		780C7CCB27A01B87008C8D53 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
@@ -75,13 +73,13 @@
 		780C7CD127A02E98008C8D53 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		780C7CD327A11D7C008C8D53 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		780C7CD527A11D96008C8D53 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		780C7D1727A2D483008C8D53 /* Core.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Core.xcdatamodel; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		78CF7F10279A979300AC6182 /* PopulateListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListRouter.swift; sourceTree = "<group>"; };
 		78CF7F12279A98EB00AC6182 /* PopulateListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListProtocols.swift; sourceTree = "<group>"; };
 		78CF7F14279A98F700AC6182 /* ProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProtocols.swift; sourceTree = "<group>"; };
 		78CF7F16279A990300AC6182 /* SearchProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocols.swift; sourceTree = "<group>"; };
-		78CF7F18279A991300AC6182 /* AddNewListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewListProtocols.swift; sourceTree = "<group>"; };
 		78CF7F1A279AA3C700AC6182 /* PopulateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateList.swift; sourceTree = "<group>"; };
 		78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopulateList.storyboard; sourceTree = "<group>"; };
 		78CF7F1F279AC91B00AC6182 /* PopulateListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListPresenter.swift; sourceTree = "<group>"; };
@@ -138,6 +136,7 @@
 				780589242795536A007A327E /* ListItem.swift */,
 				7805892627955372007A327E /* List.swift */,
 				780589282795537C007A327E /* ListDataBase.swift */,
+				780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -164,7 +163,6 @@
 				78CF7F0B279A975600AC6182 /* Populate List */,
 				78CF7F0A279A974C00AC6182 /* Profile */,
 				78CF7F09279A974500AC6182 /* Search */,
-				780589822796DFF2007A327E /* Add A New List */,
 				7805892B27955478007A327E /* Populate Menu */,
 			);
 			path = Modules;
@@ -217,15 +215,6 @@
 				780589472795A475007A327E /* ListItemCell.swift */,
 			);
 			name = "List Item Cell";
-			sourceTree = "<group>";
-		};
-		780589822796DFF2007A327E /* Add A New List */ = {
-			isa = PBXGroup;
-			children = (
-				780589832796FD53007A327E /* AddNewListRouter.swift */,
-				78CF7F18279A991300AC6182 /* AddNewListProtocols.swift */,
-			);
-			path = "Add A New List";
 			sourceTree = "<group>";
 		};
 		780C7CC527A01AA7008C8D53 /* Profile */ = {
@@ -377,10 +366,9 @@
 				78CF7F1B279AA3C700AC6182 /* PopulateList.swift in Sources */,
 				78CF7F17279A990300AC6182 /* SearchProtocols.swift in Sources */,
 				780C7CCE27A01B95008C8D53 /* Search.swift in Sources */,
-				78CF7F19279A991300AC6182 /* AddNewListProtocols.swift in Sources */,
 				78CF7F20279AC91B00AC6182 /* PopulateListPresenter.swift in Sources */,
 				780589492795A475007A327E /* ListItemCell.swift in Sources */,
-				780589842796FD53007A327E /* AddNewListRouter.swift in Sources */,
+				780C7D1827A2D483008C8D53 /* Core.xcdatamodeld in Sources */,
 				78CF7F13279A98EB00AC6182 /* PopulateListProtocols.swift in Sources */,
 				780589292795537C007A327E /* ListDataBase.swift in Sources */,
 				7805890A27954957007A327E /* SceneDelegate.swift in Sources */,
@@ -604,6 +592,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				780C7D1727A2D483008C8D53 /* Core.xcdatamodel */,
+			);
+			currentVersion = 780C7D1727A2D483008C8D53 /* Core.xcdatamodel */;
+			path = Core.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 780588FC27954957007A327E /* Project object */;
 }

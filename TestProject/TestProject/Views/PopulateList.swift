@@ -57,6 +57,7 @@ extension PopulateList
             listTitle.resignFirstResponder()
         }
         
+        //Set Date for My Day
         /*if listTitle.text == Constants.listsTitleArray[0]
         {
             let date = Date()
@@ -96,14 +97,6 @@ extension PopulateList
         Utilities.popAnError(self, 1)
         return false
     }
-    
-    override func viewWillDisappear(_ animated : Bool) {
-        super.viewWillDisappear(animated)
-
-        if (self.isMovingFromParent){
-            print("I am going back")
-        }
-    }
 }
 
 
@@ -120,6 +113,7 @@ extension PopulateList
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        tableView.cellForRow(at: indexPath)
         presenter?.pushToEditText(itemNumber: indexPath.row)
     }
 }

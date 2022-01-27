@@ -23,7 +23,7 @@ class PopulateMenuPresenter: Proto_VTOP_PopulateMenu, Proto_ITOP_PopulateMenu, P
     
     
     func viewDidLoad() {
-        view?.showActivity()
+        //view?.showActivity()
         //Presenter is asking to Interact to load new data
         optionalListTitle = interactor?.getOptionalListTitleArray() ?? []
     }

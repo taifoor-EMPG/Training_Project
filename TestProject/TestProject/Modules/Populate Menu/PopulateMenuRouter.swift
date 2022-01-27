@@ -35,7 +35,6 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
         {
             let viewController = view as! MenuVC
             viewController.present(profileVC, animated: true, completion: nil)
-            //viewController.navigationController?.pushViewController(profileVC, animated: true)
         }
     }
     
@@ -47,8 +46,6 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
             let viewController = view as! MenuVC
             searchVC.modalPresentationStyle = .fullScreen
             viewController.present(searchVC, animated: true, completion: nil)
-            
-            //viewController.navigationController?.pushViewController(searchVC, animated: true)
         }
     }
     
@@ -59,6 +56,7 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
         pushToOpenList(view: view, with: listName, editable: false)
     }
     
+    //Actual Implementation
     func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String, editable: Bool) {
         
         if let openListVC = PopulateListRouter.createModule(with: listName, editable: editable)

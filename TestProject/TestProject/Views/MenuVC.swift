@@ -33,7 +33,6 @@ class MenuVC: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
         //Ask the Presenter to Perform viewDidLoad()
         presenter?.viewDidLoad()
     }
@@ -93,7 +92,12 @@ extension MenuVC
 extension MenuVC: Proto_PTOV_PopulateMenu
 {
     func showActivity() {
+        presenter?.viewDidLoad()
         optionalLists.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        showActivity()
     }
 }
 

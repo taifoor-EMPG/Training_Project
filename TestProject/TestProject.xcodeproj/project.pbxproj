@@ -122,8 +122,7 @@
 			children = (
 				7805892C27955561007A327E /* Views */,
 				7805892A2795546F007A327E /* Modules */,
-				7805891D279552A5007A327E /* Utility */,
-				7805891C27955296007A327E /* Constant */,
+				780C7D2127A3C5B8008C8D53 /* Supplementary */,
 				7805891B2795528E007A327E /* Entities */,
 				7805890727954957007A327E /* AppDelegate.swift */,
 				7805890927954957007A327E /* SceneDelegate.swift */,
@@ -137,10 +136,9 @@
 		7805891B2795528E007A327E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				780589242795536A007A327E /* ListItem.swift */,
-				7805892627955372007A327E /* List.swift */,
+				780C7D2027A3C58D008C8D53 /* Models */,
+				780C7D1D27A3C4F8008C8D53 /* Database */,
 				780589282795537C007A327E /* ListDataBase.swift */,
-				780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */,
 				780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */,
 				780C7D1B27A3BD52008C8D53 /* DataModel.swift */,
 			);
@@ -239,6 +237,32 @@
 				780C7CCD27A01B95008C8D53 /* Search.swift */,
 			);
 			name = Search;
+			sourceTree = "<group>";
+		};
+		780C7D1D27A3C4F8008C8D53 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		780C7D2027A3C58D008C8D53 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7805892627955372007A327E /* List.swift */,
+				780589242795536A007A327E /* ListItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		780C7D2127A3C5B8008C8D53 /* Supplementary */ = {
+			isa = PBXGroup;
+			children = (
+				7805891D279552A5007A327E /* Utility */,
+				7805891C27955296007A327E /* Constant */,
+			);
+			path = Supplementary;
 			sourceTree = "<group>";
 		};
 		78CF7F09279A974500AC6182 /* Search */ = {

@@ -16,10 +16,6 @@ struct ListItem
     
     //END OF DATA MEMBERS
     
-    
-    
-    
-    
     //Recreate a List Item using Properties
     init(text:String, done:Bool)
     {

@@ -5,28 +5,28 @@
         <attribute name="groupName" optional="YES" attributeType="String"/>
     </entity>
     <entity name="List_Item" representedClassName="List_Item" syncable="YES" codeGenerationType="class">
-        <attribute name="listItemKey" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="listKey" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="listItemKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ListItem"/>
+        <relationship name="listKey" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="PermanentLists"/>
     </entity>
     <entity name="ListItem" representedClassName="ListItem" syncable="YES" codeGenerationType="class">
         <attribute name="listItemKey" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="Transformable"/>
     </entity>
     <entity name="OptionalLists" representedClassName="OptionalLists" syncable="YES" codeGenerationType="class">
         <attribute name="listKey" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="listName" optional="YES" attributeType="String"/>
-        <attribute name="parent" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="groupKey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Groups"/>
     </entity>
     <entity name="PermanentLists" representedClassName="PermanentLists" syncable="YES" codeGenerationType="class">
         <attribute name="listKey" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="listName" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ListItem" positionX="-45" positionY="0" width="128" height="74"/>
-        <element name="PermanentLists" positionX="-18" positionY="54" width="128" height="59"/>
-        <element name="List_Item" positionX="9" positionY="81" width="128" height="59"/>
-        <element name="Groups" positionX="27" positionY="90" width="128" height="59"/>
-        <element name="OptionalLists" positionX="45" positionY="99" width="128" height="74"/>
+        <element name="ListItem" positionX="-2562.72314453125" positionY="-1545.808654785156" width="128" height="88"/>
+        <element name="PermanentLists" positionX="-2466.851318359375" positionY="-1419.841644287109" width="128" height="59"/>
+        <element name="List_Item" positionX="-2692.473999023438" positionY="-1454.585357666016" width="128" height="73"/>
+        <element name="Groups" positionX="-2688.674072265625" positionY="-1297.409393310547" width="128" height="73"/>
+        <element name="OptionalLists" positionX="-2470.601501464844" positionY="-1340.140853881836" width="128" height="88"/>
     </elements>
 </model>

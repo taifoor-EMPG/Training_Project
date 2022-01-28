@@ -33,6 +33,8 @@
 		780C7CD427A11D7C008C8D53 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD327A11D7C008C8D53 /* ProfileInteractor.swift */; };
 		780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD527A11D96008C8D53 /* ProfilePresenter.swift */; };
 		780C7D1827A2D483008C8D53 /* Core.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */; };
+		780C7D1A27A2D643008C8D53 /* ProtocolEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */; };
+		780C7D1C27A3BD52008C8D53 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1B27A3BD52008C8D53 /* DataModel.swift */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
 		78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F10279A979300AC6182 /* PopulateListRouter.swift */; };
@@ -74,6 +76,8 @@
 		780C7CD327A11D7C008C8D53 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		780C7CD527A11D96008C8D53 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		780C7D1727A2D483008C8D53 /* Core.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Core.xcdatamodel; sourceTree = "<group>"; };
+		780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolEntity.swift; sourceTree = "<group>"; };
+		780C7D1B27A3BD52008C8D53 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		78CF7F10279A979300AC6182 /* PopulateListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListRouter.swift; sourceTree = "<group>"; };
@@ -120,7 +124,7 @@
 				7805892A2795546F007A327E /* Modules */,
 				7805891D279552A5007A327E /* Utility */,
 				7805891C27955296007A327E /* Constant */,
-				7805891B2795528E007A327E /* Entity */,
+				7805891B2795528E007A327E /* Entities */,
 				7805890727954957007A327E /* AppDelegate.swift */,
 				7805890927954957007A327E /* SceneDelegate.swift */,
 				7805891027954959007A327E /* Assets.xcassets */,
@@ -130,15 +134,17 @@
 			path = TestProject;
 			sourceTree = "<group>";
 		};
-		7805891B2795528E007A327E /* Entity */ = {
+		7805891B2795528E007A327E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				780589242795536A007A327E /* ListItem.swift */,
 				7805892627955372007A327E /* List.swift */,
 				780589282795537C007A327E /* ListDataBase.swift */,
 				780C7D1627A2D483008C8D53 /* Core.xcdatamodeld */,
+				780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */,
+				780C7D1B27A3BD52008C8D53 /* DataModel.swift */,
 			);
-			path = Entity;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		7805891C27955296007A327E /* Constant */ = {
@@ -356,6 +362,7 @@
 				780589812796CE3A007A327E /* PopulateMenuRouter.swift in Sources */,
 				780589212795532F007A327E /* Utilities.swift in Sources */,
 				780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */,
+				780C7D1C27A3BD52008C8D53 /* DataModel.swift in Sources */,
 				7805897A2796A886007A327E /* PopulateMenuProtocols.swift in Sources */,
 				78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */,
 				7805890827954957007A327E /* AppDelegate.swift in Sources */,
@@ -368,6 +375,7 @@
 				780C7CCE27A01B95008C8D53 /* Search.swift in Sources */,
 				78CF7F20279AC91B00AC6182 /* PopulateListPresenter.swift in Sources */,
 				780589492795A475007A327E /* ListItemCell.swift in Sources */,
+				780C7D1A27A2D643008C8D53 /* ProtocolEntity.swift in Sources */,
 				780C7D1827A2D483008C8D53 /* Core.xcdatamodeld in Sources */,
 				78CF7F13279A98EB00AC6182 /* PopulateListProtocols.swift in Sources */,
 				780589292795537C007A327E /* ListDataBase.swift in Sources */,

@@ -35,6 +35,12 @@
 		780C7D1A27A2D643008C8D53 /* ProtocolEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */; };
 		780C7D1C27A3BD52008C8D53 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1B27A3BD52008C8D53 /* DataModel.swift */; };
 		780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2227A3D2A8008C8D53 /* ToDoApp.xcdatamodeld */; };
+		780C7D2B27A3F4F4008C8D53 /* ListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2527A3F4F4008C8D53 /* ListItem+CoreDataClass.swift */; };
+		780C7D2C27A3F4F4008C8D53 /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2627A3F4F4008C8D53 /* ListItem+CoreDataProperties.swift */; };
+		780C7D2D27A3F4F4008C8D53 /* List+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2727A3F4F4008C8D53 /* List+CoreDataClass.swift */; };
+		780C7D2E27A3F4F4008C8D53 /* List+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2827A3F4F4008C8D53 /* List+CoreDataProperties.swift */; };
+		780C7D2F27A3F4F4008C8D53 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2927A3F4F4008C8D53 /* Group+CoreDataClass.swift */; };
+		780C7D3027A3F4F4008C8D53 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2A27A3F4F4008C8D53 /* Group+CoreDataProperties.swift */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
 		78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F10279A979300AC6182 /* PopulateListRouter.swift */; };
@@ -78,6 +84,12 @@
 		780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolEntity.swift; sourceTree = "<group>"; };
 		780C7D1B27A3BD52008C8D53 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		780C7D2327A3D2A8008C8D53 /* ToDoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoApp.xcdatamodel; sourceTree = "<group>"; };
+		780C7D2527A3F4F4008C8D53 /* ListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		780C7D2627A3F4F4008C8D53 /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		780C7D2727A3F4F4008C8D53 /* List+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataClass.swift"; sourceTree = "<group>"; };
+		780C7D2827A3F4F4008C8D53 /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		780C7D2927A3F4F4008C8D53 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; };
+		780C7D2A27A3F4F4008C8D53 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		78CF7F10279A979300AC6182 /* PopulateListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListRouter.swift; sourceTree = "<group>"; };
@@ -250,6 +262,12 @@
 		780C7D2027A3C58D008C8D53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				780C7D2527A3F4F4008C8D53 /* ListItem+CoreDataClass.swift */,
+				780C7D2627A3F4F4008C8D53 /* ListItem+CoreDataProperties.swift */,
+				780C7D2727A3F4F4008C8D53 /* List+CoreDataClass.swift */,
+				780C7D2827A3F4F4008C8D53 /* List+CoreDataProperties.swift */,
+				780C7D2927A3F4F4008C8D53 /* Group+CoreDataClass.swift */,
+				780C7D2A27A3F4F4008C8D53 /* Group+CoreDataProperties.swift */,
 				7805892627955372007A327E /* List.swift */,
 				780589242795536A007A327E /* ListItem.swift */,
 			);
@@ -383,10 +401,13 @@
 			files = (
 				780C7CD027A02E51008C8D53 /* SearchPresenter.swift in Sources */,
 				780589252795536A007A327E /* ListItem.swift in Sources */,
+				780C7D2F27A3F4F4008C8D53 /* Group+CoreDataClass.swift in Sources */,
 				780589812796CE3A007A327E /* PopulateMenuRouter.swift in Sources */,
 				780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */,
 				780589212795532F007A327E /* Utilities.swift in Sources */,
+				780C7D2B27A3F4F4008C8D53 /* ListItem+CoreDataClass.swift in Sources */,
 				780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */,
+				780C7D2D27A3F4F4008C8D53 /* List+CoreDataClass.swift in Sources */,
 				780C7D1C27A3BD52008C8D53 /* DataModel.swift in Sources */,
 				7805897A2796A886007A327E /* PopulateMenuProtocols.swift in Sources */,
 				78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */,
@@ -408,7 +429,10 @@
 				780C7CD427A11D7C008C8D53 /* ProfileInteractor.swift in Sources */,
 				7805897C2796B8DC007A327E /* PopulateMenuPresenter.swift in Sources */,
 				780C7CD227A02E98008C8D53 /* SearchInteractor.swift in Sources */,
+				780C7D2C27A3F4F4008C8D53 /* ListItem+CoreDataProperties.swift in Sources */,
+				780C7D3027A3F4F4008C8D53 /* Group+CoreDataProperties.swift in Sources */,
 				7805892327955342007A327E /* Constants.swift in Sources */,
+				780C7D2E27A3F4F4008C8D53 /* List+CoreDataProperties.swift in Sources */,
 				7805897F2796CBAD007A327E /* PopulateMenuInteractor.swift in Sources */,
 				7805892727955372007A327E /* List.swift in Sources */,
 				780C7CC927A01AC4008C8D53 /* Profile.swift in Sources */,

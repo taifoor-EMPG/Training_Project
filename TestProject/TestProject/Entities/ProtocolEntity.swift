@@ -20,9 +20,13 @@ protocol ProtocolEntity
     func removeOptionalList(listKey: Int) -> Bool
 
     //Add Group
-    //Returns: groupKey on Sucess (-1 on failure)
+    //Return: groupKey on Sucess (-1 on failure)
     func addGroup(groupName: String) -> Int
-
+    
+    //Ungroup - Release all Lists from the Group
+    //Return: Result of Operation
+    func ungroup(groupKey: Int) -> Bool
+    
     //Remove Group
     //Return: Result of Operation
     func removeGroup(groupKey: Int) -> Bool

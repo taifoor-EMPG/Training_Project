@@ -18,6 +18,7 @@ extension ListItem {
 
     @NSManaged public var text: String?
     @NSManaged public var done: Bool
+    @NSManaged public var itemKey: Int64
     @NSManaged public var list: List?
 
 }

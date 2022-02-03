@@ -7,27 +7,56 @@
 
 import UIKit
 
-class PopulateListInteractor: Proto_PTOI_PopulateList
+class PopulateListInteractor: ProtocolPresenterToInteractorPopulateList
 {
    //DATA MEMBERS
     
-    var presenter: Proto_ITOP_PopulateList?
+    private weak var presenter: ProtocolInteractorToPresenterPopulateList?
+    private var source: ProtocolDatasource?
     
     //END OF DATA MEMBERS
     
-   
+    init(source : ProtocolDatasource?)
+    {
+        guard source != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.source = source
+    }
+
+    func setPresenter(presenter: ProtocolInteractorToPresenterPopulateList?)
+    {
+        guard presenter != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.presenter = presenter
+    }
+}
+
+//MARK: Use Case Functionalities
+extension PopulateListInteractor
+{
     func getList(listName: String) -> List? {
-        return ListDataBase.getList(listName: listName)
+        
+        print("PopulateListInteractor >> In getList")
+        return nil
+        //return ListDataBase.getList(listName: listName)
     }
     
     func changeListTitle(oldTitle: String, newTitle: String) -> Bool
     {
-        return ListDataBase.changeOptionalListName(oldName: oldTitle, newName: newTitle)
+        print("PopulateListInteractor >> In changeListTitle")
+        return false
+        //return ListDataBase.changeOptionalListName(oldName: oldTitle, newName: newTitle)
     }
     
     func allowEditing(_ listName: String) -> Bool {
-        return ListDataBase.isPermanentList(listName)
+        print("PopulateListInteractor >> In allowEditing")
+        return false
+        //return ListDataBase.isPermanentList(listName)
     }
-    
-    
 }

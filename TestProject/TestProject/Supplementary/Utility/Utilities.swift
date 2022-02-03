@@ -12,7 +12,9 @@ struct Utilities
     private static let errorList = [0: ["Something Went Wrong", "Error Not Found", "Dismiss"],
                                     1: ["Duplicate List", "There already exists a list with this name\n Try Something Else?", "Dismiss"],
                                     2: ["Empty Entry", "You did not type anything\n Try Something Else?", "Dismiss"],
-                                    3: ["Data Not Received", "Something Went Wrong", "Dismiss"]
+                                    3: ["Data Not Received", "Something Went Wrong", "Dismiss"],
+                                    4: ["Data Unable to be Fetched", "Something went wrong", "Close"],
+                                    5: ["Failed to Create a Group", "Something went wrong", "Close"]
                                                                                                                                 ]
     //Error 0:  Error Reference Not Found
     //          The error referenced in Code does not exist in database
@@ -48,6 +50,20 @@ struct Utilities
     static func newList() -> String
     {
         return Constants.newListTitle
+    }
+    
+    static func convertToString(_ x: Int) -> String
+    {
+        if x > 0
+        {
+            return String(x)
+        }
+        return ""
+    }
+    
+    static func getErrorCodes() -> [Int]
+    {
+        return Array(errorList.keys)
     }
 }
 

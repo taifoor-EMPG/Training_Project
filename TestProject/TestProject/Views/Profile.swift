@@ -7,12 +7,17 @@
 
 import UIKit
 
-class Profile: UIViewController, Proto_PTOV_Profile
+class Profile: UIViewController, ProtocolPresenterToViewProfile
 {
     //DATA MEMBERS
-    
-    var presenter: (Proto_ITOP_Profile & Proto_VTOP_Profile)?
+
+    private var presenter: (ProtocolViewToPresenterProfile & ProtocolInteractorToPresenterProfile)?
     
     //END OF DATA MEMBERS
+    
+    func setPresenter(_ presenter: (ProtocolViewToPresenterProfile & ProtocolInteractorToPresenterProfile)?)
+    {
+        self.presenter = presenter
+    }
     
 }

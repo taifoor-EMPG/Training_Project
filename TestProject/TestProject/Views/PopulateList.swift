@@ -7,11 +7,11 @@
 
 import UIKit
 
-class PopulateList: UIViewController, Proto_PTOV_PopulateList, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
+class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
     //DATA MEMBERS
     
-    var presenter: (Proto_ITOP_PopulateList & Proto_VTOP_PopulateList)?
+    private var presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?
     @IBOutlet weak var listItems: UITableView!
     @IBOutlet weak var listTitle: UITextField!
     var currentTitle: String = ""
@@ -21,6 +21,11 @@ class PopulateList: UIViewController, Proto_PTOV_PopulateList, UITableViewDelega
         super.viewDidLoad()
         //Misc Attribute Setup
         setupUI()
+    }
+    
+    func setPresenter(_ presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?)
+    {
+        self.presenter = presenter
     }
 }
 

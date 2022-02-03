@@ -9,37 +9,167 @@ import Foundation
 
 //MARK: - All Methods that the Presenter can call to get information from API/DB come here
 
-class PopulateMenuInteractor: Proto_PTOI_PopulateMenu
+class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
 {
     //Data Members
     
-    var presenter: Proto_ITOP_PopulateMenu?
+    private weak var presenter: ProtocolInteractorToPresenterPopulateMenu?
+    private var source: ProtocolDatasource?
     
     //End of Data Members
     
     
-    
-    func getOptionalListCount() -> Int {
-        return ListDataBase.getOptionalListCount()
-    }
-    
-    func getOptionalListTitleArray() -> [String] {
-        return ListDataBase.getOptionalListTitles()
-    }
-    
-    func getListSize(listName: String) -> String? {
-        return ListDataBase.getListSize(listName: listName)
-    }
-    
-    func createNewList(listName: String) -> Bool {
-        return ListDataBase.addOptionalList(title: listName)
-    }
-    
-    func removeOptionalList(listName: String) -> [String] {
-        if ListDataBase.removeOptionalList(listName: listName) == true
+    init(source : ProtocolDatasource?)
+    {
+        guard source != nil else
         {
-            return ListDataBase.getOptionalListTitles()
+            //RAISE SOME ERROR HERE
+            return
         }
-        return []
+        self.source = source
+    }
+
+    func setPresenter(presenter: ProtocolInteractorToPresenterPopulateMenu?)
+    {
+        guard presenter != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.presenter = presenter
+    }
+    
+    //MARK: CRUD - CREATE
+    func createGroup(groupName: String) -> Bool {
+        
+        //Check if group with same name exists
+        
+        var name = groupName
+        var count = 1
+        var result = source?.groupExists(groupName: name)
+        
+        while result == true
+        {
+            name = groupName + " " + String(count)
+            result = source?.groupExists(groupName: name)
+            count += 1
+        }
+        
+        let x = source?.addGroup(groupName: name)
+        if x == nil
+        {
+            print("PopulateMenuInteractor >> In createGroup >> Error: Failed to Perform")
+        }
+        return x ?? false
+    }
+    
+    func createList(listName: String) -> Int {
+        print("PopulateMenuInteractor >> In createList")
+        return -1
+    }
+    
+    func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
+        print("PopulateMenuInteractor >> In addListToGroup")
+        return false
+    }
+    
+    //MARK: CRUD - READ
+    func getPermanentListTitles() -> [Int : String] {
+        let x = source?.getPermanentListTitles()
+        if x == nil
+        {
+            print("PopulateMenuInteractor >> In getPermanentListTitles >> Error: Failed to Retrieve Count")
+        }
+        return x ?? [:]
+    }
+    
+    func getListActiveCount(listKey: Int) -> Int {
+        let x = source?.getActiveItems(listKey: listKey)
+        if x == -1
+        {
+            print("PopulateMenuInteractor >> In getListActiveCount >> Error: Failed to Retrieve Count")
+        }
+        return x ?? -1
+    }
+    
+    func getGroupFreeListTitles() -> [Int : String] {
+        let x = source?.getGroupFreeListTitles()
+        if x == nil
+        {
+            print("PopulateMenuInteractor >> In getGroupFreeListTitles >> Error: Failed to Retrieve Count")
+        }
+        return x ?? [:]
+    }
+    
+    func getGroupCount() -> Int {
+        let x = source?.getGroupCount()
+        if x == -1
+        {
+            print("PopulateMenuInteractor >> In getGroupCount >> Error: Failed to Retrieve Count")
+        }
+        return x ?? -1
+    }
+    
+    func getGroupTitles(groupKey: Int) -> [Int : String] {
+        return (source?.getPermanentListTitles())!
+    }
+    
+    func getGroupListCount(groupKey: Int) -> Int {
+        print("PopulateMenuInteractor >> In getGroupListCount")
+        return -1
+    }
+    
+    func getGroupListTitles(groupKey: Int) -> [Int : String] {
+        print("PopulateMenuInteractor >> In getGroupListTitles")
+        return [:]
+    }
+    func getListTitle(listKey: Int) -> String {
+        print("PopulateMenuInteractor >> In getListTitle")
+        return ""
+    }
+    
+    func getGroups() -> [Group]? {
+        let x = source?.getGroups()
+        if x == nil
+        {
+            print("PopulateMenuInteractor >> In getPermanentListTitles >> Error: Failed to Retrieve Count")
+        }
+        return x ?? nil
+    }
+    
+    //MARK: CRUD - UPDATE
+    func renameList(listKey: Int, newName: String) -> Bool {
+        print("PopulateMenuInteractor >> In renameList")
+        return false
+    }
+    
+    func renameGroup(groupKey: Int, newName: String) -> Bool {
+        print("PopulateMenuInteractor >> In renameGroup")
+        return false
+    }
+    
+    func ungroup(groupKey: Int) -> Bool {
+        print("PopulateMenuInteractor >> In ungroup")
+        return false
+    }
+    
+    //MARK: CRUD - DELETE
+    func deleteGroup(groupKey: Int) -> Bool {
+        print("PopulateMenuInteractor >> In deleteGroup")
+        return false
+    }
+    
+    func deleteList(listKey: Int) -> Bool {
+        print("PopulateMenuInteractor >> In deleteList")
+        return false
+    }
+    
+    func removeListFromGroup(listKey: Int) -> Bool {
+        print("PopulateMenuInteractor >> In removeListFromGroup")
+        return false
+    }
+    func deleteList(listKey: Int) -> [Group]? {
+        print("PopulateMenuInteractor >> In deleteList")
+        return nil
     }
 }

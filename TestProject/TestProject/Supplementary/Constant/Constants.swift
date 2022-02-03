@@ -10,15 +10,17 @@ import UIKit
 struct Constants
 {
     //DATA MEMBERS
-    
-    static let navBarReturnTitle = "Lists"
-    static let listsTitleArray = ["My Day", "Important", "Planned", "Assigned to Me", "Tasks"]
-    private static var optionalListsTitleArray:[String] = ["Travel Items"]
-    
+   
     static let newListTitle = "Untitled List"
+    static let newListKey = -2
+    static let newGroupKey = -3
+    static let errorFetchCode = -1
+    static let errorCodes = Utilities.getErrorCodes()
     
     struct UIDefaults
     {
+        static let navBarReturnTitle = "Lists"
+        
         struct images
         {
             static let checkedCircle = "circle_checked.png"
@@ -30,64 +32,15 @@ struct Constants
             static let optionalListCell = "optionalListCell"
             static let listItemCell = "ListItemCell"
         }
+        
+        struct newGroup
+        {
+            static let title = "New Group"
+            static let newGroupTitle = "Untitled Group"
+            static let leftButtonText = "Cancel"
+            static let rightButtonText = "Create"            
+        }
     }
     
     //END OF DATA MEMBERS
-    
-    
-    //Adds Title of an Optional List
-    static func addOptionalList(_ name:String) -> Bool
-    {
-        if !optionalListsTitleArray.contains(name)
-        {
-            Constants.optionalListsTitleArray.append(name)
-            return true
-        }
-        return false
-    }
-    
-    //Returns the Entire array of Optional List Titles
-    static func getOptionalListTitles() -> [String]
-    {
-        return optionalListsTitleArray
-    }
-    
-    //Returns if a List Name exists in the Optional List Array
-    static func doesExist(listName: String) -> Bool
-    {
-        return optionalListsTitleArray.contains(listName)
-    }
-    
-    //Removes a Title From Optional List Array
-    static func removeList(listName: String) -> Int?
-    {
-        if doesExist(listName: listName)
-        {
-            let index = optionalListsTitleArray.firstIndex(of: listName)!
-            optionalListsTitleArray.remove(at: index)
-            return index
-            
-        }
-        return nil
-    }
-    
-    //Changes a name in the list
-    static func changeOptionalListName(oldName: String, newName: String) -> Bool
-    {
-        for i in listsTitleArray
-        {
-            if i == newName
-            {
-                return false
-            }
-        }
-        if optionalListsTitleArray.contains(newName)
-        {
-            return false
-        }
-        
-        let index = optionalListsTitleArray.firstIndex(of: oldName)
-        optionalListsTitleArray[index!] = newName
-        return true
-    }
 }

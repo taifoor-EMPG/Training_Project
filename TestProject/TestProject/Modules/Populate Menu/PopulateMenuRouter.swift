@@ -7,30 +7,27 @@
 
 import UIKit
 
-class PopulateMenuRouter: Proto_PTOR_PopulateMenu
+class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
 {
     static func createModule() -> UINavigationController? {
-        
-        //This all should come from a Factory >> Dependency Injection
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
         
         let NavigationController = UINavigationController(rootViewController: viewController)
         
-        let presenter: Proto_VTOP_PopulateMenu & Proto_ITOP_PopulateMenu = PopulateMenuPresenter()
+        let source = Datasource(plugin: CoreData())
         
-        viewController.presenter = presenter
-        viewController.presenter?.router = PopulateMenuRouter()
-        viewController.presenter?.view = viewController
-        viewController.presenter?.interactor = PopulateMenuInteractor()
-        viewController.presenter?.interactor?.presenter = presenter
+        let presenter: ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu = PopulateMenuPresenter(view: viewController, interactor: PopulateMenuInteractor(source: source), router: PopulateMenuRouter())
+        
+        presenter.initInteractor()
+        viewController.setPresenter(presenter)
         
         return NavigationController
     }
     
     //Changes to Profile Screen
-    func pushToProfile(view: Proto_PTOV_PopulateMenu?) {
+    func pushToProfile(view: ProtocolPresenterToViewPopulateMenu?) {
         if let profileVC = ProfileRouter.createModule()
         {
             let viewController = view as! MenuVC
@@ -39,7 +36,7 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
     }
     
     //Changes to Search Screen
-    func pushToSearch(view: Proto_PTOV_PopulateMenu?) {
+    func pushToSearch(view: ProtocolPresenterToViewPopulateMenu?) {
         
         if let searchVC = SearchRouter.createModule()
         {
@@ -51,13 +48,13 @@ class PopulateMenuRouter: Proto_PTOR_PopulateMenu
     
     //Wrapper Function
     //Changes to OpenList - Also acts as NewList Creater
-    func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String)
     {
         pushToOpenList(view: view, with: listName, editable: false)
     }
     
     //Actual Implementation
-    func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String, editable: Bool) {
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, editable: Bool) {
         
         if let openListVC = PopulateListRouter.createModule(with: listName, editable: editable)
         {

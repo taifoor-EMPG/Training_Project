@@ -7,14 +7,23 @@
 
 import UIKit
 
-class Search: UIViewController, Proto_PTOV_Search
+class Search: UIViewController, ProtocolPresenterToViewSearch
 {
     //DATA MEMBERS
     
+    private var presenter: (ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch)?
+    
+    ///View Controller Outlets
     @IBOutlet weak var searchBox: UITextField!
-    var presenter: (Proto_ITOP_Search & Proto_VTOP_Search)?
     @IBOutlet weak var bar: UIStackView!
     //END OF DATA MEMBERS
+    
+    
+    func setPresenter(_ presenter: (ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch)?)
+    {
+        self.presenter = presenter
+    }
+    
     
     
     override func viewDidLoad() {

@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Counters" representedClassName="Counters" syncable="YES">
+        <attribute name="group" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="list" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="listItem" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="groupKey" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="lists" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="group" inverseEntity="List"/>
+        <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="List" inverseName="group" inverseEntity="List"/>
     </entity>
     <entity name="List" representedClassName="List" syncable="YES">
         <attribute name="activeTaskCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isPermanent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="listKey" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="lists" inverseEntity="Group"/>
         <relationship name="listItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ListItem" inverseName="list" inverseEntity="ListItem"/>
     </entity>
     <entity name="ListItem" representedClassName="ListItem" syncable="YES">
         <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="itemKey" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="listItems" inverseEntity="List"/>
     </entity>
     <elements>
-        <element name="ListItem" positionX="-54" positionY="-9" width="128" height="74"/>
-        <element name="List" positionX="-36" positionY="9" width="128" height="104"/>
-        <element name="Group" positionX="-18" positionY="27" width="128" height="59"/>
+        <element name="ListItem" positionX="1906.297790527344" positionY="-2266.086868286133" width="128" height="89"/>
+        <element name="List" positionX="1537.580078125" positionY="-2184.819412231445" width="128" height="119"/>
+        <element name="Group" positionX="1316.768493652344" positionY="-2169.414901733398" width="128" height="88"/>
+        <element name="Counters" positionX="1756.443603515625" positionY="-1975.559463500977" width="128" height="74"/>
     </elements>
 </model>

@@ -10,6 +10,7 @@ import UIKit
 class OptionalListCell: UITableViewCell {
 
     //DATA MEMBERS
+    private var listKey: Int = Constants.errorFetchCode
     @IBOutlet weak var listTitle: UILabel!
     @IBOutlet weak var count: UILabel!
     //END OF DATA MEMBERS
@@ -35,9 +36,15 @@ class OptionalListCell: UITableViewCell {
         
     }
     
-    func setupCell(text: String, count: String)
+    func setupCell(listKey: Int, text: String, count: String)
     {
+        self.listKey = listKey
         listTitle.text = text
         self.count.text = count
+    }
+    
+    func getListKey() -> Int
+    {
+        return listKey
     }
 }

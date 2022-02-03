@@ -7,12 +7,32 @@
 
 import UIKit
 
-class SearchInteractor: Proto_PTOI_Search
+class SearchInteractor: ProtocolPresenterToInteractorSearch
 {
     //DATA MEMBERS
     
-    var presenter: Proto_ITOP_Search?
+    private weak var presenter: ProtocolInteractorToPresenterSearch?
+    private var source: ProtocolDatasource?
     
     //END OF DATA MEMBERS
     
+    init(source : ProtocolDatasource?)
+    {
+        guard source != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.source = source
+    }
+
+    func setPresenter(presenter: ProtocolInteractorToPresenterSearch?)
+    {
+        guard presenter != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.presenter = presenter
+    }
 }

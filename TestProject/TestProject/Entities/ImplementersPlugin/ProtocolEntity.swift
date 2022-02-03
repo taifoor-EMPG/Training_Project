@@ -11,6 +11,26 @@ import Foundation
 
 protocol ProtocolEntity
 {
+    //Get Permanent Lists
+    //Return: Dictionary [List] (nil on failure)
+    func getPermanentListTitles() -> [List]?
+    
+    //Get Active Items of a List
+    //Return: Said List as array on Sucess (-1 on failure)
+    func getActiveItems(listKey: Int) -> [List]?
+    
+    //Get Group Count
+    //Return: Count on Success (-1 on failure)
+    func getGroupsCount() -> Int
+    
+    //Get Optional Lists
+    //Return: Dictionary [List] (nil on failure)
+    func getOptionalListTitles() -> [List]?
+    
+    //Does a group with given name exist?
+    //Return: Result of Operation
+    func groupExists(groupName: String) -> Bool?
+    
     //Adds a New Optional List
     //Return: listKey on Success (-1 on failure)
     func addOptionalList(listName: String) -> Int
@@ -55,9 +75,7 @@ protocol ProtocolEntity
     //Return: Size on Success (-1 on failure)
     func getListSize(listKey: Int) -> Int
     
-    //Get Active Items of a List
-    //Return: Count of Active Items on Sucess (-1 on failure)
-    func getActiveItems(listKey: Int) -> Int
+
     
     //Change Name of List
     //Return: Result of Operation
@@ -81,13 +99,11 @@ protocol ProtocolEntity
     
     //Get Groups
     //Return: Dictionary [groupKey: [Array of Lists]] on Success ([] on failure)
-    func getGroups() -> [Int: [Int]]
+    func getGroups() -> [Group]
     
     //Get Group Size
     //Return: Size on Success (-1 on failure)
     func getGroupSize(groupKey: Int) -> Int
     
-    //Get Group Count
-    //Return: Count on Success (-1 on failure)
-    func getGroupsCount() -> Int
+
 }

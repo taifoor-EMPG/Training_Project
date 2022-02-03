@@ -9,14 +9,10 @@ import UIKit
 
 //MARK: - View Input
 //To Pass information from Presenter to View
-protocol Proto_VTOP_Search
+protocol ProtocolViewToPresenterSearch
 {
-    //Data Members
-    var view: Proto_PTOV_Search? {get set}
-    var interactor: Proto_PTOI_Search? {get set}
-    var router: Proto_PTOR_Search? {get set}
-    
     //Setting Up View
+    func initInteractor()
     
     //Navigation to Other Screens
 
@@ -28,28 +24,26 @@ protocol Proto_VTOP_Search
 
 //MARK: - View Output
 //To Pass information from View to Presenter
-protocol Proto_PTOV_Search: AnyObject
+protocol ProtocolPresenterToViewSearch: AnyObject
 {
-    var presenter: (Proto_VTOP_Search & Proto_ITOP_Search)? {get set}
-    
     //Function to Open List Should be here and implemented on the backend
 }
 
 
 //MARK: - Interactor Input
 //Functions that are needed from Interactor are placed here
-protocol Proto_PTOI_Search
+protocol ProtocolPresenterToInteractorSearch: AnyObject
 {
-    var presenter: Proto_ITOP_Search? {get set}
+    func setPresenter(presenter: ProtocolInteractorToPresenterSearch?)
 }
 
-protocol Proto_ITOP_Search
+protocol ProtocolInteractorToPresenterSearch: AnyObject
 {
     
 }
 
 //MARK: - Router Protocol - All functionalities from Router come here
-protocol Proto_PTOR_Search
+protocol ProtocolPresenterToRouterSearch
 {
     static func createModule() -> UIViewController?
 }

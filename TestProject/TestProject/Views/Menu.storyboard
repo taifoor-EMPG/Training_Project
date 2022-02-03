@@ -62,7 +62,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="37" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="g2t-2J-u00" userLabel="Lists">
                                         <rect key="frame" x="0.0" y="0.0" width="384" height="718"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <color key="sectionIndexBackgroundColor" red="0.55920147899999995" green="0.16157564520000001" blue="0.14507573839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="Bjz-4p-8j1" userLabel="Header">
                                             <rect key="frame" x="0.0" y="0.0" width="384" height="238"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -367,6 +367,79 @@
                                                     <outlet property="listTitle" destination="rKU-no-I4Z" id="oEx-Pf-Uir"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sectionHeader" rowHeight="40" id="uhF-ra-qfd" customClass="SectionHeader" customModule="TestProject" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="322.5" width="384" height="40"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uhF-ra-qfd" id="RCU-YK-dIA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="384" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zi-rH-p2b" userLabel="Horizontal Container">
+                                                            <rect key="frame" x="0.0" y="0.0" width="384" height="40"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.stack" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="hpz-tu-Rde" userLabel="Icon">
+                                                                    <rect key="frame" x="0.0" y="-1" width="50" height="41.5"/>
+                                                                    <color key="tintColor" systemColor="secondaryLabelColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="50" id="ovf-fN-lOF"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC0-Pw-fOf" userLabel="Group Title">
+                                                                    <rect key="frame" x="50" y="0.0" width="254" height="40"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pdR-eg-fdA" userLabel="Options">
+                                                                    <rect key="frame" x="304" y="0.0" width="40" height="40"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="40" id="1jK-By-W6E"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" image="ellipsis" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="optionsPressed:" destination="uhF-ra-qfd" eventType="touchUpInside" id="3J5-FI-foU"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tit-8K-VSY" userLabel="Collapser">
+                                                                    <rect key="frame" x="344" y="0.0" width="40" height="40"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="40" id="2Xq-co-mWU"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" image="chevron.down" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="collapserPressed:" destination="uhF-ra-qfd" eventType="touchUpInside" id="8EK-Kx-ph2"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="tit-8K-VSY" firstAttribute="leading" secondItem="pdR-eg-fdA" secondAttribute="trailing" id="Akf-mb-lJ6"/>
+                                                                <constraint firstItem="kC0-Pw-fOf" firstAttribute="leading" secondItem="hpz-tu-Rde" secondAttribute="trailing" id="WjP-5h-e6f"/>
+                                                                <constraint firstAttribute="trailing" secondItem="tit-8K-VSY" secondAttribute="trailing" id="m2a-CD-f63"/>
+                                                                <constraint firstItem="hpz-tu-Rde" firstAttribute="leading" secondItem="2zi-rH-p2b" secondAttribute="leading" id="pJd-8p-Isy"/>
+                                                                <constraint firstItem="pdR-eg-fdA" firstAttribute="leading" secondItem="kC0-Pw-fOf" secondAttribute="trailing" id="vGD-Hn-3fx"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="2zi-rH-p2b" secondAttribute="bottom" id="3W7-6l-kQ2"/>
+                                                        <constraint firstItem="2zi-rH-p2b" firstAttribute="leading" secondItem="RCU-YK-dIA" secondAttribute="leading" id="BgY-Vn-naX"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2zi-rH-p2b" secondAttribute="trailing" id="TLw-K0-q8j"/>
+                                                        <constraint firstItem="2zi-rH-p2b" firstAttribute="top" secondItem="RCU-YK-dIA" secondAttribute="top" id="ccG-GJ-iFP"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <accessibilityTraits key="traits" image="YES"/>
+                                                </accessibility>
+                                                <connections>
+                                                    <outlet property="collapser" destination="tit-8K-VSY" id="5Ac-ct-p0z"/>
+                                                    <outlet property="groupTitle" destination="kC0-Pw-fOf" id="nvO-A8-Gat"/>
+                                                    <outlet property="optionsButton" destination="pdR-eg-fdA" id="Vdr-kE-aMg"/>
+                                                </connections>
+                                            </tableViewCell>
                                         </prototypes>
                                     </tableView>
                                 </subviews>
@@ -386,12 +459,12 @@
                                             <action selector="createNewList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="QUh-aW-b1Q"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBd-cL-rzp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBd-cL-rzp" userLabel="Add New Group">
                                         <rect key="frame" x="368.5" y="0.0" width="45.5" height="50"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="plus.app" catalog="system"/>
                                         <connections>
-                                            <action selector="createNewList:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cgB-pI-muo"/>
+                                            <action selector="createNewGroup:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aC1-xw-nLG"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -434,7 +507,10 @@
             <point key="canvasLocation" x="131.8840579710145" y="97.767857142857139"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="separatorColor"/>
     <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="list" width="32" height="32"/>
         <image name="logo_assigned" width="33" height="33"/>
         <image name="logo_important" width="21" height="21"/>
@@ -444,6 +520,7 @@
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
+        <image name="square.stack" catalog="system" width="113" height="128"/>
         <image name="test_user_profile" width="30" height="30"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

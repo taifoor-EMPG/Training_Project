@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol ListItemCellProtocols
+{
+    func didTapChecked()
+}
+
+
+
+
 class ListItemCell: UITableViewCell {
 
     //DATA MEMBERS
@@ -15,6 +23,7 @@ class ListItemCell: UITableViewCell {
     @IBOutlet weak var checkMark: UIButton!
     private var status:Bool = false
     
+    private var delegate: ListItemCellProtocols?
     //END OF DATA MEMBERS
     
     
@@ -58,6 +67,8 @@ class ListItemCell: UITableViewCell {
     
     func setupCell(text: String, status: Bool)
     {
+        //self.delegate = reference
+        
         let attrRedStrikethroughStyle = [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)]
         
         label.text = text

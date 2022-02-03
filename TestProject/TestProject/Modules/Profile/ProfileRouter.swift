@@ -8,17 +8,18 @@
 
 import UIKit
 
-class ProfileRouter: Proto_PTOR_Profile
+class ProfileRouter: ProtocolPresenterToRouterProfile
 {
     static func createModule() -> UIViewController? {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "Profile") as! Profile
-        let presenter: Proto_VTOP_Profile & Proto_ITOP_Profile = ProfilePresenter()
-            
-        viewController.presenter = presenter
-        viewController.presenter?.router = ProfileRouter()
-        viewController.presenter?.view = viewController
-        viewController.presenter?.interactor = ProfileInteractor()
+        
+        let source = Datasource(plugin: CoreData())
+        
+        let presenter: ProtocolViewToPresenterProfile & ProtocolInteractorToPresenterProfile = ProfilePresenter(view: viewController, interactor: ProfileInteractor(source: source), router: ProfileRouter())
+        
+        presenter.initInteractor()
+        viewController.setPresenter(presenter)
             
         //Set Data Members Here
         

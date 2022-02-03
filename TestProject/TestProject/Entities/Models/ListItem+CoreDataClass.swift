@@ -12,4 +12,8 @@ import CoreData
 @objc(ListItem)
 public class ListItem: NSManagedObject {
 
+    
+    
+    
+    
 }

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Group Options-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="GroupOptions" id="Y6W-OH-hqX" customClass="GroupOptions" customModule="TestProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seE-Fu-eoP">
+                                <rect key="frame" x="0.0" y="696" width="414" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJZ-wB-rh9" userLabel="Upper Bar">
+                                        <rect key="frame" x="182" y="5" width="50" height="5"/>
+                                        <color key="backgroundColor" systemColor="separatorColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="DQU-AE-tUt"/>
+                                            <constraint firstAttribute="height" constant="5" id="nEy-1K-GlJ"/>
+                                        </constraints>
+                                    </view>
+                                    <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhc-FK-Mvx">
+                                        <rect key="frame" x="0.0" y="15" width="414" height="40"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="jjF-8m-O7u"/>
+                                        </constraints>
+                                        <color key="barTintColor" systemColor="systemBackgroundColor"/>
+                                        <items>
+                                            <navigationItem title="Group Options" id="p3o-Ia-nUC">
+                                                <barButtonItem key="backBarButtonItem" title="Done" id="s2Z-gV-yBr"/>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9Gh-FY-ZHJ">
+                                        <rect key="frame" x="0.0" y="55" width="414" height="125"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <view key="tableHeaderView" contentMode="scaleToFill" id="NlJ-W2-4za">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wCi-tN-TMm" userLabel="Prompts">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kn-8T-NbP" userLabel="Add-Delete Lists">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
+                                                            <color key="tintColor" systemColor="labelColor"/>
+                                                            <inset key="contentEdgeInsets" minX="5" minY="5" maxX="0.0" maxY="5"/>
+                                                            <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" title="Add/Remove Lists">
+                                                                <imageReference key="image" image="list.bullet" catalog="system" symbolScale="small"/>
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="light"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="addRemoveLists:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gzC-BL-aS2"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-JL-T6g" userLabel="Rename Group">
+                                                            <rect key="frame" x="0.0" y="39.5" width="414" height="39"/>
+                                                            <color key="tintColor" systemColor="labelColor"/>
+                                                            <inset key="contentEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" title="Rename List">
+                                                                <imageReference key="image" image="rectangle.lefthalf.filled" catalog="system" symbolScale="large"/>
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="renameGroup:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="7vl-O8-XP6"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UmL-HH-yAz" userLabel="Delete Group">
+                                                            <rect key="frame" x="0.0" y="78.5" width="414" height="39.5"/>
+                                                            <color key="tintColor" red="0.55920147899999995" green="0.16157564520000001" blue="0.14507573839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" title="Action">
+                                                                <imageReference key="image" image="rectangle.on.rectangle.slash" catalog="system" symbolScale="large"/>
+                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="deleteUngroup:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="IRN-4Y-3JK"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="wCi-tN-TMm" secondAttribute="bottom" id="FMr-5f-LGm"/>
+                                                <constraint firstItem="wCi-tN-TMm" firstAttribute="top" secondItem="NlJ-W2-4za" secondAttribute="top" id="O7G-gd-Csq"/>
+                                                <constraint firstItem="wCi-tN-TMm" firstAttribute="leading" secondItem="NlJ-W2-4za" secondAttribute="leading" id="dCC-Gz-113"/>
+                                                <constraint firstAttribute="trailing" secondItem="wCi-tN-TMm" secondAttribute="trailing" id="naH-9d-Aov"/>
+                                            </constraints>
+                                        </view>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstItem="zhc-FK-Mvx" firstAttribute="top" secondItem="ZJZ-wB-rh9" secondAttribute="bottom" constant="5" id="AP6-6g-ZMb"/>
+                                    <constraint firstAttribute="bottom" secondItem="9Gh-FY-ZHJ" secondAttribute="bottom" constant="20" id="DMT-em-Xj1"/>
+                                    <constraint firstItem="zhc-FK-Mvx" firstAttribute="leading" secondItem="seE-Fu-eoP" secondAttribute="leading" id="Pda-Fc-bqk"/>
+                                    <constraint firstAttribute="trailing" secondItem="zhc-FK-Mvx" secondAttribute="trailing" id="Uw7-sr-ZwN"/>
+                                    <constraint firstItem="ZJZ-wB-rh9" firstAttribute="top" secondItem="seE-Fu-eoP" secondAttribute="top" constant="5" id="dRF-lH-bgU"/>
+                                    <constraint firstAttribute="height" constant="200" id="eC1-qu-xGe"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Gh-FY-ZHJ" secondAttribute="trailing" id="eax-r9-HgB"/>
+                                    <constraint firstItem="9Gh-FY-ZHJ" firstAttribute="leading" secondItem="seE-Fu-eoP" secondAttribute="leading" id="ldm-ft-Hni"/>
+                                    <constraint firstItem="ZJZ-wB-rh9" firstAttribute="centerX" secondItem="seE-Fu-eoP" secondAttribute="centerX" id="n95-Co-dch"/>
+                                    <constraint firstItem="9Gh-FY-ZHJ" firstAttribute="top" secondItem="zhc-FK-Mvx" secondAttribute="bottom" id="q79-gA-LmW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="seE-Fu-eoP" secondAttribute="bottom" id="Q3O-xh-GGj"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="seE-Fu-eoP" secondAttribute="trailing" id="SPL-ai-sxs"/>
+                            <constraint firstItem="seE-Fu-eoP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="dG9-5a-9ZU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deleteUngroup" destination="UmL-HH-yAz" id="oiV-J2-WmX"/>
+                        <outlet property="sectionView" destination="seE-Fu-eoP" id="6Le-H1-LQV"/>
+                        <outlet property="upperBar" destination="ZJZ-wB-rh9" id="yPg-jZ-qHP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100.00000000000001" y="77.678571428571431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="rectangle.lefthalf.filled" catalog="system" width="128" height="93"/>
+        <image name="rectangle.on.rectangle.slash" catalog="system" width="128" height="112"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

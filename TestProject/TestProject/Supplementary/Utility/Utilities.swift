@@ -14,7 +14,8 @@ struct Utilities
                                     2: ["Empty Entry", "You did not type anything\n Try Something Else?", "Dismiss"],
                                     3: ["Data Not Received", "Something Went Wrong", "Dismiss"],
                                     4: ["Data Unable to be Fetched", "Something went wrong", "Close"],
-                                    5: ["Failed to Create a Group", "Something went wrong", "Close"]
+                                    5: ["Failed to Create a Group", "Something went wrong", "Close"],
+                                    6: ["Duplicate Group", "There already exists a group with this name\n Try Something Else?", "Dismiss"]
                                                                                                                                 ]
     //Error 0:  Error Reference Not Found
     //          The error referenced in Code does not exist in database

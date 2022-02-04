@@ -84,8 +84,6 @@ class MenuVC: UIViewController
             
             //Next Prompt alert
             
-            
-            
         }
         
         let cancelButton = UIAlertAction(title: Constants.UIDefaults.newGroup.leftButtonText, style: .default)
@@ -152,10 +150,14 @@ extension MenuVC
 
 
 //For View to Communicate User Responses to Presenter
-extension MenuVC: ProtocolPresenterToViewPopulateMenu
+extension MenuVC: ProtocolPresenterToViewPopulateMenu, UIViewControllerTransitioningDelegate
 {
+    func presentGroupOptions(viewController: GroupOptions) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
     func showActivity() {
-        //optionalLists.reloadData()
+        optionalLists.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

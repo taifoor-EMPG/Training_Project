@@ -7,14 +7,25 @@
 
 import UIKit
 
-class SearchPresenter: Proto_VTOP_Search, Proto_ITOP_Search
+class SearchPresenter: ProtocolViewToPresenterSearch, ProtocolInteractorToPresenterSearch
 {
     //DATA MEMBERS
     
-    var view: Proto_PTOV_Search?
-    var interactor: Proto_PTOI_Search?
-    var router: Proto_PTOR_Search?
+    private var view: ProtocolPresenterToViewSearch?
+    private var interactor: ProtocolPresenterToInteractorSearch?
+    private var router: ProtocolPresenterToRouterSearch?
     
     //END OF DATA MEMBERS
     
+    init(view: ProtocolPresenterToViewSearch?, interactor: ProtocolPresenterToInteractorSearch?, router: ProtocolPresenterToRouterSearch?)
+    {
+        //Setting Up Data Members
+        self.view = view
+        self.interactor = interactor
+        self.router = router
+    }
+    
+    func initInteractor() {
+        interactor?.setPresenter(presenter: self)
+    }
 }

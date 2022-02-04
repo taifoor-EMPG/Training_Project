@@ -206,8 +206,19 @@ extension PopulateMenuPresenter
 //MARK: CELL RELATED FUNCTIONALITIES HERE
 extension PopulateMenuPresenter: SectionHeaderProtocols
 {
-    func didPressOptions() {
-        print("In PopulateMenu Presenter >> didPressOptions")
+    func didPressOptions(section: Int, groupKey: Int, groupName: String) {
+        let viewController = router?.createGroupOptions()
+        let x: Bool
+        if tableView(numberOfRowsInSection: section) > 0
+        {
+            x = false
+        }
+        else
+        {
+            x = true
+        }
+        viewController?.groupStatus(isEmpty: x, groupKey: groupKey, groupName: groupName, reference: self)
+        view?.presentGroupOptions(viewController: viewController!)
     }
     
     func didPressCollapser(section: Int, isCollapsing: Bool) {
@@ -308,4 +319,37 @@ extension PopulateMenuPresenter
     func getStaticListTitles() -> [Int : String] {
         return interactor?.getPermanentListTitles() ?? [:]
     }
+}
+
+
+//MARK: Group Option Functionalities
+extension PopulateMenuPresenter: GroupOptionsProtocols
+{
+    func addDeleteLists() {
+        print("In PopulateMenuPresenter >> addDeleteList")
+        return
+    }
+    
+    func renameGroup(groupKey: Int, groupName: String) -> Bool
+    {
+        let x = interactor?.renameGroup(groupKey: groupKey, newName: groupName)
+        if x == nil || x == false
+        {
+            return false
+        }
+        groups = interactor?.getGroups() ?? nil
+        if groups == nil
+        {
+            Utilities.popAnError(self.view as! UIViewController, Constants.errorCodes[4])
+        }
+        view?.showActivity()
+        return true
+    }
+    
+    func deleteUngroup() {
+        print("In PopulateMenuPresenter >> addDeleteList")
+        return
+    }
+    
+    
 }

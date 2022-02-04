@@ -40,7 +40,6 @@
 		780C7D5227A41391008C8D53 /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4A27A41391008C8D53 /* ListItem+CoreDataProperties.swift */; };
 		780C7D5527A41391008C8D53 /* List+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4D27A41391008C8D53 /* List+CoreDataClass.swift */; };
 		780C7D5627A41391008C8D53 /* List+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4E27A41391008C8D53 /* List+CoreDataProperties.swift */; };
-		780C7D5A27A41BF6008C8D53 /* Viper-Module.png in Resources */ = {isa = PBXBuildFile; fileRef = 780C7D5927A41BF6008C8D53 /* Viper-Module.png */; };
 		780C7D5F27A7E6E9008C8D53 /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D5D27A7E6E9008C8D53 /* Group+CoreDataClass.swift */; };
 		780C7D6027A7E6E9008C8D53 /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D5E27A7E6E9008C8D53 /* Group+CoreDataProperties.swift */; };
 		780C7D6727A7F26A008C8D53 /* Counters+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D6527A7F26A008C8D53 /* Counters+CoreDataClass.swift */; };
@@ -48,6 +47,8 @@
 		780C7D7C27AA553A008C8D53 /* GroupPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */; };
 		780C7D7E27AA554F008C8D53 /* GroupPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 780C7D7D27AA554F008C8D53 /* GroupPrompt.xib */; };
 		780C7D8227AA5A4E008C8D53 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */; };
+		782DA71027ABCE1A00FBA666 /* GroupOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */; };
+		782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
 		78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F10279A979300AC6182 /* PopulateListRouter.swift */; };
@@ -96,7 +97,6 @@
 		780C7D4A27A41391008C8D53 /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		780C7D4D27A41391008C8D53 /* List+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataClass.swift"; sourceTree = "<group>"; };
 		780C7D4E27A41391008C8D53 /* List+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		780C7D5927A41BF6008C8D53 /* Viper-Module.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Viper-Module.png"; path = "../../../../../../../Downloads/Viper-Module.png"; sourceTree = "<group>"; };
 		780C7D5D27A7E6E9008C8D53 /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Group+CoreDataClass.swift"; path = "../../../Group+CoreDataClass.swift"; sourceTree = "<group>"; };
 		780C7D5E27A7E6E9008C8D53 /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Group+CoreDataProperties.swift"; path = "../../../Group+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		780C7D6527A7F26A008C8D53 /* Counters+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Counters+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -104,6 +104,8 @@
 		780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPrompt.swift; sourceTree = "<group>"; };
 		780C7D7D27AA554F008C8D53 /* GroupPrompt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupPrompt.xib; sourceTree = "<group>"; };
 		780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOptions.swift; sourceTree = "<group>"; };
+		782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupOptions.storyboard; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		78CF7F10279A979300AC6182 /* PopulateListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListRouter.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		7805892C27955561007A327E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				782DA70C27ABC98100FBA666 /* Group Options */,
 				780C7D7F27AA5A29008C8D53 /* TableView Cells */,
 				780C7D7227A96062008C8D53 /* Group Prompt */,
 				780C7CCA27A01B76008C8D53 /* Search */,
@@ -327,7 +330,6 @@
 		780C7D4627A40B4B008C8D53 /* Helper Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				780C7D5927A41BF6008C8D53 /* Viper-Module.png */,
 				780C7D4727A40BB9008C8D53 /* Notes.rtf */,
 			);
 			path = "Helper Documentation";
@@ -358,6 +360,15 @@
 				780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */,
 			);
 			name = "Section Header";
+			sourceTree = "<group>";
+		};
+		782DA70C27ABC98100FBA666 /* Group Options */ = {
+			isa = PBXGroup;
+			children = (
+				782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */,
+				782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */,
+			);
+			name = "Group Options";
 			sourceTree = "<group>";
 		};
 		78CF7F09279A974500AC6182 /* Search */ = {
@@ -462,10 +473,10 @@
 			files = (
 				78CF7F1E279AA3FC00AC6182 /* PopulateList.storyboard in Resources */,
 				7805891427954959007A327E /* LaunchScreen.storyboard in Resources */,
+				782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */,
 				7805893A27958BF2007A327E /* Menu.storyboard in Resources */,
 				780C7CC727A01AB9008C8D53 /* Profile.storyboard in Resources */,
 				780C7D7E27AA554F008C8D53 /* GroupPrompt.xib in Resources */,
-				780C7D5A27A41BF6008C8D53 /* Viper-Module.png in Resources */,
 				780C7D4827A40BB9008C8D53 /* Notes.rtf in Resources */,
 				780C7CCC27A01B87008C8D53 /* Search.storyboard in Resources */,
 				7805891127954959007A327E /* Assets.xcassets in Resources */,
@@ -518,6 +529,7 @@
 				780C7D3327A3F7B7008C8D53 /* ProtocolDatasource.swift in Sources */,
 				7805892327955342007A327E /* Constants.swift in Sources */,
 				7805897F2796CBAD007A327E /* PopulateMenuInteractor.swift in Sources */,
+				782DA71027ABCE1A00FBA666 /* GroupOptions.swift in Sources */,
 				780C7D7C27AA553A008C8D53 /* GroupPrompt.swift in Sources */,
 				780C7CC927A01AC4008C8D53 /* Profile.swift in Sources */,
 				78CF7F15279A98F700AC6182 /* ProfileProtocols.swift in Sources */,

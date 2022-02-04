@@ -9,7 +9,7 @@ import UIKit
 
 protocol SectionHeaderProtocols: AnyObject
 {
-    func didPressOptions()
+    func didPressOptions(section: Int, groupKey: Int, groupName: String)
     func didPressCollapser(section: Int, isCollapsing: Bool)
 }
 
@@ -24,7 +24,6 @@ class SectionHeader: UITableViewCell
     private var sectionID: Int = -1
     private var groupKey: Int = -1
     private var collapsed: Bool = false
-    private var rowsInSection = -1
     
     private weak var delegate: SectionHeaderProtocols?
     
@@ -33,9 +32,7 @@ class SectionHeader: UITableViewCell
     
     @IBAction func optionsPressed(_ sender: UIButton)
     {
-        //Pop Up New Menu Here
-        print("SECTION HEADER OPTIONS PRESSED")
-        delegate?.didPressOptions()
+        delegate?.didPressOptions(section: sectionID, groupKey: groupKey, groupName: groupTitle.text!)
     }
     
     @IBAction func collapserPressed(_ sender: UIButton)
@@ -44,6 +41,8 @@ class SectionHeader: UITableViewCell
         {
             //Is collapsed - uncollapse it
             collapser.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+            optionsButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+            optionsButton.isEnabled = true
             self.collapsed = false
             delegate?.didPressCollapser(section: sectionID, isCollapsing: collapsed)
         }
@@ -51,6 +50,8 @@ class SectionHeader: UITableViewCell
         {
             //Is not collapsed - collapse it
             collapser.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+            optionsButton.setImage(UIImage(), for: .normal)
+            optionsButton.isEnabled = false
             self.collapsed = true
             delegate?.didPressCollapser(section: sectionID, isCollapsing: collapsed)
         }

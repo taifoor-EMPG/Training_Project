@@ -144,8 +144,9 @@ class Datasource: ProtocolDatasource
         if x == nil
         {
             print("Datasource >> In groupExists >> Error: Failed to Retrieve Count")
+            return true
         }
-        return x ?? true
+        return x!
     }
     
     func getGroupTitles(groupKey: Int) -> [Int : String] {
@@ -169,8 +170,12 @@ class Datasource: ProtocolDatasource
     }
     
     func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
-        print("Datasource >> In changeGroupName")
-        return false
+        let x = plug?.changeGroupName(groupKey: groupKey, newGroupName: newGroupName)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func ungroup(groupKey: Int) -> Bool {

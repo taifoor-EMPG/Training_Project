@@ -144,8 +144,20 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     }
     
     func renameGroup(groupKey: Int, newName: String) -> Bool {
-        print("PopulateMenuInteractor >> In renameGroup")
-        return false
+        //Check if group with newName exists
+        var x = source?.groupExists(groupName: newName)
+        if x == nil || x == true
+        {
+            return false
+        }
+        
+        //Rename the Group with groupKey
+        x = source?.changeGroupName(groupKey: groupKey, newGroupName: newName)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func ungroup(groupKey: Int) -> Bool {

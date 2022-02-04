@@ -185,7 +185,31 @@ class CoreData: ProtocolEntity
     
     
     ///UPDATE
-    
+    func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
+        do
+        {
+            let request = Group.fetchRequest() as NSFetchRequest<Group>
+            let predicate = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+            request.predicate = predicate
+            
+            let group = try context.fetch(request)
+            
+            if group.isEmpty == true
+            {
+                return false
+            }
+            
+            group[0].name = newGroupName
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func changeGroupName >> Failed to Fetch")
+            return false
+        }
+    }
     
     ///DELETE
     
@@ -258,10 +282,7 @@ class CoreData: ProtocolEntity
         return false
     }
     
-    func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
-        print("Core >> In changeGroupName")
-        return false
-    }
+    
     
     func getListItems(listkey: Int) -> [Int : (text: String, status: Bool)] {
         print("Core >> In getListItems")

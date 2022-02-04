@@ -46,6 +46,12 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
         }
     }
     
+    func createGroupOptions() -> GroupOptions {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupOptions", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "GroupOptions") as! GroupOptions
+        return viewController
+    }
+    
     //Wrapper Function
     //Changes to OpenList - Also acts as NewList Creater
     func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String)

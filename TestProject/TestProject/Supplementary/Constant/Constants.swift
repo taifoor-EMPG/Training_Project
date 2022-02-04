@@ -40,6 +40,14 @@ struct Constants
             static let leftButtonText = "Cancel"
             static let rightButtonText = "Create"            
         }
+        struct groupOptions
+        {
+            static let deleteTitle = "Delete Group"
+            static let deleteImage = "trash"
+            static let ungroupTitle = "Ungroup Lists"
+            static let ungroupImage = "rectangle.on.rectangle.slash"
+            static let renameTitle = "Rename"
+        }
     }
     
     //END OF DATA MEMBERS

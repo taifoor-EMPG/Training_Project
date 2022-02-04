@@ -7,12 +7,32 @@
 
 import UIKit
 
-class ProfileInteractor: Proto_PTOI_Profile
+class ProfileInteractor: ProtocolPresenterToInteractorProfile
 {
     //DATA MEMBERS
     
-    var presenter: Proto_ITOP_Profile?
+    private weak var presenter: ProtocolInteractorToPresenterProfile?
+    private var source: ProtocolDatasource?
     
     //END OF DATA MEMBERS
     
+    init(source : ProtocolDatasource?)
+    {
+        guard source != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.source = source
+    }
+
+    func setPresenter(presenter: ProtocolInteractorToPresenterProfile?)
+    {
+        guard presenter != nil else
+        {
+            //RAISE SOME ERROR HERE
+            return
+        }
+        self.presenter = presenter
+    }
 }

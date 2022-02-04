@@ -47,6 +47,7 @@ protocol ProtocolPresenterToViewPopulateMenu: AnyObject
     func showActivity()
     func closeSection(indexPath: [IndexPath])
     func openSection(indexPath: [IndexPath])
+    func presentGroupOptions(viewController: GroupOptions)
 }
 
 
@@ -96,9 +97,15 @@ protocol ProtocolInteractorToPresenterPopulateMenu: AnyObject
 protocol ProtocolPresenterToRouterPopulateMenu
 {
     static func createModule() -> UINavigationController?
+    
+    //Navigation Controls
     func pushToProfile(view: ProtocolPresenterToViewPopulateMenu?)
     func pushToSearch(view: ProtocolPresenterToViewPopulateMenu?)
     func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String)
     func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, editable: Bool)
+    
+    //Creation Controls
+    func createGroupOptions() -> GroupOptions
+
 }
 

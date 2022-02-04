@@ -212,7 +212,77 @@ class CoreData: ProtocolEntity
     }
     
     ///DELETE
+    func removeGroup(groupKey: Int) -> Bool {
+        do
+        {
+            let request = Group.fetchRequest() as NSFetchRequest<Group>
+            let predicate = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+            request.predicate = predicate
+            
+            let group = try context.fetch(request)
+            
+            if group.isEmpty == true
+            {
+                return false
+            }
+            
+            self.context.delete(group[0])
+            
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func changeGroupName >> Failed to Fetch")
+            return false
+        }
+    }
     
+    func ungroup(groupKey: Int) -> Bool {
+        do
+        {
+            let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
+            let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+            requestGroup.predicate = predicateGroup
+            
+            let group = try context.fetch(requestGroup)
+            
+            if group.isEmpty == true
+            {
+                return false
+            }
+            
+            let requestList = List.fetchRequest() as NSFetchRequest<List>
+            let predicateList = NSPredicate(format: DatabaseConstants.lists[2] + " == false")
+            requestList.predicate = predicateList
+            
+            let lists = try context.fetch(requestList)
+            
+            for i in lists
+            {
+                if i.group == nil
+                {
+                    //print("List " + i.name! + " not a part of any group")
+                }
+                else
+                {
+                    if  Int(i.group!.groupKey) == groupKey
+                    {
+                        group[0].removeFromLists(i)
+                    }
+                }
+            }
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func ungroup >> Failed to Transact")
+            return false
+        }
+    }
     
     
     
@@ -232,15 +302,9 @@ class CoreData: ProtocolEntity
         return false
     }
     
-    func ungroup(groupKey: Int) -> Bool {
-        print("Core >> In ungroup")
-        return false
-    }
     
-    func removeGroup(groupKey: Int) -> Bool {
-        print("Core >> In removeGroup")
-        return false
-    }
+    
+    
     
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
         print("Core >> In addListToGroup")

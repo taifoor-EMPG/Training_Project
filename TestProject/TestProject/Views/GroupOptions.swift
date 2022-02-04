@@ -11,7 +11,8 @@ protocol GroupOptionsProtocols
 {
     func addDeleteLists()
     func renameGroup(groupKey: Int, groupName: String) -> Bool
-    func deleteUngroup()
+    func deleteGroup(groupKey: Int)
+    func ungroup(groupKey: Int)
 }
 
 
@@ -87,7 +88,6 @@ class GroupOptions: UIViewController
             {
                 Utilities.popAnError(self as UIViewController, 6)
             }
-            
         }
         
         let cancelButton = UIAlertAction(title: Constants.UIDefaults.newGroup.leftButtonText, style: .default)
@@ -105,6 +105,17 @@ class GroupOptions: UIViewController
     
     @IBAction func deleteUngroup(_ sender: UIButton)
     {
-        
+        if sender.currentTitle == Constants.UIDefaults.groupOptions.deleteTitle
+        {
+            //Group is Empty - Delete it
+            delegate?.deleteGroup(groupKey: groupKey!)
+            self.dismiss(animated: true, completion: nil)
+        }
+        else
+        {
+            //Group is !Empty - Ungroup
+            delegate?.ungroup(groupKey: groupKey!)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

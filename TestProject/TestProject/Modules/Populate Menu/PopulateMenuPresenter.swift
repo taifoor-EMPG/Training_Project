@@ -346,9 +346,18 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
         return true
     }
     
-    func deleteUngroup() {
-        print("In PopulateMenuPresenter >> addDeleteList")
-        return
+    func deleteGroup(groupKey: Int)
+    {
+        interactor?.deleteGroup(groupKey: groupKey)
+        viewDidLoad()
+        view?.showActivity()
+    }
+    
+    func ungroup(groupKey: Int)
+    {
+        interactor?.ungroup(groupKey: groupKey)
+        viewDidLoad()
+        view?.showActivity()
     }
     
     

@@ -157,7 +157,11 @@ extension MenuVC: ProtocolPresenterToViewPopulateMenu, UIViewControllerTransitio
     }
     
     func showActivity() {
-        optionalLists.reloadData()
+        DispatchQueue.main.async {
+                    // now update UI on main thread
+                    self.optionalLists.reloadData()
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

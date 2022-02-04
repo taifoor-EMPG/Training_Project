@@ -161,14 +161,22 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     }
     
     func ungroup(groupKey: Int) -> Bool {
-        print("PopulateMenuInteractor >> In ungroup")
-        return false
+        let x = source?.ungroup(groupKey: groupKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     //MARK: CRUD - DELETE
     func deleteGroup(groupKey: Int) -> Bool {
-        print("PopulateMenuInteractor >> In deleteGroup")
-        return false
+        let x = source?.removeGroup(groupKey: groupKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func deleteList(listKey: Int) -> Bool {

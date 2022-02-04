@@ -179,13 +179,21 @@ class Datasource: ProtocolDatasource
     }
     
     func ungroup(groupKey: Int) -> Bool {
-        print("Datasource >> In ungroup")
-        return false
+        let x = plug?.ungroup(groupKey: groupKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func removeGroup(groupKey: Int) -> Bool {
-        print("Datasource >> In removeGroup")
-        return false
+        let x = plug?.removeGroup(groupKey: groupKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func deleteList(listKey: Int) -> Bool {

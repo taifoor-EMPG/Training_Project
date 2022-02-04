@@ -48,6 +48,7 @@ protocol ProtocolPresenterToViewPopulateMenu: AnyObject
     func closeSection(indexPath: [IndexPath])
     func openSection(indexPath: [IndexPath])
     func presentGroupOptions(viewController: GroupOptions)
+    func presentGroupPrompt(viewController: GroupPrompt)
 }
 
 
@@ -106,6 +107,6 @@ protocol ProtocolPresenterToRouterPopulateMenu
     
     //Creation Controls
     func createGroupOptions() -> GroupOptions
-
+    func createGroupPrompt() -> GroupPrompt
 }
 

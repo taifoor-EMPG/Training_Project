@@ -28,8 +28,9 @@ class MenuVC: UIViewController
     @IBOutlet weak var assignedCount: UILabel!
     @IBOutlet weak var tasksCount: UILabel!
     
-    var titles: [Int: String]?
+    private var titles: [Int: String]?
     
+    private var groupOptionsVC:GroupOptions?
     //END DATA MEMEBRS
     
     func setPresenter(_ presenter: (ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu)?)
@@ -83,6 +84,7 @@ class MenuVC: UIViewController
             self.optionalLists.reloadData()
             
             //Next Prompt alert
+            //PROMPT THE NEXT SCREEN FOR ADDING LISTS
             
         }
         
@@ -153,12 +155,18 @@ extension MenuVC
 extension MenuVC: ProtocolPresenterToViewPopulateMenu, UIViewControllerTransitioningDelegate
 {
     func presentGroupOptions(viewController: GroupOptions) {
+        groupOptionsVC = viewController
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    func presentGroupPrompt(viewController: GroupPrompt) {
+        groupOptionsVC?.dismiss(animated: true, completion: nil)
         self.present(viewController, animated: true, completion: nil)
     }
     
     func showActivity() {
         DispatchQueue.main.async {
-                    // now update UI on main thread
+                    //Update UI on main thread
                     self.optionalLists.reloadData()
         }
         

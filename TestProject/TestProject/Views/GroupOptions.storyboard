@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seE-Fu-eoP">
-                                <rect key="frame" x="0.0" y="696" width="414" height="200"/>
+                                <rect key="frame" x="0.0" y="661" width="414" height="235"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJZ-wB-rh9" userLabel="Upper Bar">
                                         <rect key="frame" x="182" y="5" width="50" height="5"/>
@@ -29,30 +29,38 @@
                                         </constraints>
                                     </view>
                                     <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhc-FK-Mvx">
-                                        <rect key="frame" x="0.0" y="15" width="414" height="40"/>
+                                        <rect key="frame" x="0.0" y="15" width="414" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="jjF-8m-O7u"/>
+                                            <constraint firstAttribute="height" constant="55" id="jjF-8m-O7u"/>
                                         </constraints>
                                         <color key="barTintColor" systemColor="systemBackgroundColor"/>
                                         <items>
-                                            <navigationItem title="Group Options" id="p3o-Ia-nUC">
-                                                <barButtonItem key="backBarButtonItem" title="Done" id="s2Z-gV-yBr"/>
+                                            <navigationItem title="Group Options" largeTitleDisplayMode="always" id="p3o-Ia-nUC">
+                                                <barButtonItem key="backBarButtonItem" title="Done" style="done" id="s2Z-gV-yBr">
+                                                    <color key="tintColor" systemColor="linkColor"/>
+                                                    <connections>
+                                                        <action selector="donePressed:" destination="Y6W-OH-hqX" id="WIH-sX-rke"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                                <connections>
+                                                    <outlet property="rightBarButtonItem" destination="s2Z-gV-yBr" id="5wO-Cd-vm5"/>
+                                                </connections>
                                             </navigationItem>
                                         </items>
                                     </navigationBar>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9Gh-FY-ZHJ">
-                                        <rect key="frame" x="0.0" y="55" width="414" height="125"/>
+                                        <rect key="frame" x="0.0" y="70" width="414" height="145"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="NlJ-W2-4za">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wCi-tN-TMm" userLabel="Prompts">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0kn-8T-NbP" userLabel="Add-Delete Lists">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                                             <color key="tintColor" systemColor="labelColor"/>
                                                             <inset key="contentEdgeInsets" minX="5" minY="5" maxX="0.0" maxY="5"/>
                                                             <inset key="titleEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -66,7 +74,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-JL-T6g" userLabel="Rename Group">
-                                                            <rect key="frame" x="0.0" y="39.5" width="414" height="39"/>
+                                                            <rect key="frame" x="0.0" y="50" width="414" height="50"/>
                                                             <color key="tintColor" systemColor="labelColor"/>
                                                             <inset key="contentEdgeInsets" minX="13" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -80,7 +88,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UmL-HH-yAz" userLabel="Delete Group">
-                                                            <rect key="frame" x="0.0" y="78.5" width="414" height="39.5"/>
+                                                            <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                                             <color key="tintColor" red="0.55920147899999995" green="0.16157564520000001" blue="0.14507573839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <inset key="contentEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -114,7 +122,7 @@
                                     <constraint firstItem="zhc-FK-Mvx" firstAttribute="leading" secondItem="seE-Fu-eoP" secondAttribute="leading" id="Pda-Fc-bqk"/>
                                     <constraint firstAttribute="trailing" secondItem="zhc-FK-Mvx" secondAttribute="trailing" id="Uw7-sr-ZwN"/>
                                     <constraint firstItem="ZJZ-wB-rh9" firstAttribute="top" secondItem="seE-Fu-eoP" secondAttribute="top" constant="5" id="dRF-lH-bgU"/>
-                                    <constraint firstAttribute="height" constant="200" id="eC1-qu-xGe"/>
+                                    <constraint firstAttribute="height" constant="235" id="eC1-qu-xGe"/>
                                     <constraint firstAttribute="trailing" secondItem="9Gh-FY-ZHJ" secondAttribute="trailing" id="eax-r9-HgB"/>
                                     <constraint firstItem="9Gh-FY-ZHJ" firstAttribute="leading" secondItem="seE-Fu-eoP" secondAttribute="leading" id="ldm-ft-Hni"/>
                                     <constraint firstItem="ZJZ-wB-rh9" firstAttribute="centerX" secondItem="seE-Fu-eoP" secondAttribute="centerX" id="n95-Co-dch"/>
@@ -147,6 +155,9 @@
         <image name="rectangle.on.rectangle.slash" catalog="system" width="128" height="112"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>

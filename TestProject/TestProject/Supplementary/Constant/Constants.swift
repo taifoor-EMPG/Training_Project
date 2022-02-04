@@ -31,6 +31,7 @@ struct Constants
         {
             static let optionalListCell = "optionalListCell"
             static let listItemCell = "ListItemCell"
+            static let listing = "listing"
         }
         
         struct newGroup
@@ -47,6 +48,11 @@ struct Constants
             static let ungroupTitle = "Ungroup Lists"
             static let ungroupImage = "rectangle.on.rectangle.slash"
             static let renameTitle = "Rename"
+        }
+        struct groupPrompt
+        {
+            static let addedImage = "checkmark"
+            static let addImage = "plus"
         }
     }
     

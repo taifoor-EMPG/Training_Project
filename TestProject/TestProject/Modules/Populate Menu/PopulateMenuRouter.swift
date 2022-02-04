@@ -52,6 +52,13 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
         return viewController
     }
     
+    func createGroupPrompt() -> GroupPrompt
+    {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupPrompt", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "GroupPrompt") as! GroupPrompt
+        return viewController
+    }
+    
     //Wrapper Function
     //Changes to OpenList - Also acts as NewList Creater
     func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String)

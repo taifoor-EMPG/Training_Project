@@ -292,6 +292,8 @@ extension PopulateMenuPresenter
         
         router?.pushToOpenList(view: view, with: name, editable: true)
     }
+    
+    //Create a Function to generate and set group prompt
 
 }
 
@@ -325,9 +327,19 @@ extension PopulateMenuPresenter
 //MARK: Group Option Functionalities
 extension PopulateMenuPresenter: GroupOptionsProtocols
 {
-    func addDeleteLists() {
-        print("In PopulateMenuPresenter >> addDeleteList")
-        return
+    
+    func addDeleteLists(groupKey: Int) {
+        //Get this done using a function
+        let newView = router?.createGroupPrompt()
+        
+        if newView == nil
+        {
+            print("In PopulateMenuPresenter >> addDeleteList >> View Not Generated")
+            return
+        }
+        newView?.setDelegate(self)
+        newView?.setGroupKey(groupKey: groupKey)
+        view?.presentGroupPrompt(viewController: newView!)
     }
     
     func renameGroup(groupKey: Int, groupName: String) -> Bool
@@ -348,16 +360,54 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
     
     func deleteGroup(groupKey: Int)
     {
-        interactor?.deleteGroup(groupKey: groupKey)
-        viewDidLoad()
-        view?.showActivity()
+        if interactor?.deleteGroup(groupKey: groupKey) == true
+        {
+            viewDidLoad()
+            view?.showActivity()
+            return
+        }
+        print("In PopulateMenuPresenter >> deleteGroup >> Unexpected Error Occured")
     }
     
     func ungroup(groupKey: Int)
     {
-        interactor?.ungroup(groupKey: groupKey)
-        viewDidLoad()
-        view?.showActivity()
+        if interactor?.ungroup(groupKey: groupKey) == true
+        {
+            viewDidLoad()
+            view?.showActivity()
+            return
+        }
+        print("In PopulateMenuPresenter >> ungroup >> Unexpected Error Occured")
+    }
+}
+
+extension PopulateMenuPresenter: GroupPromptProtocol
+{
+    func setRows(groupKey: Int) -> Int {
+        var total = freeLists!.count + 0
+        
+        if groups != nil
+        {
+            for i in groups!
+            {
+                if i.groupKey == groupKey
+                {
+                    total += i.listsArray.count
+                }
+            }
+        }
+        return total
+    }
+    
+    func selectedRowAction() {
+        print("In PopulateMenuPresenter >> selectedRowAction")
+        return
+    }
+    
+    func setCell(_ cell: Listing) {
+        
+        print("In PopulateMenuPresenter >> selectedRowAction")
+        return
     }
     
     

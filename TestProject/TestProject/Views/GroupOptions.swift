@@ -9,7 +9,7 @@ import UIKit
 
 protocol GroupOptionsProtocols
 {
-    func addDeleteLists()
+    func addDeleteLists(groupKey: Int)
     func renameGroup(groupKey: Int, groupName: String) -> Bool
     func deleteGroup(groupKey: Int)
     func ungroup(groupKey: Int)
@@ -67,7 +67,7 @@ class GroupOptions: UIViewController
     
     @IBAction func addRemoveLists(_ sender: UIButton)
     {
-        
+        delegate?.addDeleteLists(groupKey: groupKey!)
     }
     
     @IBAction func renameGroup(_ sender: UIButton)
@@ -117,5 +117,8 @@ class GroupOptions: UIViewController
             delegate?.ungroup(groupKey: groupKey!)
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    @IBAction func donePressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -45,10 +45,11 @@
 		780C7D6727A7F26A008C8D53 /* Counters+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D6527A7F26A008C8D53 /* Counters+CoreDataClass.swift */; };
 		780C7D6827A7F26A008C8D53 /* Counters+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D6627A7F26A008C8D53 /* Counters+CoreDataProperties.swift */; };
 		780C7D7C27AA553A008C8D53 /* GroupPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */; };
-		780C7D7E27AA554F008C8D53 /* GroupPrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 780C7D7D27AA554F008C8D53 /* GroupPrompt.xib */; };
 		780C7D8227AA5A4E008C8D53 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */; };
 		782DA71027ABCE1A00FBA666 /* GroupOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */; };
 		782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */; };
+		7836BADF27AD73F200CC860D /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7836BADE27AD73F200CC860D /* Listing.swift */; };
+		78CDDEB727AD5C5800210B26 /* GroupPrompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
 		78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F10279A979300AC6182 /* PopulateListRouter.swift */; };
@@ -102,10 +103,11 @@
 		780C7D6527A7F26A008C8D53 /* Counters+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Counters+CoreDataClass.swift"; sourceTree = "<group>"; };
 		780C7D6627A7F26A008C8D53 /* Counters+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Counters+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPrompt.swift; sourceTree = "<group>"; };
-		780C7D7D27AA554F008C8D53 /* GroupPrompt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupPrompt.xib; sourceTree = "<group>"; };
 		780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOptions.swift; sourceTree = "<group>"; };
 		782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupOptions.storyboard; sourceTree = "<group>"; };
+		7836BADE27AD73F200CC860D /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupPrompt.storyboard; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		78CF7F10279A979300AC6182 /* PopulateListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListRouter.swift; sourceTree = "<group>"; };
@@ -339,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */,
-				780C7D7D27AA554F008C8D53 /* GroupPrompt.xib */,
+				78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */,
 			);
 			name = "Group Prompt";
 			sourceTree = "<group>";
@@ -347,6 +349,7 @@
 		780C7D7F27AA5A29008C8D53 /* TableView Cells */ = {
 			isa = PBXGroup;
 			children = (
+				7836BADD27AD73D900CC860D /* Prompt Listing */,
 				780C7D8027AA5A37008C8D53 /* Section Header */,
 				7805893227955D28007A327E /* ListCell */,
 				7805897D2796BADB007A327E /* List Item Cell */,
@@ -369,6 +372,14 @@
 				782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */,
 			);
 			name = "Group Options";
+			sourceTree = "<group>";
+		};
+		7836BADD27AD73D900CC860D /* Prompt Listing */ = {
+			isa = PBXGroup;
+			children = (
+				7836BADE27AD73F200CC860D /* Listing.swift */,
+			);
+			name = "Prompt Listing";
 			sourceTree = "<group>";
 		};
 		78CF7F09279A974500AC6182 /* Search */ = {
@@ -476,10 +487,10 @@
 				782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */,
 				7805893A27958BF2007A327E /* Menu.storyboard in Resources */,
 				780C7CC727A01AB9008C8D53 /* Profile.storyboard in Resources */,
-				780C7D7E27AA554F008C8D53 /* GroupPrompt.xib in Resources */,
 				780C7D4827A40BB9008C8D53 /* Notes.rtf in Resources */,
 				780C7CCC27A01B87008C8D53 /* Search.storyboard in Resources */,
 				7805891127954959007A327E /* Assets.xcassets in Resources */,
+				78CDDEB727AD5C5800210B26 /* GroupPrompt.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +515,7 @@
 				7805897A2796A886007A327E /* PopulateMenuProtocols.swift in Sources */,
 				78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */,
 				7805890827954957007A327E /* AppDelegate.swift in Sources */,
+				7836BADF27AD73F200CC860D /* Listing.swift in Sources */,
 				78CF7F22279ACBC600AC6182 /* PopulateListInteractor.swift in Sources */,
 				78CF7F11279A979300AC6182 /* PopulateListRouter.swift in Sources */,
 				7805894527959B8B007A327E /* OptionalListCell.swift in Sources */,

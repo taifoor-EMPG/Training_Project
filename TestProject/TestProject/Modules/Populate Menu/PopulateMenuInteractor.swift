@@ -69,8 +69,12 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     }
     
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
-        print("PopulateMenuInteractor >> In addListToGroup")
-        return false
+        let x = source?.addListToGroup(listKey: listKey, groupKey: groupKey)
+        if x == nil
+        {
+            print("PopulateMenuInteractor >> In addListToGroup >> Error: Failed to Add List")
+        }
+        return x ?? false
     }
     
     //MARK: CRUD - READ
@@ -184,9 +188,13 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
         return false
     }
     
-    func removeListFromGroup(listKey: Int) -> Bool {
-        print("PopulateMenuInteractor >> In removeListFromGroup")
-        return false
+    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
+        let x = source?.removeListFromGroup(listKey: listKey, groupKey: groupKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     func deleteList(listKey: Int) -> [Group]? {
         print("PopulateMenuInteractor >> In deleteList")

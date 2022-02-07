@@ -61,6 +61,46 @@ class CoreData: ProtocolEntity
         }
     }
     
+    func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
+        do
+        {
+            let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
+            let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+            requestGroup.predicate = predicateGroup
+            
+            let group = try context.fetch(requestGroup)
+            
+            if group.isEmpty == true
+            {
+                return false
+            }
+            
+            let requestList = List.fetchRequest() as NSFetchRequest<List>
+            let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            requestList.predicate = predicateList
+            
+            let lists = try context.fetch(requestList)
+            
+            if lists.isEmpty == true
+            {
+                return false
+            }
+            
+            
+            group[0].addToLists(lists[0])
+            
+            try self.context.save()
+            return true
+            
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("Core >> In addListToGroup")
+            return false
+        }
+    }
+    
     
     ///READ
     func getPermanentListTitles() -> [List]? {
@@ -284,6 +324,44 @@ class CoreData: ProtocolEntity
         }
     }
     
+    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
+        do
+        {
+            let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
+            let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+            requestGroup.predicate = predicateGroup
+            
+            let group = try context.fetch(requestGroup)
+            
+            if group.isEmpty == true
+            {
+                return false
+            }
+            
+            let requestList = List.fetchRequest() as NSFetchRequest<List>
+            let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            requestList.predicate = predicateList
+            
+            let lists = try context.fetch(requestList)
+            
+            if lists.isEmpty == true
+            {
+                return false
+            }
+            
+            
+            group[0].removeFromLists(lists[0])
+            
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("Core >> In removeListFromGroup")
+            return false
+        }
+    }
     
     
     
@@ -306,15 +384,9 @@ class CoreData: ProtocolEntity
     
     
     
-    func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
-        print("Core >> In addListToGroup")
-        return false
-    }
     
-    func removeListFromGroup(listKey: Int) -> Bool {
-        print("Core >> In removeListFromGroup")
-        return false
-    }
+    
+    
     
     func addItemtoList(listKey: Int, itemText: String) -> Int {
         print("Core >> In addItemtoList")

@@ -51,7 +51,7 @@
                                     <constraint firstAttribute="height" constant="50" id="x8R-SC-14n"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Search Title" translatesAutoresizingMaskIntoConstraints="NO" id="CL1-34-h7T">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_title" translatesAutoresizingMaskIntoConstraints="NO" id="CL1-34-h7T">
                                 <rect key="frame" x="57" y="298" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="B2X-3f-l59"/>
@@ -80,8 +80,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Search Title" width="166.5" height="166.5"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="search_title" width="166.5" height="166.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

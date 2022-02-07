@@ -56,8 +56,14 @@ class Datasource: ProtocolDatasource
     }
     
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
-        print("Datasource >> In addListToGroup")
-        return false
+        
+        let x = plug?.addListToGroup(listKey: listKey, groupKey: groupKey)
+        guard x != nil else
+        {
+            print("Datasource >> In addListToGroup >> Error: CoreData failed to add list to group")
+            return false
+        }
+        return x!
     }
     
     func getPermanentListTitles() -> [Int : String]? {
@@ -201,9 +207,13 @@ class Datasource: ProtocolDatasource
         return false
     }
     
-    func removeListFromGroup(listKey: Int) -> Bool {
-        print("Datasource >> In removeListFromGroup")
-        return false
+    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
+        let x = plug?.removeListFromGroup(listKey: listKey, groupKey: groupKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     

@@ -57,7 +57,7 @@ protocol ProtocolEntity
     
     //Remove List from Group
     //Return: Result of Operation
-    func removeListFromGroup(listKey: Int) -> Bool
+    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
     
     //Add Item to List
     //Return: listItemKey on Success (-1 on failure)

@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol ListingCellProtocol
+{
+    func addListToGroup(listKey: Int, groupKey: Int)
+    func removeListFromGroup(listKey: Int, groupKey: Int)
+}
+
+
 class Listing: UITableViewCell
 {
     //DATA MEMBERS
@@ -14,41 +21,51 @@ class Listing: UITableViewCell
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var button: UIButton!
     
+    private var deletegate: ListingCellProtocol?
+    
     private var listKey: Int?
     private var isIncluded: Bool?
+    private var openedGroupKey: Int?
     
     //END DATA MEMBERS
     
     
-    func setupCell(listKey: Int, listName: String, isAdded: Bool)
+    func setupCell(listKey: Int, listName: String, openedGroupKey:Int, isAdded: Bool, reference: ListingCellProtocol?)
     {
         self.listKey = listKey
         self.isIncluded = isAdded
-        //Come Back to this later
+        self.openedGroupKey = openedGroupKey
         try! title.attributedText = NSAttributedString(markdown: listName)
+        deletegate = reference
         setImage()
     }
     
     private func setImage()
     {
-        if isIncluded == true
-        {
-            button.setImage(UIImage(systemName: Constants.UIDefaults.groupPrompt.addedImage), for: .normal)
-        }
-        else
-        {
-            button.setImage(UIImage(systemName: Constants.UIDefaults.groupPrompt.addImage), for: .normal)
+        DispatchQueue.main.async {
+            if self.isIncluded == true
+            {
+                self.button.setImage(UIImage(systemName: Constants.UIDefaults.groupPrompt.addedImage), for: .normal)
+            }
+            else
+            {
+                self.button.setImage(UIImage(systemName: Constants.UIDefaults.groupPrompt.addImage), for: .normal)
+            }
         }
     }
     
-    @IBAction func addRemovePressed(_ sender: UIButton) {
+    @IBAction func addRemovePressed(_ sender: UIButton){
         if isIncluded == true
         {
-            
+            isIncluded = false
+            setImage()
+            deletegate?.removeListFromGroup(listKey: listKey!, groupKey: openedGroupKey!)
         }
         else
         {
-            
+            isIncluded = true
+            setImage()
+            deletegate?.addListToGroup(listKey: listKey!, groupKey: openedGroupKey!)
         }
     }
 }

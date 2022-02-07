@@ -87,7 +87,7 @@ protocol ProtocolDatasource
     
     //Remove List from Group
     //Return: Result of Operation
-    func removeListFromGroup(listKey: Int) -> Bool
+    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
     
     
     

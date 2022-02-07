@@ -63,7 +63,7 @@ protocol ProtocolPresenterToInteractorPopulateMenu: AnyObject
     //Create
     func createGroup(groupName: String) -> Bool         //*using
     func createList(listName: String) -> Int            //*using
-    func addListToGroup(listKey: Int, groupKey: Int) -> Bool
+    func addListToGroup(listKey: Int, groupKey: Int) -> Bool //*using
     
     //Read
     func getListTitle(listKey: Int) -> String   //*using
@@ -85,7 +85,7 @@ protocol ProtocolPresenterToInteractorPopulateMenu: AnyObject
     //Delete
     func deleteGroup(groupKey: Int) -> Bool
     func deleteList(listKey: Int) -> [Group]?       //*using
-    func removeListFromGroup(listKey: Int) -> Bool
+    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
 }
 
 

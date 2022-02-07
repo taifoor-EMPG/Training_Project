@@ -398,17 +398,54 @@ extension PopulateMenuPresenter: GroupPromptProtocol
         }
         return total
     }
+
     
-    func selectedRowAction() {
-        print("In PopulateMenuPresenter >> selectedRowAction")
-        return
-    }
-    
-    func setCell(_ cell: Listing) {
+    func setCell(_ cell: Listing, indexPath: IndexPath, rowCount: Int, groupKey: Int) {
+        //Setting Up Cell - from Lists and groups
         
-        print("In PopulateMenuPresenter >> selectedRowAction")
-        return
+        if (freeLists?.count)! - indexPath.row > 0
+        {
+            let keys = Array(freeLists!.keys)
+            let names = Array(freeLists!.values)
+            cell.setupCell(listKey: keys[indexPath.row], listName: names[indexPath.row], openedGroupKey: groupKey, isAdded: false, reference: self)
+        }
+        else
+        {
+            for i in groups!
+            {
+                if i.groupKey == groupKey
+                {
+                    i.setListsArray()
+                    let index = indexPath.row - freeLists!.count
+                    let list = i.listsArray[index]
+                    cell.setupCell(listKey: Int(list.listKey), listName: list.name!, openedGroupKey: groupKey, isAdded: true, reference: self)
+                    break
+                }
+                
+            }
+        }
+    }
+}
+
+extension PopulateMenuPresenter: ListingCellProtocol
+{
+    func addListToGroup(listKey: Int, groupKey: Int) {
+        if interactor?.addListToGroup(listKey: listKey, groupKey: groupKey) == false
+        {
+            print("In PopulateMenuPresenter >> Extension: Listing Cell Protocol >> addListTogroup >> ERROR")
+            return
+        }
+        viewDidLoad()
+        view?.showActivity()
     }
     
-    
+    func removeListFromGroup(listKey: Int, groupKey: Int) {
+        if interactor?.removeListFromGroup(listKey: listKey, groupKey: groupKey) == false
+        {
+            print("In PopulateMenuPresenter >> Extension: Listing Cell Protocol >> addListTogroup >> ERROR")
+            return
+        }
+        viewDidLoad()
+        view?.showActivity()
+    }
 }

@@ -10,8 +10,7 @@ import UIKit
 protocol GroupPromptProtocol: AnyObject
 {
     func setRows(groupKey: Int) -> Int
-    func selectedRowAction()
-    func setCell(_ cell: Listing)
+    func setCell(_ cell: Listing, indexPath: IndexPath, rowCount: Int, groupKey: Int)
 }
 
 
@@ -21,17 +20,20 @@ class GroupPrompt: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var listTable: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     private weak var delegate: GroupPromptProtocol?
     
     private var groupKey: Int?
+    private var rowCount: Int?
+    
     //END DATA MEMEBERS
     
     override func viewDidLoad() {
-        //subView.layer.cornerRadius = 10
-        //subView.layer.cornerCurve = .circular
+        subView.layer.cornerRadius = 10
         listTable.delegate = self
         listTable.dataSource = self
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
     }
     
     func setDelegate(_ reference: GroupPromptProtocol?)
@@ -45,18 +47,20 @@ class GroupPrompt: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return delegate?.setRows(groupKey: groupKey ?? -1) ?? 0
+        rowCount = delegate?.setRows(groupKey: groupKey ?? -1)
+        return rowCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.labels.listing, for: indexPath) as? Listing {
-            delegate?.setCell(cell)
+            delegate?.setCell(cell, indexPath: indexPath, rowCount: rowCount!, groupKey: groupKey!)
+            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Cell was tapped")
+    @IBAction func cancelPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -18,6 +18,7 @@ public class Group: NSManagedObject {
     
     func setListsArray()
     {
+        listsArray.removeAll()
         let temp = self.lists!.allObjects
         for i in temp
         {

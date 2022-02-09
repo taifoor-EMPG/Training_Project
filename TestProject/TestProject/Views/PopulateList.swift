@@ -14,6 +14,11 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     private var presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?
     @IBOutlet weak var listItems: UITableView!
     @IBOutlet weak var listTitle: UITextField!
+    @IBOutlet weak var newItem: UITextField!
+  
+  
+  @IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
+  
     var currentTitle: String = ""
     //END OF DATA MEMBERS
     
@@ -21,14 +26,34 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
         super.viewDidLoad()
         //Misc Attribute Setup
         setupUI()
+      
+      
+      //TESTER CODE
+      
+      
+      newItem.delegate = self
+      listTitle.addTarget(self, action: #selector(editingFunctionForTitle), for: .editingDidBegin)
+      newItem.addTarget(self, action: #selector(editingFunctionForItem), for: .editingDidBegin)
+      
+      NotificationCenter.default.addObserver(
+          self,
+          selector: #selector(keyboardWillShow),
+          name: UIResponder.keyboardWillShowNotification,
+          object: nil
+      )
+      
+      
+      //END TESTER CODE
     }
-    
+  
     func setPresenter(_ presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?)
     {
         self.presenter = presenter
     }
     
-    @IBAction func createNewItem(_ sender: UIButton) {
+    
+  //Deal with this later
+  func createNewItem(_ sender: UIButton) {
         
         //TO GENERATE AN ALERT
         
@@ -84,7 +109,8 @@ extension PopulateList
         currentTitle = (presenter?.getListName())!
         listTitle.text = currentTitle
         listTitle.delegate = self
-        
+      
+       
         let result = presenter?.allowEditing()
         if result == nil || result == false
         {
@@ -201,5 +227,31 @@ extension PopulateList
         presenter?.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
         listItems.reloadData()
     }
-    
+}
+
+//Object-C Functions
+extension PopulateList
+{
+  @objc func keyboardWillShow(_ notification: Notification) {
+      if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+          let keyboardRectangle = keyboardFrame.cgRectValue
+          let keyboardHeight = keyboardRectangle.height
+        
+//        stackBottomConstraint.constant
+        
+        UIView.animate(withDuration: 0.25) {
+          self.stackBottomConstraint.constant = keyboardHeight + 10
+        }
+        
+        print("Keyboard height : \(keyboardHeight)")
+      }
+  }
+  
+  @objc func editingFunctionForTitle(textField: UITextField) {
+    print("editingFunctionForTitle")
+  }
+  
+  @objc func editingFunctionForItem(textField: UITextField) {
+    print("editingFunctionForItem")
+  }
 }

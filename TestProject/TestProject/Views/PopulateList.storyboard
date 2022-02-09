@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,15 +12,15 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="PopulateList" id="Y6W-OH-hqX" customClass="PopulateList" customModule="TestProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="l5T-yG-0HY">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="68" translatesAutoresizingMaskIntoConstraints="NO" id="l5T-yG-0HY">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JLU-zQ-gZw" userLabel="List Items Table">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <view key="tableHeaderView" contentMode="scaleToFill" id="KfV-em-c34" userLabel="Table Header">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -97,41 +97,31 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Cf-wl-5hL" userLabel="New List Item">
-                                        <rect key="frame" x="0.0" y="768" width="414" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="EK4-Si-Kwl"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="plus.app" catalog="system" title="  New Item"/>
-                                        <connections>
-                                            <action selector="createNewItem:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="m1u-ld-MZs"/>
-                                        </connections>
-                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a new task" textAlignment="center" minimumFontSize="17" id="ZqH-CD-OPE" userLabel="New List Item">
+                                        <rect key="frame" x="0.0" y="784" width="414" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.55920147899999995" green="0.16157564520000001" blue="0.14507573839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="JLU-zQ-gZw" secondAttribute="trailing" id="5fy-Yg-CeC"/>
-                                    <constraint firstItem="1Cf-wl-5hL" firstAttribute="leading" secondItem="l5T-yG-0HY" secondAttribute="leading" id="DZN-uZ-Mbu"/>
-                                    <constraint firstItem="1Cf-wl-5hL" firstAttribute="top" secondItem="JLU-zQ-gZw" secondAttribute="bottom" id="K0r-p6-8Ds"/>
-                                    <constraint firstAttribute="bottom" secondItem="1Cf-wl-5hL" secondAttribute="bottom" id="LoU-sp-wNv"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Cf-wl-5hL" secondAttribute="trailing" id="eSR-YA-1q9"/>
-                                    <constraint firstItem="JLU-zQ-gZw" firstAttribute="leading" secondItem="l5T-yG-0HY" secondAttribute="leading" id="kdy-Pt-jlD"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="l5T-yG-0HY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="5Kp-Xf-7yW"/>
-                            <constraint firstItem="l5T-yG-0HY" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Chx-Hp-93E"/>
-                            <constraint firstItem="l5T-yG-0HY" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="KLS-xz-X47"/>
-                            <constraint firstItem="l5T-yG-0HY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tbh-s3-LHB"/>
+                            <constraint firstItem="l5T-yG-0HY" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3lP-Gv-PWO"/>
+                            <constraint firstItem="l5T-yG-0HY" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="10" id="LSJ-zy-2ZO"/>
+                            <constraint firstItem="l5T-yG-0HY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="a0A-zR-PfQ"/>
+                            <constraint firstItem="l5T-yG-0HY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gEA-bM-bDk"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="listItems" destination="JLU-zQ-gZw" id="GBX-T6-sUc"/>
                         <outlet property="listTitle" destination="5lA-1a-6rO" id="RIN-3A-75C"/>
+                        <outlet property="newItem" destination="ZqH-CD-OPE" id="WK9-Ie-wGa"/>
+                        <outlet property="stackBottomConstraint" destination="LSJ-zy-2ZO" id="Mmx-G4-OJH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -140,7 +130,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus.app" catalog="system" width="128" height="114"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

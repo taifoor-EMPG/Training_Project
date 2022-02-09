@@ -158,6 +158,7 @@ class CoreData: ProtocolEntity
             newListItem.done = false
             
             list[0].addToListItems(newListItem)
+          list[0].activeTaskCount += 1
             
             try self.context.save()
             return Int(key)
@@ -633,7 +634,7 @@ class CoreData: ProtocolEntity
             }
             
             list[0].removeFromListItems(listsItem[0])
-            
+          list[0].activeTaskCount -= 1
           self.context.delete(listsItem[0])
           
             try self.context.save()

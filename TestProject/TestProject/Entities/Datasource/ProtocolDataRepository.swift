@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ProtocolDatasource
+protocol ProtocolDataRepository
 {
     //MARK: CRUD - CREATE
     
@@ -22,8 +22,6 @@ protocol ProtocolDatasource
     //Add List to Group
     //Return: Result of Operation
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool
-    
-    
     
     //MARK: CRUD - READ
     

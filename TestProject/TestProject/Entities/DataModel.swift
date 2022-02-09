@@ -9,9 +9,9 @@ import Foundation
 
 class DataModel
 {
-    private var dataSource: ProtocolEntity?
+    private var dataSource: ProtocolDataSource?
     
-    init(_ parameter: ProtocolEntity?)
+    init(_ parameter: ProtocolDataSource?)
     {
         if parameter != nil
         {

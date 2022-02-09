@@ -7,214 +7,212 @@
 
 import Foundation
 
-class Datasource: ProtocolDatasource
+class Datasource: ProtocolDataRepository
 {
+  //MARK: DATA MEMBERS
+  private var plugin: ProtocolDataSource?
+  //END MEMBERS
+  
+  
+  init(plugin: ProtocolDataSource?){
+    guard plugin != nil else{
+      //SOME ERROR SHOULD POP UP HERE
+      self.plugin = nil
+      return
+    }
+    self.plugin = plugin
+  }
+  
+  func addGroup(groupName: String) -> Bool {
+    let result = plugin?.addGroup(groupName: groupName)
     
-    //DATA MEMBERS
-    
-    private var plug: ProtocolEntity?
-    
-    //END MEMBERS
-    
-    init(plugin: ProtocolEntity?)
+    if result == nil || result! < 0
     {
-        guard plugin != nil else
-        {
-            //SOME ERROR SHOULD POP UP HERE
-            plug = nil
-            return
-        }
-        plug = plugin
-        loadData()
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func addGroup")
+      return false
     }
+    return true
+  }
+  
+  func addOptionalList(listName: String) -> Bool {
+    LoggingSystemFlow.printLog("In Datasource >> func addOptionalList")
+    return false
+  }
+  
+  func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
     
-    private func loadData()
+    let result = plugin?.addListToGroup(listKey: listKey, groupKey: groupKey)
+    guard result != nil else
     {
-        print("Datasource >> In Load Data")
-        return
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func addListToGroup")
+      return false
+    }
+    return result!
+  }
+  
+  func getPermanentListTitles() -> [Int : String]? {
+    
+    let lists = plugin?.getPermanentListTitles()
+    
+    guard lists != nil else
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func getPermanentListTitles")
+      return nil
     }
     
+    var result = [Int:String]()
     
-    func addGroup(groupName: String) -> Bool {
-        let result = plug?.addGroup(groupName: groupName)
-        
-        if result == nil || result! < 0
-        {
-            print("Datasource >> addGroup >> Error: CoreData Save Error")
-            return false
-        }
-        else
-        {
-            return true
-        }
-        
+    for i in lists!
+    {
+      result[Int(i.listKey)] = i.name
     }
     
-    func addOptionalList(listName: String) -> Bool {
-        print("Datasource >> In addOptionalList")
-        return false
+    return result
+  }
+  
+  func getActiveItems(listKey: Int) -> Int {
+    
+    let list = plugin?.getActiveItems(listKey: listKey)
+    
+    guard list != nil else
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func getActiveItems")
+      return -1
     }
     
-    func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
-        
-        let x = plug?.addListToGroup(listKey: listKey, groupKey: groupKey)
-        guard x != nil else
-        {
-            print("Datasource >> In addListToGroup >> Error: CoreData failed to add list to group")
-            return false
-        }
-        return x!
+    return Int(exactly: list![0].activeTaskCount)!
+  }
+  
+  func getGroups() -> [Group] {
+    let groups = plugin?.getGroups()
+    
+    guard groups?.isEmpty != true else
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroups")
+      return []
     }
     
-    func getPermanentListTitles() -> [Int : String]? {
-        
-        let lists = plug?.getPermanentListTitles()
-        
-        guard lists != nil else
-        {
-            print("Datasource >> getPermanentListTitles >> Error: CoreData returned Empty")
-            return nil
-        }
-        
-        var toReturn = [Int:String]()
-        
-        for i in lists!
-        {
-            toReturn[Int(i.listKey)] = i.name
-        }
-        
-        return toReturn
+    return groups!
+  }
+  
+  func getGroupFreeListTitles() -> [Int : String]? {
+    
+    let lists = plugin?.getOptionalListTitles()
+    
+    guard lists != nil else
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroupFreeListTitles")
+      return nil
     }
     
-    func getActiveItems(listKey: Int) -> Int {
-        
-        let list = plug?.getActiveItems(listKey: listKey)
-        
-        guard list != nil else
-        {
-            print("Datasource >> getActiveItems >> Error: CoreData Could Not Find List ")
-            return -1
-        }
-        
-        return Int(exactly: list![0].activeTaskCount)!
+    var result = [Int:String]()
+    
+    for i in lists!
+    {
+      if i.group == nil
+      {
+        result[Int(i.listKey)] = i.name
+      }
     }
     
-    func getGroups() -> [Group] {
-        let groups = plug?.getGroups()
-        
-        guard groups?.isEmpty != true else
-        {
-            print("Datasource >> getGroups >> Error: CoreData Could Not Find List ")
-            return []
-        }
-        
-        return groups!
+    return result
+  }
+  
+  func getGroupCount() -> Int {
+    let result = plugin?.getGroupsCount()
+    if result == -1
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroupCount")
     }
+    return result ?? -1
+  }
+  
+  func groupExists(groupName: String) -> Bool {
     
-    func getGroupFreeListTitles() -> [Int : String]? {
-        
-        let lists = plug?.getOptionalListTitles()
-        
-        guard lists != nil else
-        {
-            print("Datasource >> getGroupFreeListTitles >> Error: CoreData returned Empty")
-            return nil
-        }
-        
-        var toReturn = [Int:String]()
-        
-        for i in lists!
-        {
-            if i.group == nil
-            {
-                toReturn[Int(i.listKey)] = i.name
-            }
-        }
-        
-        return toReturn
+    let result = plugin?.groupExists(groupName: groupName)
+    
+    if result == nil
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func groupExists")
+      return true
     }
-    
-    func getGroupCount() -> Int {
-        let x = plug?.getGroupsCount()
-        if x == -1
-        {
-            print("Datasource >> In getGroupCount >> Error: Failed to Retrieve Count")
-        }
-        return x ?? -1
+    return result!
+  }
+  
+  func getGroupTitles(groupKey: Int) -> [Int : String] {
+    LoggingSystemFlow.printLog("In Datasource >> In getGroupTitles")
+    return [:]
+  }
+  
+  func getGroupSize(GroupKey: Int) -> Int {
+    LoggingSystemFlow.printLog("In Datasource >> In getGroupSize")
+    return -1
+  }
+  
+  func getGroupListTitles(groupKey: Int) -> [Int : String]? {
+    LoggingSystemFlow.printLog("In Datasource >> In getGroupListTitles")
+    return nil
+  }
+  
+  func changeListName(listKey: Int, newListName: String) -> Bool {
+    LoggingSystemFlow.printLog("In Datasource >> In changeListName")
+    return false
+  }
+  
+  func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
+    let result = plugin?.changeGroupName(groupKey: groupKey, newGroupName: newGroupName)
+    if result == nil || result == false
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func changeGroupName")
+      return false
     }
-    
-    func groupExists(groupName: String) -> Bool {
-        
-        let x = plug?.groupExists(groupName: groupName)
-        
-        if x == nil
-        {
-            print("Datasource >> In groupExists >> Error: Failed to Retrieve Count")
-            return true
-        }
-        return x!
+    return true
+  }
+  
+  func ungroup(groupKey: Int) -> Bool {
+    let result = plugin?.ungroup(groupKey: groupKey)
+    if result == nil || result == false
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func ungroup")
+      return false
     }
-    
-    func getGroupTitles(groupKey: Int) -> [Int : String] {
-        print("Datasource >> In getGroupCount")
-        return [:]
+    return true
+  }
+  
+  func removeGroup(groupKey: Int) -> Bool {
+    let result = plugin?.removeGroup(groupKey: groupKey)
+    if result == nil || result == false
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func removeGroup")
+      return false
     }
-    
-    func getGroupSize(GroupKey: Int) -> Int {
-        print("Datasource >> In getGroupSize")
-        return -1
+    return true
+  }
+  
+  func deleteList(listKey: Int) -> Bool {
+    LoggingSystemFlow.printLog("In Datasource >> In deleteList")
+    return false
+  }
+  
+  func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
+    let result = plugin?.removeListFromGroup(listKey: listKey, groupKey: groupKey)
+    if result == nil || result == false
+    {
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: Datasource >> func removeListFromGroup")
+      return false
     }
-    
-    func getGroupListTitles(groupKey: Int) -> [Int : String]? {
-        print("Datasource >> In getGroupListTitles")
-        return nil
-    }
-    
-    func changeListName(listKey: Int, newListName: String) -> Bool {
-        print("Datasource >> In changeListName")
-        return false
-    }
-    
-    func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
-        let x = plug?.changeGroupName(groupKey: groupKey, newGroupName: newGroupName)
-        if x == nil || x == false
-        {
-            return false
-        }
-        return true
-    }
-    
-    func ungroup(groupKey: Int) -> Bool {
-        let x = plug?.ungroup(groupKey: groupKey)
-        if x == nil || x == false
-        {
-            return false
-        }
-        return true
-    }
-    
-    func removeGroup(groupKey: Int) -> Bool {
-        let x = plug?.removeGroup(groupKey: groupKey)
-        if x == nil || x == false
-        {
-            return false
-        }
-        return true
-    }
-    
-    func deleteList(listKey: Int) -> Bool {
-        print("Datasource >> In deleteList")
-        return false
-    }
-    
-    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
-        let x = plug?.removeListFromGroup(listKey: listKey, groupKey: groupKey)
-        if x == nil || x == false
-        {
-            return false
-        }
-        return true
-    }
-    
-    
+    return true
+  }
 }

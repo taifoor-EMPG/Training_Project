@@ -8,13 +8,13 @@
 import CoreData
 
 //MARK: Core Data Conformance Protocol
-protocol CoreDataManagerProtocol
+protocol ProtocolCoreDataManager
 {
   var persistentContainer: NSPersistentContainer {get}
   func saveContext()
 }
 
-class CoreDataManager: CoreDataManagerProtocol
+class CoreDataManager: ProtocolCoreDataManager
 {
   //MARK: Shared Instance of CoreDataManager
   static let shared = CoreDataManager()

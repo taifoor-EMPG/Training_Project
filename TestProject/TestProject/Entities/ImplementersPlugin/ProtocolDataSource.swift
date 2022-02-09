@@ -9,7 +9,7 @@ import Foundation
 
 //Refer to To-Do List DB Requisitions
 
-protocol ProtocolEntity
+protocol ProtocolDataSource
 {
     //Get Permanent Lists
     //Return: Dictionary [List] (nil on failure)
@@ -75,8 +75,6 @@ protocol ProtocolEntity
     //Return: Size on Success (-1 on failure)
     func getListSize(listKey: Int) -> Int
     
-
-    
     //Change Name of List
     //Return: Result of Operation
     func changeListName(listKey: Int, newListName: String) -> Bool
@@ -104,6 +102,4 @@ protocol ProtocolEntity
     //Get Group Size
     //Return: Size on Success (-1 on failure)
     func getGroupSize(groupKey: Int) -> Int
-    
-
 }

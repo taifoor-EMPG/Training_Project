@@ -12,11 +12,11 @@ class ProfileInteractor: ProtocolPresenterToInteractorProfile
     //DATA MEMBERS
     
     private weak var presenter: ProtocolInteractorToPresenterProfile?
-    private var source: ProtocolDatasource?
+    private var source: ProtocolDataRepository?
     
     //END OF DATA MEMBERS
     
-    init(source : ProtocolDatasource?)
+    init(source : ProtocolDataRepository?)
     {
         guard source != nil else
         {

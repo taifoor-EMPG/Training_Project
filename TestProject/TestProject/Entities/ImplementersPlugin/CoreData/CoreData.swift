@@ -8,30 +8,30 @@
 import CoreData
 import UIKit
 
-class CoreData: ProtocolEntity
+class CoreData: ProtocolDataSource
 {
-    //MARK: DATA MEMBERS
-    private let context: NSManagedObjectContext
-    private let manager: CoreDataManagerProtocol
+  //MARK: DATA MEMBERS
+  private let context: NSManagedObjectContext
+  private let manager: ProtocolCoreDataManager
   
-    struct DatabaseConstants
-    {
-        static let lists = ["listKey", "name", "isPermanent", "activeTaskCount"]
-        static let listItems = ["itemKey", "text", "done"]
-        static let counter = ["list", "listItem", "group"]
-        static let group = ["groupKey", "name"]
-    }
-    
-    //END OF DATA MEMBERS
-    
+  struct DatabaseConstants
+  {
+    static let lists = ["listKey", "name", "isPermanent", "activeTaskCount"]
+    static let listItems = ["itemKey", "text", "done"]
+    static let counter = ["list", "listItem", "group"]
+    static let group = ["groupKey", "name"]
+  }
+  
+  //END OF DATA MEMBERS
+  
   
   //Initializer to Instantiate Core Data Class
-  init(CoreDataManager: CoreDataManagerProtocol = CoreDataManager.shared)
-    {
-      self.manager = CoreDataManager
-      context = manager.persistentContainer.viewContext
-    }
-    
+  init(CoreDataManager: ProtocolCoreDataManager = CoreDataManager.shared)
+  {
+    self.manager = CoreDataManager
+    context = manager.persistentContainer.viewContext
+  }
+  
   
   
   //MARK: CRUD FUNCTIONALITIES
@@ -39,398 +39,374 @@ class CoreData: ProtocolEntity
   
   
   ///CREATE
-    func addGroup(groupName: String) -> Int
+  func addGroup(groupName: String) -> Int{
+    do
     {
-        do
-        {
-            let request = Counters.fetchRequest() as NSFetchRequest<Counters>
-            let counter = try context.fetch(request)
-            
-            let key = counter[0].group            
-            counter[0].group += 1
-            
-            let mygroup = Group(context: context)
-            mygroup.groupKey = key
-            mygroup.name = groupName
-                    
-            try self.context.save()
-            return Int(key)
-            
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getPermanentListTitles >> Failed to Fetch")
-            return -1
-        }
+      let request = Counters.fetchRequest() as NSFetchRequest<Counters>
+      let counter = try context.fetch(request)
+      
+      let key = counter[0].group
+      counter[0].group += 1
+      
+      let mygroup = Group(context: context)
+      mygroup.groupKey = key
+      mygroup.name = groupName
+      
+      try self.context.save()
+      return Int(key)
+      
     }
-    
-    func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
-        do
-        {
-            let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
-            let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
-            requestGroup.predicate = predicateGroup
-            
-            let group = try context.fetch(requestGroup)
-            
-            if group.isEmpty == true
-            {
-                return false
-            }
-            
-            let requestList = List.fetchRequest() as NSFetchRequest<List>
-            let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
-            requestList.predicate = predicateList
-            
-            let lists = try context.fetch(requestList)
-            
-            if lists.isEmpty == true
-            {
-                return false
-            }
-            
-            
-            group[0].addToLists(lists[0])
-            
-            try self.context.save()
-            return true
-            
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("Core >> In addListToGroup")
-            return false
-        }
-    }
-    
-    
-    ///READ
-    func getPermanentListTitles() -> [List]? {
-        do
-        {
-            let request = List.fetchRequest() as NSFetchRequest<List>
-            let predicate = NSPredicate(format: DatabaseConstants.lists[2] + " == true")
-            request.predicate = predicate
-            
-            let sort = NSSortDescriptor(key: DatabaseConstants.lists[0], ascending: true)
-            request.sortDescriptors = [sort]
-            
-            let lists = try context.fetch(request)
-            
-            return lists
-            
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getPermanentListTitles >> Failed to Fetch")
-            return nil
-        }
-    }
-    
-    func getOptionalListTitles() -> [List]? {
-        do
-        {
-            let request = List.fetchRequest() as NSFetchRequest<List>
-            let predicate = NSPredicate(format: DatabaseConstants.lists[2] + " == false")
-            request.predicate = predicate
-            
-            let sort = NSSortDescriptor(key: DatabaseConstants.lists[0], ascending: true)
-            request.sortDescriptors = [sort]
-            
-            let lists = try context.fetch(request)
-            
-            return lists
-            
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getPermanentListTitles >> Failed to Fetch")
-            return nil
-        }
-    }
-    
-    
-    func getActiveItems(listKey: Int) -> [List]? {
-        do
-        {
-            let request = List.fetchRequest() as NSFetchRequest<List>
-            let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
-            request.predicate = predicate
-            
-            let list = try context.fetch(request)
-            
-            return list
-            
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getPermanentListTitles >> Failed to Fetch")
-            return nil
-        }
-    }
-    
-    func getGroupsCount() -> Int {
-        do
-        {
-            let request = Group.fetchRequest() as NSFetchRequest<Group>
-            let groups = try context.fetch(request)
-            return groups.count
-            
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getGroupsCount >> Failed to Fetch")
-            return -1
-        }
-    }
-    
-    func getGroups() -> [Group]
+    catch
     {
-        do
-        {
-            let request = Group.fetchRequest() as NSFetchRequest<Group>
-            let groups = try context.fetch(request)
-            return groups
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getGroups >> Failed to Fetch")
-            return []
-        }
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func getPermanentListTitles")
+      return -1
     }
-    
-    func groupExists(groupName: String) -> Bool? {
-        do
-        {
-            let request = Group.fetchRequest() as NSFetchRequest<Group>
-            let predicate = NSPredicate(format: DatabaseConstants.group[1] + " == '" + String(groupName) + "'")
-            request.predicate = predicate
-            
-            let group = try context.fetch(request)
-            
-            let x = !group.isEmpty
-            return x
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func getPermanentListTitles >> Failed to Fetch")
-            return nil
-        }
-    }
-    
-    
-    
-    ///UPDATE
-    func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
-        do
-        {
-            let request = Group.fetchRequest() as NSFetchRequest<Group>
-            let predicate = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
-            request.predicate = predicate
-            
-            let group = try context.fetch(request)
-            
-            if group.isEmpty == true
-            {
-                return false
-            }
-            
-            group[0].name = newGroupName
-            try self.context.save()
-            return true
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func changeGroupName >> Failed to Fetch")
-            return false
-        }
-    }
-    
-    ///DELETE
-    func removeGroup(groupKey: Int) -> Bool {
-        do
-        {
-            let request = Group.fetchRequest() as NSFetchRequest<Group>
-            let predicate = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
-            request.predicate = predicate
-            
-            let group = try context.fetch(request)
-            
-            if group.isEmpty == true
-            {
-                return false
-            }
-            
-            self.context.delete(group[0])
-            
-            try self.context.save()
-            return true
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func changeGroupName >> Failed to Fetch")
-            return false
-        }
-    }
-    
-    func ungroup(groupKey: Int) -> Bool {
-        do
-        {
-            let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
-            let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
-            requestGroup.predicate = predicateGroup
-            
-            let group = try context.fetch(requestGroup)
-            
-            if group.isEmpty == true
-            {
-                return false
-            }
-            
-            let requestList = List.fetchRequest() as NSFetchRequest<List>
-            let predicateList = NSPredicate(format: DatabaseConstants.lists[2] + " == false")
-            requestList.predicate = predicateList
-            
-            let lists = try context.fetch(requestList)
-            
-            for i in lists
-            {
-                if i.group == nil
-                {
-                    //print("List " + i.name! + " not a part of any group")
-                }
-                else
-                {
-                    if  Int(i.group!.groupKey) == groupKey
-                    {
-                        group[0].removeFromLists(i)
-                    }
-                }
-            }
-            try self.context.save()
-            return true
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("ERROR: In Datasource >> func ungroup >> Failed to Transact")
-            return false
-        }
-    }
-    
-    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
-        do
-        {
-            let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
-            let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
-            requestGroup.predicate = predicateGroup
-            
-            let group = try context.fetch(requestGroup)
-            
-            if group.isEmpty == true
-            {
-                return false
-            }
-            
-            let requestList = List.fetchRequest() as NSFetchRequest<List>
-            let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
-            requestList.predicate = predicateList
-            
-            let lists = try context.fetch(requestList)
-            
-            if lists.isEmpty == true
-            {
-                return false
-            }
-            
-            
-            group[0].removeFromLists(lists[0])
-            
-            try self.context.save()
-            return true
-        }
-        catch
-        {
-            //Error Failed to Fetch Data
-            print("Core >> In removeListFromGroup")
-            return false
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    func addOptionalList(listName: String) -> Int {
-        print("Core >> In addOptionalList")
-        return -1
-    }
-    
-    func removeOptionalList(listKey: Int) -> Bool {
-        print("Core >> In removeOptionalList")
+  }
+  func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
+    do
+    {
+      let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
+      let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+      requestGroup.predicate = predicateGroup
+      
+      let group = try context.fetch(requestGroup)
+      
+      if group.isEmpty == true
+      {
         return false
-    }
-    
-    func addItemtoList(listKey: Int, itemText: String) -> Int {
-        print("Core >> In addItemtoList")
-        return -1
-    }
-    
-    func removeItemFromList(listKey: Int, itemKey: Int) -> Bool {
-        print("Core >> In removeItemFromList")
+      }
+      
+      let requestList = List.fetchRequest() as NSFetchRequest<List>
+      let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+      requestList.predicate = predicateList
+      
+      let lists = try context.fetch(requestList)
+      
+      if lists.isEmpty == true
+      {
         return false
+      }
+      
+      
+      group[0].addToLists(lists[0])
+      
+      try self.context.save()
+      return true
+      
     }
-    
-    func mark(listItemKey: Int) -> Bool {
-        print("Core >> In mark")
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> In addListToGroup")
+      return false
+    }
+  }
+  func addOptionalList(listName: String) -> Int {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> In addOptionalList")
+    return -1
+  }
+  func addItemtoList(listKey: Int, itemText: String) -> Int {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> In addItemtoList")
+    return -1
+  }
+  
+  ///READ
+  func getPermanentListTitles() -> [List]? {
+    do
+    {
+      let request = List.fetchRequest() as NSFetchRequest<List>
+      let predicate = NSPredicate(format: DatabaseConstants.lists[2] + " == true")
+      request.predicate = predicate
+      
+      let sort = NSSortDescriptor(key: DatabaseConstants.lists[0], ascending: true)
+      request.sortDescriptors = [sort]
+      
+      let lists = try context.fetch(request)
+      
+      return lists
+      
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func getPermanentListTitles")
+      return nil
+    }
+  }
+  func getOptionalListTitles() -> [List]? {
+    do
+    {
+      let request = List.fetchRequest() as NSFetchRequest<List>
+      let predicate = NSPredicate(format: DatabaseConstants.lists[2] + " == false")
+      request.predicate = predicate
+      
+      let sort = NSSortDescriptor(key: DatabaseConstants.lists[0], ascending: true)
+      request.sortDescriptors = [sort]
+      
+      let lists = try context.fetch(request)
+      
+      return lists
+      
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func getOptionalListTitles")
+      return nil
+    }
+  }
+  func getActiveItems(listKey: Int) -> [List]? {
+    do
+    {
+      let request = List.fetchRequest() as NSFetchRequest<List>
+      let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+      request.predicate = predicate
+      
+      let list = try context.fetch(request)
+      
+      return list
+      
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func getActiveItems")
+      return nil
+    }
+  }
+  func getGroupsCount() -> Int {
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let groups = try context.fetch(request)
+      return groups.count
+      
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func getGroupsCount")
+      return -1
+    }
+  }
+  func getGroups() -> [Group]{
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let groups = try context.fetch(request)
+      return groups
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func getGroups")
+      return []
+    }
+  }
+  func groupExists(groupName: String) -> Bool? {
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let predicate = NSPredicate(format: DatabaseConstants.group[1] + " == '" + String(groupName) + "'")
+      request.predicate = predicate
+      
+      let group = try context.fetch(request)
+      
+      let x = !group.isEmpty
+      return x
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func groupExists")
+      return nil
+    }
+  }
+  
+  
+  ///UPDATE
+  func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let predicate = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+      request.predicate = predicate
+      
+      let group = try context.fetch(request)
+      
+      if group.isEmpty == true
+      {
         return false
+      }
+      
+      group[0].name = newGroupName
+      try self.context.save()
+      return true
     }
-    
-    func getListSize(listKey: Int) -> Int {
-        print("Core >> In getListSize")
-        return -1
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func changeGroupName")
+      return false
     }
-    
-    func changeListName(listKey: Int, newListName: String) -> Bool {
-        print("Core >> In changeListName")
+  }
+  
+  ///DELETE
+  func removeGroup(groupKey: Int) -> Bool {
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let predicate = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+      request.predicate = predicate
+      
+      let group = try context.fetch(request)
+      
+      if group.isEmpty == true
+      {
         return false
+      }
+      
+      self.context.delete(group[0])
+      
+      try self.context.save()
+      return true
     }
-    
-    func changeTextOfItem(itemKey: Int, newText: String) -> Bool {
-        print("Core >> In changeTextOfItem")
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func removeGroup")
+      return false
+    }
+  }
+  func ungroup(groupKey: Int) -> Bool {
+    do
+    {
+      let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
+      let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+      requestGroup.predicate = predicateGroup
+      
+      let group = try context.fetch(requestGroup)
+      
+      if group.isEmpty == true
+      {
         return false
+      }
+      
+      let requestList = List.fetchRequest() as NSFetchRequest<List>
+      let predicateList = NSPredicate(format: DatabaseConstants.lists[2] + " == false")
+      requestList.predicate = predicateList
+      
+      let lists = try context.fetch(requestList)
+      
+      for i in lists
+      {
+        if i.group == nil
+        {
+          return false
+        }
+        else
+        {
+          if Int(i.group!.groupKey) == groupKey
+          {
+            group[0].removeFromLists(i)
+          }
+        }
+      }
+      
+      try self.context.save()
+      return true
     }
-    
-    func getListItems(listkey: Int) -> [Int : (text: String, status: Bool)] {
-        print("Core >> In getListItems")
-        return [:]
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func ungroup")
+      return false
     }
-    
-    func getLists() -> [Int : String] {
-        print("Core >> In getLists")
-        return [:]
+  }
+  func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
+    do
+    {
+      let requestGroup = Group.fetchRequest() as NSFetchRequest<Group>
+      let predicateGroup = NSPredicate(format: DatabaseConstants.group[0] + " == " + String(groupKey))
+      requestGroup.predicate = predicateGroup
+      
+      let group = try context.fetch(requestGroup)
+      
+      if group.isEmpty == true
+      {
+        return false
+      }
+      
+      let requestList = List.fetchRequest() as NSFetchRequest<List>
+      let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+      requestList.predicate = predicateList
+      
+      let lists = try context.fetch(requestList)
+      
+      if lists.isEmpty == true
+      {
+        return false
+      }
+      
+      
+      group[0].removeFromLists(lists[0])
+      
+      try self.context.save()
+      return true
     }
-    
-    func getGroups() -> [Int : [Int]] {
-        print("Core >> In getGroups")
-        return [:]
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func removeListFromGroup")
+      return false
     }
-    
-    func getGroupSize(groupKey: Int) -> Int {
-        print("Core >> In getPermanentListTitles")
-        return -1
-    }
+  }
+  
+  
+  //MARK: Further Processing Required
+  func removeOptionalList(listKey: Int) -> Bool {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func removeOptionalList")
+    return false
+  }
+  
+  func removeItemFromList(listKey: Int, itemKey: Int) -> Bool {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func removeItemFromList")
+    return false
+  }
+  
+  func mark(listItemKey: Int) -> Bool {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func mark")
+    return false
+  }
+  
+  func getListSize(listKey: Int) -> Int {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func getListSize")
+    return -1
+  }
+  
+  func changeListName(listKey: Int, newListName: String) -> Bool {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func changeListName")
+    return false
+  }
+  
+  func changeTextOfItem(itemKey: Int, newText: String) -> Bool {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func changeTextOfItem")
+    return false
+  }
+  
+  func getListItems(listkey: Int) -> [Int : (text: String, status: Bool)] {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func getListItems")
+    return [:]
+  }
+  
+  func getLists() -> [Int : String] {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func getLists")
+    return [:]
+  }
+  
+  func getGroupSize(groupKey: Int) -> Int {
+    LoggingSystemFlow.printLog("ERROR: In CoreData >> func getGroupSize")
+    return -1
+  }
 }

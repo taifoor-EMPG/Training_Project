@@ -12,11 +12,11 @@ class SearchInteractor: ProtocolPresenterToInteractorSearch
     //DATA MEMBERS
     
     private weak var presenter: ProtocolInteractorToPresenterSearch?
-    private var source: ProtocolDatasource?
+    private var source: ProtocolDataRepository?
     
     //END OF DATA MEMBERS
     
-    init(source : ProtocolDatasource?)
+    init(source : ProtocolDataRepository?)
     {
         guard source != nil else
         {

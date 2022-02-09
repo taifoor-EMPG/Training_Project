@@ -9,54 +9,50 @@ import UIKit
 
 class PopulateListInteractor: ProtocolPresenterToInteractorPopulateList
 {
-   //DATA MEMBERS
-    
-    private weak var presenter: ProtocolInteractorToPresenterPopulateList?
-    private var source: ProtocolDatasource?
-    
-    //END OF DATA MEMBERS
-    
-    init(source : ProtocolDatasource?)
+  //MARK: DATA MEMBERS
+  private weak var presenter: ProtocolInteractorToPresenterPopulateList?
+  private var source: ProtocolDataRepository?
+  //END OF DATA MEMBERS
+  
+  init(source : ProtocolDataRepository?)
+  {
+    guard source != nil else
     {
-        guard source != nil else
-        {
-            //RAISE SOME ERROR HERE
-            return
-        }
-        self.source = source
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: PopulateListInteractor >> func init()")
+      return
     }
-
-    func setPresenter(presenter: ProtocolInteractorToPresenterPopulateList?)
+    self.source = source
+  }
+  
+  func setPresenter(presenter: ProtocolInteractorToPresenterPopulateList?)
+  {
+    guard presenter != nil else
     {
-        guard presenter != nil else
-        {
-            //RAISE SOME ERROR HERE
-            return
-        }
-        self.presenter = presenter
+      //Error Occured
+      LoggingSystemFlow.printLog("ERROR: PopulateListInteractor >> func setPresenter")
+      return
     }
+    self.presenter = presenter
+  }
 }
 
 //MARK: Use Case Functionalities
 extension PopulateListInteractor
 {
-    func getList(listName: String) -> List? {
-        
-        print("PopulateListInteractor >> In getList")
-        return nil
-        //return ListDataBase.getList(listName: listName)
-    }
-    
-    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
-    {
-        print("PopulateListInteractor >> In changeListTitle")
-        return false
-        //return ListDataBase.changeOptionalListName(oldName: oldTitle, newName: newTitle)
-    }
-    
-    func allowEditing(_ listName: String) -> Bool {
-        print("PopulateListInteractor >> In allowEditing")
-        return false
-        //return ListDataBase.isPermanentList(listName)
-    }
+  func getList(listName: String) -> List? {
+    LoggingSystemFlow.printLog("PopulateListInteractor >> func getList")
+    return nil
+  }
+  
+  func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+  {
+    LoggingSystemFlow.printLog("PopulateListInteractor >> func changeListTitle")
+    return false
+  }
+  
+  func allowEditing(_ listName: String) -> Bool {
+    LoggingSystemFlow.printLog("PopulateListInteractor >> func allowEditing")
+    return false
+  }
 }

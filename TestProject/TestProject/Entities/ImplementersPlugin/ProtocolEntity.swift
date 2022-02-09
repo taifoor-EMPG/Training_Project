@@ -31,6 +31,10 @@ protocol ProtocolEntity
     //Return: Result of Operation
     func groupExists(groupName: String) -> Bool?
     
+    //Does a list with given name exist?
+    //Return: Result of Operation
+    func listExists(listName: String) -> Bool?
+    
     //Adds a New Optional List
     //Return: listKey on Success (-1 on failure)
     func addOptionalList(listName: String) -> Int
@@ -69,13 +73,11 @@ protocol ProtocolEntity
     
     //Marks Item as Done/Undone
     //Return: Result of Operation
-    func mark(listItemKey: Int) -> Bool
+    func mark(listItemKey: Int, newStatus: Bool) -> Bool
 
     //Gets Total Size of a List
     //Return: Size on Success (-1 on failure)
     func getListSize(listKey: Int) -> Int
-    
-
     
     //Change Name of List
     //Return: Result of Operation
@@ -105,5 +107,12 @@ protocol ProtocolEntity
     //Return: Size on Success (-1 on failure)
     func getGroupSize(groupKey: Int) -> Int
     
+    //Get a Particular List
+    //Returns List on Success (nil on Failure)
+    func getList(listKey: Int) -> List?
 
+    //Know if the list is Permanent
+    //Returns result of operations (nil on failure)
+    func allowEditing(listKey: Int) -> Bool?
+    
 }

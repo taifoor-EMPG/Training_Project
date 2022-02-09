@@ -9,6 +9,7 @@ import UIKit
 
 class PopulateMenuPresenter: ProtocolViewToPresenterPopulateMenu, ProtocolInteractorToPresenterPopulateMenu
 {
+    
     //Data Members
     private var view: ProtocolPresenterToViewPopulateMenu?
     private var interactor: ProtocolPresenterToInteractorPopulateMenu?
@@ -195,7 +196,17 @@ extension PopulateMenuPresenter
             tableView.beginUpdates()
             
             let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
-            groups = interactor?.deleteList(listKey: cell.getListKey())
+            let key = cell.getListKey()
+            
+            if interactor?.deleteList(listKey: key) == false
+            {
+                print("In PopulateMenuPresenter >> DeleteSwipedRow >> Failed to Delete List")
+                return
+            }
+            
+            print(freeLists?.count as Any)
+            freeLists?[key] = nil
+            print(freeLists?.count as Any)
             
             tableView.deleteRows(at: [indexPath], with: .middle)
             tableView.endUpdates()
@@ -265,9 +276,8 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
 //MARK: Navigational Functionalities
 extension PopulateMenuPresenter
 {
-    func pushToOpenList(listKey: Int) {
-        let name = (interactor?.getListTitle(listKey: listKey))!
-        router?.pushToOpenList(view: view, with: name)
+    func pushToOpenList(listKey: Int, listName: String) {
+        router?.pushToOpenList(view: view, with: listName, listKey: listKey)
     }
     func pushToSearch() {
         router?.pushToSearch(view: view)
@@ -279,38 +289,44 @@ extension PopulateMenuPresenter
     
     func pushToAddNewList() {
         //Create New List
-        var name = Utilities.newList()
-        var count = 1
-        var result = interactor?.createList(listName: name)
+        let set = interactor?.createList(listName: Utilities.newList())
+        let key = set?.0
+        let name = set?.1
         
-        while result! < 0
-        {
-            name = Utilities.newList() + "(" + String(count) + ")"
-            result = interactor?.createList(listName: name)
-            count += 1
-        }
+        //Add List to free list
+        freeLists![key!] = name
         
-        router?.pushToOpenList(view: view, with: name, editable: true)
+        //Refresh Table View
+        view?.showActivity()
+        
+        //Open said new list
+        router?.pushToOpenList(view: view, with: name!, listKey: key!, editable: true)
     }
     
-    //Create a Function to generate and set group prompt
+    func newGroupPrompt(groupKey: Int) {
+        let vc = router?.createGroupPrompt()
+        vc?.setGroupKey(groupKey: groupKey)
+        vc?.setDelegate(self)
+        view?.presentGroupPrompt(viewController: vc!)
+    }
 
 }
 
 //MARK: MISC Functionalities
 extension PopulateMenuPresenter
 {
-    func createNewGroup(groupName: String) {
+    func createNewGroup(groupName: String) -> Int {
         //Interactor Functionality
         let x = interactor?.createGroup(groupName: groupName)
         
-        if x == false
+        if x == nil
         {
             Utilities.popAnError(self.view as! UIViewController, Constants.errorCodes[5])
-            return
+            return -1
         }
         
         self.viewDidLoad()
+        return x!
     }
 
     func getActiveListCount(listKey: Int) -> Int

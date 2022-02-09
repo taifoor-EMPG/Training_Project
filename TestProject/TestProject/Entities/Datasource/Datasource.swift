@@ -9,7 +9,6 @@ import Foundation
 
 class Datasource: ProtocolDatasource
 {
-    
     //DATA MEMBERS
     
     private var plug: ProtocolEntity?
@@ -35,28 +34,32 @@ class Datasource: ProtocolDatasource
     }
     
     
-    func addGroup(groupName: String) -> Bool {
+    func addGroup(groupName: String) -> Int {
         let result = plug?.addGroup(groupName: groupName)
         
         if result == nil || result! < 0
         {
             print("Datasource >> addGroup >> Error: CoreData Save Error")
-            return false
+            return -1
         }
         else
         {
-            return true
+            return result!
         }
         
     }
     
-    func addOptionalList(listName: String) -> Bool {
-        print("Datasource >> In addOptionalList")
-        return false
+    func addOptionalList(listName: String) -> Int {
+        let x = plug?.addOptionalList(listName: listName)
+        guard x != nil else
+        {
+            print("Datasource >> In addOptionalList >> Error: CoreData failed to create list")
+            return -1
+        }
+        return x!
     }
     
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
-        
         let x = plug?.addListToGroup(listKey: listKey, groupKey: groupKey)
         guard x != nil else
         {
@@ -155,6 +158,18 @@ class Datasource: ProtocolDatasource
         return x!
     }
     
+    func listExists(listName: String) -> Bool {
+        let x = plug?.listExists(listName: listName)
+        
+        if x == nil
+        {
+            print("Datasource >> In listExists >> Error: Failed to Retrieve Count")
+            return true
+        }
+        return x!
+    }
+    
+    
     func getGroupTitles(groupKey: Int) -> [Int : String] {
         print("Datasource >> In getGroupCount")
         return [:]
@@ -171,14 +186,20 @@ class Datasource: ProtocolDatasource
     }
     
     func changeListName(listKey: Int, newListName: String) -> Bool {
-        print("Datasource >> In changeListName")
-        return false
+        let x = plug?.changeListName(listKey: listKey, newListName: newListName)
+        if x == nil || x == false
+        {
+            print("In Datasouce >> changeListName >> ERROR")
+            return false
+        }
+        return true
     }
     
     func changeGroupName(groupKey: Int, newGroupName: String) -> Bool {
         let x = plug?.changeGroupName(groupKey: groupKey, newGroupName: newGroupName)
         if x == nil || x == false
         {
+            print("In Datasouce >> changeGroupName >> ERROR")
             return false
         }
         return true
@@ -203,8 +224,12 @@ class Datasource: ProtocolDatasource
     }
     
     func deleteList(listKey: Int) -> Bool {
-        print("Datasource >> In deleteList")
-        return false
+        let x = plug?.removeOptionalList(listKey: listKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
@@ -217,4 +242,59 @@ class Datasource: ProtocolDatasource
     }
     
     
+    func getList(listKey: Int) -> List? {
+        let x = plug?.getList(listKey: listKey)
+        if x == nil
+        {
+            print("In DataSource >> getList >> Error: Failed to Fetch")
+            return nil
+        }
+        return x
+    }
+    
+    func allowEditing(listKey: Int) -> Bool? {
+        let x = plug?.allowEditing(listKey: listKey)
+        if x == nil
+        {
+            print("In DataSource >> allowEditing >> Error: Failed to Fetch")
+            return nil
+        }
+        return x
+    }
+    
+    func changeStatusOfItem(itemKey: Int, newStauts: Bool) {
+        let x = plug?.mark(listItemKey: itemKey, newStatus: newStauts)
+        if x == nil || x == false
+        {
+            print("In DataSource >> changeStatusOfItem >> Error: Failed to Fetch")
+        }
+    }
+    
+    func changeTextOfItem(itemKey: Int, newText: String) {
+        let x = plug?.changeTextOfItem(itemKey: itemKey, newText: newText)
+        if x == nil || x == false
+        {
+            print("In DataSource >> changeStatusOfItem >> Error: Failed to Fetch")
+        }
+    }
+    
+    func addItemtoList(listKey: Int, itemText: String) -> Bool {
+        let x = plug?.addItemtoList(listKey: listKey, itemText: itemText)
+        if x == nil || x! < 0
+        {
+            print("In DataSource >> addItemtoList >> Error: Failed to Fetch")
+            return false
+        }
+        return true
+    }
+    
+    func removeItemFromList(listKey: Int, itemKey: Int) -> Bool {
+        let x = plug?.removeItemFromList(listKey: listKey, itemKey: itemKey)
+        if x == nil || x! == false
+        {
+            print("In DataSource >> addItemtoList >> Error: Failed to Fetch")
+            return false
+        }
+        return true
+    }
 }

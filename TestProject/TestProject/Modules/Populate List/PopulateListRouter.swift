@@ -10,7 +10,7 @@ import UIKit
 
 class PopulateListRouter: ProtocolPresenterToRouterPopulateList
 {
-    static func createModule(with listName: String, editable: Bool) -> UIViewController?
+    static func createModule(with listName: String, listKey: Int, editable: Bool) -> UIViewController?
     {
         let storyBoard: UIStoryboard = UIStoryboard(name: "PopulateList", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "PopulateList") as! PopulateList
@@ -23,7 +23,7 @@ class PopulateListRouter: ProtocolPresenterToRouterPopulateList
         viewController.setPresenter(presenter)
         
         //Set Data Members HerePopulateList
-        presenter.viewDidLoad(listName, firstOpen: editable)
+        presenter.viewDidLoad(listName, listKey: listKey, firstOpen: editable)
         
         return viewController
     }

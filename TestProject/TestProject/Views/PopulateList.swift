@@ -27,6 +27,48 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     {
         self.presenter = presenter
     }
+    
+    @IBAction func createNewItem(_ sender: UIButton) {
+        
+        //TO GENERATE AN ALERT
+        
+        let alert = UIAlertController(title: Constants.UIDefaults.newListItem.titleMessage, message: "", preferredStyle: .alert)
+        alert.addTextField()
+        let textfield = alert.textFields![0]
+        textfield.placeholder = Constants.UIDefaults.newListItem.newText
+        
+        let doneButton = UIAlertAction(title: Constants.UIDefaults.newListItem.rightButtonText, style: .default)
+        { (action) in
+            
+            //Get the textfield for the alert
+            let newText = textfield.text
+            
+            //Check if Text Field is Empty
+            if newText?.isEmpty == true
+            {
+                //POP AN ERROR HERE
+                Utilities.popAnError(self, 2)
+            }
+            else
+            {
+                //Change the backend
+                self.presenter?.addNewTask(text: newText!)
+                self.listItems.reloadData()
+            }
+        }
+        
+        let cancelButton = UIAlertAction(title: Constants.UIDefaults.editListItem.leftButtonText, style: .default)
+        { (action) in
+            
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelButton)
+        alert.addAction(doneButton)
+        self.present(alert, animated: true, completion: nil)
+        //END OF ALERT
+    }
+    
 }
 
 //Utilities Related Functionality
@@ -37,11 +79,13 @@ extension PopulateList
         //Set Table Attributes
         listItems.delegate = self
         listItems.dataSource = self
+        
+        //Setting Up UI Components
         currentTitle = (presenter?.getListName())!
         listTitle.text = currentTitle
         listTitle.delegate = self
         
-        var result = presenter?.allowEditing(currentTitle)
+        let result = presenter?.allowEditing()
         if result == nil || result == false
         {
             listTitle.isUserInteractionEnabled = false
@@ -51,26 +95,19 @@ extension PopulateList
             listTitle.isUserInteractionEnabled = true
         }
         
-        result = presenter?.isFirstOpen()
-        
         if result == true
         {
-            listTitle.becomeFirstResponder()
+            let editing = presenter?.isFirstOpen()
+            
+            if editing == true
+            {
+                listTitle.becomeFirstResponder()
+            }
+            else
+            {
+                listTitle.resignFirstResponder()
+            }
         }
-        else
-        {
-            listTitle.resignFirstResponder()
-        }
-        
-        //Set Date for My Day
-        /*if listTitle.text == Constants.listsTitleArray[0]
-        {
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy"
-            let result = formatter.string(from: date)
-            listTitle.text = listTitle.text! + "\n" + result
-        }*/
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -89,12 +126,13 @@ extension PopulateList
             listTitle.resignFirstResponder()
             return true
         }
-        else if presenter?.changeListTitle(oldTitle: currentTitle, newTitle: listTitle.text!) == true
+        else if presenter?.changeListTitle(newTitle: listTitle.text!) == true
         {
             //New List Name Approved by DB
             currentTitle = listTitle.text!
             listTitle.resignFirstResponder()
             return true
+            
         }
         
         //Database did not allow a change
@@ -118,7 +156,50 @@ extension PopulateList
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        tableView.cellForRow(at: indexPath)
-        presenter?.pushToEditText(itemNumber: indexPath.row)
+        let cell = tableView.cellForRow(at: indexPath) as! ListItemCell
+        
+        //TO GENERATE AN ALERT
+        
+        let alert = UIAlertController(title: Constants.UIDefaults.editListItem.titleMessage, message: "", preferredStyle: .alert)
+        alert.addTextField()
+        let textfield = alert.textFields![0]
+        textfield.text = cell.getText()
+        let key = cell.getItemKey()
+        
+        let renameButton = UIAlertAction(title: Constants.UIDefaults.editListItem.rightButtonText, style: .default)
+        { (action) in
+            
+            //Get the textfield for the alert
+            let newText = textfield.text
+            
+            //Change the backend
+            self.presenter?.pushToEditText(itemKey: key, newText: newText!)
+            
+            self.listItems.reloadData()
+        }
+        
+        let cancelButton = UIAlertAction(title: Constants.UIDefaults.editListItem.leftButtonText, style: .default)
+        { (action) in
+            
+            alert.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(cancelButton)
+        alert.addAction(renameButton)
+        self.present(alert, animated: true, completion: nil)
+        
+        //END OF ALERT
     }
+    
+    //Set an editing style when interacted
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    //Delete swiped row
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        presenter?.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
+        listItems.reloadData()
+    }
+    
 }

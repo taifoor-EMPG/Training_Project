@@ -104,6 +104,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="plus.app" catalog="system" title="  New Item"/>
+                                        <connections>
+                                            <action selector="createNewItem:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="m1u-ld-MZs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

@@ -20,8 +20,6 @@ class GroupPrompt: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var listTable: UITableView!
-    @IBOutlet weak var navBar: UINavigationBar!
-    
     private weak var delegate: GroupPromptProtocol?
     
     private var groupKey: Int?

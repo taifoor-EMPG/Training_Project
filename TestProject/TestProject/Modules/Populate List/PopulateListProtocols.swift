@@ -12,21 +12,22 @@ import UIKit
 protocol ProtocolViewToPresenterPopulateList
 {
     //Setting Up View
-    func viewDidLoad(_ listName: String, firstOpen: Bool)
+    func viewDidLoad(_ listName: String, listKey: Int, firstOpen: Bool)
     func initInteractor()
     
     //Setting View Table
     func numberOfRowsInSection() -> Int
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     
     //Navigation to Other Screens
-    func pushToEditText(itemNumber: Int)
-    
+    func pushToEditText(itemKey: Int, newText: String)
+    func addNewTask(text: String)
     
     //Misc Functions to Populate View
     func getListName() -> String
-    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
-    func allowEditing(_ listName:String) -> Bool
+    func changeListTitle(newTitle: String) -> Bool
+    func allowEditing() -> Bool
     func isFirstOpen() -> Bool
 }
 
@@ -45,9 +46,13 @@ protocol ProtocolPresenterToInteractorPopulateList: AnyObject
 {
     func setPresenter(presenter: ProtocolInteractorToPresenterPopulateList?)
     
-    func getList(listName: String) -> List?
-    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
-    func allowEditing(_ listName: String) -> Bool
+    func getList(listKey: Int) -> List?
+    func changeListTitle(listKey: Int, newTitle: String) -> Bool
+    func allowEditing(listKey: Int) -> Bool
+    func changeItemStatus(itemKey: Int, newStatus: Bool)
+    func changeItemText(itemKey: Int, newText: String)
+    func newListItem(listKey: Int, text: String)
+    func deleteListItem(listKey: Int, itemKey: Int) -> Bool
 }
 
 protocol ProtocolInteractorToPresenterPopulateList: AnyObject
@@ -58,6 +63,6 @@ protocol ProtocolInteractorToPresenterPopulateList: AnyObject
 //MARK: - Router Protocol - All functionalities from Router come here
 protocol ProtocolPresenterToRouterPopulateList
 {
-    static func createModule(with listName: String, editable: Bool) -> UIViewController?
+    static func createModule(with listName: String, listKey: Int, editable: Bool) -> UIViewController?
 }
 

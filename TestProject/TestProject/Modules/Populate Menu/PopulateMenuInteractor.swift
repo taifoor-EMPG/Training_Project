@@ -8,7 +8,6 @@
 import Foundation
 
 //MARK: - All Methods that the Presenter can call to get information from API/DB come here
-
 class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
 {
     //Data Members
@@ -40,7 +39,7 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     }
     
     //MARK: CRUD - CREATE
-    func createGroup(groupName: String) -> Bool {
+    func createGroup(groupName: String) -> Int {
         
         //Check if group with same name exists
         
@@ -55,17 +54,30 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
             count += 1
         }
         
-        let x = source?.addGroup(groupName: name)
-        if x == nil
+        let key = source?.addGroup(groupName: name)
+        if key == nil
         {
             print("PopulateMenuInteractor >> In createGroup >> Error: Failed to Perform")
+            return key ?? -1
         }
-        return x ?? false
+        return key!
     }
     
-    func createList(listName: String) -> Int {
-        print("PopulateMenuInteractor >> In createList")
-        return -1
+    func createList(listName: String) -> (Int, String) {
+        
+        var name = listName
+        var count = 1
+        var result = source?.listExists(listName: listName)
+        
+        while result == true
+        {
+            name = Utilities.newList() + "(" + String(count) + ")"
+            result = source?.listExists(listName: listName)
+            count += 1
+        }
+        
+        let key = source?.addOptionalList(listName: name)
+        return (key!, name)
     }
     
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
@@ -184,8 +196,12 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     }
     
     func deleteList(listKey: Int) -> Bool {
-        print("PopulateMenuInteractor >> In deleteList")
-        return false
+        let x = source?.deleteList(listKey: listKey)
+        if x == nil || x == false
+        {
+            return false
+        }
+        return true
     }
     
     func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool {
@@ -195,9 +211,5 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
             return false
         }
         return true
-    }
-    func deleteList(listKey: Int) -> [Group]? {
-        print("PopulateMenuInteractor >> In deleteList")
-        return nil
     }
 }

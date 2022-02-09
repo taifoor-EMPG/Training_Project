@@ -19,8 +19,9 @@ protocol ProtocolViewToPresenterPopulateMenu
     func pushToSearch()
     func pushToProfile()
     func pushToAddNewList()
-    func pushToOpenList(listKey: Int)
-    func createNewGroup(groupName: String)
+    func pushToOpenList(listKey: Int, listName: String)
+    func createNewGroup(groupName: String) -> Int
+    func newGroupPrompt(groupKey: Int)
     
     //Setting View Table
     func numberOfSections() -> Int
@@ -61,8 +62,8 @@ protocol ProtocolPresenterToInteractorPopulateMenu: AnyObject
     //MARK: Functionality (CRUD)
     
     //Create
-    func createGroup(groupName: String) -> Bool         //*using
-    func createList(listName: String) -> Int            //*using
+    func createGroup(groupName: String) -> Int         //*using
+    func createList(listName: String) -> (Int, String)            //*using
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool //*using
     
     //Read
@@ -84,7 +85,7 @@ protocol ProtocolPresenterToInteractorPopulateMenu: AnyObject
     
     //Delete
     func deleteGroup(groupKey: Int) -> Bool
-    func deleteList(listKey: Int) -> [Group]?       //*using
+    func deleteList(listKey: Int) -> Bool       //*using
     func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
 }
 
@@ -102,8 +103,8 @@ protocol ProtocolPresenterToRouterPopulateMenu
     //Navigation Controls
     func pushToProfile(view: ProtocolPresenterToViewPopulateMenu?)
     func pushToSearch(view: ProtocolPresenterToViewPopulateMenu?)
-    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String)
-    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, editable: Bool)
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int)
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, editable: Bool)
     
     //Creation Controls
     func createGroupOptions() -> GroupOptions

@@ -13,16 +13,19 @@ protocol ProtocolDatasource
     
     //Add Group
     //Return: Result of Operation
-    func addGroup(groupName: String) -> Bool
+    func addGroup(groupName: String) -> Int
     
     //Adds a New Optional List
     //Return: Result of Operation
-    func addOptionalList(listName: String) -> Bool
+    func addOptionalList(listName: String) -> Int
     
     //Add List to Group
     //Return: Result of Operation
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool
     
+    //Add Item to List
+    //Return: Result of Operation
+    func addItemtoList(listKey: Int, itemText: String) -> Bool
     
     
     //MARK: CRUD - READ
@@ -54,11 +57,28 @@ protocol ProtocolDatasource
     //Get Group List Titles
     //Return: Dictionary of [listKey: listTitle] (NIL on failure)
     func getGroupListTitles(groupKey: Int) -> [Int : String]?
-    
-    
+        
     //Find A Group
     //Returns: Result of Operation
     func groupExists(groupName: String) -> Bool
+    
+    //Get a Particular List
+    //Returns a List on Success (nil on Failure)
+    func getList(listKey: Int) -> List?
+    
+    //Know if the list is Permanent
+    //Returns result of operations (nil on failure)
+    func allowEditing(listKey: Int) -> Bool?
+    
+    //Find A List
+    //Returns: Result of Operation
+    func listExists(listName: String) -> Bool
+    
+    //Get Groups
+    //Return: [Grouping] on Success ([] on failure)
+    func getGroups() -> [Group]
+    
+    
     
     //MARK: CRUD - UPDATE
     
@@ -73,6 +93,16 @@ protocol ProtocolDatasource
     //Ungroup - Release all Lists from the Group
     //Return: Result of Operation
     func ungroup(groupKey: Int) -> Bool
+    
+    //Change Status of ListItem
+    //Return: NA
+    func changeStatusOfItem(itemKey: Int, newStauts: Bool)
+    
+    //Change Text of ListItem
+    //Return: NA
+    func changeTextOfItem(itemKey: Int, newText: String)
+    
+    
     
     
     //MARK: CRUD - DELETE
@@ -89,18 +119,17 @@ protocol ProtocolDatasource
     //Return: Result of Operation
     func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
     
+    //Remove Item from List
+    //Return: Result of Operation
+    func removeItemFromList(listKey: Int, itemKey: Int) -> Bool
     
     
     //MARK: - PROCESSED TILL HERE
     ///Remaining functions are left to process
     
-    //Add Item to List
-    //Return: listItemKey on Success (-1 on failure)
-    //func addItemtoList(list: List, itemText: String) -> Int
+
     
-    //Remove Item from List
-    //Return: Result of Operation
-    //func removeItemFromList(list: List, item: ListItem) -> Bool
+
     
     //Marks Item as Done/Undone
     //Return: Result of Operation
@@ -122,8 +151,5 @@ protocol ProtocolDatasource
     //Return: Dictionary [listKey: listName] on Success ([] on failure)
     //func getLists() -> [Int: String]
     
-    //Get Groups
-    //Return: [Grouping] on Success ([] on failure)
-    func getGroups() -> [Group]
     
 }

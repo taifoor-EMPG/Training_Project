@@ -9,11 +9,8 @@ import UIKit
 
 protocol ListItemCellProtocols
 {
-    func didTapChecked()
+    func didTapChecked(itemKey: Int, newStatus: Bool)
 }
-
-
-
 
 class ListItemCell: UITableViewCell {
 
@@ -21,7 +18,9 @@ class ListItemCell: UITableViewCell {
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var checkMark: UIButton!
-    private var status:Bool = false
+    
+    private var status:Bool?
+    private var itemKey:Int?
     
     private var delegate: ListItemCellProtocols?
     //END OF DATA MEMBERS
@@ -38,6 +37,15 @@ class ListItemCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func getText() -> String
+    {
+        return label.text!
+    }
+    
+    func getItemKey() -> Int
+    {
+        return itemKey!
+    }
     
     @IBAction func tappedCheck(_ sender: UIButton) {
         
@@ -48,27 +56,36 @@ class ListItemCell: UITableViewCell {
         if status == false
         {
             status = true
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
-            //Strike Through Text
-            let text = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
-            label.attributedText = text
+            delegate?.didTapChecked(itemKey: itemKey!, newStatus: status!)
+            DispatchQueue.main.async { [self] in
+                //Update UI on main thread
+                checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
+                //Strike Through Text
+                let text = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
+                label.attributedText = text
+            }
+            
         }
         else
         {
             status = false
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
-            //Unstrike through text
-            let text = NSAttributedString(string: label.text!, attributes: attrBlueNoStrikethroughStyle)
-            label.attributedText = text
+            delegate?.didTapChecked(itemKey: itemKey!, newStatus: status!)
+            DispatchQueue.main.async { [self] in
+                //Update UI on main thread
+                checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+                //Unstrike through text
+                let text = NSAttributedString(string: label.text!, attributes: attrBlueNoStrikethroughStyle)
+                label.attributedText = text
+            }
+            
         }
     }
     
-    
-    
-    func setupCell(text: String, status: Bool)
+    func setupCell(itemKey: Int, text: String, status: Bool, reference: ListItemCellProtocols?)
     {
-        //self.delegate = reference
+        self.delegate = reference
         
+        self.itemKey = itemKey
         let attrRedStrikethroughStyle = [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)]
         
         label.text = text

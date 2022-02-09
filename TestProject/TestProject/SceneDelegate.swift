@@ -10,7 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    private let testing = false
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,15 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: winScene)
         window?.frame = UIScreen.main.bounds
         
-        let navigationController = PopulateMenuRouter.createModule()
         
+        if testing == true
+        {
+            let storyBoard: UIStoryboard = UIStoryboard(name: "DBView", bundle: nil)
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "DBView") as! DBView
+            window?.rootViewController = viewController
+        }
+        else
+        {
+            let navigationController = PopulateMenuRouter.createModule()
+            window?.rootViewController = navigationController
+        }
         
-        //let storyBoard: UIStoryboard = UIStoryboard(name: "DBView", bundle: nil)
-        //let viewController = storyBoard.instantiateViewController(withIdentifier: "DBView") as! DBView
-        //window?.rootViewController = viewController
-        
-        
-        window?.rootViewController = navigationController
         window!.makeKeyAndVisible()
     }
 

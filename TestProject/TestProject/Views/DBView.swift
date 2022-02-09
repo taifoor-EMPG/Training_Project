@@ -26,6 +26,7 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
         setCounters()
         groupTable.delegate = self
         groupTable.dataSource = self
+        mysetterFunction()
     }
     
     func setCounters()
@@ -76,5 +77,40 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
-    
+    func mysetterFunction()
+    {
+        do
+        {
+            let request = List.fetchRequest() as NSFetchRequest<List>
+            let list = try context!.fetch(request)
+            
+            
+            for i in list
+            {
+                if i.name == "Important"
+                {
+                    print("I am in important")
+                    i.activeTaskCount = 2
+                }
+                else if i.name == "Planned"
+                {
+                    print("I am in planned")
+                    i.activeTaskCount = 2
+                }
+                else if i.name == "Tasks"
+                {
+                    print("I am in tasks")
+                    i.activeTaskCount = 1
+                }
+            }
+
+            try context?.save()
+            print("Done Printing")
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Test >> func setCounters >> Failed to Fetch")
+        }
+    }
 }

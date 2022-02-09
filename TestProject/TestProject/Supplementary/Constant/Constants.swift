@@ -54,6 +54,19 @@ struct Constants
             static let addedImage = "checkmark"
             static let addImage = "plus"
         }
+        struct editListItem
+        {
+            static let titleMessage = "Alter Text"
+            static let leftButtonText = "Cancel"
+            static let rightButtonText = "Modify"
+        }
+        struct newListItem
+        {
+            static let titleMessage = "Create New Task"
+            static let leftButtonText = "Cancel"
+            static let rightButtonText = "Done"
+            static let newText = "Take a note of something"
+        }
     }
     
     //END OF DATA MEMBERS

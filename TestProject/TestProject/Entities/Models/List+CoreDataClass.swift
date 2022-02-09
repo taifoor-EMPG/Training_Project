@@ -12,6 +12,21 @@ import CoreData
 @objc(List)
 public class List: NSManagedObject {
     
+    //DATA MEMBERS
+    var listsItemsArray:[ListItem] = []
+    //END DATA MEMBERS
+    
+    
+    func setListsArray()
+    {
+        listsItemsArray.removeAll()
+        let temp = self.listItems?.allObjects
+        for i in temp!
+        {
+            listsItemsArray.append(i as! ListItem)
+        }
+    }
+    
     func myprint()
     {
         print("List Key: \(self.listKey)")
@@ -29,8 +44,6 @@ public class List: NSManagedObject {
         self.isPermanent = isPermanent
         activeTaskCount = 0
     }
-    
-    
     
     public func addItemsToList(listItems: [ListItem])
     {

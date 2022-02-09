@@ -15,12 +15,10 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
     private var interactor: ProtocolPresenterToInteractorPopulateList?
     private var router: ProtocolPresenterToRouterPopulateList?
     
-    private var listName: String = ""
-    private var openedList: List?
-    private var listItems:[String] = []
-    private var listItemsStatus:[Bool] = []
-    
-    private var firstOpen: Bool = false
+    private var listName: String?
+    private var listKey: Int?
+    private var list: List?
+    private var firstOpen: Bool?
     
     //END OF DATA MEMBERS
     
@@ -37,29 +35,30 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
     }
     
     //Setting up screen
-    func viewDidLoad(_ listName: String, firstOpen: Bool) {
+    func viewDidLoad(_ listName: String, listKey: Int, firstOpen: Bool) {
         //Presenter is asking to Interact to load new data
         self.listName = listName
-        openedList = interactor?.getList(listName: listName)
-        //listItems = openedList?.getListItemsText() ?? []
-        //listItemsStatus = openedList?.getListItemStauts() ?? []
+        self.listKey = listKey
+        list = interactor?.getList(listKey: listKey)
+        list?.setListsArray()
         self.firstOpen = firstOpen
     }
     
     
-    func pushToEditText(itemNumber: Int) {
-        print("This is tapped")
+    func pushToEditText(itemKey: Int, newText: String) {
+        interactor?.changeItemText(itemKey: itemKey, newText: newText)
+        list = interactor?.getList(listKey: listKey!)
+        list?.setListsArray()
     }
     
     func getListName() -> String
     {
-        return listName
+        return listName!
     }
     
-    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+    func changeListTitle(newTitle: String) -> Bool
     {
-        let result = interactor?.changeListTitle(oldTitle: oldTitle, newTitle: newTitle)
-        
+        let result = interactor?.changeListTitle(listKey: listKey!, newTitle: newTitle)
         if result == nil
         {
             return false
@@ -68,9 +67,8 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
         return result!
     }
     
-    func allowEditing(_ listName: String) -> Bool {
-        let result = interactor?.allowEditing(listName)
-        
+    func allowEditing() -> Bool {
+        let result = interactor?.allowEditing(listKey: listKey!)
         if result == nil
         {
             return false
@@ -79,7 +77,7 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
     }
     
     func isFirstOpen() -> Bool {
-        return firstOpen
+        return firstOpen!
     }
 }
 
@@ -88,16 +86,58 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
 extension PopulateListPresenter
 {
     func numberOfRowsInSection() -> Int {
-        print("PopulateListPresenter >> In numberOfRowsInSection")
-        return -1
-        //return openedList!.getListSize()
+        return list?.listsItemsArray.count ?? 0
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.labels.listItemCell, for: indexPath) as? ListItemCell {
-            cell.setupCell(text: self.listItems[indexPath.row], status: self.listItemsStatus[indexPath.row])
+            let listItemsArray = list?.listsItemsArray
+            
+            cell.setupCell(itemKey: Int(listItemsArray![indexPath.row].itemKey), text: listItemsArray![indexPath.row].text!, status: listItemsArray![indexPath.row].done, reference: self)
             return cell
         }
         return UITableViewCell()
+    }
+    
+    //Delete swiped row
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete
+        {
+            tableView.beginUpdates()
+            
+            let cell = tableView.cellForRow(at: indexPath) as! ListItemCell
+            let key = cell.getItemKey()
+            
+            if interactor?.deleteListItem(listKey: listKey!, itemKey: key) == false
+            {
+                print("In PopulateListresenter >> DeleteSwipedRow >> Failed to Delete List Item")
+                return
+            }
+            
+            list = interactor?.getList(listKey: listKey!)
+            list?.setListsArray()
+            
+            tableView.deleteRows(at: [indexPath], with: .middle)
+            tableView.endUpdates()
+        }
+    }
+    
+    
+    func addNewTask(text: String) {
+        interactor?.newListItem(listKey: listKey!, text: text)
+        list = interactor?.getList(listKey: listKey!)
+        list?.setListsArray()
+    }
+}
+
+
+//To Provide Functionality to List Item Cell
+extension PopulateListPresenter: ListItemCellProtocols
+{
+    func didTapChecked(itemKey: Int, newStatus: Bool) {
+        interactor?.changeItemStatus(itemKey: itemKey, newStatus: newStatus)
+        
+        //Reflect this in MenuVC
+        
     }
 }

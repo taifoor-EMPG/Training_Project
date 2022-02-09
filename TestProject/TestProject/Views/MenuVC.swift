@@ -46,24 +46,26 @@ class MenuVC: UIViewController
         presenter?.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        showActivity()
+    }
+    
+    
     @IBAction func listTapped(_ sender: UIButton) {
-        var listKey: Int = -1
         let title = (sender.titleLabel?.text)!
         
         for (key, value) in titles! {
             if value == title
             {
-                listKey = key
+                presenter?.pushToOpenList(listKey: key, listName: value)
                 break
             }
         }
-        presenter?.pushToOpenList(listKey: listKey)
     }
     
     
     @IBAction func createNewList(_ sender: UIButton) {
         presenter?.pushToAddNewList()
-        showActivity()
     }
     
     @IBAction func createNewGroup(_ sender: UIButton)
@@ -78,14 +80,13 @@ class MenuVC: UIViewController
             
             //Get the textfield for the alert
             let newGroupName = textfield.text
-            self.presenter?.createNewGroup(groupName: newGroupName!)
+            let key = self.presenter?.createNewGroup(groupName: newGroupName!)
             
             //refetch data
             self.optionalLists.reloadData()
             
             //Next Prompt alert
-            //PROMPT THE NEXT SCREEN FOR ADDING LISTS
-            
+            self.presenter?.newGroupPrompt(groupKey: key!)
         }
         
         let cancelButton = UIAlertAction(title: Constants.UIDefaults.newGroup.leftButtonText, style: .default)
@@ -124,13 +125,14 @@ extension MenuVC
             return
         }
         
-        let keys = Array(titles!.keys)
+        var keys = Array(titles!.keys)
+        keys.sort()
         
-        listMyDay.titleLabel?.text = titles?[keys[0]]
-        listImportant.titleLabel?.text = titles?[keys[1]]
-        listPlanned.titleLabel?.text = titles?[keys[2]]
-        listAssigned.titleLabel?.text = titles?[keys[3]]
-        listTasks.titleLabel?.text = titles?[keys[4]]
+        listMyDay.setTitle(titles?[keys[0]], for: .normal)
+        listImportant.setTitle(titles?[keys[1]], for: .normal)
+        listPlanned.setTitle(titles?[keys[2]], for: .normal)
+        listAssigned.setTitle(titles?[keys[3]], for: .normal)
+        listTasks.setTitle(titles?[keys[4]], for: .normal)
         
         
         //Set Count For Each List Here
@@ -227,7 +229,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource
     //If cell was selected - what to do
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
-        presenter?.pushToOpenList(listKey: cell.getListKey())
+        presenter?.pushToOpenList(listKey: cell.getListKey(), listName: cell.listTitle.text!)
     }
     
     //Set an editing style when interacted
@@ -238,5 +240,6 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource
     //Delete swiped row
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         presenter?.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
+        showActivity()
     }
 }

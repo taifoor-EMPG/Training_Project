@@ -11,7 +11,8 @@ import UIKit
 
 class CoreData: ProtocolEntity
 {
-
+   
+    
     //DATA MEMBERS
     let context: NSManagedObjectContext
     
@@ -61,6 +62,31 @@ class CoreData: ProtocolEntity
         }
     }
     
+    func addOptionalList(listName: String) -> Int {
+        do
+        {
+            let request = Counters.fetchRequest() as NSFetchRequest<Counters>
+            let counter = try context.fetch(request)
+            
+            let key = counter[0].list
+            counter[0].list += 1
+            
+            let newList = List(context: context)
+            newList.newList(listKey: Int(key), name: listName, isPermanent: false)
+            
+            try self.context.save()
+            return Int(key)
+            
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("Core >> In addOptionalList >> ERROR: Failed to create List")
+            return -1
+        }
+    }
+
+    
     func addListToGroup(listKey: Int, groupKey: Int) -> Bool {
         do
         {
@@ -101,6 +127,49 @@ class CoreData: ProtocolEntity
         }
     }
     
+    func addItemtoList(listKey: Int, itemText: String) -> Int {
+        do
+        {
+            let requestList = List.fetchRequest() as NSFetchRequest<List>
+            let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            requestList.predicate = predicateList
+            
+            let list = try context.fetch(requestList)
+            
+            if list.isEmpty == true
+            {
+                return -1
+            }
+            
+            let requestCounters = Counters.fetchRequest() as NSFetchRequest<Counters>
+            let counter = try context.fetch(requestCounters)
+            
+            if counter.isEmpty == true
+            {
+                return -1
+            }
+            
+            let key = counter[0].listItem
+            counter[0].list += 1
+            
+            let newListItem = ListItem(context: context)
+            newListItem.itemKey = key
+            newListItem.text = itemText
+            newListItem.done = false
+            
+            list[0].addToListItems(newListItem)
+            
+            try self.context.save()
+            return Int(key)
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("Core >> In addItemtoList >> ERROR")
+            return -1
+        }
+    }
+    
     
     ///READ
     func getPermanentListTitles() -> [List]? {
@@ -114,7 +183,6 @@ class CoreData: ProtocolEntity
             request.sortDescriptors = [sort]
             
             let lists = try context.fetch(request)
-            
             return lists
             
         }
@@ -222,6 +290,74 @@ class CoreData: ProtocolEntity
         }
     }
     
+    func listExists(listName: String) -> Bool? {
+        do
+        {
+            let request = List.fetchRequest() as NSFetchRequest<List>
+            let predicate = NSPredicate(format: DatabaseConstants.lists[1] + " == '" + String(listName) + "'")
+            request.predicate = predicate
+            
+            let list = try context.fetch(request)
+            
+            let x = !list.isEmpty
+            return x
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func listExists >> Failed to Fetch")
+            return nil
+        }
+    }
+    
+    func getList(listKey: Int) -> List? {
+        do
+        {
+            let request = List.fetchRequest() as NSFetchRequest<List>
+            let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            request.predicate = predicate
+            
+            let list = try context.fetch(request)
+            
+            if list.isEmpty == true
+            {
+                return nil
+            }
+            
+            return list[0]
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func getList >> Failed to Fetch")
+            return nil
+        }
+    }
+    
+    func allowEditing(listKey: Int) -> Bool? {
+        do
+        {
+            let request = List.fetchRequest() as NSFetchRequest<List>
+            let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            request.predicate = predicate
+            
+            let list = try context.fetch(request)
+            
+            if list.isEmpty == true
+            {
+                return nil
+            }
+            
+            return !list[0].isPermanent
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func allowEditing >> Failed to Fetch")
+            return nil
+        }
+    }
+    
     
     
     ///UPDATE
@@ -250,6 +386,87 @@ class CoreData: ProtocolEntity
             return false
         }
     }
+    
+    func changeListName(listKey: Int, newListName: String) -> Bool {
+        do
+        {
+            let request = List.fetchRequest() as NSFetchRequest<List>
+            let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            request.predicate = predicate
+            
+            let list = try context.fetch(request)
+            
+            if list.isEmpty == true
+            {
+                return false
+            }
+            
+            list[0].name = newListName
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func changeGroupName >> Failed to Fetch")
+            return false
+        }
+    }
+    
+    
+    func mark(listItemKey: Int, newStatus: Bool) -> Bool {
+        do
+        {
+            let request = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+            let predicate = NSPredicate(format: DatabaseConstants.listItems[0] + " == " + String(listItemKey))
+            request.predicate = predicate
+            
+            let listItem = try context.fetch(request)
+            
+            if listItem.isEmpty == true
+            {
+                return false
+            }
+            
+            listItem[0].done = newStatus
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func mark >> Failed to Fetch")
+            return false
+        }
+    }
+    
+    func changeTextOfItem(itemKey: Int, newText: String) -> Bool {
+        do
+        {
+            let request = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+            let predicate = NSPredicate(format: DatabaseConstants.listItems[0] + " == " + String(itemKey))
+            request.predicate = predicate
+            
+            let listItem = try context.fetch(request)
+            
+            if listItem.isEmpty == true
+            {
+                return false
+            }
+            
+            listItem[0].text = newText
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("ERROR: In Datasource >> func mark >> Failed to Fetch")
+            return false
+        }
+    }
+    
+    
     
     ///DELETE
     func removeGroup(groupKey: Int) -> Bool {
@@ -363,62 +580,92 @@ class CoreData: ProtocolEntity
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    func addOptionalList(listName: String) -> Int {
-        print("Core >> In addOptionalList")
-        return -1
-    }
-    
     func removeOptionalList(listKey: Int) -> Bool {
-        print("Core >> In removeOptionalList")
-        return false
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    func addItemtoList(listKey: Int, itemText: String) -> Int {
-        print("Core >> In addItemtoList")
-        return -1
+        do
+        {
+            let request = List.fetchRequest() as NSFetchRequest<List>
+            let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            request.predicate = predicate
+            
+            let list = try context.fetch(request)
+            
+            if list.isEmpty == true
+            {
+                return false
+            }
+            
+            self.context.delete(list[0])
+            
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("Core >> In removeOptionalList >> Failed to Fetch Data")
+            return false
+        }
     }
     
     func removeItemFromList(listKey: Int, itemKey: Int) -> Bool {
-        print("Core >> In removeItemFromList")
-        return false
+        do
+        {
+            let requestList = List.fetchRequest() as NSFetchRequest<List>
+            let predicateList = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+            requestList.predicate = predicateList
+            
+            let list = try context.fetch(requestList)
+            
+            if list.isEmpty == true
+            {
+                return false
+            }
+            
+            let requestListItem = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+            let predicateListItem = NSPredicate(format: DatabaseConstants.listItems[0] + " == " + String(itemKey))
+            requestListItem.predicate = predicateListItem
+            
+            let listsItem = try context.fetch(requestListItem)
+            
+            if listsItem.isEmpty == true
+            {
+                return false
+            }
+            
+            list[0].removeFromListItems(listsItem[0])
+            
+          self.context.delete(listsItem[0])
+          
+            try self.context.save()
+            return true
+        }
+        catch
+        {
+            //Error Failed to Fetch Data
+            print("Core >> In removeItemFromList")
+            return false
+        }
     }
     
-    func mark(listItemKey: Int) -> Bool {
-        print("Core >> In mark")
-        return false
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
     
     func getListSize(listKey: Int) -> Int {
         print("Core >> In getListSize")
         return -1
     }
-    
-    func changeListName(listKey: Int, newListName: String) -> Bool {
-        print("Core >> In changeListName")
-        return false
-    }
-    
-    func changeTextOfItem(itemKey: Int, newText: String) -> Bool {
-        print("Core >> In changeTextOfItem")
-        return false
-    }
-    
-    
+
     
     func getListItems(listkey: Int) -> [Int : (text: String, status: Bool)] {
         print("Core >> In getListItems")

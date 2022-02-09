@@ -40,23 +40,71 @@ class PopulateListInteractor: ProtocolPresenterToInteractorPopulateList
 //MARK: Use Case Functionalities
 extension PopulateListInteractor
 {
-    func getList(listName: String) -> List? {
+    func getList(listKey: Int) -> List? {
+        let x = source?.getList(listKey: listKey)
         
-        print("PopulateListInteractor >> In getList")
-        return nil
-        //return ListDataBase.getList(listName: listName)
+        if x == nil
+        {
+            print("PopulateListInteractor >> In getList >> Error: Failed to Fetch")
+            return nil
+        }
+        return x
     }
     
-    func changeListTitle(oldTitle: String, newTitle: String) -> Bool
+    func changeListTitle(listKey: Int, newTitle: String) -> Bool
     {
-        print("PopulateListInteractor >> In changeListTitle")
-        return false
-        //return ListDataBase.changeOptionalListName(oldName: oldTitle, newName: newTitle)
+        //Check if List with newTitle exists
+        var x = source?.listExists(listName: newTitle)
+        if x == nil || x == true
+        {
+            return false
+        }
+        
+        //Rename the List with ListKey
+        x = source?.changeListName(listKey: listKey, newListName: newTitle)
+        if x == nil
+        {
+            print("PopulateListInteractor >> In changeListTitle")
+            return false
+        }
+        return x!
     }
     
-    func allowEditing(_ listName: String) -> Bool {
-        print("PopulateListInteractor >> In allowEditing")
-        return false
-        //return ListDataBase.isPermanentList(listName)
+    func allowEditing(listKey: Int) -> Bool {
+        let x = source?.allowEditing(listKey: listKey)
+        
+        if x == nil
+        {
+            print("PopulateListInteractor >> In allowEditing >> Error: Failed to Fetch")
+            return false
+        }
+        return x!
+    }
+    
+    func changeItemStatus(itemKey: Int, newStatus: Bool) {
+        source?.changeStatusOfItem(itemKey: itemKey, newStauts: newStatus)
+    }
+    func changeItemText(itemKey: Int, newText: String) {
+        source?.changeTextOfItem(itemKey: itemKey, newText: newText)
+    }
+    
+    func newListItem(listKey: Int, text: String) {
+        let x = source?.addItemtoList(listKey: listKey, itemText: text)
+        
+        if x == nil || x == false
+        {
+            print("PopulateListInteractor >> In newListItem >> Error: Failed to Fetch")
+        }
+    }
+    
+    func deleteListItem(listKey: Int, itemKey: Int) -> Bool {
+        let x = source?.removeItemFromList(listKey: listKey, itemKey: itemKey)
+        
+        if x == nil || x == false
+        {
+            print("PopulateListInteractor >> In newListItem >> Error: Failed to Fetch")
+            return false
+        }
+        return true
     }
 }

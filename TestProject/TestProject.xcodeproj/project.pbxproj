@@ -51,6 +51,7 @@
 		7836BADF27AD73F200CC860D /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7836BADE27AD73F200CC860D /* Listing.swift */; };
 		7899ED6E27B1035C00DBFAE5 /* DBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7899ED6D27B1035C00DBFAE5 /* DBView.swift */; };
 		7899ED7027B1037E00DBFAE5 /* DBView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7899ED6F27B1037E00DBFAE5 /* DBView.storyboard */; };
+		7899ED7227B3CBF100DBFAE5 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7899ED7127B3CBF100DBFAE5 /* CoreDataManager.swift */; };
 		78CDDEB727AD5C5800210B26 /* GroupPrompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
@@ -111,6 +112,7 @@
 		7836BADE27AD73F200CC860D /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		7899ED6D27B1035C00DBFAE5 /* DBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBView.swift; sourceTree = "<group>"; };
 		7899ED6F27B1037E00DBFAE5 /* DBView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DBView.storyboard; sourceTree = "<group>"; };
+		7899ED7127B3CBF100DBFAE5 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupPrompt.storyboard; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				780C7D3627A3FBE9008C8D53 /* CoreData.swift */,
+				7899ED7127B3CBF100DBFAE5 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				780589212795532F007A327E /* Utilities.swift in Sources */,
 				780C7D3927A3FC07008C8D53 /* Datasource.swift in Sources */,
 				780C7D5127A41391008C8D53 /* ListItem+CoreDataClass.swift in Sources */,
+				7899ED7227B3CBF100DBFAE5 /* CoreDataManager.swift in Sources */,
 				780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */,
 				780C7D6027A7E6E9008C8D53 /* Group+CoreDataProperties.swift in Sources */,
 				780C7D1C27A3BD52008C8D53 /* DataModel.swift in Sources */,

@@ -5,16 +5,15 @@
 //  Created by Muhammad Taifoor Saleem on 28/01/2022.
 //
 
-import Foundation
 import CoreData
 import UIKit
 
 class CoreData: ProtocolEntity
 {
-
-    //DATA MEMBERS
-    let context: NSManagedObjectContext
-    
+    //MARK: DATA MEMBERS
+    private let context: NSManagedObjectContext
+    private let manager: CoreDataManagerProtocol
+  
     struct DatabaseConstants
     {
         static let lists = ["listKey", "name", "isPermanent", "activeTaskCount"]
@@ -25,16 +24,21 @@ class CoreData: ProtocolEntity
     
     //END OF DATA MEMBERS
     
-    
-    init()
+  
+  //Initializer to Instantiate Core Data Class
+  init(CoreDataManager: CoreDataManagerProtocol = CoreDataManager.shared)
     {
-        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+      self.manager = CoreDataManager
+      context = manager.persistentContainer.viewContext
     }
     
-    //MARK: CRUD FUNCTIONALITIES
-    
-    ///CREATE
-    
+  
+  
+  //MARK: CRUD FUNCTIONALITIES
+  ///Refer to ProtocolDataSource for implementational details
+  
+  
+  ///CREATE
     func addGroup(groupName: String) -> Int
     {
         do
@@ -380,14 +384,6 @@ class CoreData: ProtocolEntity
         return false
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     func addItemtoList(listKey: Int, itemText: String) -> Int {
         print("Core >> In addItemtoList")
         return -1
@@ -417,8 +413,6 @@ class CoreData: ProtocolEntity
         print("Core >> In changeTextOfItem")
         return false
     }
-    
-    
     
     func getListItems(listkey: Int) -> [Int : (text: String, status: Bool)] {
         print("Core >> In getListItems")

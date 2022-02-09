@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "41B8E87B-3DDB-441E-8D22-E5F07AC02D04"
+            uuid = "946E98C8-DF94-4A71-BC4A-512C926D002C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestProject/Modules/Populate Menu/PopulateMenuPresenter.swift"
+            filePath = "TestProject/Views/MenuVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
-            landmarkName = "setCell(_:indexPath:rowCount:groupKey:)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "listTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

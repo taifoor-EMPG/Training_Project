@@ -22,7 +22,7 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        //context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         setCounters()
         groupTable.delegate = self
         groupTable.dataSource = self

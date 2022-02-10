@@ -48,7 +48,7 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
     
     
     func pushToEditText(itemNumber: Int) {
-        print("This is tapped")
+      LoggingSystemFlow.printLog("This is tapped")
     }
     
     func getListName() -> String
@@ -88,7 +88,7 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
 extension PopulateListPresenter
 {
     func numberOfRowsInSection() -> Int {
-        print("PopulateListPresenter >> In numberOfRowsInSection")
+      LoggingSystemFlow.printLog("PopulateListPresenter >> In numberOfRowsInSection")
         return -1
         //return openedList!.getListSize()
     }

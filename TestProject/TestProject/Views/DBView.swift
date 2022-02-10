@@ -27,7 +27,7 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
     //groupTable.delegate = self
     //groupTable.dataSource = self
     
-    myTesterFunction()
+    //myTesterFunction()
   }
   
   func setCounters()
@@ -44,7 +44,7 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
     catch
     {
       //Error Failed to Fetch Data
-      print("ERROR: In Test >> func setCounters >> Failed to Fetch")
+      LoggingSystemFlow.printLog("ERROR: In Test >> func setCounters >> Failed to Fetch")
     }
   }
   
@@ -59,7 +59,7 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
     catch
     {
       //Error Failed to Fetch Data
-      print("ERROR: In Test >> func setCounters >> Failed to Fetch")
+      LoggingSystemFlow.printLog("ERROR: In Test >> func setCounters >> Failed to Fetch")
       return 0
     }
   }
@@ -68,20 +68,13 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
     let cell = UITableViewCell()
     var string = groups?[indexPath.row].name
     
-    groups?[indexPath.row].setListsArray()
+    let listArray = groups?[indexPath.row].getListsArray()
     
-    for i in groups![indexPath.row].listsArray
+    for i in listArray ?? []
     {
       string! += " - " + i.name!
     }
     cell.textLabel?.text = string
     return cell
-  }
-  
-  func myTesterFunction()
-  {
-    let x = DataRepository(plugin: CoreData())
-    x.interactor()
-    
   }
 }

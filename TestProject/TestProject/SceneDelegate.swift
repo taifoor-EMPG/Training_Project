@@ -21,15 +21,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: winScene)
         window?.frame = UIScreen.main.bounds
         
-        //let navigationController = PopulateMenuRouter.createModule()
+        let navigationController = PopulateMenuRouter.createModule()
         
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "DBView", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "DBView") as! DBView
-        window?.rootViewController = viewController
+        //let storyBoard: UIStoryboard = UIStoryboard(name: "DBView", bundle: nil)
+        //let viewController = storyBoard.instantiateViewController(withIdentifier: "DBView") as! DBView
+        //window?.rootViewController = viewController
         
         
-        //window?.rootViewController = navigationController
+        window?.rootViewController = navigationController
         window!.makeKeyAndVisible()
     }
 

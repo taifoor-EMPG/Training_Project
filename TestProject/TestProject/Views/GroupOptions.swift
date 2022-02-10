@@ -10,7 +10,7 @@ import UIKit
 protocol GroupOptionsProtocols
 {
     func addDeleteLists(groupKey: Int)
-    func renameGroup(groupKey: Int, groupName: String) -> Bool
+    func renameGroup(groupKey: Int, groupName: String)
     func deleteGroup(groupKey: Int)
     func ungroup(groupKey: Int)
 }
@@ -82,12 +82,7 @@ class GroupOptions: UIViewController
             
             //Get New Group Name
             let newGroupName = textfield.text
-            let x = self.delegate?.renameGroup(groupKey: self.groupKey!, groupName: newGroupName!)
-            
-            if x == false
-            {
-                Utilities.popAnError(self as UIViewController, 6)
-            }
+            self.delegate?.renameGroup(groupKey: self.groupKey!, groupName: newGroupName!)
         }
         
         let cancelButton = UIAlertAction(title: Constants.UIDefaults.newGroup.leftButtonText, style: .default)

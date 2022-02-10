@@ -16,7 +16,7 @@ class CoreData: ProtocolDataSource
   
   struct DatabaseConstants
   {
-    static let lists = ["listKey", "name", "isPermanent", "activeTaskCount"]
+    static let lists = ["listKey", "name", "isPermanent"]
     static let listItems = ["itemKey", "text", "done"]
     static let counter = ["list", "listItem", "group"]
     static let group = ["groupKey", "name"]
@@ -110,23 +110,6 @@ class CoreData: ProtocolDataSource
   
   ///READ
   
-  //TEST CODE
-  func dataSource(completion: @escaping (([Int]) -> Void))
-   {
-     
-     LoggingSystemFlow.printLog("I am in \(#function)")
-     LoggingSystemFlow.printLog("I will send back a [Int]?")
-     
-     var listArray = [Int]()
-     
-     for i in 0...3
-     {
-       listArray.append(i)
-     }
-     completion(listArray)
-   }
-  //TLL HERE
-
   func getPermanentListTitles(completion: @escaping (([List]?) -> Void)){
     do
     {
@@ -169,7 +152,7 @@ class CoreData: ProtocolDataSource
       completion(nil)
     }
   }
-  func getActiveItems(listKey: Int) -> [List]? {
+  func getActiveItems(listKey: Int, completion: @escaping (([List]?) -> Void)){
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
@@ -178,46 +161,45 @@ class CoreData: ProtocolDataSource
       
       let list = try context.fetch(request)
       
-      return list
-      
+      completion(list)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func getActiveItems")
-      return nil
+      completion(nil)
     }
   }
-  func getGroupsCount() -> Int {
+  func getGroupsCount(completion: @escaping ((Int) -> Void)){
     do
     {
       let request = Group.fetchRequest() as NSFetchRequest<Group>
       let groups = try context.fetch(request)
-      return groups.count
+      completion(groups.count)
       
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func getGroupsCount")
-      return -1
+      completion(-1)
     }
   }
-  func getGroups() -> [Group]{
+  func getGroups(completion: @escaping (([Group]) -> Void)){
     do
     {
       let request = Group.fetchRequest() as NSFetchRequest<Group>
       let groups = try context.fetch(request)
-      return groups
+      completion(groups)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func getGroups")
-      return []
+      completion([])
     }
   }
-  func groupExists(groupName: String) -> Bool? {
+  func groupExists(groupName: String, completion: @escaping ((Bool) -> Void)){
     do
     {
       let request = Group.fetchRequest() as NSFetchRequest<Group>
@@ -226,14 +208,14 @@ class CoreData: ProtocolDataSource
       
       let group = try context.fetch(request)
       
-      let x = !group.isEmpty
-      return x
+      let doesExist = !group.isEmpty
+      completion(doesExist)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func groupExists")
-      return nil
+      completion(false)
     }
   }
   

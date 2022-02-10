@@ -11,32 +11,15 @@ import CoreData
 
 @objc(Group)
 public class Group: NSManagedObject {
-
-    //DATA MEMBERS
+  
+  func getListsArray() -> [List]
+  {
     var listsArray:[List] = []
-    //END OF DATA MEMBERS
-    
-    func setListsArray()
+    let tempList = self.lists!.allObjects
+    for i in tempList
     {
-        listsArray.removeAll()
-        let temp = self.lists!.allObjects
-        for i in temp
-        {
-            listsArray.append(i as! List)
-        }
+      listsArray.append(i as! List)
     }
-    
-    func myprint()
-    {
-        print("Group Key: \(self.groupKey)")
-        print("Name: \(String(describing: self.name))")
-        
-        setListsArray()
-        
-        for i in self.listsArray
-        {
-            i.myprint()
-        }
-        
-    }
+    return listsArray
+  }
 }

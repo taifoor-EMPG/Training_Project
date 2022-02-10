@@ -11,6 +11,7 @@ import Foundation
 
 class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
 {
+  
   //MARK: Data Members
   private weak var presenter: ProtocolInteractorToPresenterPopulateMenu?
   private var source: ProtocolDataRepository?
@@ -40,28 +41,33 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
   }
   
   //MARK: CRUD - CREATE
-  func createGroup(groupName: String) -> Bool {
+  func createGroup(groupName: String, completion: @escaping ((Bool) -> Void)){
     
     //Check if group with same name exists
     
     var name = groupName
     var count = 1
-    var result = source?.groupExists(groupName: name)
+    var doesExist = true
     
-    while result == true
-    {
-      name = groupName + " " + String(count)
-      result = source?.groupExists(groupName: name)
-      count += 1
-    }
+    source?.groupExists(groupName: name, completion: { [self] result in
+      doesExist = result
+      while doesExist == true
+      {
+        name = groupName + " " + String(count)
+        source?.groupExists(groupName: name, completion: { newResult in
+          doesExist = newResult
+          count += 1
+        })
+      }
     
-    let isAdded = source?.addGroup(groupName: name)
-    if isAdded == nil
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func createGroup")
-    }
-    return isAdded ?? false
+      let isAdded = source?.addGroup(groupName: name)
+      if isAdded == nil
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func createGroup")
+      }
+      completion(isAdded ?? false)
+    })
   }
   
   func createList(listName: String) -> Int {
@@ -80,48 +86,54 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
   }
   
   //MARK: CRUD - READ
-  func getPermanentListTitles() -> [Int : String] {
-    let result = source?.getPermanentListTitles()
-    if result == nil
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getPermanentListTitles")
-    }
-    return result ?? [:]
+  func getPermanentListTitles(completion: @escaping (([Int : String]) -> Void)){
+    source?.getPermanentListTitles(completion: { result in
+      if result == nil
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getPermanentListTitles")
+      }
+      completion(result ?? [:])
+    })
   }
   
-  func getListActiveCount(listKey: Int) -> Int {
-    let result = source?.getActiveItems(listKey: listKey)
-    if result == -1
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getListActiveCount")
-    }
-    return result ?? -1
+  func getListActiveCount(listKey: Int, completion: @escaping ((Int) -> Void)){
+    source?.getActiveItems(listKey: listKey, completion: { result in
+      if result == -1
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getListActiveCount")
+      }
+      completion(result)
+    })
   }
   
-  func getGroupFreeListTitles() -> [Int : String] {
-    let result = source?.getGroupFreeListTitles()
-    if result == nil
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getGroupFreeListTitles")
-    }
-    return result ?? [:]
+  func getGroupFreeListTitles(completion: @escaping (([Int : String]) -> Void)){
+    source?.getGroupFreeListTitles(completion: { result in
+      if result == nil
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getGroupFreeListTitles")
+      }
+      completion(result ?? [:])
+    })
   }
   
-  func getGroupCount() -> Int {
-    let result = source?.getGroupCount()
-    if result == -1
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getGroupCount")
-    }
-    return result ?? -1
+  func getGroupCount(completion: @escaping ((Int) -> Void)){
+    source?.getGroupCount(completion: { result in
+      if result == -1
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getGroupCount")
+      }
+      completion(result)
+    })
   }
   
-  func getGroupTitles(groupKey: Int) -> [Int : String] {
-    return (source?.getPermanentListTitles())!
+  func getGroupTitles(groupKey: Int, completion: @escaping (([Int : String]) -> Void)){
+    source?.getPermanentListTitles(completion: { result in
+      completion(result ?? [:])
+    })
   }
   
   func getGroupListCount(groupKey: Int) -> Int {
@@ -138,14 +150,10 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     return ""
   }
   
-  func getGroups() -> [Group]? {
-    let result = source?.getGroups()
-    if result == nil
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func getGroups")
-    }
-    return result ?? nil
+  func getGroups(completion: @escaping (([Group]?) -> Void)){
+    source?.getGroups(completion: { result in
+      completion(result)
+    })
   }
   
   //MARK: CRUD - UPDATE
@@ -154,25 +162,27 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
     return false
   }
   
-  func renameGroup(groupKey: Int, newName: String) -> Bool {
+  func renameGroup(groupKey: Int, newName: String, completion: @escaping ((Bool) -> Void)){
     //Check if group with newName exists
-    var result = source?.groupExists(groupName: newName)
-    if result == nil || result == true
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func renameGroup")
-      return false
-    }
     
-    //Rename the Group with groupKey
-    result = source?.changeGroupName(groupKey: groupKey, newGroupName: newName)
-    if result == nil || result == false
-    {
-      //ERROR
-      LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func renameGroup")
-      return false
-    }
-    return true
+    source?.groupExists(groupName: newName, completion: { [self] result in
+      if result == true
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func renameGroup")
+        completion(false)
+      }
+      
+      let newResult = source?.changeGroupName(groupKey: groupKey, newGroupName: newName)
+      
+      if newResult == nil || newResult == false
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func renameGroup")
+        completion(false)
+      }
+      completion(true)
+    })
   }
   
   func ungroup(groupKey: Int) -> Bool {

@@ -47,99 +47,99 @@ class DataRepository: ProtocolDataRepository
     return result!
   }
   
-  func getPermanentListTitles() -> [Int : String]? {
-    
-    let lists = plugin?.getPermanentListTitles()
-    
-    guard lists != nil else
-    {
-      //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func getPermanentListTitles")
-      return nil
-    }
-    
-    var result = [Int:String]()
-    
-    for i in lists!
-    {
-      result[Int(i.listKey)] = i.name
-    }
-    
-    return result
-  }
-  
-  func getActiveItems(listKey: Int) -> Int {
-    
-    let list = plugin?.getActiveItems(listKey: listKey)
-    
-    guard list != nil else
-    {
-      //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func getActiveItems")
-      return -1
-    }
-    
-    return Int(exactly: list![0].activeTaskCount)!
-  }
-  
-  func getGroups() -> [Group] {
-    let groups = plugin?.getGroups()
-    
-    guard groups?.isEmpty != true else
-    {
-      //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroups")
-      return []
-    }
-    
-    return groups!
-  }
-  
-  func getGroupFreeListTitles() -> [Int : String]? {
-    
-    let lists = plugin?.getOptionalListTitles()
-    
-    guard lists != nil else
-    {
-      //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroupFreeListTitles")
-      return nil
-    }
-    
-    var result = [Int:String]()
-    
-    for i in lists!
-    {
-      if i.group == nil
+  func getPermanentListTitles(completion: @escaping (([Int : String]?) -> Void)){
+    plugin?.getPermanentListTitles(completion: { lists in
+      guard lists != nil else
+      {
+        //Error Occured
+        LoggingSystemFlow.printLog("ERROR: Datasource >> func getPermanentListTitles")
+        completion(nil)
+        return
+      }
+      
+      var result = [Int:String]()
+      for i in lists ?? []
       {
         result[Int(i.listKey)] = i.name
       }
-    }
-    
-    return result
+      completion(result)
+    })
   }
   
-  func getGroupCount() -> Int {
-    let result = plugin?.getGroupsCount()
-    if result == -1
-    {
-      //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroupCount")
-    }
-    return result ?? -1
+  func getActiveItems(listKey: Int, completion: @escaping ((Int) -> Void)){
+    plugin?.getActiveItems(listKey: listKey, completion: { list in
+      guard list != nil else
+      {
+        //Error Occured
+        LoggingSystemFlow.printLog("ERROR: Datasource >> func getActiveItems")
+        completion(-1)
+        return
+      }
+      
+      var listItems:[ListItem] = []
+      let tempListItems = list?[0].listItems?.allObjects
+      for i in tempListItems ?? []
+      {
+        listItems.append(i as! ListItem)
+      }
+      var count = 0
+      for i in listItems
+      {
+        if i.done == true
+        {
+          count += 1
+        }
+      }
+      
+      completion(count)
+    })
   }
   
-  func groupExists(groupName: String) -> Bool {
-    
-    let result = plugin?.groupExists(groupName: groupName)
-    
-    if result == nil
-    {
-      //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func groupExists")
-      return true
-    }
-    return result!
+  func getGroups(completion: @escaping (([Group]) -> Void)){
+    plugin?.getGroups(completion: { groups in
+      
+      guard groups.isEmpty != true else
+      {
+        //Error Occured
+        LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroups")
+        completion([])
+        return
+      }
+      return completion(groups)
+    })
+  }
+  
+  func getGroupFreeListTitles(completion: @escaping (([Int : String]?) -> Void)){
+    plugin?.getOptionalListTitles(completion: { lists in
+      guard lists != nil else
+      {
+        //Error Occured
+        LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroupFreeListTitles")
+        completion(nil)
+        return
+      }
+      var result = [Int:String]()
+      for i in lists ?? []
+      {
+        if i.group == nil
+        {
+          result[Int(i.listKey)] = i.name
+        }
+      }
+      completion(result)
+    })
+  }
+  
+  func getGroupCount(completion: @escaping ((Int) -> Void)){
+    plugin?.getGroupsCount(completion: { result in
+      completion(result)
+    })
+  }
+  
+  func groupExists(groupName: String, completion: @escaping ((Bool) -> Void)){
+    plugin?.groupExists(groupName: groupName, completion: { result in
+      completion(result)
+    })
   }
   
   func getGroupTitles(groupKey: Int) -> [Int : String] {

@@ -50,7 +50,7 @@ class ListItemCell: UITableViewCell {
             status = true
             checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
             //Strike Through Text
-            let text = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
+          let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
             label.attributedText = text
         }
         else
@@ -58,7 +58,7 @@ class ListItemCell: UITableViewCell {
             status = false
             checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
             //Unstrike through text
-            let text = NSAttributedString(string: label.text!, attributes: attrBlueNoStrikethroughStyle)
+            let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrBlueNoStrikethroughStyle)
             label.attributedText = text
         }
     }
@@ -76,7 +76,7 @@ class ListItemCell: UITableViewCell {
         if status == true
         {
             checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
-            let temp = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
+            let temp = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
             label.attributedText = temp
         }
         else

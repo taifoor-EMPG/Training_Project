@@ -32,7 +32,7 @@ class SectionHeader: UITableViewCell
     
     @IBAction func optionsPressed(_ sender: UIButton)
     {
-        delegate?.didPressOptions(section: sectionID, groupKey: groupKey, groupName: groupTitle.text!)
+      delegate?.didPressOptions(section: sectionID, groupKey: groupKey, groupName: groupTitle.text ?? Constants.emptyString)
     }
     
     @IBAction func collapserPressed(_ sender: UIButton)

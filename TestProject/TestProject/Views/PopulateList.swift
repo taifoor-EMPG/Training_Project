@@ -37,7 +37,7 @@ extension PopulateList
         //Set Table Attributes
         listItems.delegate = self
         listItems.dataSource = self
-        currentTitle = (presenter?.getListName())!
+        currentTitle = (presenter?.getListName()) ?? Constants.emptyString
         listTitle.text = currentTitle
         listTitle.delegate = self
         
@@ -61,16 +61,6 @@ extension PopulateList
         {
             listTitle.resignFirstResponder()
         }
-        
-        //Set Date for My Day
-        /*if listTitle.text == Constants.listsTitleArray[0]
-        {
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy"
-            let result = formatter.string(from: date)
-            listTitle.text = listTitle.text! + "\n" + result
-        }*/
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -89,10 +79,10 @@ extension PopulateList
             listTitle.resignFirstResponder()
             return true
         }
-        else if presenter?.changeListTitle(oldTitle: currentTitle, newTitle: listTitle.text!) == true
+        else if presenter?.changeListTitle(oldTitle: currentTitle, newTitle: listTitle.text ?? Constants.emptyString) == true
         {
             //New List Name Approved by DB
-            currentTitle = listTitle.text!
+            currentTitle = listTitle.text ?? Constants.emptyString
             listTitle.resignFirstResponder()
             return true
         }

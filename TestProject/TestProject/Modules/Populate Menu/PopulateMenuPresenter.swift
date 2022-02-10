@@ -88,51 +88,47 @@ extension PopulateMenuPresenter
       return 0
     }
     
-    if section == 0 && !freeLists!.isEmpty
+    if section == 0 && !(freeLists?.isEmpty ?? false)
     {
-      //print(freeLists!.count)
-      return freeLists!.count
+      guard let count = freeLists?.count else {return Constants.errorFetchCode}
+      return count
     }
-    else if section == 0 && freeLists!.isEmpty
+    else if section == 0 && (freeLists?.isEmpty ?? false)
     {
-      //print(groups?[section].lists?.count)
       return groups?[section].lists?.count ?? 0
     }
-    //print(groups?[section - 1].lists?.count)
     return groups?[section - 1].lists?.count ?? 0
   }
   
   //Setting Title For Section
   func tableView(titleForHeaderInSection section: Int) -> String? {
     
-    if section == 0 && !freeLists!.isEmpty
+    if section == 0 && !(freeLists?.isEmpty ?? false)
     {
       return ""
     }
-    else if section == 0 && freeLists!.isEmpty
+    else if section == 0 && (freeLists?.isEmpty ?? false)
     {
-      //print(groups?[section].name)
       return groups?[section].name
     }
-    //print(groups?[section - 1].name)
     return groups?[section - 1].name
   }
   
   //Setting View For Section
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
   {
-    let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "sectionHeader")! as! SectionHeader
-    if section == 0 && !freeLists!.isEmpty
+    let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "sectionHeader") as! SectionHeader
+    if section == 0 && !(freeLists?.isEmpty ?? false)
     {
       return nil
     }
-    else if section == 0 && freeLists!.isEmpty
+    else if section == 0 && (freeLists?.isEmpty ?? false)
     {
-      sectionHeader.setupCell(groupKey: Int((groups?[section].groupKey)!), groupName: (groups?[section].name)!, section: section, reference: self)
+      sectionHeader.setupCell(groupKey: Int((groups?[section].groupKey ?? Int64(Constants.newGroupKey))), groupName: (groups?[section].name ?? Constants.emptyString), section: section, reference: self)
     }
     else
     {
-      sectionHeader.setupCell(groupKey: Int((groups?[section - 1].groupKey)!), groupName: (groups?[section - 1].name)!, section: section, reference: self)
+      sectionHeader.setupCell(groupKey: Int((groups?[section - 1].groupKey) ?? Int64(Constants.newGroupKey)), groupName: (groups?[section - 1].name) ?? Constants.emptyString, section: section, reference: self)
     }
     
     return sectionHeader
@@ -144,22 +140,22 @@ extension PopulateMenuPresenter
       
       let tempGroup: Group?
       
-      if indexPath.section == 0 && !freeLists!.isEmpty
+      if indexPath.section == 0 && !(freeLists?.isEmpty ?? false)
       {
-        let keys = Array(freeLists!.keys)
+        let keys = Array(freeLists?.keys ?? [:].keys)
         
         let listKey = keys[indexPath.row]
-        let title = freeLists![keys[indexPath.row]]
+        let title = freeLists?[keys[indexPath.row]]
         
         interactor?.getListActiveCount(listKey: listKey, completion: { count in
           self.activeTaskCount[listKey] = count
         })
         
         let count = activeTaskCount[listKey]
-        cell.setupCell(listKey: listKey, text: title!, count: Utilities.convertToString(count!))
+        cell.setupCell(listKey: listKey, text: title ?? Constants.emptyString, count: Utilities.convertToString(count ?? 0))
         return cell
       }
-      else if indexPath.section == 0 && freeLists!.isEmpty
+      else if indexPath.section == 0 && (freeLists?.isEmpty ?? false)
       {
         tempGroup = groups?[indexPath.section]
       }
@@ -174,8 +170,11 @@ extension PopulateMenuPresenter
       
       let listKey = Int((tempList?[indexPath.row].listKey ?? -1))
       let title = tempList?[indexPath.row].name
-      let count = Int((tempList?[indexPath.row].activeTaskCount ?? -1))
-      cell.setupCell(listKey: listKey, text: title!, count: Utilities.convertToString(count))
+      interactor?.getListActiveCount(listKey: listKey, completion: { result in
+        self.activeTaskCount[listKey] = result
+      })
+      let count = activeTaskCount[listKey] ?? <#default value#>
+      cell.setupCell(listKey: listKey, text: title ?? Constants.emptyString, count: Utilities.convertToString(count))
       return cell
     }
     return UITableViewCell()
@@ -222,7 +221,7 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
       result = true
     }
     viewController?.groupStatus(isEmpty: result, groupKey: groupKey, groupName: groupName, reference: self)
-    view?.presentGroupOptions(viewController: viewController!)
+    view?.presentGroupOptions(viewController: viewController ?? GroupOptions())
   }
   
   func didPressCollapser(section: Int, isCollapsing: Bool) {
@@ -270,7 +269,7 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
 extension PopulateMenuPresenter
 {
   func pushToOpenList(listKey: Int) {
-    let name = (interactor?.getListTitle(listKey: listKey))!
+    let name = (interactor?.getListTitle(listKey: listKey)) ?? Constants.emptyString
     router?.pushToOpenList(view: view, with: name)
   }
   func pushToSearch() {
@@ -285,12 +284,12 @@ extension PopulateMenuPresenter
     //Create New List
     var name = Utilities.newList()
     var count = 1
-    var result = interactor?.createList(listName: name)
+    var result = interactor?.createList(listName: name) ?? -1
     
-    while result! < 0
+    while result  < 0
     {
       name = Utilities.newList() + "(" + String(count) + ")"
-      result = interactor?.createList(listName: name)
+      result = interactor?.createList(listName: name) ?? -1
       count += 1
     }
     
@@ -352,7 +351,7 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
     }
     newView?.setDelegate(self)
     newView?.setGroupKey(groupKey: groupKey)
-    view?.presentGroupPrompt(viewController: newView!)
+    view?.presentGroupPrompt(viewController: newView ?? GroupPrompt())
   }
   
   func renameGroup(groupKey: Int, groupName: String)
@@ -399,11 +398,11 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
 extension PopulateMenuPresenter: GroupPromptProtocol
 {
   func setRows(groupKey: Int) -> Int {
-    var total = freeLists!.count + 0
+    var total = freeLists?.count ?? 0 + 0
     
     if groups != nil
     {
-      for i in groups!
+      for i in groups ?? []
       {
         if i.groupKey == groupKey
         {
@@ -418,21 +417,27 @@ extension PopulateMenuPresenter: GroupPromptProtocol
   func setCell(_ cell: Listing, indexPath: IndexPath, rowCount: Int, groupKey: Int) {
     //Setting Up Cell - from Lists and groups
     
-    if (freeLists?.count)! - indexPath.row > 0
+    guard let count = freeLists?.count else {return}
+    
+    
+    if count - indexPath.row > 0
     {
-      let keys = Array(freeLists!.keys)
-      let names = Array(freeLists!.values)
+      let keys = Array(freeLists?.keys ?? [:].keys)
+      let names = Array(freeLists?.values ?? [:].values)
       cell.setupCell(listKey: keys[indexPath.row], listName: names[indexPath.row], openedGroupKey: groupKey, isAdded: false, reference: self)
     }
     else
     {
-      for i in groups!
+      guard let groups = self.groups else {return}
+      
+      for i in groups
       {
         if i.groupKey == groupKey
         {
-          let index = indexPath.row - freeLists!.count
+          guard let count = freeLists?.count else {return}
+          let index = indexPath.row - count
           let list = (i.getListsArray())[index]
-          cell.setupCell(listKey: Int(list.listKey), listName: list.name!, openedGroupKey: groupKey, isAdded: true, reference: self)
+          cell.setupCell(listKey: Int(list.listKey), listName: list.name ?? Constants.emptyString, openedGroupKey: groupKey, isAdded: true, reference: self)
           break
         }
         

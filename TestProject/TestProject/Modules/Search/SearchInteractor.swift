@@ -16,23 +16,13 @@ class SearchInteractor: ProtocolPresenterToInteractorSearch
     
     //END OF DATA MEMBERS
     
-    init(source : ProtocolDataRepository?)
+    init(source : ProtocolDataRepository)
     {
-        guard source != nil else
-        {
-            //RAISE SOME ERROR HERE
-            return
-        }
         self.source = source
     }
 
-    func setPresenter(presenter: ProtocolInteractorToPresenterSearch?)
+    func setPresenter(presenter: ProtocolInteractorToPresenterSearch)
     {
-        guard presenter != nil else
-        {
-            //RAISE SOME ERROR HERE
-            return
-        }
         self.presenter = presenter
     }
 }

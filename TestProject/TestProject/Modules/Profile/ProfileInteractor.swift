@@ -16,23 +16,13 @@ class ProfileInteractor: ProtocolPresenterToInteractorProfile
     
     //END OF DATA MEMBERS
     
-    init(source : ProtocolDataRepository?)
+    init(source : ProtocolDataRepository)
     {
-        guard source != nil else
-        {
-            //RAISE SOME ERROR HERE
-            return
-        }
         self.source = source
     }
 
-    func setPresenter(presenter: ProtocolInteractorToPresenterProfile?)
+    func setPresenter(presenter: ProtocolInteractorToPresenterProfile)
     {
-        guard presenter != nil else
-        {
-            //RAISE SOME ERROR HERE
-            return
-        }
         self.presenter = presenter
     }
 }

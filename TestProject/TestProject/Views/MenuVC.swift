@@ -48,9 +48,9 @@ class MenuVC: UIViewController
   
   @IBAction func listTapped(_ sender: UIButton) {
     var listKey: Int = -1
-    let title = (sender.titleLabel?.text)!
+    let title = (sender.titleLabel?.text) ?? Constants.emptyString
     
-    for (key, value) in titles! {
+    for (key, value) in titles ?? [:] {
       if value == title
       {
         listKey = key
@@ -70,15 +70,15 @@ class MenuVC: UIViewController
   {
     let alert = UIAlertController(title: Constants.UIDefaults.newGroup.title, message: "", preferredStyle: .alert)
     alert.addTextField()
-    let textfield = alert.textFields![0]
-    textfield.text = Constants.UIDefaults.newGroup.newGroupTitle
+    let textfield = alert.textFields?[0]
+    textfield?.text = Constants.UIDefaults.newGroup.newGroupTitle
     
     let createButton = UIAlertAction(title: Constants.UIDefaults.newGroup.rightButtonText, style: .default)
     { (action) in
       
       //Get the textfield for the alert
-      let newGroupName = textfield.text
-      self.presenter?.createNewGroup(groupName: newGroupName!)
+      let newGroupName = textfield?.text
+      self.presenter?.createNewGroup(groupName: newGroupName ?? Constants.emptyString)
       
       //refetch data
       self.optionalLists.reloadData()
@@ -124,7 +124,7 @@ extension MenuVC
       return
     }
     
-    let keys = Array(titles!.keys)
+    let keys = Array(titles?.keys ?? [:].keys)
     
     listMyDay.titleLabel?.text = titles?[keys[0]]
     listImportant.titleLabel?.text = titles?[keys[1]]
@@ -250,8 +250,8 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource
   
   //If cell was selected - what to do
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
-    presenter?.pushToOpenList(listKey: cell.getListKey())
+    let cell = tableView.cellForRow(at: indexPath) as? OptionalListCell
+    presenter?.pushToOpenList(listKey: cell?.getListKey() ?? Constants.newListKey)
   }
   
   //Set an editing style when interacted

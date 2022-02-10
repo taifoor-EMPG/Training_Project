@@ -65,7 +65,7 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
             return false
         }
         
-        return result!
+        return result ?? false
     }
     
     func allowEditing(_ listName: String) -> Bool {
@@ -75,7 +75,7 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
         {
             return false
         }
-        return result!
+        return result ?? false
     }
     
     func isFirstOpen() -> Bool {
@@ -90,7 +90,6 @@ extension PopulateListPresenter
     func numberOfRowsInSection() -> Int {
       LoggingSystemFlow.printLog("PopulateListPresenter >> In numberOfRowsInSection")
         return -1
-        //return openedList!.getListSize()
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {

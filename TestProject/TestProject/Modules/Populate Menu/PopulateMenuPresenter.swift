@@ -136,7 +136,7 @@ extension PopulateMenuPresenter
   
   //Setting up the cell
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.labels.optionalListCell, for: indexPath) as? OptionalListCell {
+    if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.optionalListCell, for: indexPath) as? OptionalListCell {
       
       let tempGroup: Group?
       
@@ -173,7 +173,7 @@ extension PopulateMenuPresenter
       interactor?.getListActiveCount(listKey: listKey, completion: { result in
         self.activeTaskCount[listKey] = result
       })
-      let count = activeTaskCount[listKey] ?? <#default value#>
+      let count = activeTaskCount[listKey] ?? 0
       cell.setupCell(listKey: listKey, text: title ?? Constants.emptyString, count: Utilities.convertToString(count))
       return cell
     }

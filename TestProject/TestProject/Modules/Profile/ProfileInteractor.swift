@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileInteractor: ProtocolPresenterToInteractorProfile
 {
+  
     //DATA MEMBERS
     
     private weak var presenter: ProtocolInteractorToPresenterProfile?

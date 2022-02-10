@@ -34,7 +34,7 @@ protocol ProtocolPresenterToViewProfile: AnyObject
 //Functions that are needed from Interactor are placed here
 protocol ProtocolPresenterToInteractorProfile
 {
-    func setPresenter(presenter: ProtocolInteractorToPresenterProfile?)
+    func setPresenter(presenter: ProtocolInteractorToPresenterProfile)
 }
 
 protocol ProtocolInteractorToPresenterProfile: AnyObject

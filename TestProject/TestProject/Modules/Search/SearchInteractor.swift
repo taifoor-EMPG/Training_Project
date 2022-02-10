@@ -9,6 +9,7 @@ import UIKit
 
 class SearchInteractor: ProtocolPresenterToInteractorSearch
 {
+  
     //DATA MEMBERS
     
     private weak var presenter: ProtocolInteractorToPresenterSearch?

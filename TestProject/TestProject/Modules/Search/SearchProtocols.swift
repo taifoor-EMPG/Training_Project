@@ -34,7 +34,7 @@ protocol ProtocolPresenterToViewSearch: AnyObject
 //Functions that are needed from Interactor are placed here
 protocol ProtocolPresenterToInteractorSearch: AnyObject
 {
-    func setPresenter(presenter: ProtocolInteractorToPresenterSearch?)
+    func setPresenter(presenter: ProtocolInteractorToPresenterSearch)
 }
 
 protocol ProtocolInteractorToPresenterSearch: AnyObject

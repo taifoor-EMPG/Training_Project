@@ -68,12 +68,12 @@ class MenuVC: UIViewController
   
   @IBAction func createNewGroup(_ sender: UIButton)
   {
-    let alert = UIAlertController(title: Constants.UIDefaults.newGroup.title, message: "", preferredStyle: .alert)
+    let alert = UIAlertController(title: Constants.UIDefaults.NewGroup.title, message: "", preferredStyle: .alert)
     alert.addTextField()
     let textfield = alert.textFields?[0]
-    textfield?.text = Constants.UIDefaults.newGroup.newGroupTitle
+    textfield?.text = Constants.UIDefaults.NewGroup.newGroupTitle
     
-    let createButton = UIAlertAction(title: Constants.UIDefaults.newGroup.rightButtonText, style: .default)
+    let createButton = UIAlertAction(title: Constants.UIDefaults.NewGroup.rightButtonText, style: .default)
     { (action) in
       
       //Get the textfield for the alert
@@ -88,7 +88,7 @@ class MenuVC: UIViewController
       
     }
     
-    let cancelButton = UIAlertAction(title: Constants.UIDefaults.newGroup.leftButtonText, style: .default)
+    let cancelButton = UIAlertAction(title: Constants.UIDefaults.NewGroup.leftButtonText, style: .default)
     { (action) in
       
       alert.dismiss(animated: true, completion: nil)

@@ -93,7 +93,7 @@ extension PopulateListPresenter
     }
     
     func setCell(tableView: UITableView, forRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.labels.listItemCell, for: indexPath) as? ListItemCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.listItemCell, for: indexPath) as? ListItemCell {
             cell.setupCell(text: self.listItems[indexPath.row], status: self.listItemsStatus[indexPath.row])
             return cell
         }

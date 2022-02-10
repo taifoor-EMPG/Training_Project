@@ -48,7 +48,7 @@ class ListItemCell: UITableViewCell {
         if status == false
         {
             status = true
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
             //Strike Through Text
           let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
             label.attributedText = text
@@ -56,7 +56,7 @@ class ListItemCell: UITableViewCell {
         else
         {
             status = false
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
             //Unstrike through text
             let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrBlueNoStrikethroughStyle)
             label.attributedText = text
@@ -75,13 +75,13 @@ class ListItemCell: UITableViewCell {
         self.status = status
         if status == true
         {
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
             let temp = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
             label.attributedText = temp
         }
         else
         {
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
         }
     }
   

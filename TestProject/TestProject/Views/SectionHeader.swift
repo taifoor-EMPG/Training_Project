@@ -40,8 +40,8 @@ class SectionHeader: UITableViewCell
         if self.collapsed == true
         {
             //Is collapsed - uncollapse it
-            collapser.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-            optionsButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+          collapser.setImage(UIImage(systemName: Constants.UIDefaults.SectionHeader.uncollapsedImage), for: .normal)
+          optionsButton.setImage(UIImage(systemName: Constants.UIDefaults.SectionHeader.optionsImage), for: .normal)
             optionsButton.isEnabled = true
             self.collapsed = false
             delegate?.didPressCollapser(section: sectionID, isCollapsing: collapsed)
@@ -49,7 +49,7 @@ class SectionHeader: UITableViewCell
         else
         {
             //Is not collapsed - collapse it
-            collapser.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+            collapser.setImage(UIImage(systemName: Constants.UIDefaults.SectionHeader.collapsedImage), for: .normal)
             optionsButton.setImage(UIImage(), for: .normal)
             optionsButton.isEnabled = false
             self.collapsed = true

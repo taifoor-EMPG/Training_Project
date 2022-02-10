@@ -24,27 +24,27 @@ struct Constants
   {
     static let navBarReturnTitle = "Lists"
     
-    struct images
+    struct Images
     {
       static let checkedCircle = "circle_checked.png"
       static let uncheckedCircle = "circle_unchecked.png"
     }
     
-    struct labels
+    struct Labels
     {
       static let optionalListCell = "optionalListCell"
       static let listItemCell = "ListItemCell"
       static let listing = "listing"
     }
     
-    struct newGroup
+    struct NewGroup
     {
       static let title = "New Group"
       static let newGroupTitle = "Untitled Group"
       static let leftButtonText = "Cancel"
       static let rightButtonText = "Create"
     }
-    struct groupOptions
+    struct GroupOptions
     {
       static let deleteTitle = "Delete Group"
       static let deleteImage = "trash"
@@ -52,10 +52,17 @@ struct Constants
       static let ungroupImage = "rectangle.on.rectangle.slash"
       static let renameTitle = "Rename"
     }
-    struct groupPrompt
+    struct GroupPrompt
     {
       static let addedImage = "checkmark"
       static let addImage = "plus"
+    }
+    struct SectionHeader
+    {
+      static let optionsImage = "ellipsis"
+      static let collapsedImage = "chevron.right"
+      static let uncollapsedImage = "chevron.down"
+      
     }
   }
   

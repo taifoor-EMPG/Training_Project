@@ -21,12 +21,13 @@ class DataRepository: ProtocolDataRepository
   func addGroup(groupName: String) -> Bool {
     let result = plugin?.addGroup(groupName: groupName)
     
-    if result == nil || result! < 0
+    guard result == nil, result ?? 0 < 0 else
     {
       //Error Occured
       LoggingSystemFlow.printLog("ERROR: Datasource >> func addGroup")
       return false
     }
+    
     return true
   }
   
@@ -44,7 +45,7 @@ class DataRepository: ProtocolDataRepository
       LoggingSystemFlow.printLog("ERROR: Datasource >> func addListToGroup")
       return false
     }
-    return result!
+    return result ?? false
   }
   
   func getPermanentListTitles(completion: @escaping (([Int : String]?) -> Void)){
@@ -85,7 +86,7 @@ class DataRepository: ProtocolDataRepository
       var count = 0
       for i in listItems
       {
-        if i.done == true
+        if i.done == false
         {
           count += 1
         }

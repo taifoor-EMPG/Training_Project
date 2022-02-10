@@ -302,7 +302,7 @@ class CoreData: ProtocolDataSource
         }
         else
         {
-          if Int(i.group!.groupKey) == groupKey
+          if Int(i.group?.groupKey ?? Int64(Constants.newGroupKey)) == groupKey
           {
             group[0].removeFromLists(i)
           }

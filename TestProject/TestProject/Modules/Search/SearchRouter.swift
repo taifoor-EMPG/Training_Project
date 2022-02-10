@@ -12,7 +12,7 @@ class SearchRouter: ProtocolPresenterToRouterSearch
         let storyBoard: UIStoryboard = UIStoryboard(name: "Search", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "Search") as! Search
         
-        let source = Datasource(plugin: CoreData())
+        let source = DataRepository(plugin: CoreData())
         
         let presenter: ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch = SearchPresenter(view: viewController, interactor: SearchInteractor(source: source), router: SearchRouter())
         

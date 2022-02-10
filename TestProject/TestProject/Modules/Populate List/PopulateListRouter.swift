@@ -15,7 +15,7 @@ class PopulateListRouter: ProtocolPresenterToRouterPopulateList
         let storyBoard: UIStoryboard = UIStoryboard(name: "PopulateList", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "PopulateList") as! PopulateList
         
-        let source = Datasource(plugin: CoreData())
+        let source = DataRepository(plugin: CoreData())
         
         let presenter: ProtocolViewToPresenterPopulateList & ProtocolInteractorToPresenterPopulateList = PopulateListPresenter(view: viewController, interactor: PopulateListInteractor(source: source), router: PopulateListRouter())
         

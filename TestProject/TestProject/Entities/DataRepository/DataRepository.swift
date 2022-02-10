@@ -7,19 +7,14 @@
 
 import Foundation
 
-class Datasource: ProtocolDataRepository
+class DataRepository: ProtocolDataRepository
 {
   //MARK: DATA MEMBERS
   private var plugin: ProtocolDataSource?
   //END MEMBERS
   
   
-  init(plugin: ProtocolDataSource?){
-    guard plugin != nil else{
-      //SOME ERROR SHOULD POP UP HERE
-      self.plugin = nil
-      return
-    }
+  init(plugin: ProtocolDataSource){
     self.plugin = plugin
   }
   

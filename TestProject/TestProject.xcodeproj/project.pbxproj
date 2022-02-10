@@ -34,7 +34,7 @@
 		780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2227A3D2A8008C8D53 /* ToDoApp.xcdatamodeld */; };
 		780C7D3327A3F7B7008C8D53 /* ProtocolDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3227A3F7B7008C8D53 /* ProtocolDataRepository.swift */; };
 		780C7D3727A3FBE9008C8D53 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3627A3FBE9008C8D53 /* CoreData.swift */; };
-		780C7D3927A3FC07008C8D53 /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3827A3FC07008C8D53 /* Datasource.swift */; };
+		780C7D3927A3FC07008C8D53 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3827A3FC07008C8D53 /* DataRepository.swift */; };
 		780C7D4827A40BB9008C8D53 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 780C7D4727A40BB9008C8D53 /* Notes.rtf */; };
 		780C7D5127A41391008C8D53 /* ListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4927A41391008C8D53 /* ListItem+CoreDataClass.swift */; };
 		780C7D5227A41391008C8D53 /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4A27A41391008C8D53 /* ListItem+CoreDataProperties.swift */; };
@@ -96,7 +96,7 @@
 		780C7D2327A3D2A8008C8D53 /* ToDoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoApp.xcdatamodel; sourceTree = "<group>"; };
 		780C7D3227A3F7B7008C8D53 /* ProtocolDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDataRepository.swift; sourceTree = "<group>"; };
 		780C7D3627A3FBE9008C8D53 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
-		780C7D3827A3FC07008C8D53 /* Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datasource.swift; sourceTree = "<group>"; };
+		780C7D3827A3FC07008C8D53 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 		780C7D4727A40BB9008C8D53 /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
 		780C7D4927A41391008C8D53 /* ListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		780C7D4A27A41391008C8D53 /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				780C7D3427A3F84C008C8D53 /* ImplementersPlugin */,
-				780C7D3127A3F796008C8D53 /* Datasource */,
+				780C7D3127A3F796008C8D53 /* DataRepository */,
 				780C7D2027A3C58D008C8D53 /* Models */,
 				780C7D1D27A3C4F8008C8D53 /* Database */,
 				780C7D4627A40B4B008C8D53 /* Helper Documentation */,
@@ -313,13 +313,13 @@
 			path = Supplementary;
 			sourceTree = "<group>";
 		};
-		780C7D3127A3F796008C8D53 /* Datasource */ = {
+		780C7D3127A3F796008C8D53 /* DataRepository */ = {
 			isa = PBXGroup;
 			children = (
 				780C7D3227A3F7B7008C8D53 /* ProtocolDataRepository.swift */,
-				780C7D3827A3FC07008C8D53 /* Datasource.swift */,
+				780C7D3827A3FC07008C8D53 /* DataRepository.swift */,
 			);
-			path = Datasource;
+			path = DataRepository;
 			sourceTree = "<group>";
 		};
 		780C7D3427A3F84C008C8D53 /* ImplementersPlugin */ = {
@@ -536,7 +536,7 @@
 				780C7D8227AA5A4E008C8D53 /* SectionHeader.swift in Sources */,
 				780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */,
 				780589212795532F007A327E /* Utilities.swift in Sources */,
-				780C7D3927A3FC07008C8D53 /* Datasource.swift in Sources */,
+				780C7D3927A3FC07008C8D53 /* DataRepository.swift in Sources */,
 				780C7D5127A41391008C8D53 /* ListItem+CoreDataClass.swift in Sources */,
 				7899ED7227B3CBF100DBFAE5 /* CoreDataManager.swift in Sources */,
 				780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */,

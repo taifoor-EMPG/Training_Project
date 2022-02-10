@@ -32,11 +32,8 @@ class CoreData: ProtocolDataSource
     context = manager.persistentContainer.viewContext
   }
   
-  
-  
   //MARK: CRUD FUNCTIONALITIES
   ///Refer to ProtocolDataSource for implementational details
-  
   
   ///CREATE
   func addGroup(groupName: String) -> Int{
@@ -112,7 +109,25 @@ class CoreData: ProtocolDataSource
   }
   
   ///READ
-  func getPermanentListTitles() -> [List]? {
+  
+  //TEST CODE
+  func dataSource(completion: @escaping (([Int]) -> Void))
+   {
+     
+     LoggingSystemFlow.printLog("I am in \(#function)")
+     LoggingSystemFlow.printLog("I will send back a [Int]?")
+     
+     var listArray = [Int]()
+     
+     for i in 0...3
+     {
+       listArray.append(i)
+     }
+     completion(listArray)
+   }
+  //TLL HERE
+
+  func getPermanentListTitles(completion: @escaping (([List]?) -> Void)){
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
@@ -124,17 +139,16 @@ class CoreData: ProtocolDataSource
       
       let lists = try context.fetch(request)
       
-      return lists
-      
+      completion(lists)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func getPermanentListTitles")
-      return nil
+      completion(nil)
     }
   }
-  func getOptionalListTitles() -> [List]? {
+  func getOptionalListTitles(completion: @escaping (([List]?) -> Void)){
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
@@ -146,14 +160,13 @@ class CoreData: ProtocolDataSource
       
       let lists = try context.fetch(request)
       
-      return lists
-      
+      completion(lists)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func getOptionalListTitles")
-      return nil
+      completion(nil)
     }
   }
   func getActiveItems(listKey: Int) -> [List]? {

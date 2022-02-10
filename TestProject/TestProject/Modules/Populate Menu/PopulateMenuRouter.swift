@@ -16,7 +16,7 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
         
         let NavigationController = UINavigationController(rootViewController: viewController)
         
-        let source = Datasource(plugin: CoreData())
+        let source = DataRepository(plugin: CoreData())
         
         let presenter: ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu = PopulateMenuPresenter(view: viewController, interactor: PopulateMenuInteractor(source: source), router: PopulateMenuRouter())
         

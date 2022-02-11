@@ -102,4 +102,8 @@ protocol ProtocolDataSource
   //Get Group Size
   //Return: Size on Success (-1 on failure)
   func getGroupSize(groupKey: Int) -> Int
+  
+  //Search Database
+  //Return: Results (nil on Failure)
+  func search(query: String, completion: @escaping ([Results]?) -> Void)
 }

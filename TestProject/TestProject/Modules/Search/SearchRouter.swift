@@ -23,4 +23,14 @@ class SearchRouter: ProtocolPresenterToRouterSearch
         
         return viewController
     }
+  
+  func pushToOpenList(view: ProtocolPresenterToViewSearch?, listKey: Int)
+  {
+    let listName = "Some List"
+    if let openListVC = PopulateListRouter.createModule(with: listName, editable: false)
+    {
+        let viewController = view as! Search
+        viewController.navigationController?.pushViewController(openListVC, animated: true)
+    }
+  }
 }

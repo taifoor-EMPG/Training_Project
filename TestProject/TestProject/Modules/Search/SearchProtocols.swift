@@ -11,14 +11,18 @@ import UIKit
 //To Pass information from Presenter to View
 protocol ProtocolViewToPresenterSearch
 {
-    //Setting Up View
-    func initInteractor()
-    
-    //Navigation to Other Screens
-
-    //Setting View Table
-    
-    //Misc Functions to Populate View
+  //Setting Up View
+  func initInteractor()
+  
+  //Navigation to Other Screens
+  func pushToOpenList(listKey: Int)
+  
+  //Setting View Table
+  func setupCell(cell: ResultCell, index: Int) -> ResultCell
+  func getRowCount() -> Int
+  func fetchData(query: String)
+  
+  //Misc Functions to Populate View
 }
 
 
@@ -26,7 +30,7 @@ protocol ProtocolViewToPresenterSearch
 //To Pass information from View to Presenter
 protocol ProtocolPresenterToViewSearch: AnyObject
 {
-    //Function to Open List Should be here and implemented on the backend
+  //Function to Open List Should be here and implemented on the backend
 }
 
 
@@ -34,17 +38,20 @@ protocol ProtocolPresenterToViewSearch: AnyObject
 //Functions that are needed from Interactor are placed here
 protocol ProtocolPresenterToInteractorSearch: AnyObject
 {
-    func setPresenter(presenter: ProtocolInteractorToPresenterSearch)
+  func setPresenter(presenter: ProtocolInteractorToPresenterSearch)
+  
+  func fetchResults(query: String, completion: @escaping ([Results]?) -> Void)
 }
 
 protocol ProtocolInteractorToPresenterSearch: AnyObject
 {
-    
+  
 }
 
 //MARK: - Router Protocol - All functionalities from Router come here
 protocol ProtocolPresenterToRouterSearch
 {
-    static func createModule() -> UIViewController?
+  static func createModule() -> UIViewController?
+  func pushToOpenList(view: ProtocolPresenterToViewSearch?, listKey: Int)
 }
 

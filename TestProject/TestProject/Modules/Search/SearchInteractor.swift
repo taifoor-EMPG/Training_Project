@@ -9,21 +9,28 @@ import UIKit
 
 class SearchInteractor: ProtocolPresenterToInteractorSearch
 {
+  //DATA MEMBERS
   
-    //DATA MEMBERS
-    
-    private weak var presenter: ProtocolInteractorToPresenterSearch?
-    private var source: ProtocolDataRepository?
-    
-    //END OF DATA MEMBERS
-    
-    init(source : ProtocolDataRepository)
-    {
-        self.source = source
-    }
-
-    func setPresenter(presenter: ProtocolInteractorToPresenterSearch)
-    {
-        self.presenter = presenter
-    }
+  private weak var presenter: ProtocolInteractorToPresenterSearch?
+  private var source: ProtocolDataRepository?
+  
+  //END OF DATA MEMBERS
+  
+  init(source : ProtocolDataRepository)
+  {
+    self.source = source
+  }
+  
+  func setPresenter(presenter: ProtocolInteractorToPresenterSearch)
+  {
+    self.presenter = presenter
+  }
+  
+  func fetchResults(query: String, completion: @escaping ([Results]?) -> Void)
+  {
+    source?.searchQuery(query: query, completion: { results in
+      completion(results)
+    })
+  }
+  
 }

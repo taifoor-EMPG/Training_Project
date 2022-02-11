@@ -21,7 +21,7 @@ class DataRepository: ProtocolDataRepository
   func addGroup(groupName: String) -> Bool {
     let result = plugin?.addGroup(groupName: groupName)
     
-    guard result == nil, result ?? 0 < 0 else
+    guard result != nil || (result ?? 0) > 0 else
     {
       //Error Occured
       LoggingSystemFlow.printLog("ERROR: Datasource >> func addGroup")
@@ -210,5 +210,11 @@ class DataRepository: ProtocolDataRepository
       return false
     }
     return true
+  }
+  
+  func searchQuery(query: String, completion: @escaping (([Results]?) -> Void)) {
+    plugin?.search(query: query, completion: { results in
+      completion(results)
+    })
   }
 }

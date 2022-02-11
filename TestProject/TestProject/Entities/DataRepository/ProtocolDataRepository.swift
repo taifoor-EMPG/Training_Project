@@ -86,7 +86,9 @@ protocol ProtocolDataRepository
   //Return: Result of Operation
   func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
   
-  
+  //Search Database
+  //Return: Results (nil on failure)
+  func searchQuery(query: String, completion: @escaping (([Results]?) -> Void))
   
   //MARK: - PROCESSED TILL HERE
   ///Remaining functions are left to process

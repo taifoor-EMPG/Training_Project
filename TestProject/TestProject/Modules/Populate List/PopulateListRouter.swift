@@ -22,7 +22,7 @@ class PopulateListRouter: ProtocolPresenterToRouterPopulateList
         presenter.initInteractor()
         viewController.setPresenter(presenter)
         
-        //Set Data Members HerePopulateList
+        //Set Data Members Here - PopulateList
         presenter.viewDidLoad(listName, firstOpen: editable)
         
         return viewController

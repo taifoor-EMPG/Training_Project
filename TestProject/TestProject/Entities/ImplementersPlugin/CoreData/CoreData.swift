@@ -298,7 +298,7 @@ class CoreData: ProtocolDataSource
       {
         if i.group == nil
         {
-          return false
+          //return false
         }
         else
         {
@@ -355,6 +355,55 @@ class CoreData: ProtocolDataSource
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func removeListFromGroup")
       return false
+    }
+  }
+  
+  func search(query: String, completion: @escaping ([Results]?) -> Void) {
+    do
+    {
+      var toReturn = [Results]()
+      
+      //Search List Titles
+      let requestList = List.fetchRequest() as NSFetchRequest<List>
+      let predicateList = NSPredicate(format: DatabaseConstants.lists[1] + " contains[c] %@", query)
+      requestList.predicate = predicateList
+      
+      let lists = try context.fetch(requestList)
+      
+      if lists.isEmpty == false
+      {
+        for list in lists
+        {
+          var match = Results()
+          match.listKey = Int(list.listKey)
+          match.path = (list.name ?? "ListName")
+          toReturn.append(match)
+        }
+      }
+      
+      //Search List Items
+      let requestListItems = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+      let predicateListItems = NSPredicate(format: DatabaseConstants.listItems[1] + " contains[c] %@", query)
+      requestListItems.predicate = predicateListItems
+      
+      let listItems = try context.fetch(requestListItems)
+      
+      if listItems.isEmpty == false
+      {
+        for item in listItems
+        {
+          var match = Results()
+          match.listKey = Int(item.list?.listKey ?? Int64(Constants.newListKey))
+          match.path = (item.list?.name ?? "ListName") + " > " + (item.text ?? "Some Item")
+          toReturn.append(match)
+        }
+      }
+      completion(toReturn)
+    }
+    catch
+    {
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func search")
+      completion(nil)
     }
   }
   

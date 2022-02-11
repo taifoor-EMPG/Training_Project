@@ -7,33 +7,104 @@
 
 import UIKit
 
-class Search: UIViewController, ProtocolPresenterToViewSearch
+class Search: UIViewController, ProtocolPresenterToViewSearch, UITextFieldDelegate
 {
-    //DATA MEMBERS
+  //DATA MEMBERS
+  
+  private var presenter: (ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch)?
+  
+  ///View Controller Outlets
+  @IBOutlet weak var searchBox: UITextField!
+  @IBOutlet weak var bar: UIStackView!
+  @IBOutlet weak var image: UIImageView!
+  @IBOutlet weak var searchResults: UITableView!
+  //END OF DATA MEMBERS
+  
+  
+  func setPresenter(_ presenter: (ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch)?)
+  {
+    self.presenter = presenter
+  }
+  
+  override func viewDidLoad() {
+    self.view.bringSubviewToFront(bar)
     
-    private var presenter: (ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch)?
+    image.isHidden = false
+    searchResults.isHidden = true
     
-    ///View Controller Outlets
-    @IBOutlet weak var searchBox: UITextField!
-    @IBOutlet weak var bar: UIStackView!
-    //END OF DATA MEMBERS
+    searchBox.delegate = self
+    searchBox.addTarget(self, action: #selector(textFieldWasTapped), for: .editingChanged)
     
+    searchResults.delegate = self
+    searchResults.dataSource = self
     
-    func setPresenter(_ presenter: (ProtocolViewToPresenterSearch & ProtocolInteractorToPresenterSearch)?)
+    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    tap.cancelsTouchesInView = false
+    view.addGestureRecognizer(tap)
+  }
+  
+  @IBAction func cancelTapped(_ sender: UIButton) {
+    self.dismiss(animated: true, completion: nil)
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    searchBox.resignFirstResponder()
+    presenter?.fetchData(query: searchBox.text ?? Constants.emptyString)
+    searchResults.reloadData()
+    return true
+  }
+}
+
+//MARK: Objective-C Functions
+extension Search
+{
+  @objc func textFieldWasTapped(textField: UITextField) {
+    image.isHidden = true
+    searchResults.isHidden = false
+  }
+  
+  //Dismisses Keyboard if tapped anywhere on the screen
+  @objc func dismissKeyboard() {
+    view.endEditing(true)
+  }
+}
+
+//MARK: Table Related Functionalities
+extension Search: UITableViewDelegate, UITableViewDataSource
+{
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if tableView.isHidden == true
     {
-        self.presenter = presenter
+      return 0
+    }
+    //Fetch Row Count
+    let rowCount = presenter?.getRowCount() ?? 0
+    
+    if rowCount == 0
+    {
+      image.image = UIImage(systemName: "plus")
+      searchResults.isHidden = true
+      image.isHidden = false
     }
     
-    
-    
-    override func viewDidLoad() {
-        //searchBox.becomeFirstResponder()
-        self.view.bringSubviewToFront(bar)
-        
+    return rowCount
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.searchResultCell) as? ResultCell
+    {
+      return presenter?.setupCell(cell: cell, index: indexPath.row) ?? UITableViewCell()
     }
-    
-    @IBAction func cancelTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+    return UITableViewCell()
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.searchResultCell) as? ResultCell
+    {
+      let key = cell.getKey()
+      presenter?.pushToOpenList(listKey: key)
     }
-    
+    return
+  }
+  
 }

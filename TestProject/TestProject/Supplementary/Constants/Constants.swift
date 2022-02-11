@@ -35,6 +35,7 @@ struct Constants
       static let optionalListCell = "optionalListCell"
       static let listItemCell = "ListItemCell"
       static let listing = "listing"
+      static let searchResultCell = "resultCell"
     }
     
     struct NewGroup

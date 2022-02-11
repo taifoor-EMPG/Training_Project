@@ -18,7 +18,6 @@ extension List {
 
     @NSManaged public var isPermanent: Bool
     @NSManaged public var name: String?
-    @NSManaged public var activeTaskCount: Int64
     @NSManaged public var listKey: Int64
     @NSManaged public var listItems: NSSet?
     @NSManaged public var group: Group?

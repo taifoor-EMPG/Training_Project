@@ -29,11 +29,11 @@
 		780C7CD227A02E98008C8D53 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD127A02E98008C8D53 /* SearchInteractor.swift */; };
 		780C7CD427A11D7C008C8D53 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD327A11D7C008C8D53 /* ProfileInteractor.swift */; };
 		780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7CD527A11D96008C8D53 /* ProfilePresenter.swift */; };
-		780C7D1A27A2D643008C8D53 /* ProtocolEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */; };
+		780C7D1A27A2D643008C8D53 /* ProtocolDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D1927A2D643008C8D53 /* ProtocolDataSource.swift */; };
 		780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D2227A3D2A8008C8D53 /* ToDoApp.xcdatamodeld */; };
-		780C7D3327A3F7B7008C8D53 /* ProtocolDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3227A3F7B7008C8D53 /* ProtocolDatasource.swift */; };
+		780C7D3327A3F7B7008C8D53 /* ProtocolDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3227A3F7B7008C8D53 /* ProtocolDataRepository.swift */; };
 		780C7D3727A3FBE9008C8D53 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3627A3FBE9008C8D53 /* CoreData.swift */; };
-		780C7D3927A3FC07008C8D53 /* Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3827A3FC07008C8D53 /* Datasource.swift */; };
+		780C7D3927A3FC07008C8D53 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D3827A3FC07008C8D53 /* DataRepository.swift */; };
 		780C7D4827A40BB9008C8D53 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 780C7D4727A40BB9008C8D53 /* Notes.rtf */; };
 		780C7D5127A41391008C8D53 /* ListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4927A41391008C8D53 /* ListItem+CoreDataClass.swift */; };
 		780C7D5227A41391008C8D53 /* ListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D4A27A41391008C8D53 /* ListItem+CoreDataProperties.swift */; };
@@ -61,6 +61,9 @@
 		78CF7F1E279AA3FC00AC6182 /* PopulateList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */; };
 		78CF7F20279AC91B00AC6182 /* PopulateListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F1F279AC91B00AC6182 /* PopulateListPresenter.swift */; };
 		78CF7F22279ACBC600AC6182 /* PopulateListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F21279ACBC600AC6182 /* PopulateListInteractor.swift */; };
+		78F2D1E027B6910A00A3DDA0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2D1DF27B6910A00A3DDA0 /* CoreDataManager.swift */; };
+		78F2D1E327B6939700A3DDA0 /* LoggingSystemFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2D1E227B6939700A3DDA0 /* LoggingSystemFlow.swift */; };
+		78F2D1E527B693CE00A3DDA0 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2D1E427B693CE00A3DDA0 /* Results.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,11 +91,11 @@
 		780C7CD127A02E98008C8D53 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 		780C7CD327A11D7C008C8D53 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		780C7CD527A11D96008C8D53 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
-		780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolEntity.swift; sourceTree = "<group>"; };
+		780C7D1927A2D643008C8D53 /* ProtocolDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDataSource.swift; sourceTree = "<group>"; };
 		780C7D2327A3D2A8008C8D53 /* ToDoApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoApp.xcdatamodel; sourceTree = "<group>"; };
-		780C7D3227A3F7B7008C8D53 /* ProtocolDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDatasource.swift; sourceTree = "<group>"; };
+		780C7D3227A3F7B7008C8D53 /* ProtocolDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolDataRepository.swift; sourceTree = "<group>"; };
 		780C7D3627A3FBE9008C8D53 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
-		780C7D3827A3FC07008C8D53 /* Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Datasource.swift; sourceTree = "<group>"; };
+		780C7D3827A3FC07008C8D53 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 		780C7D4727A40BB9008C8D53 /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
 		780C7D4927A41391008C8D53 /* ListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		780C7D4A27A41391008C8D53 /* ListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -120,6 +123,9 @@
 		78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopulateList.storyboard; sourceTree = "<group>"; };
 		78CF7F1F279AC91B00AC6182 /* PopulateListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListPresenter.swift; sourceTree = "<group>"; };
 		78CF7F21279ACBC600AC6182 /* PopulateListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListInteractor.swift; sourceTree = "<group>"; };
+		78F2D1DF27B6910A00A3DDA0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		78F2D1E227B6939700A3DDA0 /* LoggingSystemFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingSystemFlow.swift; sourceTree = "<group>"; };
+		78F2D1E427B693CE00A3DDA0 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				780C7D3427A3F84C008C8D53 /* ImplementersPlugin */,
-				780C7D3127A3F796008C8D53 /* Datasource */,
+				780C7D3127A3F796008C8D53 /* DataRepository */,
 				780C7D2027A3C58D008C8D53 /* Models */,
 				780C7D1D27A3C4F8008C8D53 /* Database */,
 				780C7D4627A40B4B008C8D53 /* Helper Documentation */,
@@ -177,18 +183,19 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		7805891C27955296007A327E /* Constant */ = {
+		7805891C27955296007A327E /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				7805892227955342007A327E /* Constants.swift */,
 			);
-			path = Constant;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		7805891D279552A5007A327E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				780589202795532F007A327E /* Utilities.swift */,
+				78F2D1E427B693CE00A3DDA0 /* Results.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -299,25 +306,26 @@
 		780C7D2127A3C5B8008C8D53 /* Supplementary */ = {
 			isa = PBXGroup;
 			children = (
+				78F2D1E127B6938300A3DDA0 /* Logging */,
 				7805891D279552A5007A327E /* Utility */,
-				7805891C27955296007A327E /* Constant */,
+				7805891C27955296007A327E /* Constants */,
 			);
 			path = Supplementary;
 			sourceTree = "<group>";
 		};
-		780C7D3127A3F796008C8D53 /* Datasource */ = {
+		780C7D3127A3F796008C8D53 /* DataRepository */ = {
 			isa = PBXGroup;
 			children = (
-				780C7D3227A3F7B7008C8D53 /* ProtocolDatasource.swift */,
-				780C7D3827A3FC07008C8D53 /* Datasource.swift */,
+				780C7D3227A3F7B7008C8D53 /* ProtocolDataRepository.swift */,
+				780C7D3827A3FC07008C8D53 /* DataRepository.swift */,
 			);
-			path = Datasource;
+			path = DataRepository;
 			sourceTree = "<group>";
 		};
 		780C7D3427A3F84C008C8D53 /* ImplementersPlugin */ = {
 			isa = PBXGroup;
 			children = (
-				780C7D1927A2D643008C8D53 /* ProtocolEntity.swift */,
+				780C7D1927A2D643008C8D53 /* ProtocolDataSource.swift */,
 				780C7D3527A3F875008C8D53 /* CoreData */,
 			);
 			path = ImplementersPlugin;
@@ -327,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				780C7D3627A3FBE9008C8D53 /* CoreData.swift */,
+				78F2D1DF27B6910A00A3DDA0 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -435,6 +444,14 @@
 			name = "Populate List";
 			sourceTree = "<group>";
 		};
+		78F2D1E127B6938300A3DDA0 /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				78F2D1E227B6939700A3DDA0 /* LoggingSystemFlow.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -517,9 +534,10 @@
 				780589812796CE3A007A327E /* PopulateMenuRouter.swift in Sources */,
 				7899ED6E27B1035C00DBFAE5 /* DBView.swift in Sources */,
 				780C7D8227AA5A4E008C8D53 /* SectionHeader.swift in Sources */,
+				78F2D1E327B6939700A3DDA0 /* LoggingSystemFlow.swift in Sources */,
 				780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */,
 				780589212795532F007A327E /* Utilities.swift in Sources */,
-				780C7D3927A3FC07008C8D53 /* Datasource.swift in Sources */,
+				780C7D3927A3FC07008C8D53 /* DataRepository.swift in Sources */,
 				780C7D5127A41391008C8D53 /* ListItem+CoreDataClass.swift in Sources */,
 				780C7CD627A11D96008C8D53 /* ProfilePresenter.swift in Sources */,
 				780C7D6027A7E6E9008C8D53 /* Group+CoreDataProperties.swift in Sources */,
@@ -538,7 +556,7 @@
 				78CF7F20279AC91B00AC6182 /* PopulateListPresenter.swift in Sources */,
 				780C7D6727A7F26A008C8D53 /* Counters+CoreDataClass.swift in Sources */,
 				780589492795A475007A327E /* ListItemCell.swift in Sources */,
-				780C7D1A27A2D643008C8D53 /* ProtocolEntity.swift in Sources */,
+				780C7D1A27A2D643008C8D53 /* ProtocolDataSource.swift in Sources */,
 				78CF7F13279A98EB00AC6182 /* PopulateListProtocols.swift in Sources */,
 				7805890A27954957007A327E /* SceneDelegate.swift in Sources */,
 				780589312795558F007A327E /* MenuVC.swift in Sources */,
@@ -546,17 +564,19 @@
 				7805897C2796B8DC007A327E /* PopulateMenuPresenter.swift in Sources */,
 				780C7D5F27A7E6E9008C8D53 /* Group+CoreDataClass.swift in Sources */,
 				780C7D6827A7F26A008C8D53 /* Counters+CoreDataProperties.swift in Sources */,
+				78F2D1E027B6910A00A3DDA0 /* CoreDataManager.swift in Sources */,
 				780C7D3727A3FBE9008C8D53 /* CoreData.swift in Sources */,
 				780C7D5527A41391008C8D53 /* List+CoreDataClass.swift in Sources */,
 				780C7CD227A02E98008C8D53 /* SearchInteractor.swift in Sources */,
 				780C7D5227A41391008C8D53 /* ListItem+CoreDataProperties.swift in Sources */,
-				780C7D3327A3F7B7008C8D53 /* ProtocolDatasource.swift in Sources */,
+				780C7D3327A3F7B7008C8D53 /* ProtocolDataRepository.swift in Sources */,
 				7805892327955342007A327E /* Constants.swift in Sources */,
 				7805897F2796CBAD007A327E /* PopulateMenuInteractor.swift in Sources */,
 				782DA71027ABCE1A00FBA666 /* GroupOptions.swift in Sources */,
 				780C7D7C27AA553A008C8D53 /* GroupPrompt.swift in Sources */,
 				780C7CC927A01AC4008C8D53 /* Profile.swift in Sources */,
 				78CF7F15279A98F700AC6182 /* ProfileProtocols.swift in Sources */,
+				78F2D1E527B693CE00A3DDA0 /* Results.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

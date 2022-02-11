@@ -9,7 +9,7 @@ import Foundation
 
 //Refer to To-Do List DB Requisitions
 
-protocol ProtocolEntity
+protocol ProtocolDataSource
 {
     //Get Permanent Lists
     //Return: Dictionary [List] (nil on failure)

@@ -45,8 +45,8 @@ class SearchPresenter: ProtocolViewToPresenterSearch, ProtocolInteractorToPresen
     })
   }
   
-  func pushToOpenList(listKey: Int) {
-    router?.pushToOpenList(view: view, listKey: listKey)
+  func pushToOpenList(listKey: Int, listName: String) {
+    router?.pushToOpenList(view: self.view, with: listName, listKey: listKey, editable: false)
   }
   
 }

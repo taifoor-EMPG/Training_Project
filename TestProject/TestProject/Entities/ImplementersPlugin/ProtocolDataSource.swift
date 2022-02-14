@@ -59,21 +59,15 @@ protocol ProtocolDataSource
   
   //Does a list with given name exist?
   //Return: Result of Operation
-  //<PLACE HOLDER> func listExists(listName: String) -> Bool?
+  func listExists(listName: String, completion: @escaping ((Bool) -> Void))
   
   //Gets Total Size of a List
   //Return: Size on Success (-1 on failure)
-  //<PLACE HOLDER> func getList(listKey: Int) -> List?
+  func getList(listKey: Int, completion: @escaping ((List?) -> Void))
   
   //Know if the list is Permanent
   //Returns result of operations (nil on failure)
-  //<PLACE HOLDER> func allowEditing(listKey: Int) -> Bool?
-  
-  // --> RECHECK THESE FUNCTIONS
-  func listExists(listName: String) -> Bool?
-  func getList(listKey: Int) -> List?
-  func allowEditing(listKey: Int) -> Bool?
-  // --> Till Here
+  func allowEditing(listKey: Int, completion: @escaping ((Bool?) -> Void))
   
   //Search through List and Items for a String
   //Returns [Result] on Sucess (nil on Failure)

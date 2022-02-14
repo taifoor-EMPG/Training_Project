@@ -9,6 +9,7 @@ import UIKit
 
 class PopulateListInteractor: ProtocolPresenterToInteractorPopulateList
 {
+  
   //MARK: DATA MEMBERS
   
   private weak var presenter: ProtocolInteractorToPresenterPopulateList?
@@ -28,48 +29,47 @@ class PopulateListInteractor: ProtocolPresenterToInteractorPopulateList
 //MARK: Use Case Functionalities
 extension PopulateListInteractor
 {
-  //REcheck this
-  func getList(listKey: Int) -> List? {
-    let result = source?.getList(listKey: listKey)
-    
-    if result == nil
-    {
-      print("PopulateListInteractor >> In getList >> Error: Failed to Fetch")
-      return nil
-    }
-    return result
+  func getList(listKey: Int){
+    source?.getList(listKey: listKey, completion: { result in
+      if result == nil
+      {
+        print("PopulateListInteractor >> In getList >> Error: Failed to Fetch")
+        return
+      }
+      else
+      {
+        self.presenter?.setList(result ?? nil)
+      }
+    })
   }
   
-  //Recheck this
-  func changeListTitle(listKey: Int, newTitle: String) -> Bool
+  func changeListTitle(listKey: Int, newTitle: String, completion: @escaping ((Bool) -> Void))
   {
-    //Check if List with newTitle exists
-    var result = source?.listExists(listName: newTitle)
-    if result == nil || result == true
-    {
-      return false
-    }
+    //Check if List with newName exists
     
-    //Rename the List with ListKey
-    result = source?.changeListName(listKey: listKey, newListName: newTitle)
-    if result == nil
-    {
-      LoggingSystemFlow.printLog("PopulateListInteractor >> In changeListTitle")
-      return false
-    }
-    return result!
+    source?.listExists(listName: newTitle, completion: { result in
+      if result == true
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateListInteractor >> func changeListTitle")
+        completion(false)
+      }
+      
+      let newResult = self.source?.changeListName(listKey: listKey, newListName: newTitle)
+      if newResult == nil || newResult == false
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func changeListTitle")
+        completion(false)
+      }
+      completion(true)
+    })
   }
   
-  //recheck this
-  func allowEditing(listKey: Int) -> Bool {
-    let result = source?.allowEditing(listKey: listKey)
-    
-    if result == nil
-    {
-      print("PopulateListInteractor >> In allowEditing >> Error: Failed to Fetch")
-      return false
-    }
-    return result!
+  func allowEditing(listKey: Int){
+    source?.allowEditing(listKey: listKey, completion: { result in
+      self.presenter?.setEditingPermission(!result)
+    })
   }
   
   func changeItemStatus(itemKey: Int, newStatus: Bool) {

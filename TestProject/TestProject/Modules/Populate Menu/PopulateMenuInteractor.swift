@@ -51,31 +51,41 @@ class PopulateMenuInteractor: ProtocolPresenterToInteractorPopulateMenu
       }
     
       let isAdded = source?.addGroup(groupName: name)
-      if isAdded == nil
+      if isAdded == nil || isAdded ?? Constants.newGroupKey < 0
       {
         //ERROR
         LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func createGroup")
+        completion(false)
       }
-      completion(isAdded ?? false)
+      completion(true)
     })
   }
   
-  //MARK: RECHECK THIS - REFACTORING REQUIRED
-  func createList(listName: String) -> (Int, String) {
-    
+  func createList(listName: String, completion: @escaping (((Int, String)) -> Void)){
+    //Check if list with same name exists
     var name = listName
     var count = 1
-    var result = source?.listExists(listName: listName)
+    var doesExist = true
     
-    while result == true
-    {
-      name = Utilities.newList() + "(" + String(count) + ")"
-      result = source?.listExists(listName: listName)
-      count += 1
-    }
+    source?.listExists(listName: listName, completion: {[self] result in
+      doesExist = result
+      while doesExist == true
+      {
+        name = listName + " " + String(count)
+        source?.listExists(listName: name, completion: { newResult in
+          doesExist = newResult
+          count += 1
+        })
+      }
     
-    let key = source?.addOptionalList(listName: name)
-    return (key!, name)
+      let key = source?.addOptionalList(listName: name)
+      if key == nil || key ?? Constants.newListKey < 0
+      {
+        //ERROR
+        LoggingSystemFlow.printLog("ERROR: PopulateMenuInteractor >> func createList")
+      }
+      completion((key ?? Constants.newListKey, name))
+    })
   }
   
   func addListToGroup(listKey: Int, groupKey: Int) -> Bool {

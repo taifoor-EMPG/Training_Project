@@ -9,6 +9,7 @@ import Foundation
 
 class DataRepository: ProtocolDataRepository
 {
+  
   //MARK: DATA MEMBERS
   private var plugin: ProtocolDataSource?
   //END MEMBERS
@@ -164,38 +165,33 @@ class DataRepository: ProtocolDataRepository
     })
   }
   
-  //MARK: Convert this to closure pattern
-  func listExists(listName: String) -> Bool {
-    let x = plugin?.listExists(listName: listName)
+  func listExists(listName: String, completion: @escaping ((Bool) -> Void)){
+    plugin?.listExists(listName: listName, completion: { result in
+      completion(result)
+    })
+  }
+
+  func allowEditing(listKey: Int, completion: @escaping ((Bool) -> Void)){
     
-    if x == nil
-    {
-      print("Datasource >> In listExists >> Error: Failed to Retrieve Count")
-      return true
-    }
-    return x ?? true
+    plugin?.allowEditing(listKey: listKey, completion: { result in
+      if result == nil
+      {
+        print("In DataSource >> allowEditing >> Error: Failed to Fetch")
+        completion(false)
+      }
+      completion(result ?? false)
+    })
   }
   
-  //MARK: Convert this to closure pattern
-  func allowEditing(listKey: Int) -> Bool? {
-    let x = plugin?.allowEditing(listKey: listKey)
-    if x == nil
-    {
-      print("In DataSource >> allowEditing >> Error: Failed to Fetch")
-      return nil
-    }
-    return x
-  }
-  
-  //MARK: Convert this to closure pattern
-  func getList(listKey: Int) -> List? {
-    let x = plugin?.getList(listKey: listKey)
-    if x == nil
-    {
-      print("In DataSource >> getList >> Error: Failed to Fetch")
-      return nil
-    }
-    return x
+  func getList(listKey: Int, completion: @escaping ((List?) -> Void)){
+    plugin?.getList(listKey: listKey, completion: { result in
+      if result == nil
+      {
+        print("In DataSource >> getList >> Error: Failed to Fetch")
+        completion(nil)
+      }
+      completion(result)
+    })
   }
   
   //MARK: UPDATE OPERATIONS

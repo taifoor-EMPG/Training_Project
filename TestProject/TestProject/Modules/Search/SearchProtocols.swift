@@ -15,7 +15,7 @@ protocol ProtocolViewToPresenterSearch
   func initInteractor()
   
   //Navigation to Other Screens
-  func pushToOpenList(listKey: Int)
+  func pushToOpenList(listKey: Int, listName: String)
   
   //Setting View Table
   func setupCell(cell: ResultCell, index: Int) -> ResultCell

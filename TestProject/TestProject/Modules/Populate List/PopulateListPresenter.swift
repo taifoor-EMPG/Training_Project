@@ -18,7 +18,8 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
   private var listName: String?
   private var listKey: Int?
   private var list: List?
-  private var firstOpen: Bool?
+  private var firstOpen = false
+  private var isPermanent = true
   
   //END OF DATA MEMBERS
   
@@ -39,25 +40,31 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
     //Presenter is asking to Interact to load new data
     self.listName = listName
     self.listKey = listKey
-    list = interactor?.getList(listKey: listKey) //THIS WILL HAVE TO BE REFACTORED
+    interactor?.getList(listKey: listKey)
     self.firstOpen = firstOpen
+    interactor?.allowEditing(listKey: listKey)
   }
 
+  func setList(_ with: List?)
+  {
+    list = with
+  }
+  
+  func setEditingPermission(_ with: Bool)
+  {
+    isPermanent = with
+  }
+  
   func getListName() -> String{
     return listName ?? Constants.newListTitle
   }
 
   func allowEditing() -> Bool {
-    let result = interactor?.allowEditing(listKey: listKey!)
-    if result == nil
-    {
-      return false
-    }
-    return result!
+    return !isPermanent
   }
   
   func isFirstOpen() -> Bool {
-    return firstOpen ?? false
+    return firstOpen
   }
 }
 
@@ -66,13 +73,13 @@ extension PopulateListPresenter
 {
   func changeListTitle(newTitle: String) -> Bool
   {
-    let result = interactor?.changeListTitle(listKey: listKey ?? Constants.newListKey, newTitle: newTitle)
-    if result == nil
-    {
-      return false
-    }
-    
-    return result ?? false
+    ((interactor?.changeListTitle(listKey: listKey ?? Constants.newListKey, newTitle: newTitle, completion: { result in
+      if result
+      {
+        self.interactor?.getList(listKey: self.listKey ?? Constants.newListKey)
+        self.view?.setRestTitle(newTitle)
+      }
+    })) != nil)
   }
 }
 
@@ -81,7 +88,7 @@ extension PopulateListPresenter
 {
   func pushToEditText(itemKey: Int, newText: String) {
     interactor?.changeItemText(itemKey: itemKey, newText: newText)
-    list = interactor?.getList(listKey: listKey ?? Constants.newListKey)
+    interactor?.getList(listKey: listKey ?? Constants.newListKey)
   }
 }
 
@@ -119,7 +126,7 @@ extension PopulateListPresenter
         return
       }
       
-      list = interactor?.getList(listKey: listKey ?? Constants.newListKey)
+      interactor?.getList(listKey: listKey ?? Constants.newListKey)
       
       tableView.deleteRows(at: [indexPath], with: .middle)
       tableView.endUpdates()
@@ -129,7 +136,7 @@ extension PopulateListPresenter
   
   func addNewTask(text: String) {
     interactor?.newListItem(listKey: listKey ?? Constants.newListKey, text: text)
-    list = interactor?.getList(listKey: listKey ?? Constants.newListKey)
+    interactor?.getList(listKey: listKey ?? Constants.newListKey)
   }
 }
 

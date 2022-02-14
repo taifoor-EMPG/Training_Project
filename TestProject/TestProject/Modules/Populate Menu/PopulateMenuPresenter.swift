@@ -199,8 +199,13 @@ extension PopulateMenuPresenter
       tableView.beginUpdates()
       
       let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
-      //MARK: RECHECK THIS - WHAT IS THE LIST IS A FREE LIST
-      groups = interactor?.deleteList(listKey: cell.getListKey())
+      
+      let key = cell.getListKey()
+      if interactor?.deleteList(listKey: key) == true
+      {
+        freeLists?[key] = nil
+        activeTaskCount[key] = nil
+      }
       
       tableView.deleteRows(at: [indexPath], with: .middle)
       tableView.endUpdates()
@@ -237,10 +242,10 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
       
       if rows > 0
       {
-        for i in 0...(rows-1)
+        for row in 0...(rows-1)
         {
-          let x = IndexPath(row: i, section: section)
-          indexPaths.append(x)
+          let path = IndexPath(row: row, section: section)
+          indexPaths.append(path)
         }
       }
       
@@ -254,10 +259,10 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
       
       if rows > 0
       {
-        for i in 0...(rows-1)
+        for row in 0...(rows-1)
         {
-          let x = IndexPath(row: i, section: section)
-          indexPaths.append(x)
+          let path = IndexPath(row: row, section: section)
+          indexPaths.append(path)
         }
       }
       view?.closeSection(indexPath: indexPaths)
@@ -280,18 +285,19 @@ extension PopulateMenuPresenter
   
   func pushToAddNewList() {
     //Create New List
-    let set = interactor?.createList(listName: Utilities.newList())
-    let key = set?.0
-    let name = set?.1
     
-    //Add List to free list
-    freeLists?[key ?? Constants.newListKey] = name
-    
-    //Refresh Table View
-    view?.showActivity()
-    
-    //Open said new list
-    router?.pushToOpenList(view: view, with: name!, listKey: key!, editable: true)
+    interactor?.createList(listName: Constants.newListTitle, completion: { resultSet in
+      let key = resultSet.0
+      let name = resultSet.1
+      //Add List to free list
+      self.freeLists?[key] = name
+      
+      //Refresh Table View
+      self.view?.showActivity()
+      
+      //Open said new list
+      self.router?.pushToOpenList(view: self.view, with: name , listKey: key , editable: true)
+    })
   }
   
   func newGroupPrompt(groupKey: Int) {
@@ -313,7 +319,6 @@ extension PopulateMenuPresenter
         Utilities.popAnError(self.view as! UIViewController, Constants.errorCodes[5])
         return
       }
-      
       self.viewDidLoad()
     })
   }
@@ -334,6 +339,19 @@ extension PopulateMenuPresenter
   func getStaticListTitles() -> [Int:String]{
     return staticListTitles
   }
+  
+  func getNewGroupKey() -> Int {
+    var newKey = Constants.newGroupKey
+    
+    for group in groups ?? []
+    {
+      if newKey < Int(group.groupKey)
+      {
+        newKey = Int(group.groupKey)
+      }
+    }
+    return newKey
+  }
 }
 
 
@@ -342,7 +360,6 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
 {
   
   func addDeleteLists(groupKey: Int) {
-    //Get this done using a function
     let newView = router?.createGroupPrompt()
     if newView == nil
     {
@@ -355,7 +372,7 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
   }
   
   func renameGroup(groupKey: Int, groupName: String) -> Bool{
-    interactor?.renameGroup(groupKey: groupKey, newName: groupName, completion: { result in
+    ((interactor?.renameGroup(groupKey: groupKey, newName: groupName, completion: { result in
       if result
       {
         self.interactor?.getGroups(completion: { groupResult in
@@ -368,7 +385,7 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
           self.view?.showActivity()
         })
       }
-    })
+    })) != nil)
   }
   
   func deleteGroup(groupKey: Int){

@@ -102,7 +102,12 @@ extension Search: UITableViewDelegate, UITableViewDataSource
     if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.searchResultCell) as? ResultCell
     {
       let key = cell.getKey()
-      presenter?.pushToOpenList(listKey: key)
+      let path = cell.gotoResult.text ?? Constants.emptyString
+      
+      let pathArray = path.components(separatedBy: ">")
+      let name = pathArray[0]
+      
+      presenter?.pushToOpenList(listKey: key, listName: name)
     }
     return
   }

@@ -69,7 +69,9 @@ class CoreData: ProtocolDataSource
       counter[0].list += 1
       
       let newList = List(context: context)
-      newList.newList(listKey: Int(key), name: listName, isPermanent: false)
+      newList.listKey = key
+      newList.name = listName
+      newList.isPermanent = false
       
       try self.context.save()
       return Int(key)
@@ -79,6 +81,7 @@ class CoreData: ProtocolDataSource
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func addOptionalList")
+      return Constants.newListKey
     }
   }
   
@@ -279,9 +282,8 @@ class CoreData: ProtocolDataSource
       completion(false)
     }
   }
-  
-  //MARK: RECHECK THIS FUNCTION - REFACTORING REQUIRED
-  func listExists(listName: String) -> Bool? {
+
+  func listExists(listName: String, completion: @escaping ((Bool) -> Void)){
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
@@ -290,19 +292,18 @@ class CoreData: ProtocolDataSource
       
       let list = try context.fetch(request)
       
-      let x = !list.isEmpty
-      return x
+      let doesExist = !list.isEmpty
+      completion(doesExist)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In Datasource >> func listExists >> Failed to Fetch")
-      return nil
+      completion(false)
     }
   }
-  
-  //MARK: RECHECK THIS FUNCTION - REFACTORING REQUIRED
-  func getList(listKey: Int) -> List? {
+
+  func getList(listKey: Int, completion: @escaping ((List?) -> Void)){
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
@@ -313,21 +314,20 @@ class CoreData: ProtocolDataSource
       
       if list.isEmpty == true
       {
-        return nil
+        completion(nil)
       }
       
-      return list[0]
+      completion(list[0])
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In Datasource >> func getList >> Failed to Fetch")
-      return nil
+      completion(nil)
     }
   }
-  
-  //MARK: RECHECK THIS FUNCTION - REFACTORING REQUIRED
-  func allowEditing(listKey: Int) -> Bool? {
+
+  func allowEditing(listKey: Int, completion: @escaping ((Bool?) -> Void)){
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
@@ -338,16 +338,16 @@ class CoreData: ProtocolDataSource
       
       if list.isEmpty == true
       {
-        return nil
+        completion(nil)
       }
       
-      return !list[0].isPermanent
+      completion(!list[0].isPermanent)
     }
     catch
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In Datasource >> func allowEditing >> Failed to Fetch")
-      return nil
+      completion(nil)
     }
   }
   
@@ -452,6 +452,7 @@ class CoreData: ProtocolDataSource
     {
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In CoreData >> func changeListName")
+      return false
     }
   }
   

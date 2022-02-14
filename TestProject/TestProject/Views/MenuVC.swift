@@ -74,13 +74,14 @@ class MenuVC: UIViewController
       
       //Get the textfield for the alert
       let newGroupName = textfield?.text
-      let key = self.presenter?.createNewGroup(groupName: newGroupName ?? Constants.emptyString)
+      self.presenter?.createNewGroup(groupName: newGroupName ?? Constants.emptyString)
+      let key = self.presenter?.getNewGroupKey()
       
       //refetch data
       self.optionalLists.reloadData()
       
       //Next Prompt alert
-      self.presenter?.newGroupPrompt(groupKey: key)
+      self.presenter?.newGroupPrompt(groupKey: key ?? Constants.newGroupKey)
     }
     
     let cancelButton = UIAlertAction(title: Constants.UIDefaults.NewGroup.leftButtonText, style: .default)

@@ -60,22 +60,15 @@ protocol ProtocolDataRepository
   
   //Find A List
   //Returns: Result of Operation
-  //<PLACE HOLDER> func listExists(listName: String) -> Bool
+  func listExists(listName: String, completion: @escaping ((Bool) -> Void))
   
   //Know if the list is Permanent
   //Returns result of operations (nil on failure)
-  //<PLACE HOLDER> func allowEditing(listKey: Int) -> Bool?
+  func allowEditing(listKey: Int, completion: @escaping ((Bool) -> Void))
   
   //Get a Particular List
   //Returns a List on Success (nil on Failure)
-  //<PLACE HOLDER> func getList(listKey: Int) -> List?
-  
-  // --> Changes will have to be made from here
-  func listExists(listName: String) -> Bool
-  func allowEditing(listKey: Int) -> Bool?
-  func getList(listKey: Int) -> List?
-  // --> Till Here
-  
+  func getList(listKey: Int, completion: @escaping ((List?) -> Void))
   
   //MARK: CRUD - UPDATE
   

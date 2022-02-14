@@ -37,6 +37,7 @@ protocol ProtocolViewToPresenterPopulateMenu
   func setActiveListCount(listKey: Int)
   func setStaticListTitles()
   func getStaticListTitles() -> [Int:String]
+  func getNewGroupKey() -> Int
   
 }
 
@@ -66,8 +67,7 @@ protocol ProtocolPresenterToInteractorPopulateMenu: AnyObject
   
   //Create
   func createGroup(groupName: String, completion: @escaping ((Bool) -> Void))
-  //MARK: CHECK THIS FUNCTION - REFACTORING REQUIRED
-  func createList(listName: String) -> (Int, String)
+  func createList(listName: String, completion: @escaping (((Int, String)) -> Void))
   func addListToGroup(listKey: Int, groupKey: Int) -> Bool
   
   //Read
@@ -78,8 +78,6 @@ protocol ProtocolPresenterToInteractorPopulateMenu: AnyObject
   func getGroupFreeListTitles(completion: @escaping (([Int : String]) -> Void))
   func getGroupCount(completion: @escaping ((Int) -> Void))
   func getGroupTitles(groupKey: Int, completion: @escaping (([Int : String]) -> Void))
-  // MIGHT NOT NEED THIS -> RECHECK : func getGroupListCount(groupKey: Int) -> Int
-  // MIGHT NOT NEED THIS -> RECHECK : func getGroupListTitles(groupKey: Int) -> [Int: String]
   
   //Update
   func renameList(listKey: Int, newName: String) -> Bool

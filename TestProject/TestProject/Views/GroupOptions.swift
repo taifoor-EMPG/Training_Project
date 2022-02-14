@@ -82,9 +82,9 @@ class GroupOptions: UIViewController
             
             //Get New Group Name
             let newGroupName = textfield.text
-            let x = self.delegate?.renameGroup(groupKey: self.groupKey!, groupName: newGroupName!)
+          let result = self.delegate?.renameGroup(groupKey: self.groupKey ?? Constants.newGroupKey, groupName: newGroupName!)
             
-            if x == false
+            if result == false
             {
                 Utilities.popAnError(self as UIViewController, 6)
             }

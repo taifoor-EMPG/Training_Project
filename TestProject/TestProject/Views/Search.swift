@@ -99,8 +99,8 @@ extension Search: UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.searchResultCell) as? ResultCell
-    {
+    
+    if let cell = tableView.cellForRow(at: indexPath) as? ResultCell {
       let key = cell.getKey()
       let path = cell.gotoResult.text ?? Constants.emptyString
       

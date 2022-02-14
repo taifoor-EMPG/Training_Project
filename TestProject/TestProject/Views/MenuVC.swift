@@ -120,13 +120,14 @@ extension MenuVC
       return
     }
     
-    let keys = Array(titles?.keys ?? [:].keys)
+    var keys = Array(titles?.keys ?? [:].keys)
+    keys.sort()
     
-    listMyDay.titleLabel?.text = titles?[keys[0]]
-    listImportant.titleLabel?.text = titles?[keys[1]]
-    listPlanned.titleLabel?.text = titles?[keys[2]]
-    listAssigned.titleLabel?.text = titles?[keys[3]]
-    listTasks.titleLabel?.text = titles?[keys[4]]
+    listMyDay.setTitle(titles?[keys[0]], for: .normal)
+    listImportant.setTitle(titles?[keys[1]], for: .normal)
+    listPlanned.setTitle(titles?[keys[2]], for: .normal)
+    listAssigned.setTitle(titles?[keys[3]], for: .normal)
+    listTasks.setTitle(titles?[keys[4]], for: .normal)
     
     //Set Count For Each List Here
     for i in 0...4

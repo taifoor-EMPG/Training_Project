@@ -117,8 +117,7 @@ class DataRepository: ProtocolDataRepository
       
       guard groups.isEmpty != true else
       {
-        //Error Occured
-        LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroups")
+        //Error Occured OR No Groups Exist
         completion([])
         return
       }

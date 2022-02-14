@@ -9,7 +9,7 @@ import UIKit
 
 class OptionalListCell: UITableViewCell {
 
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     private var listKey: Int = Constants.errorFetchCode
     @IBOutlet weak var listTitle: UILabel!
     @IBOutlet weak var count: UILabel!

@@ -9,7 +9,7 @@ import UIKit
 
 class ProfilePresenter: ProtocolViewToPresenterProfile, ProtocolInteractorToPresenterProfile
 {
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     
     private var view: ProtocolPresenterToViewProfile?
     private var interactor: ProtocolPresenterToInteractorProfile?

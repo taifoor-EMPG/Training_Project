@@ -22,7 +22,7 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+      context = CoreDataManager.shared.persistentContainer.viewContext
         setCounters()
         groupTable.delegate = self
         groupTable.dataSource = self
@@ -66,12 +66,12 @@ class DBView: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = UITableViewCell()
         var string = groups?[indexPath.row].name
         
-        groups?[indexPath.row].setListsArray()
+        //groups?[indexPath.row].setListsArray()
     
-        for i in groups![indexPath.row].listsArray
-        {
-            string! += " - " + i.name!
-        }
+        //for i in groups![indexPath.row].listsArray
+       // {
+       //     string! += " - " + i.name!
+        //}
         cell.textLabel?.text = string
         return cell
     }

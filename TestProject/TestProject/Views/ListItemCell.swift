@@ -14,7 +14,7 @@ protocol ListItemCellProtocols
 
 class ListItemCell: UITableViewCell {
 
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var checkMark: UIButton!
@@ -59,7 +59,7 @@ class ListItemCell: UITableViewCell {
             delegate?.didTapChecked(itemKey: itemKey!, newStatus: status!)
             DispatchQueue.main.async { [self] in
                 //Update UI on main thread
-                checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
+                checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
                 //Strike Through Text
                 let text = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
                 label.attributedText = text
@@ -72,7 +72,7 @@ class ListItemCell: UITableViewCell {
             delegate?.didTapChecked(itemKey: itemKey!, newStatus: status!)
             DispatchQueue.main.async { [self] in
                 //Update UI on main thread
-                checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+                checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
                 //Unstrike through text
                 let text = NSAttributedString(string: label.text!, attributes: attrBlueNoStrikethroughStyle)
                 label.attributedText = text
@@ -92,13 +92,13 @@ class ListItemCell: UITableViewCell {
         self.status = status
         if status == true
         {
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
             let temp = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
             label.attributedText = temp
         }
         else
         {
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
         }
     }
   

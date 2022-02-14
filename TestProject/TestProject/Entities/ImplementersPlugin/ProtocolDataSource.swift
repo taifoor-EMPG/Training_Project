@@ -11,108 +11,113 @@ import Foundation
 
 protocol ProtocolDataSource
 {
-    //Get Permanent Lists
-    //Return: Dictionary [List] (nil on failure)
-    func getPermanentListTitles() -> [List]?
-    
-    //Get Active Items of a List
-    //Return: Said List as array on Sucess (-1 on failure)
-    func getActiveItems(listKey: Int) -> [List]?
-    
-    //Get Group Count
-    //Return: Count on Success (-1 on failure)
-    func getGroupsCount() -> Int
-    
-    //Get Optional Lists
-    //Return: Dictionary [List] (nil on failure)
-    func getOptionalListTitles() -> [List]?
-    
-    //Does a group with given name exist?
-    //Return: Result of Operation
-    func groupExists(groupName: String) -> Bool?
-    
-    //Does a list with given name exist?
-    //Return: Result of Operation
-    func listExists(listName: String) -> Bool?
-    
-    //Adds a New Optional List
-    //Return: listKey on Success (-1 on failure)
-    func addOptionalList(listName: String) -> Int
-    
-    //Removes an Optional List
-    //Return: Result of Operation
-    func removeOptionalList(listKey: Int) -> Bool
-
-    //Add Group
-    //Return: groupKey on Sucess (-1 on failure)
-    func addGroup(groupName: String) -> Int
-    
-    //Ungroup - Release all Lists from the Group
-    //Return: Result of Operation
-    func ungroup(groupKey: Int) -> Bool
-    
-    //Remove Group
-    //Return: Result of Operation
-    func removeGroup(groupKey: Int) -> Bool
-
-    //Add List to Group
-    //Return: Result of Operation
-    func addListToGroup(listKey: Int, groupKey: Int) -> Bool
-    
-    //Remove List from Group
-    //Return: Result of Operation
-    func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
-    
-    //Add Item to List
-    //Return: listItemKey on Success (-1 on failure)
-    func addItemtoList(listKey: Int, itemText: String) -> Int
-    
-    //Remove Item from List
-    //Return: Result of Operation
-    func removeItemFromList(listKey: Int, itemKey: Int) -> Bool
-    
-    //Marks Item as Done/Undone
-    //Return: Result of Operation
-    func mark(listItemKey: Int, newStatus: Bool) -> Bool
-
-    //Gets Total Size of a List
-    //Return: Size on Success (-1 on failure)
-    func getListSize(listKey: Int) -> Int
-    
-    //Change Name of List
-    //Return: Result of Operation
-    func changeListName(listKey: Int, newListName: String) -> Bool
-    
-    //Change Text of List Item
-    //Return: Result of Operation
-    func changeTextOfItem(itemKey: Int, newText: String) -> Bool
-
-    //Change Name of Group
-    //Return: Result of Operation
-    func changeGroupName(groupKey: Int, newGroupName: String) -> Bool
-    
-    //Get List Item Array for a given List
-    //Return: Dictionary [itemKey: <text, bool>] on Success ([] on failure)
-    func getListItems(listkey: Int) -> [Int: (text: String, status: Bool)]
-    
-    //Get Lists
-    //Return: Dictionary [listKey: listName] on Success ([] on failure)
-    func getLists() -> [Int: String]
-    
-    //Get Groups
-    //Return: Dictionary [groupKey: [Array of Lists]] on Success ([] on failure)
-    func getGroups() -> [Group]
-    
-    //Get Group Size
-    //Return: Size on Success (-1 on failure)
-    func getGroupSize(groupKey: Int) -> Int
-    
-    //Get a Particular List
-    //Returns List on Success (nil on Failure)
-    func getList(listKey: Int) -> List?
-
-    //Know if the list is Permanent
-    //Returns result of operations (nil on failure)
-    func allowEditing(listKey: Int) -> Bool?
-    
+  
+  //MARK: CREATE OPERTAION
+  
+  //Add Group
+  //Return: groupKey on Sucess (-1 on failure)
+  func addGroup(groupName: String) -> Int
+  
+  //Adds a New Optional List
+  //Return: listKey on Success (-1 on failure)
+  func addOptionalList(listName: String) -> Int
+  
+  //Add List to Group
+  //Return: Result of Operation
+  func addListToGroup(listKey: Int, groupKey: Int) -> Bool
+  
+  //Add Item to List
+  //Return: listItemKey on Success (-1 on failure)
+  func addItemtoList(listKey: Int, itemText: String) -> Int
+  
+  
+  //MARK: READ OPERATIONS
+  
+  //Get Permanent Lists
+  //Return: Dictionary [List] (nil on failure)
+  func getPermanentListTitles(completion: @escaping (([List]?) -> Void))
+  
+  //Get Optional Lists
+  //Return: Dictionary [List] (nil on failure)
+  func getOptionalListTitles(completion: @escaping (([List]?) -> Void))
+  
+  //Get Active Items of a List
+  //Return: Said List as array on Sucess (-1 on failure)
+  func getActiveItems(listKey: Int, completion: @escaping (([List]?) -> Void))
+  
+  //Get Group Count
+  //Return: Count on Success (-1 on failure)
+  func getGroupsCount(completion: @escaping ((Int) -> Void))
+  
+  //Get Group Count
+  //Return: Count on Success (-1 on failure)
+  func getGroups(completion: @escaping (([Group]) -> Void))
+  
+  //Does a group with given name exist?
+  //Return: Result of Operation
+  func groupExists(groupName: String, completion: @escaping ((Bool) -> Void))
+  
+  //Does a list with given name exist?
+  //Return: Result of Operation
+  //<PLACE HOLDER> func listExists(listName: String) -> Bool?
+  
+  //Gets Total Size of a List
+  //Return: Size on Success (-1 on failure)
+  //<PLACE HOLDER> func getList(listKey: Int) -> List?
+  
+  //Know if the list is Permanent
+  //Returns result of operations (nil on failure)
+  //<PLACE HOLDER> func allowEditing(listKey: Int) -> Bool?
+  
+  // --> RECHECK THESE FUNCTIONS
+  func listExists(listName: String) -> Bool?
+  func getList(listKey: Int) -> List?
+  func allowEditing(listKey: Int) -> Bool?
+  // --> Till Here
+  
+  //Search through List and Items for a String
+  //Returns [Result] on Sucess (nil on Failure)
+  func search(query: String, completion: @escaping ([Results]?) -> Void)
+  
+  
+  //MARK: UPDATE OPERATIONS
+  
+  //Change Name of Group
+  //Return: Result of Operation
+  func changeGroupName(groupKey: Int, newGroupName: String) -> Bool
+  
+  //Change Name of List
+  //Return: Result of Operation
+  func changeListName(listKey: Int, newListName: String) -> Bool
+  
+  //Marks Item as Done/Undone
+  //Return: Result of Operation
+  func mark(listItemKey: Int, newStatus: Bool) -> Bool
+  
+  //Change Text of List Item
+  //Return: Result of Operation
+  func changeTextOfItem(itemKey: Int, newText: String) -> Bool
+  
+  
+  //MARK: DELETE OPERATIONS
+  
+  //Remove Group
+  //Return: Result of Operation
+  func removeGroup(groupKey: Int) -> Bool
+  
+  //Removes an Optional List
+  //Return: Result of Operation
+  func removeOptionalList(listKey: Int) -> Bool
+  
+  //Ungroup - Release all Lists from the Group
+  //Return: Result of Operation
+  func ungroup(groupKey: Int) -> Bool
+  
+  //Remove List from Group
+  //Return: Result of Operation
+  func removeListFromGroup(listKey: Int, groupKey: Int) -> Bool
+  
+  //Remove Item from List
+  //Return: Result of Operation
+  func removeItemFromList(listKey: Int, itemKey: Int) -> Bool
 }

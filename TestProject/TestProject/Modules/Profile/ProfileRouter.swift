@@ -11,10 +11,10 @@ import UIKit
 class ProfileRouter: ProtocolPresenterToRouterProfile
 {
     static func createModule() -> UIViewController? {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "Profile") as! Profile
+      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.PopulateList.storyboardID, bundle: nil)
+      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.PopulateList.identifier) as! Profile
         
-        let source = Datasource(plugin: CoreData())
+        let source = DataRepository(plugin: CoreData())
         
         let presenter: ProtocolViewToPresenterProfile & ProtocolInteractorToPresenterProfile = ProfilePresenter(view: viewController, interactor: ProfileInteractor(source: source), router: ProfileRouter())
         

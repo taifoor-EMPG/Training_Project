@@ -9,7 +9,7 @@ import UIKit
 
 class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     
     private var presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?
     @IBOutlet weak var listItems: UITableView!
@@ -57,12 +57,12 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
         
         //TO GENERATE AN ALERT
         
-        let alert = UIAlertController(title: Constants.UIDefaults.newListItem.titleMessage, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: Constants.UIDefaults.NewListItem.titleMessage, message: "", preferredStyle: .alert)
         alert.addTextField()
         let textfield = alert.textFields![0]
-        textfield.placeholder = Constants.UIDefaults.newListItem.newText
+        textfield.placeholder = Constants.UIDefaults.NewListItem.newText
         
-        let doneButton = UIAlertAction(title: Constants.UIDefaults.newListItem.rightButtonText, style: .default)
+        let doneButton = UIAlertAction(title: Constants.UIDefaults.NewListItem.rightButtonText, style: .default)
         { (action) in
             
             //Get the textfield for the alert
@@ -82,7 +82,7 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
             }
         }
         
-        let cancelButton = UIAlertAction(title: Constants.UIDefaults.editListItem.leftButtonText, style: .default)
+        let cancelButton = UIAlertAction(title: Constants.UIDefaults.EditListItem.leftButtonText, style: .default)
         { (action) in
             
             alert.dismiss(animated: true, completion: nil)
@@ -186,13 +186,13 @@ extension PopulateList
         
         //TO GENERATE AN ALERT
         
-        let alert = UIAlertController(title: Constants.UIDefaults.editListItem.titleMessage, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: Constants.UIDefaults.EditListItem.titleMessage, message: "", preferredStyle: .alert)
         alert.addTextField()
         let textfield = alert.textFields![0]
         textfield.text = cell.getText()
         let key = cell.getItemKey()
         
-        let renameButton = UIAlertAction(title: Constants.UIDefaults.editListItem.rightButtonText, style: .default)
+        let renameButton = UIAlertAction(title: Constants.UIDefaults.EditListItem.rightButtonText, style: .default)
         { (action) in
             
             //Get the textfield for the alert
@@ -204,7 +204,7 @@ extension PopulateList
             self.listItems.reloadData()
         }
         
-        let cancelButton = UIAlertAction(title: Constants.UIDefaults.editListItem.leftButtonText, style: .default)
+        let cancelButton = UIAlertAction(title: Constants.UIDefaults.EditListItem.leftButtonText, style: .default)
         { (action) in
             
             alert.dismiss(animated: true, completion: nil)

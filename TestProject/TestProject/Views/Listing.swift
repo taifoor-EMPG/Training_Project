@@ -16,7 +16,7 @@ protocol ListingCellProtocol
 
 class Listing: UITableViewCell
 {
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var button: UIButton!
@@ -45,11 +45,11 @@ class Listing: UITableViewCell
         DispatchQueue.main.async {
             if self.isIncluded == true
             {
-                self.button.setImage(UIImage(systemName: Constants.UIDefaults.groupPrompt.addedImage), for: .normal)
+                self.button.setImage(UIImage(systemName: Constants.UIDefaults.GroupPrompt.addedImage), for: .normal)
             }
             else
             {
-                self.button.setImage(UIImage(systemName: Constants.UIDefaults.groupPrompt.addImage), for: .normal)
+                self.button.setImage(UIImage(systemName: Constants.UIDefaults.GroupPrompt.addImage), for: .normal)
             }
         }
     }

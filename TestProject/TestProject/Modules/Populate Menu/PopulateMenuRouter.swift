@@ -11,12 +11,12 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
 {
     static func createModule() -> UINavigationController? {
         
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
+      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.Menu.storyboardID, bundle: nil)
+      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.Menu.identifier) as! MenuVC
         
         let NavigationController = UINavigationController(rootViewController: viewController)
         
-        let source = Datasource(plugin: CoreData())
+        let source = DataRepository(plugin: CoreData())
         
         let presenter: ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu = PopulateMenuPresenter(view: viewController, interactor: PopulateMenuInteractor(source: source), router: PopulateMenuRouter())
         
@@ -37,7 +37,6 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
     
     //Changes to Search Screen
     func pushToSearch(view: ProtocolPresenterToViewPopulateMenu?) {
-        
         if let searchVC = SearchRouter.createModule()
         {
             let viewController = view as! MenuVC
@@ -47,22 +46,21 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
     }
     
     func createGroupOptions() -> GroupOptions {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupOptions", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "GroupOptions") as! GroupOptions
+      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.GroupOptions.storyboardID, bundle: nil)
+      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.GroupOptions.identifier) as! GroupOptions
         return viewController
     }
     
     func createGroupPrompt() -> GroupPrompt
     {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupPrompt", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "GroupPrompt") as! GroupPrompt
+      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.GroupPrompt.storyboardID, bundle: nil)
+      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.GroupPrompt.identifier) as! GroupPrompt
         return viewController
     }
     
     //Wrapper Function
     //Changes to OpenList - Also acts as NewList Creater
-    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int)
-    {
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int){
         pushToOpenList(view: view, with: listName, listKey: listKey, editable: false)
     }
     

@@ -19,7 +19,7 @@ protocol GroupOptionsProtocols
 class GroupOptions: UIViewController
 {
  
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     
     private var isGroupEmpty: Bool?
     private var groupName: String?
@@ -44,14 +44,14 @@ class GroupOptions: UIViewController
         if isGroupEmpty == true
         {
             //DELETE GROUP
-            deleteUngroup.setTitle(Constants.UIDefaults.groupOptions.deleteTitle, for: .normal)
-            deleteUngroup.setImage(UIImage(systemName: Constants.UIDefaults.groupOptions.deleteImage), for: .normal)
+            deleteUngroup.setTitle(Constants.UIDefaults.GroupOptions.deleteTitle, for: .normal)
+            deleteUngroup.setImage(UIImage(systemName: Constants.UIDefaults.GroupOptions.deleteImage), for: .normal)
         }
         else
         {
             //UNGROUP
-            deleteUngroup.setTitle(Constants.UIDefaults.groupOptions.ungroupTitle, for: .normal)
-            deleteUngroup.setImage(UIImage(systemName: Constants.UIDefaults.groupOptions.ungroupImage), for: .normal)
+            deleteUngroup.setTitle(Constants.UIDefaults.GroupOptions.ungroupTitle, for: .normal)
+            deleteUngroup.setImage(UIImage(systemName: Constants.UIDefaults.GroupOptions.ungroupImage), for: .normal)
         }
     }
     
@@ -72,12 +72,12 @@ class GroupOptions: UIViewController
     
     @IBAction func renameGroup(_ sender: UIButton)
     {
-        let alert = UIAlertController(title: Constants.UIDefaults.newGroup.title, message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: Constants.UIDefaults.NewGroup.title, message: "", preferredStyle: .alert)
         alert.addTextField()
         let textfield = alert.textFields![0]
         //Set Old Group Name Here
         textfield.text = groupName
-        let renameButton = UIAlertAction(title: Constants.UIDefaults.groupOptions.renameTitle, style: .default)
+        let renameButton = UIAlertAction(title: Constants.UIDefaults.GroupOptions.renameTitle, style: .default)
         { (action) in
             
             //Get New Group Name
@@ -90,7 +90,7 @@ class GroupOptions: UIViewController
             }
         }
         
-        let cancelButton = UIAlertAction(title: Constants.UIDefaults.newGroup.leftButtonText, style: .default)
+        let cancelButton = UIAlertAction(title: Constants.UIDefaults.NewGroup.leftButtonText, style: .default)
         { (action) in
             
             alert.dismiss(animated: true, completion: nil)
@@ -105,7 +105,7 @@ class GroupOptions: UIViewController
     
     @IBAction func deleteUngroup(_ sender: UIButton)
     {
-        if sender.currentTitle == Constants.UIDefaults.groupOptions.deleteTitle
+        if sender.currentTitle == Constants.UIDefaults.GroupOptions.deleteTitle
         {
             //Group is Empty - Delete it
             delegate?.deleteGroup(groupKey: groupKey!)

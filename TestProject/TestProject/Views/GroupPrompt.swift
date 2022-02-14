@@ -16,7 +16,7 @@ protocol GroupPromptProtocol: AnyObject
 
 class GroupPrompt: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    //DATA MEMBERS
+    //MARK: DATA MEMBERS
     
     @IBOutlet weak var subView: UIView!
     @IBOutlet weak var listTable: UITableView!
@@ -50,7 +50,7 @@ class GroupPrompt: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.labels.listing, for: indexPath) as? Listing {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.listing, for: indexPath) as? Listing {
             delegate?.setCell(cell, indexPath: indexPath, rowCount: rowCount!, groupKey: groupKey!)
             cell.selectionStyle = .none
             return cell

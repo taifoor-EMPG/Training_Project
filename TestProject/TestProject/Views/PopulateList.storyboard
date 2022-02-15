@@ -12,7 +12,7 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="PopulateList" id="Y6W-OH-hqX" customClass="PopulateList" customModule="TestProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -112,7 +112,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="l5T-yG-0HY" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="3lP-Gv-PWO"/>
-                            <constraint firstItem="l5T-yG-0HY" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" constant="10" id="LSJ-zy-2ZO"/>
                             <constraint firstItem="l5T-yG-0HY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="a0A-zR-PfQ"/>
                             <constraint firstItem="l5T-yG-0HY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gEA-bM-bDk"/>
                         </constraints>
@@ -121,7 +120,6 @@
                         <outlet property="listItems" destination="JLU-zQ-gZw" id="GBX-T6-sUc"/>
                         <outlet property="listTitle" destination="5lA-1a-6rO" id="RIN-3A-75C"/>
                         <outlet property="newItem" destination="ZqH-CD-OPE" id="WK9-Ie-wGa"/>
-                        <outlet property="stackBottomConstraint" destination="LSJ-zy-2ZO" id="Mmx-G4-OJH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -134,6 +134,9 @@ extension Tester
     do
     {
       let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let sort = NSSortDescriptor(key: "groupKey", ascending: true)
+      request.sortDescriptors = [sort]
+      
       let groups = try context.fetch(request)
       
       self.groups = groups
@@ -147,6 +150,9 @@ extension Tester
     do
     {
       let request = List.fetchRequest() as NSFetchRequest<List>
+      let sort = NSSortDescriptor(key: "listKey", ascending: true)
+      request.sortDescriptors = [sort]
+      
       let lists = try context.fetch(request)
       
       self.lists = lists
@@ -161,6 +167,9 @@ extension Tester
     do
     {
       let request = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+      let sort = NSSortDescriptor(key: "itemKey", ascending: true)
+      request.sortDescriptors = [sort]
+      
       let listItems = try context.fetch(request)
       
       self.listItems = listItems

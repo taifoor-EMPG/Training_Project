@@ -17,7 +17,7 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
   @IBOutlet weak var newItem: UITextField!
   
   
-  @IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
+  //@IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
   
   var currentTitle: String = ""
   //END OF DATA MEMBERS
@@ -30,7 +30,6 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     
     //TESTER CODE
     
-    
     newItem.delegate = self
     listTitle.addTarget(self, action: #selector(editingFunctionForTitle), for: .editingDidBegin)
     newItem.addTarget(self, action: #selector(editingFunctionForItem), for: .editingDidBegin)
@@ -41,8 +40,6 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
       name: UIResponder.keyboardWillShowNotification,
       object: nil
     )
-    
-    
     //END TESTER CODE
   }
   
@@ -245,18 +242,18 @@ extension PopulateList
       //        stackBottomConstraint.constant
       
       UIView.animate(withDuration: 0.25) {
-        self.stackBottomConstraint.constant = keyboardHeight + 10
+        //self.stackBottomConstraint.constant = keyboardHeight + 10
       }
       
-      print("Keyboard height : \(keyboardHeight)")
+      LoggingSystemFlow.printLog("Keyboard height : \(keyboardHeight)")
     }
   }
   
   @objc func editingFunctionForTitle(textField: UITextField) {
-    print("editingFunctionForTitle")
+    LoggingSystemFlow.printLog("editingFunctionForTitle")
   }
   
   @objc func editingFunctionForItem(textField: UITextField) {
-    print("editingFunctionForItem")
+    LoggingSystemFlow.printLog("editingFunctionForItem")
   }
 }

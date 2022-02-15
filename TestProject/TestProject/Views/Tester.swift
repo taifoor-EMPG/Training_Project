@@ -40,10 +40,9 @@ class Tester: UIViewController
     }
   }
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     groupTable.dataSource = self
     groupTable.delegate = self
     
@@ -54,6 +53,26 @@ class Tester: UIViewController
     listItemTable.delegate = self
     
     fetchFromCore()
+  }
+  
+  
+  @IBAction func resetDB(_ sender: UIButton) {
+    // create the alert
+    let alert = UIAlertController(title: "WARNING!", message: "This will reset the database to system defined default. Do you want to proceed?", preferredStyle: UIAlertController.Style.alert)
+    
+    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { action in
+      self.dismiss(animated: true, completion: nil)
+    }))
+    
+    //Add an action (button)
+    alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: { action in
+      self.resetAllData()
+      self.reload()
+    }))
+    
+    //Show the Alert
+    self.present(alert, animated: true, completion: nil)
+    
   }
 }
 
@@ -127,7 +146,15 @@ extension Tester: UITableViewDelegate, UITableViewDataSource
 //MARK: Misc Private Functions
 extension Tester
 {
-  func fetchFromCore()
+  private func reload()
+  {
+    self.fetchFromCore()
+    self.groupTable.reloadData()
+    self.listTable.reloadData()
+    self.listItemTable.reloadData()
+  }
+  
+  private func fetchFromCore()
   {
     let context = CoreDataManager.shared.persistentContainer.viewContext
     
@@ -196,6 +223,76 @@ extension Tester
       //Error Failed to Fetch Data
       LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getListItems")
     }
+  }
+  
+  private func resetAllData()
+  {
+    let context = CoreDataManager.shared.persistentContainer.viewContext
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let groups = try context.fetch(request)
+      
+      for object in groups
+      {
+        context.delete(object)
+      }
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getGroups")
+    }
     
+    do
+    {
+      let request = List.fetchRequest() as NSFetchRequest<List>
+      let lists = try context.fetch(request)
+      
+      for object in lists
+      {
+        context.delete(object)
+      }
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getLists")
+    }
+    
+    do
+    {
+      let request = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+      let listItems = try context.fetch(request)
+      
+      for object in listItems
+      {
+        context.delete(object)
+      }
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getListItems")
+    }
+    
+    do
+    {
+      let request = Counters.fetchRequest() as NSFetchRequest<Counters>
+      let counters = try context.fetch(request)
+      
+      counters[0].group = 0
+      counters[0].list = 5
+      counters[0].listItem = 0
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getListItems")
+    }
   }
 }

@@ -15,10 +15,9 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
   @IBOutlet weak var listItems: UITableView!
   @IBOutlet weak var listTitle: UITextField!
   @IBOutlet weak var newItem: UITextField!
+  @IBOutlet weak var newItemBottomContraint: NSLayoutConstraint!
   
-  
-  //@IBOutlet weak var stackBottomConstraint: NSLayoutConstraint!
-  
+  var isKeyboardVisible: Bool?
   var currentTitle: String = ""
   //END OF DATA MEMBERS
   
@@ -26,21 +25,6 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     super.viewDidLoad()
     //Misc Attribute Setup
     setupUI()
-    
-    
-    //TESTER CODE
-    
-    newItem.delegate = self
-    listTitle.addTarget(self, action: #selector(editingFunctionForTitle), for: .editingDidBegin)
-    newItem.addTarget(self, action: #selector(editingFunctionForItem), for: .editingDidBegin)
-    
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(keyboardWillShow),
-      name: UIResponder.keyboardWillShowNotification,
-      object: nil
-    )
-    //END TESTER CODE
   }
   
   func setPresenter(_ presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?)
@@ -107,6 +91,9 @@ extension PopulateList
     listItems.delegate = self
     listItems.dataSource = self
     
+    //Set Text Field Delegate
+    newItem.delegate = self
+    
     //Setting Up UI Components
     currentTitle = (presenter?.getListName()) ?? Constants.newListTitle
     listTitle.text = currentTitle
@@ -130,48 +117,88 @@ extension PopulateList
       if editing == true
       {
         listTitle.becomeFirstResponder()
+        isKeyboardVisible = true
       }
       else
       {
         listTitle.resignFirstResponder()
+        isKeyboardVisible = false
       }
     }
+    else
+    {
+      isKeyboardVisible = false
+    }
+    
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow),
+      name: UIResponder.keyboardWillShowNotification,
+      object: nil
+    )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillHide),
+      name: UIResponder.keyboardWillHideNotification,
+      object: nil
+    )
+    hideKeyboardWhenTappedAround()
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
-    //String is Empty
-    if listTitle.text?.isEmpty == true
+    dismissKeyboard()
+    
+    if textField == listTitle
     {
+      //String is Empty
+      if listTitle.text?.isEmpty == true
+      {
+        //Pop Error
+        Utilities.popAnError(self, 2)
+        return false
+      }
+      
+      if listTitle.text == currentTitle
+      {
+        //No Change in Text
+        listTitle.resignFirstResponder()
+        return true
+      }
+      else if presenter?.changeListTitle(newTitle: listTitle.text!) == true
+      {
+        //New List Name Approved by DB
+        currentTitle = listTitle.text!
+        listTitle.resignFirstResponder()
+        return true
+      }
+      
+      //Database did not allow a change
       //Pop Error
-      Utilities.popAnError(self, 2)
+      Utilities.popAnError(self, 1)
       return false
     }
-    
-    if listTitle.text == currentTitle
+    else if textField == newItem
     {
-      //No Change in Text
-      listTitle.resignFirstResponder()
-      return true
+      let text = textField.text ?? ""
+      if text.isEmpty == false
+      {
+        presenter?.addNewTask(text: text)
+        listItems.reloadData()
+      }
     }
-    else if presenter?.changeListTitle(newTitle: listTitle.text!) == true
-    {
-      //New List Name Approved by DB
-      currentTitle = listTitle.text!
-      listTitle.resignFirstResponder()
-      return true
-      
-    }
-    
-    //Database did not allow a change
-    //Pop Error
-    Utilities.popAnError(self, 1)
     return false
+  }
+  
+  func hideKeyboardWhenTappedAround() {
+    let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    tap.cancelsTouchesInView = false
+    view.addGestureRecognizer(tap)
   }
 }
 
 
-//Table Related Functions
+//MARK: Table Related Functions
 extension PopulateList
 {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -231,7 +258,7 @@ extension PopulateList
   }
 }
 
-//Object-C Functions
+//MARK: Object-C Functions
 extension PopulateList
 {
   @objc func keyboardWillShow(_ notification: Notification) {
@@ -239,21 +266,36 @@ extension PopulateList
       let keyboardRectangle = keyboardFrame.cgRectValue
       let keyboardHeight = keyboardRectangle.height
       
-      //        stackBottomConstraint.constant
-      
-      UIView.animate(withDuration: 0.25) {
-        //self.stackBottomConstraint.constant = keyboardHeight + 10
+      if isKeyboardVisible == false
+      {
+        UIView.animate(withDuration: 0.50) {
+          self.newItemBottomContraint.constant = keyboardHeight
+        }
+        isKeyboardVisible = true
       }
-      
-      LoggingSystemFlow.printLog("Keyboard height : \(keyboardHeight)")
+      else if newItemBottomContraint.constant > 0
+      {
+        newItemBottomContraint.constant = 0
+        newItemBottomContraint.constant = keyboardHeight
+      }
     }
   }
   
-  @objc func editingFunctionForTitle(textField: UITextField) {
-    LoggingSystemFlow.printLog("editingFunctionForTitle")
+  @objc func keyboardWillHide(_ notification: Notification) {
+    UIView.animate(withDuration: 0.50) {
+      self.newItemBottomContraint.constant = 0
+    }
+    isKeyboardVisible = false
   }
   
-  @objc func editingFunctionForItem(textField: UITextField) {
-    LoggingSystemFlow.printLog("editingFunctionForItem")
+  @objc func dismissKeyboard() {
+    if isKeyboardVisible == true
+    {
+      UIView.animate(withDuration: 0.50) {
+        self.newItemBottomContraint.constant = 0
+      }
+      isKeyboardVisible = false
+    }
+    view.endEditing(true)
   }
 }

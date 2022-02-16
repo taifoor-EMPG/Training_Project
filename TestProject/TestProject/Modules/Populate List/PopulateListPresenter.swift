@@ -20,6 +20,7 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
   private var list: List?
   private var firstOpen = false
   private var isPermanent = true
+  private var colored = false
   
   //END OF DATA MEMBERS
   
@@ -43,6 +44,12 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
     interactor?.getList(listKey: listKey)
     self.firstOpen = firstOpen
     interactor?.allowEditing(listKey: listKey)
+    
+    if list?.color != nil || list?.color != "default"
+    {
+      colored = true
+      view?.colorScreen(UIColor(named: list?.color ?? Constants.emptyString) ?? UIColor.systemBackground)
+    }
   }
 
   func setList(_ with: List?)
@@ -77,9 +84,18 @@ extension PopulateListPresenter
       if result
       {
         self.interactor?.getList(listKey: self.listKey ?? Constants.newListKey)
-        self.view?.setRestTitle(newTitle)
+        self.view?.resetTitle(newTitle)
       }
     })) != nil)
+  }
+  
+  func getWallpapers() -> [String] {
+    let manager = WallPaperManager()
+    return manager.getWallpaperList()
+  }
+  
+  func setColor(_ color: String) {
+    interactor?.setListColor(listKey: listKey ?? Constants.newListKey, color: color)
   }
 }
 
@@ -106,6 +122,11 @@ extension PopulateListPresenter
       let listItemsArray = list?.getListItemsArray()
       
       cell.setupCell(itemKey: Int(listItemsArray?[indexPath.row].itemKey ?? Int64(Constants.newListItemKey)), text: listItemsArray?[indexPath.row].text ?? Constants.newListItemTitle, status: listItemsArray?[indexPath.row].done ?? false, reference: self)
+      
+      if colored
+      {
+        cell.setBackgroundColor(UIColor(named: list?.color ?? "Col_Default") ?? .systemBackground)
+      }
       return cell
     }
     return UITableViewCell()

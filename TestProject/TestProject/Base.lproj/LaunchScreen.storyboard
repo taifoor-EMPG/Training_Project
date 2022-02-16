@@ -22,14 +22,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microsoft-logo" translatesAutoresizingMaskIntoConstraints="NO" id="xe5-Sg-hTS">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="microsoft_logo" translatesAutoresizingMaskIntoConstraints="NO" id="xe5-Sg-hTS">
                                 <rect key="frame" x="142" y="822" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="9AP-cM-dsz"/>
                                     <constraint firstAttribute="height" constant="40" id="hHp-OD-Lo8"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to-do" translatesAutoresizingMaskIntoConstraints="NO" id="Ycs-gn-Pr0">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="to_do" translatesAutoresizingMaskIntoConstraints="NO" id="Ycs-gn-Pr0">
                                 <rect key="frame" x="132" y="373" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="PaH-7o-98S"/>
@@ -55,8 +55,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="microsoft-logo" width="333" height="333"/>
-        <image name="to-do" width="80" height="80"/>
+        <image name="microsoft_logo" width="333" height="333"/>
+        <image name="to_do" width="80" height="80"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

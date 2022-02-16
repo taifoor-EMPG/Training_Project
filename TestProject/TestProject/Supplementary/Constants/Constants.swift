@@ -78,6 +78,12 @@ struct Constants
       static let rightButtonText = "Done"
       static let newText = "Take a note of something"
     }
+    
+    struct WallpaperCell
+    {
+      static let name = "WallpaperCollectionCell"
+      static let identifier = "WallpaperCollectionCell"
+    }
   }
   
   struct ViewControllerIDs
@@ -113,4 +119,10 @@ struct Constants
       static let identifier = "Search"
     }
   }
+  
+  struct Wallpapers
+  {
+    static let wallpaperList = ["Col_Blue", "Col_Brown", "Col_Cyan", "Col_Default", "Col_Green", "Col_Grey", "Col_Indigo", "Col_Mint", "Col_Orange", "Col_Pink", "Col_Purple", "Col_Red", "Col_Teal", "Col_Yellow"]
+  }
 }
+

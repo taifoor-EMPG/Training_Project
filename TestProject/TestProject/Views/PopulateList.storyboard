@@ -29,6 +29,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="URG-J2-ddr">
                                 <rect key="frame" x="10" y="54" width="394" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="dYx-uY-iaQ" userLabel="Header">
                                     <rect key="frame" x="0.0" y="0.0" width="394" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -96,6 +97,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="cellView" destination="DhV-mJ-fRD" id="uqi-Xb-AM2"/>
                                             <outlet property="checkMark" destination="sw1-iR-x2o" id="Qtc-Gr-Poa"/>
                                             <outlet property="label" destination="gVj-fz-ec3" id="BBK-eq-MzA"/>
                                         </connections>
@@ -116,6 +118,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="headerView" destination="dYx-uY-iaQ" id="mkH-1p-m2o"/>
                         <outlet property="listItems" destination="URG-J2-ddr" id="Nom-WQ-igI"/>
                         <outlet property="listTitle" destination="a3C-2g-LAt" id="pvT-V6-kK7"/>
                         <outlet property="newItem" destination="5Ca-9K-CBM" id="9SJ-4w-VoP"/>
@@ -129,7 +132,7 @@
     </scenes>
     <resources>
         <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.4779999852180481" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

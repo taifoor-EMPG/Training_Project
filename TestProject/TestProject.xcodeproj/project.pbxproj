@@ -48,6 +48,7 @@
 		782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */; };
 		7836BADF27AD73F200CC860D /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7836BADE27AD73F200CC860D /* Listing.swift */; };
 		7878119427BB9D92004DA85E /* TestingGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878119327BB9D92004DA85E /* TestingGroupCell.swift */; };
+		78937E0927BCE264002B01A5 /* WallPaperManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78937E0827BCE264002B01A5 /* WallPaperManager.swift */; };
 		78CDDEB727AD5C5800210B26 /* GroupPrompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
@@ -59,6 +60,8 @@
 		78CF7F1E279AA3FC00AC6182 /* PopulateList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */; };
 		78CF7F20279AC91B00AC6182 /* PopulateListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F1F279AC91B00AC6182 /* PopulateListPresenter.swift */; };
 		78CF7F22279ACBC600AC6182 /* PopulateListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F21279ACBC600AC6182 /* PopulateListInteractor.swift */; };
+		78CFF88F27BBDE1800341BD0 /* WallpaperCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CFF88D27BBDE1800341BD0 /* WallpaperCollectionCell.swift */; };
+		78CFF89027BBDE1800341BD0 /* WallpaperCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78CFF88E27BBDE1800341BD0 /* WallpaperCollectionCell.xib */; };
 		78F2D1E027B6910A00A3DDA0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2D1DF27B6910A00A3DDA0 /* CoreDataManager.swift */; };
 		78F2D1E327B6939700A3DDA0 /* LoggingSystemFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2D1E227B6939700A3DDA0 /* LoggingSystemFlow.swift */; };
 		78F2D1E527B693CE00A3DDA0 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F2D1E427B693CE00A3DDA0 /* Results.swift */; };
@@ -114,6 +117,7 @@
 		782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupOptions.storyboard; sourceTree = "<group>"; };
 		7836BADE27AD73F200CC860D /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		7878119327BB9D92004DA85E /* TestingGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingGroupCell.swift; sourceTree = "<group>"; };
+		78937E0827BCE264002B01A5 /* WallPaperManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPaperManager.swift; sourceTree = "<group>"; };
 		78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupPrompt.storyboard; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 		78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PopulateList.storyboard; sourceTree = "<group>"; };
 		78CF7F1F279AC91B00AC6182 /* PopulateListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListPresenter.swift; sourceTree = "<group>"; };
 		78CF7F21279ACBC600AC6182 /* PopulateListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulateListInteractor.swift; sourceTree = "<group>"; };
+		78CFF88D27BBDE1800341BD0 /* WallpaperCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperCollectionCell.swift; sourceTree = "<group>"; };
+		78CFF88E27BBDE1800341BD0 /* WallpaperCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WallpaperCollectionCell.xib; sourceTree = "<group>"; };
 		78F2D1DF27B6910A00A3DDA0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		78F2D1E227B6939700A3DDA0 /* LoggingSystemFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingSystemFlow.swift; sourceTree = "<group>"; };
 		78F2D1E427B693CE00A3DDA0 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
@@ -314,6 +320,7 @@
 		780C7D2127A3C5B8008C8D53 /* Supplementary */ = {
 			isa = PBXGroup;
 			children = (
+				78937E0727BCE253002B01A5 /* Wallpapers */,
 				78F2D1E127B6938300A3DDA0 /* Logging */,
 				7805891D279552A5007A327E /* Utility */,
 				7805891C27955296007A327E /* Constants */,
@@ -402,6 +409,14 @@
 			name = "Prompt Listing";
 			sourceTree = "<group>";
 		};
+		78937E0727BCE253002B01A5 /* Wallpapers */ = {
+			isa = PBXGroup;
+			children = (
+				78937E0827BCE264002B01A5 /* WallPaperManager.swift */,
+			);
+			path = Wallpapers;
+			sourceTree = "<group>";
+		};
 		78CF7F09279A974500AC6182 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,10 +453,20 @@
 		78CF7F1C279AA3CD00AC6182 /* Populate List */ = {
 			isa = PBXGroup;
 			children = (
+				78CFF88C27BBDDEA00341BD0 /* Wallpaper */,
 				78CF7F1A279AA3C700AC6182 /* PopulateList.swift */,
 				78CF7F1D279AA3FC00AC6182 /* PopulateList.storyboard */,
 			);
 			name = "Populate List";
+			sourceTree = "<group>";
+		};
+		78CFF88C27BBDDEA00341BD0 /* Wallpaper */ = {
+			isa = PBXGroup;
+			children = (
+				78CFF88D27BBDE1800341BD0 /* WallpaperCollectionCell.swift */,
+				78CFF88E27BBDE1800341BD0 /* WallpaperCollectionCell.xib */,
+			);
+			path = Wallpaper;
 			sourceTree = "<group>";
 		};
 		78F2D1E127B6938300A3DDA0 /* Logging */ = {
@@ -546,6 +571,7 @@
 				780C7CC727A01AB9008C8D53 /* Profile.storyboard in Resources */,
 				780C7D4827A40BB9008C8D53 /* Notes.rtf in Resources */,
 				7805891127954959007A327E /* Assets.xcassets in Resources */,
+				78CFF89027BBDE1800341BD0 /* WallpaperCollectionCell.xib in Resources */,
 				78CDDEB727AD5C5800210B26 /* GroupPrompt.storyboard in Resources */,
 				78F2D1ED27BA628500A3DDA0 /* Tester.storyboard in Resources */,
 			);
@@ -570,6 +596,7 @@
 				780C7D6027A7E6E9008C8D53 /* Group+CoreDataProperties.swift in Sources */,
 				780C7D5627A41391008C8D53 /* List+CoreDataProperties.swift in Sources */,
 				7805897A2796A886007A327E /* PopulateMenuProtocols.swift in Sources */,
+				78CFF88F27BBDE1800341BD0 /* WallpaperCollectionCell.swift in Sources */,
 				78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */,
 				7805890827954957007A327E /* AppDelegate.swift in Sources */,
 				7836BADF27AD73F200CC860D /* Listing.swift in Sources */,
@@ -597,6 +624,7 @@
 				780C7D6827A7F26A008C8D53 /* Counters+CoreDataProperties.swift in Sources */,
 				78F2D1E027B6910A00A3DDA0 /* CoreDataManager.swift in Sources */,
 				780C7D3727A3FBE9008C8D53 /* CoreData.swift in Sources */,
+				78937E0927BCE264002B01A5 /* WallPaperManager.swift in Sources */,
 				780C7D5527A41391008C8D53 /* List+CoreDataClass.swift in Sources */,
 				780C7CD227A02E98008C8D53 /* SearchInteractor.swift in Sources */,
 				780C7D5227A41391008C8D53 /* ListItem+CoreDataProperties.swift in Sources */,

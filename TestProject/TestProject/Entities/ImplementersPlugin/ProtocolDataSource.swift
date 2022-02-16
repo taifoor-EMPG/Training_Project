@@ -92,6 +92,10 @@ protocol ProtocolDataSource
   //Return: Result of Operation
   func changeTextOfItem(itemKey: Int, newText: String) -> Bool
   
+  //Change Background Color of List
+  //Return: NA
+  func setListColor(listKey: Int, color: String)
+  
   
   //MARK: DELETE OPERATIONS
   

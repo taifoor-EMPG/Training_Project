@@ -29,6 +29,8 @@ protocol ProtocolViewToPresenterPopulateList
   func changeListTitle(newTitle: String) -> Bool
   func allowEditing() -> Bool
   func isFirstOpen() -> Bool
+  func setColor(_ color: String)
+  func getWallpapers() -> [String]
 }
 
 
@@ -37,8 +39,8 @@ protocol ProtocolViewToPresenterPopulateList
 protocol ProtocolPresenterToViewPopulateList: AnyObject
 {
   //Function to Open List Should be here and implemented on the backend
-  func setRestTitle(_ newTitle: String)
-  
+  func resetTitle(_ newTitle: String)
+  func colorScreen(_ color: UIColor)
 }
 
 
@@ -55,6 +57,7 @@ protocol ProtocolPresenterToInteractorPopulateList: AnyObject
   func changeItemText(itemKey: Int, newText: String)
   func newListItem(listKey: Int, text: String)
   func deleteListItem(listKey: Int, itemKey: Int) -> Bool
+  func setListColor(listKey: Int, color: String)
 }
 
 protocol ProtocolInteractorToPresenterPopulateList: AnyObject

@@ -16,15 +16,23 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
   @IBOutlet weak var listTitle: UITextField!
   @IBOutlet weak var newItem: UITextField!
   @IBOutlet weak var newItemBottomContraint: NSLayoutConstraint!
+  @IBOutlet weak var headerView: UIView!
   
-  var isKeyboardVisible: Bool?
+  private var wallpaperCollection: UICollectionView?
+  
+  var isKeyboardVisible:Bool = false
+  var titleEnabled = false
   var currentTitle: String = ""
+  var wallpapers:[String]?
+  var keyboardHeight: CGFloat?
+  
   //END OF DATA MEMBERS
   
   override func viewDidLoad() {
     super.viewDidLoad()
     //Misc Attribute Setup
     setupUI()
+    wallpapers = presenter?.getWallpapers()
   }
   
   func setPresenter(_ presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?)
@@ -32,7 +40,7 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     self.presenter = presenter
   }
   
-  func setRestTitle(_ newTitle: String) {
+  func resetTitle(_ newTitle: String) {
     DispatchQueue.main.async {
       //Update UI on main thread
       self.listTitle.text = newTitle
@@ -99,6 +107,31 @@ extension PopulateList
     listTitle.text = currentTitle
     listTitle.delegate = self
     
+    //Set CollectionView
+    setCollection()
+    
+    //Setting Notifications for Keyboard
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillShow),
+      name: UIResponder.keyboardWillShowNotification,
+      object: nil
+    )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardDidShow),
+      name: UIResponder.keyboardDidShowNotification,
+      object: nil
+    )
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(keyboardWillHide),
+      name: UIResponder.keyboardWillHideNotification,
+      object: nil
+    )
+    
+    //List Title Action
+    listTitle.addTarget(self, action: #selector(titleTapped), for: .editingDidBegin)
     
     let result = presenter?.allowEditing()
     if result == nil || result == false
@@ -117,40 +150,21 @@ extension PopulateList
       if editing == true
       {
         listTitle.becomeFirstResponder()
-        isKeyboardVisible = true
+        titleEnabled = true
       }
       else
       {
         listTitle.resignFirstResponder()
-        isKeyboardVisible = false
       }
     }
-    else
-    {
-      isKeyboardVisible = false
-    }
-    
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(keyboardWillShow),
-      name: UIResponder.keyboardWillShowNotification,
-      object: nil
-    )
-    NotificationCenter.default.addObserver(
-      self,
-      selector: #selector(keyboardWillHide),
-      name: UIResponder.keyboardWillHideNotification,
-      object: nil
-    )
-    hideKeyboardWhenTappedAround()
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    
     dismissKeyboard()
     
     if textField == listTitle
     {
+      hideBackgroundBar()
       //String is Empty
       if listTitle.text?.isEmpty == true
       {
@@ -190,10 +204,72 @@ extension PopulateList
     return false
   }
   
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    dismissKeyboard()
+  }
+  
   func hideKeyboardWhenTappedAround() {
     let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     tap.cancelsTouchesInView = false
-    view.addGestureRecognizer(tap)
+    tap.view?.backgroundColor = .systemRed
+    listItems.addGestureRecognizer(tap)
+  }
+  
+  func setCollection()
+  {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    
+    wallpaperCollection = UICollectionView(frame: newItem.frame, collectionViewLayout: layout)
+    wallpaperCollection?.showsHorizontalScrollIndicator = false
+    
+    wallpaperCollection?.isHidden = true
+      
+    wallpaperCollection?.layer.borderWidth = 5.0
+    wallpaperCollection?.layer.borderColor = UIColor.secondarySystemFill.cgColor
+    
+    wallpaperCollection?.register(WallpaperCollectionCell.nib(), forCellWithReuseIdentifier: Constants.UIDefaults.WallpaperCell.identifier)
+    wallpaperCollection?.delegate = self
+    wallpaperCollection?.dataSource = self
+    
+    wallpaperCollection?.isUserInteractionEnabled = true
+  }
+  
+  func showBackgroundBar()
+  {
+    newItem.isHidden = true
+    wallpaperCollection?.isHidden = false
+    wallpaperCollection?.frame = CGRect(x: 0, y: view.frame.maxY - (keyboardHeight ?? 0) - 80, width: view.frame.width, height: 80)
+    view.addSubview(wallpaperCollection ?? UICollectionView())
+  }
+  
+  func hideBackgroundBar()
+  {
+    wallpaperCollection?.removeFromSuperview()
+    newItem.isHidden = false
+    titleEnabled = false
+  }
+  
+  func colorScreen(_ color: UIColor){
+    DispatchQueue.main.async { [self] in
+      //Update UI on main thread
+      view.backgroundColor = color
+      //Set background of table header
+      headerView.backgroundColor = color
+      //Set background for table view
+      listItems.backgroundColor = color
+      //Set background of collection view
+      wallpaperCollection?.backgroundColor = color
+      //Set background of all cells
+      let items = listItems.visibleCells
+      
+      for item in items{
+        let newCell = item as! ListItemCell
+        newCell.setBackgroundColor(color)
+      }
+      //Set New Item Bar
+      newItem.backgroundColor = color
+    }
   }
 }
 
@@ -228,7 +304,7 @@ extension PopulateList
       let newText = textfield.text
       
       //Change the backend
-      self.presenter?.pushToEditText(itemKey: key, newText: newText!)
+      self.presenter?.pushToEditText(itemKey: key, newText: newText ?? Constants.emptyString)
       
       self.listItems.reloadData()
     }
@@ -264,19 +340,24 @@ extension PopulateList
   @objc func keyboardWillShow(_ notification: Notification) {
     if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
       let keyboardRectangle = keyboardFrame.cgRectValue
-      let keyboardHeight = keyboardRectangle.height
+      self.keyboardHeight = keyboardRectangle.height
       
       if isKeyboardVisible == false
       {
-        UIView.animate(withDuration: 0.50) {
-          self.newItemBottomContraint.constant = keyboardHeight
+        UIView.animate(withDuration: 0.50) { [self] in
+          self.newItemBottomContraint.constant = keyboardHeight ?? CGFloat()
         }
         isKeyboardVisible = true
       }
       else if newItemBottomContraint.constant > 0
       {
         newItemBottomContraint.constant = 0
-        newItemBottomContraint.constant = keyboardHeight
+        newItemBottomContraint.constant = keyboardHeight ?? CGFloat()
+      }
+      
+      if titleEnabled
+      {
+        showBackgroundBar()
       }
     }
   }
@@ -286,6 +367,12 @@ extension PopulateList
       self.newItemBottomContraint.constant = 0
     }
     isKeyboardVisible = false
+    
+    if titleEnabled
+    {
+      titleEnabled = false
+      hideBackgroundBar()
+    }
   }
   
   @objc func dismissKeyboard() {
@@ -297,5 +384,37 @@ extension PopulateList
       isKeyboardVisible = false
     }
     view.endEditing(true)
+  }
+  
+  @objc func titleTapped()
+  {
+    titleEnabled = true
+  }
+  @objc func keyboardDidShow(_ notification: Notification) {
+    hideKeyboardWhenTappedAround()
+  }
+}
+
+//MARK: Collection View Related Functions
+extension PopulateList: UICollectionViewDelegate, UICollectionViewDataSource
+{
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return wallpapers?.count ?? 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.UIDefaults.WallpaperCell.identifier, for: indexPath) as! WallpaperCollectionCell
+    let color = UIColor(named: wallpapers?[indexPath.row] ?? "Col_Default") ?? UIColor.systemBackground
+    cell.setupCell(color: color, colorName: wallpapers?[indexPath.row] ?? "Col_Default")
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let cell = collectionView.cellForItem(at: indexPath) as! WallpaperCollectionCell
+
+    let color = cell.getColor()
+    let colorName = cell.getColorName()
+    colorScreen(color)
+    presenter?.setColor(colorName)
   }
 }

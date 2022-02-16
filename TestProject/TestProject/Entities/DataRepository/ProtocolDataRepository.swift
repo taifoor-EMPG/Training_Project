@@ -88,6 +88,10 @@ protocol ProtocolDataRepository
   //Return: NA
   func changeTextOfItem(itemKey: Int, newText: String)
   
+  //Change Background of List
+  //Return: NA
+  func setListColor(listKey: Int, color: String)
+  
   
   //MARK: CRUD - DELETE
   

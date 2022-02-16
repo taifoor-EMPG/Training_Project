@@ -9,7 +9,6 @@ import Foundation
 
 class DataRepository: ProtocolDataRepository
 {
-  
   //MARK: DATA MEMBERS
   private var plugin: ProtocolDataSource?
   //END MEMBERS
@@ -25,7 +24,7 @@ class DataRepository: ProtocolDataRepository
     
     guard result != nil || (result ?? 0) > 0 else{
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func addGroup")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func addGroup")
       return -1
     }
     return result ?? -1
@@ -35,7 +34,7 @@ class DataRepository: ProtocolDataRepository
     let result = plugin?.addOptionalList(listName: listName)
     guard result != nil else
     {
-      LoggingSystemFlow.printLog("In Datasource >> func addOptionalList")
+      LoggingSystemFlow.printLog("In DataRepository >> func addOptionalList")
       return -1
     }
     return result ?? -1
@@ -46,7 +45,7 @@ class DataRepository: ProtocolDataRepository
     guard result != nil else
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func addListToGroup")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func addListToGroup")
       return false
     }
     return result ?? false
@@ -57,7 +56,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result ?? -1 < 0
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func addItemtoList")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func addItemtoList")
       return false
     }
     return true
@@ -69,7 +68,7 @@ class DataRepository: ProtocolDataRepository
       guard lists != nil else
       {
         //Error Occured
-        LoggingSystemFlow.printLog("ERROR: Datasource >> func getPermanentListTitles")
+        LoggingSystemFlow.printLog("ERROR: DataRepository >> func getPermanentListTitles")
         completion(nil)
         return
       }
@@ -88,7 +87,7 @@ class DataRepository: ProtocolDataRepository
       guard list != nil else
       {
         //Error Occured
-        LoggingSystemFlow.printLog("ERROR: Datasource >> func getActiveItems")
+        LoggingSystemFlow.printLog("ERROR: DataRepository >> func getActiveItems")
         completion(-1)
         return
       }
@@ -130,7 +129,7 @@ class DataRepository: ProtocolDataRepository
       guard lists != nil else
       {
         //Error Occured
-        LoggingSystemFlow.printLog("ERROR: Datasource >> func getGroupFreeListTitles")
+        LoggingSystemFlow.printLog("ERROR: DataRepository >> func getGroupFreeListTitles")
         completion(nil)
         return
       }
@@ -175,7 +174,7 @@ class DataRepository: ProtocolDataRepository
     plugin?.allowEditing(listKey: listKey, completion: { result in
       if result == nil
       {
-        print("In DataSource >> allowEditing >> Error: Failed to Fetch")
+        print("In DataRepository >> allowEditing >> Error: Failed to Fetch")
         completion(false)
       }
       completion(result ?? false)
@@ -186,7 +185,7 @@ class DataRepository: ProtocolDataRepository
     plugin?.getList(listKey: listKey, completion: { result in
       if result == nil
       {
-        print("In DataSource >> getList >> Error: Failed to Fetch")
+        print("In DataRepository >> getList >> Error: Failed to Fetch")
         completion(nil)
       }
       completion(result)
@@ -198,7 +197,7 @@ class DataRepository: ProtocolDataRepository
     let result = plugin?.changeListName(listKey: listKey, newListName: newListName)
     if result == nil || result == false
     {
-      LoggingSystemFlow.printLog("In Datasource >> In changeListName")
+      LoggingSystemFlow.printLog("In DataRepository >> In changeListName")
       return false
     }
     return true
@@ -209,7 +208,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func changeGroupName")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func changeGroupName")
       return false
     }
     return true
@@ -220,7 +219,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func changeStatusOfItem")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func changeStatusOfItem")
     }
   }
   
@@ -229,8 +228,12 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func changeTextOfItem")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func changeTextOfItem")
     }
+  }
+  
+  func setListColor(listKey: Int, color: String) {
+   plugin?.setListColor(listKey: listKey, color: color)
   }
   
   //MARK: DELETE OPERATIONS
@@ -239,7 +242,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func ungroup")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func ungroup")
       return false
     }
     return true
@@ -250,7 +253,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func removeGroup")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func removeGroup")
       return false
     }
     return true
@@ -261,7 +264,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("In Datasource >> In deleteList")
+      LoggingSystemFlow.printLog("In DataRepository >> In deleteList")
       return false
     }
     return true
@@ -272,7 +275,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || result == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func removeListFromGroup")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func removeListFromGroup")
       return false
     }
     return true
@@ -283,7 +286,7 @@ class DataRepository: ProtocolDataRepository
     if result == nil || (result ?? false) == false
     {
       //Error Occured
-      LoggingSystemFlow.printLog("ERROR: Datasource >> func removeItemFromList")
+      LoggingSystemFlow.printLog("ERROR: DataRepository >> func removeItemFromList")
       return false
     }
     return true

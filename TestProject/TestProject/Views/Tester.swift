@@ -252,7 +252,10 @@ extension Tester
       
       for object in lists
       {
-        context.delete(object)
+        if object.isPermanent == false
+        {
+          context.delete(object)
+        }
       }
       try context.save()
     }

@@ -18,6 +18,7 @@ class ListItemCell: UITableViewCell {
   
   @IBOutlet weak var label: UILabel!
   @IBOutlet weak var checkMark: UIButton!
+  @IBOutlet weak var cellView: UIView!
   
   private var status:Bool?
   private var itemKey:Int?
@@ -33,12 +34,17 @@ class ListItemCell: UITableViewCell {
   
   func getText() -> String
   {
-    return label.text!
+    return label.text ?? Constants.emptyString
   }
   
   func getItemKey() -> Int
   {
-    return itemKey!
+    return itemKey ?? Constants.newListItemKey
+  }
+  
+  func setBackgroundColor(_ color: UIColor)
+  {
+    cellView.backgroundColor = color
   }
   
   @IBAction func tappedCheck(_ sender: UIButton) {
@@ -50,12 +56,12 @@ class ListItemCell: UITableViewCell {
     if status == false
     {
       status = true
-      delegate?.didTapChecked(itemKey: itemKey!, newStatus: status!)
+      delegate?.didTapChecked(itemKey: itemKey ?? Constants.newListItemKey, newStatus: status ?? false)
       DispatchQueue.main.async { [self] in
         //Update UI on main thread
         checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
         //Strike Through Text
-        let text = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
+        let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
         label.attributedText = text
       }
       
@@ -63,12 +69,12 @@ class ListItemCell: UITableViewCell {
     else
     {
       status = false
-      delegate?.didTapChecked(itemKey: itemKey!, newStatus: status!)
+      delegate?.didTapChecked(itemKey: itemKey ?? Constants.newListItemKey, newStatus: status ?? false)
       DispatchQueue.main.async { [self] in
         //Update UI on main thread
         checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
         //Unstrike through text
-        let text = NSAttributedString(string: label.text!, attributes: attrBlueNoStrikethroughStyle)
+        let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrBlueNoStrikethroughStyle)
         label.attributedText = text
       }
       

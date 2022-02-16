@@ -72,6 +72,7 @@ class CoreData: ProtocolDataSource
       newList.listKey = key
       newList.name = listName
       newList.isPermanent = false
+      newList.color = "default"
       
       try self.context.save()
       return Int(key)
@@ -508,6 +509,32 @@ class CoreData: ProtocolDataSource
     }
   }
   
+  func setListColor(listKey: Int, color: String) {
+    do
+    {
+      let request = List.fetchRequest() as NSFetchRequest<List>
+      let predicate = NSPredicate(format: DatabaseConstants.lists[0] + " == " + String(listKey))
+      request.predicate = predicate
+      
+      let list = try context.fetch(request)
+      
+      if list.isEmpty == true
+      {
+        LoggingSystemFlow.printLog("ERROR: In CoreData >> func setListColor >> List Not Found")
+        return
+      }
+      
+      list[0].color = color
+      try self.context.save()
+      return
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In CoreData >> func setListColor")
+      return
+    }
+  }
   
   
   ///DELETE

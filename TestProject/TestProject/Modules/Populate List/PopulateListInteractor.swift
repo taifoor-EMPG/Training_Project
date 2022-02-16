@@ -9,7 +9,6 @@ import UIKit
 
 class PopulateListInteractor: ProtocolPresenterToInteractorPopulateList
 {
-  
   //MARK: DATA MEMBERS
   
   private weak var presenter: ProtocolInteractorToPresenterPopulateList?
@@ -33,7 +32,7 @@ extension PopulateListInteractor
     source?.getList(listKey: listKey, completion: { result in
       if result == nil
       {
-        print("PopulateListInteractor >> In getList >> Error: Failed to Fetch")
+        LoggingSystemFlow.printLog("PopulateListInteractor >> In getList >> Error: Failed to Fetch")
         return
       }
       else
@@ -84,7 +83,7 @@ extension PopulateListInteractor
     
     if result == nil || result == false
     {
-      print("PopulateListInteractor >> In newListItem >> Error: Failed to Fetch")
+      LoggingSystemFlow.printLog("PopulateListInteractor >> In newListItem >> Error: Failed to Fetch")
     }
   }
   
@@ -93,9 +92,12 @@ extension PopulateListInteractor
     
     if result == nil || result == false
     {
-      print("PopulateListInteractor >> In newListItem >> Error: Failed to Fetch")
+      LoggingSystemFlow.printLog("PopulateListInteractor >> In newListItem >> Error: Failed to Fetch")
       return false
     }
     return true
+  }
+  func setListColor(listKey: Int, color: String) {
+    source?.setListColor(listKey: listKey, color: color)
   }
 }

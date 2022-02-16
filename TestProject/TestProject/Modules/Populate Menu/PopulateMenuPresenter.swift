@@ -207,6 +207,12 @@ extension PopulateMenuPresenter
         activeTaskCount[key] = nil
       }
       
+      if freeLists?.isEmpty == true
+      {
+        groupCount -= 1
+        tableView.deleteSections(IndexSet(integer: 0), with: .top)
+      }
+      
       tableView.deleteRows(at: [indexPath], with: .middle)
       tableView.endUpdates()
     }

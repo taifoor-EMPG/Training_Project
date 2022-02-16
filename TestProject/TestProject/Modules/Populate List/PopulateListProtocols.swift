@@ -31,6 +31,7 @@ protocol ProtocolViewToPresenterPopulateList
   func isFirstOpen() -> Bool
   func setColor(_ color: String)
   func getWallpapers() -> [String]
+  func updateCount(_ views: [UIViewController])
 }
 
 

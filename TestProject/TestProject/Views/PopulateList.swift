@@ -35,9 +35,18 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     wallpapers = presenter?.getWallpapers()
   }
   
+  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    dismissKeyboard()
+  }
+  
   func setPresenter(_ presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?)
   {
     self.presenter = presenter
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    let views = self.navigationController!.viewControllers
+    presenter?.updateCount(views)
   }
   
   func resetTitle(_ newTitle: String) {
@@ -165,6 +174,7 @@ extension PopulateList
     if textField == listTitle
     {
       hideBackgroundBar()
+      
       //String is Empty
       if listTitle.text?.isEmpty == true
       {
@@ -195,6 +205,8 @@ extension PopulateList
     else if textField == newItem
     {
       let text = textField.text ?? ""
+      textField.text = Constants.emptyString
+      textField.placeholder = Constants.UIDefaults.NewListItem.placeholderText
       if text.isEmpty == false
       {
         presenter?.addNewTask(text: text)
@@ -202,10 +214,6 @@ extension PopulateList
       }
     }
     return false
-  }
-  
-  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-    dismissKeyboard()
   }
   
   func hideKeyboardWhenTappedAround() {

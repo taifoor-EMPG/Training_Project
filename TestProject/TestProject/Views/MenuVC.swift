@@ -130,7 +130,7 @@ extension MenuVC
     listTasks.setTitle(titles?[keys[4]], for: .normal)
     
     //Set Count For Each List Here
-    for i in 0...4
+    for i in 0...(Constants.staticListCount - 1)
     {
       presenter?.setActiveListCount(listKey: keys[i])
     }

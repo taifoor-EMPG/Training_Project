@@ -18,6 +18,7 @@ struct Constants
   static let emptyString = ""
   static let errorFetchCode = -1
   static let errorCodes = Utilities.getErrorCodes()
+  static let staticListCount = 5
   
   static let projectName = "ToDoApp"
   
@@ -77,6 +78,7 @@ struct Constants
       static let leftButtonText = "Cancel"
       static let rightButtonText = "Done"
       static let newText = "Take a note of something"
+      static let placeholderText = "Add a new task"
     }
     
     struct WallpaperCell

@@ -97,6 +97,36 @@ extension PopulateListPresenter
   func setColor(_ color: String) {
     interactor?.setListColor(listKey: listKey ?? Constants.newListKey, color: color)
   }
+  
+  func addNewTask(text: String) {
+    interactor?.newListItem(listKey: listKey ?? Constants.newListKey, text: text)
+    interactor?.getList(listKey: listKey ?? Constants.newListKey)
+  }
+  
+  func updateCount(_ views: [UIViewController])
+  {
+    if (listKey ?? Constants.newListKey) >= 0 && (listKey ?? Constants.newListKey) < Constants.staticListCount
+    {
+      for view in views
+      {
+        if view.isKind(of: MenuVC.self)
+        {
+          let menuView = view as! MenuVC
+          
+          let items = list?.getListItemsArray()
+          var count = 0
+          for item in items ?? []
+          {
+            if item.done == false
+            {
+              count += 1
+            }
+          }
+          menuView.setCount(listKey: listKey ?? Constants.newListKey, count: count)
+        }
+      }
+    }
+  }
 }
 
 //MARK: Navigational Functionalities
@@ -153,12 +183,6 @@ extension PopulateListPresenter
       tableView.endUpdates()
     }
   }
-  
-  
-  func addNewTask(text: String) {
-    interactor?.newListItem(listKey: listKey ?? Constants.newListKey, text: text)
-    interactor?.getList(listKey: listKey ?? Constants.newListKey)
-  }
 }
 
 
@@ -167,8 +191,5 @@ extension PopulateListPresenter: ListItemCellProtocols
 {
   func didTapChecked(itemKey: Int, newStatus: Bool) {
     interactor?.changeItemStatus(itemKey: itemKey, newStatus: newStatus)
-    
-    //Reflect this in MenuVC in count
-    
   }
 }

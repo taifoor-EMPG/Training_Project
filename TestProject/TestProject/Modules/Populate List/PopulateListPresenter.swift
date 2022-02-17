@@ -15,6 +15,8 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
   private var interactor: ProtocolPresenterToInteractorPopulateList?
   private var router: ProtocolPresenterToRouterPopulateList?
   
+  private weak var menuDelegate: ListToMenuUpdate?
+  
   private var listName: String?
   private var listKey: Int?
   private var list: List?
@@ -34,6 +36,10 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
   
   func initInteractor() {
     interactor?.setPresenter(presenter: self)
+  }
+  
+  func setDelegate(delegate: ListToMenuUpdate?) {
+    menuDelegate = delegate
   }
   
   //Setting up screen
@@ -85,6 +91,7 @@ extension PopulateListPresenter
       {
         self.interactor?.getList(listKey: self.listKey ?? Constants.newListKey)
         self.view?.resetTitle(newTitle)
+        self.menuDelegate?.updateListName(listKey: self.listKey ?? Constants.newListKey, newName: newTitle)
       }
     })) != nil)
   }

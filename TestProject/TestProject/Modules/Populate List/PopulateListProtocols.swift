@@ -14,6 +14,7 @@ protocol ProtocolViewToPresenterPopulateList
   //Setting Up View
   func viewDidLoad(_ listName: String, listKey: Int, firstOpen: Bool)
   func initInteractor()
+  func setDelegate(delegate: ListToMenuUpdate?)
   
   //Setting View Table
   func numberOfRowsInSection() -> Int
@@ -70,6 +71,6 @@ protocol ProtocolInteractorToPresenterPopulateList: AnyObject
 //MARK: - Router Protocol - All functionalities from Router come here
 protocol ProtocolPresenterToRouterPopulateList
 {
-  static func createModule(with listName: String, listKey: Int, editable: Bool) -> UIViewController?
+  static func createModule(with listName: String, listKey: Int, editable: Bool, delegate: ListToMenuUpdate?) -> UIViewController?
 }
 

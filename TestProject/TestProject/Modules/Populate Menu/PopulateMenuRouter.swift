@@ -60,14 +60,14 @@ class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
     
     //Wrapper Function
     //Changes to OpenList - Also acts as NewList Creater
-    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int){
-        pushToOpenList(view: view, with: listName, listKey: listKey, editable: false)
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, delegate: ListToMenuUpdate?){
+        pushToOpenList(view: view, with: listName, listKey: listKey, editable: false, delegate: delegate)
     }
     
     //Actual Implementation
-    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, editable: Bool) {
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, editable: Bool, delegate: ListToMenuUpdate?) {
         
-        if let openListVC = PopulateListRouter.createModule(with: listName, listKey: listKey, editable: editable)
+        if let openListVC = PopulateListRouter.createModule(with: listName, listKey: listKey, editable: editable, delegate: delegate)
         {
             let viewController = view as! MenuVC
             viewController.navigationController?.pushViewController(openListVC, animated: true)

@@ -104,11 +104,15 @@ protocol ProtocolPresenterToRouterPopulateMenu
   //Navigation Controls
   func pushToProfile(view: ProtocolPresenterToViewPopulateMenu?)
   func pushToSearch(view: ProtocolPresenterToViewPopulateMenu?)
-  func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int)
-  func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, editable: Bool)
+  func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, delegate: ListToMenuUpdate?)
+  func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, listKey: Int, editable: Bool, delegate: ListToMenuUpdate?)
   
   //Creation Controls
   func createGroupOptions() -> GroupOptions
   func createGroupPrompt() -> GroupPrompt
 }
 
+protocol ListToMenuUpdate: AnyObject
+{
+  func updateListName(listKey:Int, newName: String)
+}

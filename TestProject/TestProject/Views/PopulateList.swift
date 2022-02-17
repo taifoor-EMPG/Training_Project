@@ -45,8 +45,8 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
   }
   
   override func viewWillDisappear(_ animated: Bool) {
-    let views = self.navigationController!.viewControllers
-    presenter?.updateCount(views)
+    let views = self.navigationController?.viewControllers
+    presenter?.updateCount(views ?? [])
   }
   
   func resetTitle(_ newTitle: String) {

@@ -395,7 +395,7 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
 extension PopulateMenuPresenter
 {
   func pushToOpenList(listKey: Int, listName: String) {
-    router?.pushToOpenList(view: view, with: listName, listKey: listKey)
+    router?.pushToOpenList(view: view, with: listName, listKey: listKey, delegate: self)
   }
   func pushToSearch() {
     router?.pushToSearch(view: view)
@@ -414,7 +414,7 @@ extension PopulateMenuPresenter
       self.freeLists?[key] = name
       
       //Open said new list
-      self.router?.pushToOpenList(view: self.view, with: name , listKey: key , editable: true)
+      self.router?.pushToOpenList(view: self.view, with: name , listKey: key , editable: true, delegate: self)
     })
   }
   
@@ -596,5 +596,31 @@ extension PopulateMenuPresenter: ListingCellProtocol
     }
     viewDidLoad()
     view?.showActivity()
+  }
+}
+
+//MARK: List to Menu Update Protocol Functionality
+extension PopulateMenuPresenter: ListToMenuUpdate{
+  func updateListName(listKey: Int, newName: String) {
+    let keyExists = freeLists?[listKey] != nil
+    if keyExists
+    {
+      freeLists?[listKey] = newName
+      return
+    }
+    
+    for group in groups ?? []
+    {
+      let lists = group.getListsArray()
+      
+      for list in lists
+      {
+        if list.listKey == listKey
+        {
+          list.name = newName
+          return
+        }
+      }
+    }
   }
 }

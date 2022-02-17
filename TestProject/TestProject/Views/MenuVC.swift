@@ -159,7 +159,6 @@ extension MenuVC
           tasksCount.text = Utilities.convertToString(count)
     default:
       return
-      //Check this later
     }
   }
   
@@ -217,7 +216,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource
 {
   //Defines the number of groups that will be there
   func numberOfSections(in tableView: UITableView) -> Int {
-    return presenter?.numberOfSections() ?? 1
+    return presenter?.numberOfSections() ?? 0
   }
   
   //Defines the rows in a section

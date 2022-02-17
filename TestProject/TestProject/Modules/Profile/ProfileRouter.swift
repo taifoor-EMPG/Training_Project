@@ -11,8 +11,8 @@ import UIKit
 class ProfileRouter: ProtocolPresenterToRouterProfile
 {
     static func createModule() -> UIViewController? {
-      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.PopulateList.storyboardID, bundle: nil)
-      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.PopulateList.identifier) as! Profile
+      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.Profile.storyboardID, bundle: nil)
+      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.Profile.identifier) as! Profile
         
         let source = DataRepository(plugin: CoreData())
         

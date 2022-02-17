@@ -64,10 +64,6 @@ class PopulateMenuPresenter: ProtocolViewToPresenterPopulateMenu, ProtocolIntera
     //Getting Group Free Titles
     interactor?.getGroupFreeListTitles(completion: { result in
       self.freeLists = result
-      if self.freeLists?.isEmpty == false
-      {
-        self.groupCount += 1
-      }
     })
   }
   
@@ -79,6 +75,10 @@ extension PopulateMenuPresenter
 {
   //Set Number of Sections
   func numberOfSections() -> Int {
+    if freeLists?.isEmpty == false
+    {
+     return groupCount + 1
+    }
     return groupCount
   }
   
@@ -89,49 +89,167 @@ extension PopulateMenuPresenter
       return 0
     }
     
-    if section == 0 && !(freeLists?.isEmpty ?? true)
+    var isFreeListEmpty: Bool = true
+    var groupCount: Int = groups?.count ?? -1
+    if freeLists?.isEmpty == nil || freeLists?.isEmpty == false
     {
-      guard let count = freeLists?.count else {
-        return Constants.errorFetchCode
+      isFreeListEmpty = false
+    }
+    if groups?.count == nil || (groups?.count ?? -1) <= 0
+    {
+      groupCount = 0
+    }
+    
+    
+    if isFreeListEmpty
+    {
+      if groupCount > 0
+      {
+        //Groups exist but Free-Lists dont
+        return (groups?[section].lists?.count ?? 0)
       }
-      return count
+      //ELSE CASE:
+      ///Neither groups nor Free-Lists exist - Is unreachable because Section Count = 0
     }
-    else if section == 0 && (freeLists?.isEmpty ?? false)
+    else
     {
-      return groups?[section].lists?.count ?? 0
+      if groupCount > 0
+      {
+        //Groups and Free-Lists Exist
+        if section == 0
+        {
+          //Populate Free-Lists
+          return (freeLists?.count ?? 0)
+        
+        }
+        else if section > 0
+        {
+          //Populate Groups
+          let index = section - 1
+          return (groups?[index].lists?.count ?? 0)
+        }
+      }
+      else
+      {
+        //Free Lists exist but Groups dont
+        return (freeLists?.count ?? 0)
+      }
     }
-    return groups?[section - 1].lists?.count ?? 0
+    
+    return 0
   }
   
   //Setting Title For Section
   func tableView(titleForHeaderInSection section: Int) -> String? {
-    if section == 0 && !(freeLists?.isEmpty ?? true)
+    
+    var isFreeListEmpty: Bool = true
+    var groupCount: Int = groups?.count ?? -1
+    if freeLists?.isEmpty == nil || freeLists?.isEmpty == false
     {
-      return ""
+      isFreeListEmpty = false
     }
-    else if section == 0 && (freeLists?.isEmpty ?? false)
+    if groups?.count == nil || (groups?.count ?? -1) <= 0
     {
-      return groups?[section].name
+      groupCount = 0
     }
-    return groups?[section - 1].name
+    
+    
+    if isFreeListEmpty
+    {
+      if groupCount > 0
+      {
+        //Groups exist but Free-Lists dont
+        return (groups?[section].name ?? Constants.emptyString)
+      }
+      //ELSE CASE: -> Empty Table
+      ///Neither groups nor Free-Lists exist - Is unreachable because Section Count = 0
+    }
+    else
+    {
+      if groupCount > 0
+      {
+        //Groups and Free-Lists Exist
+        if section == 0
+        {
+          //Populate Free-Lists
+          return Constants.emptyString
+        
+        }
+        else if section > 0
+        {
+          //Populate Groups
+          let index = section - 1
+          return (groups?[index].name ?? Constants.emptyString)
+        }
+      }
+      else
+      {
+        //Free Lists exist but Groups dont
+        return Constants.emptyString
+      }
+    }
+    
+    return Constants.emptyString
   }
   
   //Setting View For Section
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
   {
     let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "sectionHeader") as! SectionHeader
-    if section == 0 && !(freeLists?.isEmpty ?? true)
+    
+    var isFreeListEmpty: Bool = true
+    var groupCount: Int = groups?.count ?? -1
+    if freeLists?.isEmpty == nil || freeLists?.isEmpty == false
     {
-      return nil
+      isFreeListEmpty = false
     }
-    else if section == 0 && (freeLists?.isEmpty ?? false)
+    if groups?.count == nil || (groups?.count ?? -1) <= 0
     {
-      sectionHeader.setupCell(groupKey: Int((groups?[section].groupKey ?? Int64(Constants.newGroupKey))), groupName: (groups?[section].name ?? Constants.emptyString), section: section, reference: self)
+      groupCount = 0
+    }
+    
+    if isFreeListEmpty
+    {
+      if groupCount > 0
+      {
+        //Groups exist but Free-Lists dont
+        sectionHeader.setupCell(groupKey: Int((groups?[section].groupKey ?? Int64(Constants.newGroupKey))), groupName: (groups?[section].name ?? Constants.emptyString), section: section, reference: self)
+      }
+      else
+      {
+        return nil
+      }
+      //ELSE CASE: -> Empty Table
+      ///Neither groups nor Free-Lists exist - Is unreachable because Section Count = 0
     }
     else
     {
-      sectionHeader.setupCell(groupKey: Int((groups?[section - 1].groupKey) ?? Int64(Constants.newGroupKey)), groupName: (groups?[section - 1].name) ?? Constants.emptyString, section: section, reference: self)
+      if groupCount > 0
+      {
+        //Groups and Free-Lists Exist
+        if section == 0
+        {
+          //Populate Free-Lists
+          return nil
+        
+        }
+        else if section > 0
+        {
+          //Populate Groups
+          let index = section - 1
+          sectionHeader.setupCell(groupKey: Int((groups?[index].groupKey) ?? Int64(Constants.newGroupKey)), groupName: (groups?[index].name) ?? Constants.emptyString, section: section, reference: self)
+        }
+      }
+      else
+      {
+        //Free Lists exist but Groups dont
+        return nil
+      }
     }
+    
+    //let uiview = UIView(frame: sectionHeader.frame)
+    //uiview.addSubview(sectionHeader)
+    //return uiview
     return sectionHeader
   }
   
@@ -139,44 +257,95 @@ extension PopulateMenuPresenter
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.optionalListCell, for: indexPath) as? OptionalListCell {
       
-      let tempGroup: Group?
       
-      if indexPath.section == 0 && !(freeLists?.isEmpty ?? false)
+      var isFreeListEmpty: Bool = true
+      var groupCount: Int = groups?.count ?? -1
+      if freeLists?.isEmpty == nil || freeLists?.isEmpty == false
       {
-        let keys = Array(freeLists?.keys ?? [:].keys)
-        
-        let listKey = keys[indexPath.row]
-        let title = freeLists?[keys[indexPath.row]]
-        
-        interactor?.getListActiveCount(listKey: listKey, completion: { count in
-          self.activeTaskCount[listKey] = count
-        })
-        
-        let count = activeTaskCount[listKey]
-        cell.setupCell(listKey: listKey, text: title ?? Constants.emptyString, count: Utilities.convertToString(count ?? 0))
-        return cell
+        isFreeListEmpty = false
       }
-      else if indexPath.section == 0 && (freeLists?.isEmpty ?? false)
+      if groups?.count == nil || (groups?.count ?? -1) <= 0
       {
-        tempGroup = groups?[indexPath.section]
+        groupCount = 0
+      }
+      
+      if isFreeListEmpty
+      {
+        if groupCount > 0
+        {
+          //Groups exist but Free-Lists dont
+          let listArray = groups?[indexPath.section].getListsArray()
+          let list = listArray?[indexPath.row]
+          let listKey = Int((list?.listKey ?? Int64(Constants.newListKey)))
+          
+          interactor?.getListActiveCount(listKey: listKey, completion: { count in
+            self.activeTaskCount[listKey] = count
+          })
+          
+          let count = activeTaskCount[listKey]
+          cell.setupCell(listKey: listKey, text: (list?.name ?? Constants.emptyString), count: Utilities.convertToString(count ?? 0))
+          return cell
+        }
+        //ELSE CASE:
+        ///Neither groups nor Free-Lists exist - Is unreachable because Section Count = 0
       }
       else
       {
-        tempGroup = groups?[indexPath.section - 1]
+        if groupCount > 0
+        {
+          //Groups and Free-Lists Exist
+          if indexPath.section == 0
+          {
+            //Populate Free-Lists
+            
+            var keys = Array(freeLists?.keys ?? [:].keys)
+            keys.sort()
+            let listKey = keys[indexPath.row]
+            let title = freeLists?[keys[indexPath.row]]
+            
+            interactor?.getListActiveCount(listKey: listKey, completion: { count in
+              self.activeTaskCount[listKey] = count
+            })
+            
+            let count = activeTaskCount[listKey]
+            cell.setupCell(listKey: listKey, text: (title ?? Constants.emptyString), count: Utilities.convertToString(count ?? 0))
+            return cell
+          }
+          else if indexPath.section > 0
+          {
+            //Populate Groups
+            let index = indexPath.section - 1
+            
+            let listArray = groups?[index].getListsArray()
+            let list = listArray?[indexPath.row]
+            let listKey = Int((list?.listKey ?? Int64(Constants.newListKey)))
+            
+            interactor?.getListActiveCount(listKey: listKey, completion: { count in
+              self.activeTaskCount[listKey] = count
+            })
+            
+            let count = activeTaskCount[listKey]
+            cell.setupCell(listKey: listKey, text: (list?.name ?? Constants.emptyString), count: Utilities.convertToString(count ?? 0))
+            return cell
+          }
+        }
+        else
+        {
+          //Free Lists exist but Groups dont
+          var keys = Array(freeLists?.keys ?? [:].keys)
+          keys.sort()
+          let listKey = keys[indexPath.row]
+          let title = freeLists?[keys[indexPath.row]]
+          
+          interactor?.getListActiveCount(listKey: listKey, completion: { count in
+            self.activeTaskCount[listKey] = count
+          })
+          
+          let count = activeTaskCount[listKey]
+          cell.setupCell(listKey: listKey, text: (title ?? Constants.emptyString), count: Utilities.convertToString(count ?? 0))
+          return cell
+        }
       }
-      
-      //Get Title and Count of List
-      
-      let tempList = tempGroup?.getListsArray()
-      
-      let listKey = Int((tempList?[indexPath.row].listKey ?? -1))
-      let title = tempList?[indexPath.row].name
-      interactor?.getListActiveCount(listKey: listKey, completion: { result in
-        self.activeTaskCount[listKey] = result
-      })
-      let count = activeTaskCount[listKey] ?? 0
-      cell.setupCell(listKey: listKey, text: title ?? Constants.emptyString, count: Utilities.convertToString(count))
-      return cell
     }
     return UITableViewCell()
   }
@@ -184,7 +353,7 @@ extension PopulateMenuPresenter
   //Set Section Height
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
   {
-    if section == 0
+    if section == 0 && freeLists?.isEmpty == false
     {
       return 0.0
     }
@@ -209,7 +378,6 @@ extension PopulateMenuPresenter
       
       if freeLists?.isEmpty == true
       {
-        groupCount -= 1
         tableView.deleteSections(IndexSet(integer: 0), with: .top)
       }
       
@@ -297,9 +465,6 @@ extension PopulateMenuPresenter
       let name = resultSet.1
       //Add List to free list
       self.freeLists?[key] = name
-      
-      //Refresh Table View
-      self.view?.showActivity()
       
       //Open said new list
       self.router?.pushToOpenList(view: self.view, with: name , listKey: key , editable: true)

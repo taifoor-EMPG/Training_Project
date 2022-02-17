@@ -52,7 +52,7 @@ class MenuVC: UIViewController
   @IBAction func listTapped(_ sender: UIButton) {
     let title = (sender.titleLabel?.text) ?? Constants.emptyString
     
-    for (key, value) in titles! {
+    for (key, value) in titles ?? [:] {
       if value == title
       {
         presenter?.pushToOpenList(listKey: key, listName: value)

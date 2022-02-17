@@ -30,7 +30,6 @@ protocol ProtocolViewToPresenterSearch
 //To Pass information from View to Presenter
 protocol ProtocolPresenterToViewSearch: AnyObject
 {
-  //Function to Open List Should be here and implemented on the backend
 }
 
 

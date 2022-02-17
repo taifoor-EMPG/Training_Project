@@ -350,7 +350,7 @@ extension PopulateMenuPresenter: SectionHeaderProtocols
       result = true
     }
     viewController?.groupStatus(isEmpty: result, groupKey: groupKey, groupName: groupName, reference: self)
-    view?.presentGroupOptions(viewController: viewController!)
+    view?.presentGroupOptions(viewController: viewController ?? GroupOptions())
   }
   
   func didPressCollapser(section: Int, isCollapsing: Bool) {
@@ -422,7 +422,7 @@ extension PopulateMenuPresenter
     let viewController = router?.createGroupPrompt()
     viewController?.setGroupKey(groupKey: groupKey)
     viewController?.setDelegate(self)
-    view?.presentGroupPrompt(viewController: viewController!)
+    view?.presentGroupPrompt(viewController: viewController ?? GroupPrompt())
   }
 }
 
@@ -531,7 +531,7 @@ extension PopulateMenuPresenter: GroupOptionsProtocols
 extension PopulateMenuPresenter: GroupPromptProtocol
 {
   func setRows(groupKey: Int) -> Int {
-    var total = freeLists!.count + 0
+    var total = (freeLists?.count ?? 0) + 0
     if groups != nil
     {
       for i in groups ?? []

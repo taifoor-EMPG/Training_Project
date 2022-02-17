@@ -13,12 +13,6 @@ protocol ProtocolViewToPresenterProfile
 {
     //Setting Up View
     func initInteractor()
-    
-    //Navigation to Other Screens
-
-    //Setting View Table
-    
-    //Misc Functions to Populate View
 }
 
 
@@ -26,7 +20,6 @@ protocol ProtocolViewToPresenterProfile
 //To Pass information from View to Presenter
 protocol ProtocolPresenterToViewProfile: AnyObject
 {
-    //Function to Open List Should be here and implemented on the backend
 }
 
 

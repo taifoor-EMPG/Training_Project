@@ -51,7 +51,7 @@ class GroupPrompt: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: Constants.UIDefaults.Labels.listing, for: indexPath) as? Listing {
-            delegate?.setCell(cell, indexPath: indexPath, rowCount: rowCount!, groupKey: groupKey!)
+          delegate?.setCell(cell, indexPath: indexPath, rowCount: rowCount ?? 0, groupKey: groupKey ?? Constants.newGroupKey)
             cell.selectionStyle = .none
             return cell
         }

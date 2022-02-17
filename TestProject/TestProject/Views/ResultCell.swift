@@ -24,5 +24,4 @@ class ResultCell: UITableViewCell
   {
     return listKey
   }
-  
 }

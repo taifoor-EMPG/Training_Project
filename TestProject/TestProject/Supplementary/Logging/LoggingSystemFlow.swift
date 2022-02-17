@@ -10,7 +10,7 @@ import Foundation
 class LoggingSystemFlow
 {
   //MARK: Data Members
-  private static var underDevelopment:Bool = true
+  private static var underDevelopment:Bool = false
   //End Data Members
   
   static func enableDevelopmentMode(){

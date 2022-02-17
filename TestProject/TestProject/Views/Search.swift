@@ -18,6 +18,7 @@ class Search: UIViewController, ProtocolPresenterToViewSearch, UITextFieldDelega
   @IBOutlet weak var bar: UIStackView!
   @IBOutlet weak var image: UIImageView!
   @IBOutlet weak var searchResults: UITableView!
+  @IBOutlet weak var errorMessage: UILabel!
   //END OF DATA MEMBERS
   
   
@@ -33,7 +34,7 @@ class Search: UIViewController, ProtocolPresenterToViewSearch, UITextFieldDelega
     searchResults.isHidden = true
     
     searchBox.delegate = self
-    searchBox.addTarget(self, action: #selector(textFieldWasTapped), for: .editingChanged)
+    searchBox.addTarget(self, action: #selector(textFieldWasTapped), for: .allTouchEvents)
     
     searchResults.delegate = self
     searchResults.dataSource = self
@@ -59,6 +60,7 @@ class Search: UIViewController, ProtocolPresenterToViewSearch, UITextFieldDelega
 extension Search
 {
   @objc func textFieldWasTapped(textField: UITextField) {
+    image.image = UIImage(named: Constants.UIDefaults.SearchDefault.defaultImage)
     image.isHidden = true
     searchResults.isHidden = false
   }
@@ -82,7 +84,8 @@ extension Search: UITableViewDelegate, UITableViewDataSource
     
     if rowCount == 0
     {
-      image.image = UIImage(systemName: "plus")
+      image.image = UIImage(systemName: Constants.UIDefaults.SearchDefault.didNotFindAnything)
+      errorMessage.isHidden = false
       searchResults.isHidden = true
       image.isHidden = false
     }
@@ -104,7 +107,7 @@ extension Search: UITableViewDelegate, UITableViewDataSource
       let key = cell.getKey()
       let path = cell.gotoResult.text ?? Constants.emptyString
       
-      let pathArray = path.components(separatedBy: ">")
+      let pathArray = path.components(separatedBy: Constants.UIDefaults.SearchDefault.delimiter)
       let name = pathArray[0]
       
       presenter?.pushToOpenList(listKey: key, listName: name)

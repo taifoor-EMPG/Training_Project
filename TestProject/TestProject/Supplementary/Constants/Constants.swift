@@ -87,6 +87,14 @@ struct Constants
       static let name = "WallpaperCollectionCell"
       static let identifier = "WallpaperCollectionCell"
     }
+    
+    struct SearchDefault
+    {
+      static let didNotFindAnything = "questionmark.app.dashed.ar"
+      static let defaultImage = "search_title"
+      static let delimiter = ">"
+    }
+    
   }
   
   struct ViewControllerIDs
@@ -120,6 +128,11 @@ struct Constants
     {
       static let storyboardID = "Search"
       static let identifier = "Search"
+    }
+    struct Test
+    {
+      static let storyboardID = "Tester"
+      static let identifier = "Tester"
     }
   }
   

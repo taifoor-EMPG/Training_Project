@@ -25,8 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     if testing == true
     {
-      let storyBoard: UIStoryboard = UIStoryboard(name: "Tester", bundle: nil)
-      let viewController = storyBoard.instantiateViewController(withIdentifier: "Tester") as! Tester
+      let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.Test.storyboardID, bundle: nil)
+      let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.Test.identifier) as! Tester
       window?.rootViewController = viewController
     }
     else

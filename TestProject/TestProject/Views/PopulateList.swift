@@ -62,14 +62,14 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     
     let alert = UIAlertController(title: Constants.UIDefaults.NewListItem.titleMessage, message: "", preferredStyle: .alert)
     alert.addTextField()
-    let textfield = alert.textFields![0]
-    textfield.placeholder = Constants.UIDefaults.NewListItem.newText
+    let textfield = alert.textFields?[0]
+    textfield?.placeholder = Constants.UIDefaults.NewListItem.newText
     
     let doneButton = UIAlertAction(title: Constants.UIDefaults.NewListItem.rightButtonText, style: .default)
     { (action) in
       
       //Get the textfield for the alert
-      let newText = textfield.text
+      let newText = textfield?.text
       
       //Check if Text Field is Empty
       if newText?.isEmpty == true
@@ -80,7 +80,7 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
       else
       {
         //Change the backend
-        self.presenter?.addNewTask(text: newText!)
+        self.presenter?.addNewTask(text: newText ?? Constants.emptyString)
         self.listItems.reloadData()
       }
     }
@@ -189,7 +189,7 @@ extension PopulateList
         listTitle.resignFirstResponder()
         return true
       }
-      else if presenter?.changeListTitle(newTitle: listTitle.text!) == true
+      else if presenter?.changeListTitle(newTitle: listTitle.text ?? Constants.emptyString) == true
       {
         //New List Name Approved by DB
         currentTitle = listTitle.text!

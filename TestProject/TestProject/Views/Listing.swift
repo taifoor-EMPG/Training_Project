@@ -9,63 +9,63 @@ import UIKit
 
 protocol ListingCellProtocol
 {
-    func addListToGroup(listKey: Int, groupKey: Int)
-    func removeListFromGroup(listKey: Int, groupKey: Int)
+  func addListToGroup(listKey: Int, groupKey: Int)
+  func removeListFromGroup(listKey: Int, groupKey: Int)
 }
 
 
 class Listing: UITableViewCell
 {
-    //MARK: DATA MEMBERS
-    
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var button: UIButton!
-    
-    private var deletegate: ListingCellProtocol?
-    
-    private var listKey: Int?
-    private var isIncluded: Bool?
-    private var openedGroupKey: Int?
-    
-    //END DATA MEMBERS
-    
-    
-    func setupCell(listKey: Int, listName: String, openedGroupKey:Int, isAdded: Bool, reference: ListingCellProtocol?)
+  //MARK: DATA MEMBERS
+  
+  @IBOutlet weak var title: UILabel!
+  @IBOutlet weak var button: UIButton!
+  
+  private var deletegate: ListingCellProtocol?
+  
+  private var listKey: Int?
+  private var isIncluded: Bool?
+  private var openedGroupKey: Int?
+  
+  //END DATA MEMBERS
+  
+  
+  func setupCell(listKey: Int, listName: String, openedGroupKey:Int, isAdded: Bool, reference: ListingCellProtocol?)
+  {
+    self.listKey = listKey
+    self.isIncluded = isAdded
+    self.openedGroupKey = openedGroupKey
+    try! title.attributedText = NSAttributedString(markdown: listName)
+    deletegate = reference
+    setImage()
+  }
+  
+  private func setImage()
+  {
+    DispatchQueue.main.async {
+      if self.isIncluded == true
+      {
+        self.button.setImage(UIImage(systemName: Constants.UIDefaults.GroupPrompt.addedImage), for: .normal)
+      }
+      else
+      {
+        self.button.setImage(UIImage(systemName: Constants.UIDefaults.GroupPrompt.addImage), for: .normal)
+      }
+    }
+  }
+  
+  @IBAction func addRemovePressed(_ sender: UIButton){
+    if isIncluded == true
     {
-        self.listKey = listKey
-        self.isIncluded = isAdded
-        self.openedGroupKey = openedGroupKey
-        try! title.attributedText = NSAttributedString(markdown: listName)
-        deletegate = reference
-        setImage()
+      isIncluded = false
+      setImage()
+      deletegate?.removeListFromGroup(listKey: listKey!, groupKey: openedGroupKey!)
     }
-    
-    private func setImage()
+    else
     {
-        DispatchQueue.main.async {
-            if self.isIncluded == true
-            {
-                self.button.setImage(UIImage(systemName: Constants.UIDefaults.GroupPrompt.addedImage), for: .normal)
-            }
-            else
-            {
-                self.button.setImage(UIImage(systemName: Constants.UIDefaults.GroupPrompt.addImage), for: .normal)
-            }
-        }
+      isIncluded = true
+      setImage()
+      deletegate?.addListToGroup(listKey: listKey!, groupKey: openedGroupKey!)
     }
-    
-    @IBAction func addRemovePressed(_ sender: UIButton){
-        if isIncluded == true
-        {
-            isIncluded = false
-            setImage()
-            deletegate?.removeListFromGroup(listKey: listKey!, groupKey: openedGroupKey!)
-        }
-        else
-        {
-            isIncluded = true
-            setImage()
-            deletegate?.addListToGroup(listKey: listKey!, groupKey: openedGroupKey!)
-        }
-    }
+  }
 }

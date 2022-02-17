@@ -43,12 +43,13 @@
 		780C7D6727A7F26A008C8D53 /* Counters+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D6527A7F26A008C8D53 /* Counters+CoreDataClass.swift */; };
 		780C7D6827A7F26A008C8D53 /* Counters+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D6627A7F26A008C8D53 /* Counters+CoreDataProperties.swift */; };
 		780C7D7C27AA553A008C8D53 /* GroupPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */; };
-		780C7D8227AA5A4E008C8D53 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */; };
 		782DA71027ABCE1A00FBA666 /* GroupOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */; };
 		782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */; };
 		7836BADF27AD73F200CC860D /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7836BADE27AD73F200CC860D /* Listing.swift */; };
 		7878119427BB9D92004DA85E /* TestingGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878119327BB9D92004DA85E /* TestingGroupCell.swift */; };
 		78937E0927BCE264002B01A5 /* WallPaperManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78937E0827BCE264002B01A5 /* WallPaperManager.swift */; };
+		78937E3027BE2F3D002B01A5 /* NIBSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78937E2F27BE2F3D002B01A5 /* NIBSectionHeader.swift */; };
+		78937E3627BE32F9002B01A5 /* NIBSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78937E3527BE32F9002B01A5 /* NIBSectionHeader.xib */; };
 		78CDDEB727AD5C5800210B26 /* GroupPrompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */; };
 		78CF7F0D279A977B00AC6182 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0C279A977B00AC6182 /* SearchRouter.swift */; };
 		78CF7F0F279A978600AC6182 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CF7F0E279A978600AC6182 /* ProfileRouter.swift */; };
@@ -112,12 +113,13 @@
 		780C7D6527A7F26A008C8D53 /* Counters+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Counters+CoreDataClass.swift"; sourceTree = "<group>"; };
 		780C7D6627A7F26A008C8D53 /* Counters+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Counters+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		780C7D7B27AA553A008C8D53 /* GroupPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPrompt.swift; sourceTree = "<group>"; };
-		780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		782DA70F27ABCE1A00FBA666 /* GroupOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOptions.swift; sourceTree = "<group>"; };
 		782DA71527ABE75C00FBA666 /* GroupOptions.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupOptions.storyboard; sourceTree = "<group>"; };
 		7836BADE27AD73F200CC860D /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		7878119327BB9D92004DA85E /* TestingGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingGroupCell.swift; sourceTree = "<group>"; };
 		78937E0827BCE264002B01A5 /* WallPaperManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallPaperManager.swift; sourceTree = "<group>"; };
+		78937E2F27BE2F3D002B01A5 /* NIBSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIBSectionHeader.swift; sourceTree = "<group>"; };
+		78937E3527BE32F9002B01A5 /* NIBSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NIBSectionHeader.xib; sourceTree = "<group>"; };
 		78CDDEB627AD5C5800210B26 /* GroupPrompt.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupPrompt.storyboard; sourceTree = "<group>"; };
 		78CF7F0C279A977B00AC6182 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		78CF7F0E279A978600AC6182 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
@@ -375,21 +377,13 @@
 		780C7D7F27AA5A29008C8D53 /* TableView Cells */ = {
 			isa = PBXGroup;
 			children = (
+				78937E2E27BE2F15002B01A5 /* NIBSectionHeader */,
 				78F2D1E627BA4ABC00A3DDA0 /* Result Cell */,
 				7836BADD27AD73D900CC860D /* Prompt Listing */,
-				780C7D8027AA5A37008C8D53 /* Section Header */,
 				7805893227955D28007A327E /* List Cell */,
 				7805897D2796BADB007A327E /* List Item Cell */,
 			);
 			name = "TableView Cells";
-			sourceTree = "<group>";
-		};
-		780C7D8027AA5A37008C8D53 /* Section Header */ = {
-			isa = PBXGroup;
-			children = (
-				780C7D8127AA5A4E008C8D53 /* SectionHeader.swift */,
-			);
-			name = "Section Header";
 			sourceTree = "<group>";
 		};
 		782DA70C27ABC98100FBA666 /* Group Options */ = {
@@ -415,6 +409,15 @@
 				78937E0827BCE264002B01A5 /* WallPaperManager.swift */,
 			);
 			path = Wallpapers;
+			sourceTree = "<group>";
+		};
+		78937E2E27BE2F15002B01A5 /* NIBSectionHeader */ = {
+			isa = PBXGroup;
+			children = (
+				78937E2F27BE2F3D002B01A5 /* NIBSectionHeader.swift */,
+				78937E3527BE32F9002B01A5 /* NIBSectionHeader.xib */,
+			);
+			name = NIBSectionHeader;
 			sourceTree = "<group>";
 		};
 		78CF7F09279A974500AC6182 /* Search */ = {
@@ -567,6 +570,7 @@
 				7805891427954959007A327E /* LaunchScreen.storyboard in Resources */,
 				782DA71627ABE75C00FBA666 /* GroupOptions.storyboard in Resources */,
 				7805893A27958BF2007A327E /* Menu.storyboard in Resources */,
+				78937E3627BE32F9002B01A5 /* NIBSectionHeader.xib in Resources */,
 				78F2D1EA27BA4B5F00A3DDA0 /* Search.storyboard in Resources */,
 				780C7CC727A01AB9008C8D53 /* Profile.storyboard in Resources */,
 				780C7D4827A40BB9008C8D53 /* Notes.rtf in Resources */,
@@ -586,7 +590,7 @@
 			files = (
 				780C7CD027A02E51008C8D53 /* SearchPresenter.swift in Sources */,
 				780589812796CE3A007A327E /* PopulateMenuRouter.swift in Sources */,
-				780C7D8227AA5A4E008C8D53 /* SectionHeader.swift in Sources */,
+				78937E3027BE2F3D002B01A5 /* NIBSectionHeader.swift in Sources */,
 				78F2D1E327B6939700A3DDA0 /* LoggingSystemFlow.swift in Sources */,
 				780C7D2427A3D2A8008C8D53 /* ToDoApp.xcdatamodeld in Sources */,
 				780589212795532F007A327E /* Utilities.swift in Sources */,

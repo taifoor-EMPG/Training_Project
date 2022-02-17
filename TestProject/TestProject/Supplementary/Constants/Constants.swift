@@ -38,6 +38,7 @@ struct Constants
       static let listItemCell = "ListItemCell"
       static let listing = "listing"
       static let searchResultCell = "resultCell"
+      static let sectionHeader = "NIBSectionHeader"
     }
     
     struct NewGroup

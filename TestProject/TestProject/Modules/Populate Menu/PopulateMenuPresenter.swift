@@ -139,63 +139,10 @@ extension PopulateMenuPresenter
     return 0
   }
   
-  //Setting Title For Section
-  func tableView(titleForHeaderInSection section: Int) -> String? {
-    
-    var isFreeListEmpty: Bool = true
-    var groupCount: Int = groups?.count ?? -1
-    if freeLists?.isEmpty == nil || freeLists?.isEmpty == false
-    {
-      isFreeListEmpty = false
-    }
-    if groups?.count == nil || (groups?.count ?? -1) <= 0
-    {
-      groupCount = 0
-    }
-    
-    
-    if isFreeListEmpty
-    {
-      if groupCount > 0
-      {
-        //Groups exist but Free-Lists dont
-        return (groups?[section].name ?? Constants.emptyString)
-      }
-      //ELSE CASE: -> Empty Table
-      ///Neither groups nor Free-Lists exist - Is unreachable because Section Count = 0
-    }
-    else
-    {
-      if groupCount > 0
-      {
-        //Groups and Free-Lists Exist
-        if section == 0
-        {
-          //Populate Free-Lists
-          return Constants.emptyString
-        
-        }
-        else if section > 0
-        {
-          //Populate Groups
-          let index = section - 1
-          return (groups?[index].name ?? Constants.emptyString)
-        }
-      }
-      else
-      {
-        //Free Lists exist but Groups dont
-        return Constants.emptyString
-      }
-    }
-    
-    return Constants.emptyString
-  }
-  
   //Setting View For Section
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
   {
-    let sectionHeader = tableView.dequeueReusableCell(withIdentifier: "sectionHeader") as! SectionHeader
+    let sectionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.UIDefaults.Labels.sectionHeader) as! NIBSectionHeader
     
     var isFreeListEmpty: Bool = true
     var groupCount: Int = groups?.count ?? -1

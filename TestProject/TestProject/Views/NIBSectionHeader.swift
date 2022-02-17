@@ -1,8 +1,8 @@
 //
-//  SectionHeader.swift
+//  NIBSectionHeader.swift
 //  TestProject
 //
-//  Created by Muhammad Taifoor Saleem on 02/02/2022.
+//  Created by Muhammad Taifoor Saleem on 17/02/2022.
 //
 
 import UIKit
@@ -13,10 +13,8 @@ protocol SectionHeaderProtocols: AnyObject
   func didPressCollapser(section: Int, isCollapsing: Bool)
 }
 
-
-class SectionHeader: UITableViewCell
-{
-  //DATA MEMBERS
+class NIBSectionHeader: UITableViewHeaderFooterView {
+  //MARK: DATA MEMBERS
   @IBOutlet weak var groupTitle: UILabel!
   @IBOutlet weak var optionsButton: UIButton!
   @IBOutlet weak var collapser: UIButton!
@@ -28,8 +26,7 @@ class SectionHeader: UITableViewCell
   private weak var delegate: SectionHeaderProtocols?
   
   //END MEMBERS
-  
-  
+
   @IBAction func optionsPressed(_ sender: UIButton)
   {
     delegate?.didPressOptions(section: sectionID, groupKey: groupKey, groupName: groupTitle.text!)
@@ -59,10 +56,10 @@ class SectionHeader: UITableViewCell
   
   func setupCell(groupKey:Int, groupName: String, section: Int, reference: SectionHeaderProtocols?)
   {
+    self.isUserInteractionEnabled = true
     self.delegate = reference
     self.groupKey = groupKey
     groupTitle.text = groupName
     self.sectionID = section
   }
-  
 }

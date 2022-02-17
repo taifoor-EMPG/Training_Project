@@ -26,7 +26,6 @@ protocol ProtocolViewToPresenterPopulateMenu
   //Setting View Table
   func numberOfSections() -> Int
   func tableView(numberOfRowsInSection section: Int) -> Int
-  func tableView(titleForHeaderInSection section: Int) -> String?
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?

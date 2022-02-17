@@ -43,6 +43,10 @@ class MenuVC: UIViewController
     
     //Loads Up Data for Presenter
     presenter?.viewDidLoad()
+    
+    
+    //TEST CODE
+    optionalLists.register(UINib(nibName: Constants.UIDefaults.Labels.sectionHeader, bundle: nil), forHeaderFooterViewReuseIdentifier: Constants.UIDefaults.Labels.sectionHeader)
   }
   
   @IBAction func listTapped(_ sender: UIButton) {
@@ -209,8 +213,6 @@ extension MenuVC: ProtocolPresenterToViewPopulateMenu, UIViewControllerTransitio
   }
 }
 
-
-
 //For View to conform to Table View
 extension MenuVC: UITableViewDelegate, UITableViewDataSource
 {
@@ -222,11 +224,6 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource
   //Defines the rows in a section
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return presenter?.tableView(numberOfRowsInSection: section) ?? 0
-  }
-  
-  //Section Header:
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return presenter?.tableView(titleForHeaderInSection: section)
   }
   
   //Setting up the cell

@@ -8,22 +8,24 @@
 
 import UIKit
 
-class PopulateListRouter: Proto_PTOR_PopulateList
+class PopulateListRouter: ProtocolPresenterToRouterPopulateList
 {
-    static func createModule(with listName: String) -> UIViewController?
-    {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "PopulateList", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(withIdentifier: "PopulateList") as! PopulateList
-        let presenter: Proto_VTOP_PopulateList & Proto_ITOP_PopulateList = PopulateListPresenter()
-            
-        viewController.presenter = presenter
-        viewController.presenter?.router = PopulateListRouter()
-        viewController.presenter?.view = viewController
-        viewController.presenter?.interactor = PopulateListInteractor()
-            
-        //Set Data Members HerePopulateList
-        presenter.viewDidLoad(listName)
-        
-        return viewController
-    }
+  static func createModule(with listName: String, listKey: Int, editable: Bool, delegate: ListToMenuUpdate?) -> UIViewController?
+  {
+    let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.PopulateList.storyboardID, bundle: nil)
+    let viewController = storyBoard.instantiateViewController(withIdentifier: Constants.ViewControllerIDs.PopulateList.identifier) as! PopulateList
+    
+    let source = DataRepository(plugin: CoreData())
+    
+    let presenter: ProtocolViewToPresenterPopulateList & ProtocolInteractorToPresenterPopulateList = PopulateListPresenter(view: viewController, interactor: PopulateListInteractor(source: source), router: PopulateListRouter())
+    
+    presenter.initInteractor()
+    presenter.setDelegate(delegate: delegate)
+    viewController.setPresenter(presenter)
+    
+    //Set Data Members HerePopulateList
+    presenter.viewDidLoad(listName, listKey: listKey, firstOpen: editable)
+    
+    return viewController
+  }
 }

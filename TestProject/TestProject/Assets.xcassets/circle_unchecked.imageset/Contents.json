@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "icons8-circle-50.png",
+      "filename" : "icons8-circled-thin-100.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -37,7 +37,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "icons8-circle-50@2x.png",
+      "filename" : "icons8-circled-thin-100@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -63,7 +63,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "icons8-circle-50@3x.png",
+      "filename" : "icons8-circled-thin-100@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },

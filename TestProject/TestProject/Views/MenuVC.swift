@@ -9,50 +9,103 @@ import UIKit
 
 class MenuVC: UIViewController
 {
-    //DATA MEMBERS
-   
-    var presenter: (Proto_VTOP_PopulateMenu & Proto_ITOP_PopulateMenu)?         //Belong to extension MenuVC: Proto_PTOV_PopulateMenu
+  //MARK: DATA MEMBERS
+  
+  private var presenter: (ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu)?
+  
+  ///View Controller Outlets
+  @IBOutlet weak var optionalLists: UITableView!
+  
+  @IBOutlet weak var listMyDay: UIButton!
+  @IBOutlet weak var listImportant: UIButton!
+  @IBOutlet weak var listPlanned: UIButton!
+  @IBOutlet weak var listAssigned: UIButton!
+  @IBOutlet weak var listTasks: UIButton!
+  
+  @IBOutlet weak var myDayCount: UILabel!
+  @IBOutlet weak var importantCount: UILabel!
+  @IBOutlet weak var plannedCount: UILabel!
+  @IBOutlet weak var assignedCount: UILabel!
+  @IBOutlet weak var tasksCount: UILabel!
+  
+  private var titles: [Int: String]?
+  
+  private var groupOptionsVC:GroupOptions?
+  //END DATA MEMEBRS
+  
+  func setPresenter(_ presenter: (ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu)?){
+    self.presenter = presenter
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupUI()
     
-    //View Controller Outlets
-    @IBOutlet weak var optionalLists: UITableView!
+    //Loads Up Data for Presenter
+    presenter?.viewDidLoad()
     
-    @IBOutlet weak var listMyDay: UIButton!
-    @IBOutlet weak var listImportant: UIButton!
-    @IBOutlet weak var listPlanned: UIButton!
-    @IBOutlet weak var listAssigned: UIButton!
-    @IBOutlet weak var listTasks: UIButton!
     
-    @IBOutlet weak var myDayCount: UILabel!
-    @IBOutlet weak var importantCount: UILabel!
-    @IBOutlet weak var plannedCount: UILabel!
-    @IBOutlet weak var assignedCount: UILabel!
-    @IBOutlet weak var tasksCount: UILabel!
+    //TEST CODE
+    optionalLists.register(UINib(nibName: Constants.UIDefaults.Labels.sectionHeader, bundle: nil), forHeaderFooterViewReuseIdentifier: Constants.UIDefaults.Labels.sectionHeader)
+  }
+  
+  @IBAction func listTapped(_ sender: UIButton) {
+    let title = (sender.titleLabel?.text) ?? Constants.emptyString
     
-    //END DATA MEMEBRS
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        
-        //Ask the Presenter to Perform viewDidLoad()
-        presenter?.viewDidLoad()
+    for (key, value) in titles ?? [:] {
+      if value == title
+      {
+        presenter?.pushToOpenList(listKey: key, listName: value)
+        break
+      }
+    }
+  }
+  
+  
+  @IBAction func createNewList(_ sender: UIButton) {
+    presenter?.pushToAddNewList()
+  }
+  
+  @IBAction func createNewGroup(_ sender: UIButton)
+  {
+    let alert = UIAlertController(title: Constants.UIDefaults.NewGroup.title, message: "", preferredStyle: .alert)
+    alert.addTextField()
+    let textfield = alert.textFields?[0]
+    textfield?.text = Constants.UIDefaults.NewGroup.newGroupTitle
+    
+    let createButton = UIAlertAction(title: Constants.UIDefaults.NewGroup.rightButtonText, style: .default)
+    { (action) in
+      
+      //Get the textfield for the alert
+      let newGroupName = textfield?.text
+      self.presenter?.createNewGroup(groupName: newGroupName ?? Constants.emptyString)
+      let key = self.presenter?.getNewGroupKey()
+      
+      //refetch data
+      self.optionalLists.reloadData()
+      
+      //Next Prompt alert
+      self.presenter?.newGroupPrompt(groupKey: key ?? Constants.newGroupKey)
     }
     
-    @IBAction func listTapped(_ sender: UIButton) {
-        presenter?.pushToOpenList(listName: (sender.titleLabel?.text)!)
+    let cancelButton = UIAlertAction(title: Constants.UIDefaults.NewGroup.leftButtonText, style: .default)
+    { (action) in
+      
+      alert.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func createNewList(_ sender: UITableViewCell) {
-        presenter?.pushToAddNewList()
-    }
-    
-    @IBAction func loadProfile(_ sender: UIButton) {
-        presenter?.pushToProfile()
-    }
-    
-    @IBAction func performSearch(_ sender: UIButton) {
-        presenter?.pushToSearch()
-    }
+    alert.addAction(cancelButton)
+    alert.addAction(createButton)
+    self.present(alert, animated: true, completion: nil)
+  }
+  
+  @IBAction func loadProfile(_ sender: UIButton) {
+    presenter?.pushToProfile()
+  }
+  
+  @IBAction func performSearch(_ sender: UIButton) {
+    presenter?.pushToSearch()
+  }
 }
 
 
@@ -60,52 +113,147 @@ class MenuVC: UIViewController
 //Utility Functions that are Private
 extension MenuVC
 {
-    private func setupUI()
+  private func setupUI()
+  {
+    //Set Label for Each List Here
+    presenter?.setStaticListTitles()
+    
+    guard titles != nil else
     {
-        //Set Label for Each List Here
-        listMyDay.titleLabel?.text = Constants.listsTitleArray[0]
-        listImportant.titleLabel?.text = Constants.listsTitleArray[1]
-        listPlanned.titleLabel?.text = Constants.listsTitleArray[2]
-        listAssigned.titleLabel?.text = Constants.listsTitleArray[3]
-        listTasks.titleLabel?.text = Constants.listsTitleArray[4]
-        
-        //Set Count For Each List Here
-        myDayCount.text = presenter?.getListSize(listName: Constants.listsTitleArray[0]) ?? ""
-        importantCount.text = presenter?.getListSize(listName: Constants.listsTitleArray[1]) ?? ""
-        plannedCount.text = presenter?.getListSize(listName: Constants.listsTitleArray[2]) ?? ""
-        assignedCount.text = presenter?.getListSize(listName: Constants.listsTitleArray[3]) ?? ""
-        tasksCount.text = presenter?.getListSize(listName: Constants.listsTitleArray[4]) ?? ""
-        
-        //Set Table Attributes
-        //optionalLists.register(OptionalListCell.self, forCellReuseIdentifier: Constants.UIDefaults.labels.optionalListCell)
-        optionalLists.delegate = self
-        optionalLists.dataSource = self
+      LoggingSystemFlow.printLog("Menu VC >> setupUI >> Error: Presenter Failed to Get Data ")
+      return
     }
+    
+    var keys = Array(titles?.keys ?? [:].keys)
+    keys.sort()
+    
+    listMyDay.setTitle(titles?[keys[0]], for: .normal)
+    listImportant.setTitle(titles?[keys[1]], for: .normal)
+    listPlanned.setTitle(titles?[keys[2]], for: .normal)
+    listAssigned.setTitle(titles?[keys[3]], for: .normal)
+    listTasks.setTitle(titles?[keys[4]], for: .normal)
+    
+    //Set Count For Each List Here
+    for i in 0...(Constants.staticListCount - 1)
+    {
+      presenter?.setActiveListCount(listKey: keys[i])
+    }
+
+    //Set Table Attributes
+    optionalLists.delegate = self
+    optionalLists.dataSource = self
+    
+    //Set Navigation Bar Title
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.UIDefaults.navBarReturnTitle, style: .plain, target: nil, action: nil)
+  }
+  
+  func setCount(listKey: Int, count: Int)
+  {
+    switch listKey
+    {
+    case 0:
+          myDayCount.text = Utilities.convertToString(count)
+    case 1:
+          importantCount.text = Utilities.convertToString(count)
+    case 2:
+          plannedCount.text = Utilities.convertToString(count)
+    case 3:
+          assignedCount.text = Utilities.convertToString(count)
+    case 4:
+          tasksCount.text = Utilities.convertToString(count)
+    default:
+      return
+    }
+  }
+  
+  func setStaticListTitles()
+  {
+    titles = presenter?.getStaticListTitles()
+  }
 }
 
 
 
 //For View to Communicate User Responses to Presenter
-extension MenuVC: Proto_PTOV_PopulateMenu
+extension MenuVC: ProtocolPresenterToViewPopulateMenu, UIViewControllerTransitioningDelegate
 {
-    
+  func presentGroupOptions(viewController: GroupOptions) {
+    groupOptionsVC = viewController
+    self.present(viewController, animated: true, completion: nil)
+  }
+  
+  func presentGroupPrompt(viewController: GroupPrompt) {
+    groupOptionsVC?.dismiss(animated: true, completion: nil)
+    self.present(viewController, animated: true, completion: nil)
+  }
+  
+  func showActivity() {
+    DispatchQueue.main.async {
+      //Update UI on main thread
+      self.optionalLists.reloadData()
+    }
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    showActivity()
+  }
+  
+  func closeSection(indexPath: [IndexPath]) {
+    if indexPath.isEmpty == false
+    {
+      optionalLists.deleteRows(at: indexPath, with: .top)
+    }
+  }
+  
+  func openSection(indexPath: [IndexPath]) {
+    if indexPath.isEmpty == false
+    {
+      optionalLists.insertRows(at: indexPath, with: .bottom)
+    }
+  }
 }
-
-
 
 //For View to conform to Table View
 extension MenuVC: UITableViewDelegate, UITableViewDataSource
 {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.numberOfRowsInSection() ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return presenter?.setCell(tableView: tableView, forRowAt: indexPath) ?? UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
-        presenter?.pushToOpenList(listName: cell.listTitle.text!)
-    }
+  //Defines the number of groups that will be there
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return presenter?.numberOfSections() ?? 0
+  }
+  
+  //Defines the rows in a section
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return presenter?.tableView(numberOfRowsInSection: section) ?? 0
+  }
+  
+  //Setting up the cell
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    return presenter?.tableView(tableView, cellForRowAt: indexPath) ?? UITableViewCell()
+  }
+  
+  //Alter the Section OutLook
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    presenter?.tableView(tableView, viewForHeaderInSection: section)
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    presenter?.tableView(tableView, heightForHeaderInSection: section) ?? 35.0
+  }
+  
+  //If cell was selected - what to do
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let cell = tableView.cellForRow(at: indexPath) as! OptionalListCell
+    presenter?.pushToOpenList(listKey: cell.getListKey(), listName: cell.listTitle.text ?? Constants.newListTitle)
+  }
+  
+  //Set an editing style when interacted
+  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+    return .delete
+  }
+  
+  //Delete swiped row
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    presenter?.tableView(tableView, commit: editingStyle, forRowAt: indexPath)
+    showActivity()
+  }
 }

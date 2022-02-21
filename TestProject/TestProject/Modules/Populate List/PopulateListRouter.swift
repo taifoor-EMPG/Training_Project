@@ -10,6 +10,14 @@ import UIKit
 
 class PopulateListRouter: ProtocolPresenterToRouterPopulateList
 {
+  func getBackground(parentView: ProtocolPresenterToViewPopulateList?) -> UIView {
+    if let background = WeatherRouter.createModule(parentView: parentView)
+    {
+      return background
+    }
+    return UIView()
+  }
+  
   static func createModule(with listName: String, listKey: Int, editable: Bool, delegate: ListToMenuUpdate?) -> UIViewController?
   {
     let storyBoard: UIStoryboard = UIStoryboard(name: Constants.ViewControllerIDs.PopulateList.storyboardID, bundle: nil)

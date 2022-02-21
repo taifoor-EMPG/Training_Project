@@ -79,6 +79,15 @@ class PopulateListPresenter: ProtocolViewToPresenterPopulateList, ProtocolIntera
   func isFirstOpen() -> Bool {
     return firstOpen
   }
+  
+  func getListKey() -> Int
+  {
+    return Int(list!.listKey)
+  }
+  
+  func getBackgroundView() -> UIView {
+    return router?.getBackground(parentView: view) ?? UIView()
+  }
 }
 
 //MARK: Use Case Functionalities
@@ -162,7 +171,7 @@ extension PopulateListPresenter
       
       if colored
       {
-        cell.setBackgroundColor(UIColor(named: list?.color ?? "Col_Default") ?? .systemBackground)
+        //cell.setBackgroundColor(UIColor(named: list?.color ?? "Col_Default") ?? .systemBackground)
       }
       return cell
     }

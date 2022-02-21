@@ -140,5 +140,48 @@ struct Constants
   {
     static let wallpaperList = ["Col_Blue", "Col_Brown", "Col_Cyan", "Col_Default", "Col_Green", "Col_Grey", "Col_Indigo", "Col_Mint", "Col_Orange", "Col_Pink", "Col_Purple", "Col_Red", "Col_Teal", "Col_Yellow"]
   }
+  
+  struct API
+  {
+    struct GeneralCredentials
+    {
+      static let apiIdentifier = "appid="
+      static let apiKey = "d8ae298e9bddb5ccadef21f5d8d4181d"
+    }
+    
+    struct WeatherCredentials
+    {
+      static let url = "https://api.openweathermap.org/data/2.5/find?"
+      static let cityIdentifier = "q="
+      static let unitIdentifier = "units="
+    }
+    
+    struct GeolocationCredentials
+    {
+      static let url = "https://api.openweathermap.org/geo/1.0/reverse?"
+      static let latitudeIdentifier = "lat="
+      static let longitudeIdentifier = "lon="
+      static let limitIdentifier = "limit="
+    }
+  }
+  
+  struct WeatherVideos
+  {
+    static let filetype = "mp4"
+    static let windyDay = "Windy_Day"
+    static let windyNight = "Windy_Night"
+    static let cloudyDay = "Cloudy_Day"
+    static let cloudyNight = "Cloudy_Night"
+    static let rainyDay = "Rainy_Day"
+    static let rainyNight = "Rainy_Night"
+    static let clearDay = "Clear_Day"
+    static let clearNight = "Clear_Night"
+  }
+  
+  struct WeatherLanguages
+  {
+    static let english = "en"
+    static let arabic = "ar"
+  }
 }
 

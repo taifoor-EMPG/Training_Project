@@ -24,6 +24,7 @@ protocol ProtocolViewToPresenterPopulateList
   //Navigation to Other Screens
   func pushToEditText(itemKey: Int, newText: String)
   func addNewTask(text: String)
+  func getBackgroundView() -> UIView
   
   //Misc Functions to Populate View
   func getListName() -> String
@@ -33,6 +34,7 @@ protocol ProtocolViewToPresenterPopulateList
   func setColor(_ color: String)
   func getWallpapers() -> [String]
   func updateCount(_ views: [UIViewController])
+  func getListKey() -> Int
 }
 
 
@@ -43,6 +45,7 @@ protocol ProtocolPresenterToViewPopulateList: AnyObject
   //Function to Open List Should be here and implemented on the backend
   func resetTitle(_ newTitle: String)
   func colorScreen(_ color: UIColor)
+  func getFrame() -> CGRect
 }
 
 
@@ -72,5 +75,6 @@ protocol ProtocolInteractorToPresenterPopulateList: AnyObject
 protocol ProtocolPresenterToRouterPopulateList
 {
   static func createModule(with listName: String, listKey: Int, editable: Bool, delegate: ListToMenuUpdate?) -> UIViewController?
+  func getBackground(parentView: ProtocolPresenterToViewPopulateList?) -> UIView
 }
 

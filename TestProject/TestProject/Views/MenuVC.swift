@@ -43,9 +43,7 @@ class MenuVC: UIViewController
     
     //Loads Up Data for Presenter
     presenter?.viewDidLoad()
-    
-    
-    //TEST CODE
+
     optionalLists.register(UINib(nibName: Constants.UIDefaults.Labels.sectionHeader, bundle: nil), forHeaderFooterViewReuseIdentifier: Constants.UIDefaults.Labels.sectionHeader)
   }
   

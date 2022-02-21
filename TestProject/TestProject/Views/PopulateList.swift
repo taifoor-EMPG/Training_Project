@@ -31,8 +31,18 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
   override func viewDidLoad() {
     super.viewDidLoad()
     //Misc Attribute Setup
-    setupUI()
-    wallpapers = presenter?.getWallpapers()
+    
+    let key = presenter?.getListKey()
+    setupUI(key ?? Constants.newListKey)
+    if key ?? Constants.newListKey >= Constants.staticListCount
+    {
+      wallpapers = presenter?.getWallpapers()
+    }
+        
+    if key == 0
+    {
+      setupWeatherBackground()
+    }
   }
   
   override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -96,13 +106,16 @@ class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITab
     self.present(alert, animated: true, completion: nil)
     //END OF ALERT
   }
+  func getFrame() -> CGRect {
+    return view.frame
+  }
   
 }
 
 //Utilities Related Functionality
 extension PopulateList
 {
-  private func setupUI()
+  private func setupUI(_ key: Int)
   {
     //Set Table Attributes
     listItems.delegate = self
@@ -117,7 +130,10 @@ extension PopulateList
     listTitle.delegate = self
     
     //Set CollectionView
-    setCollection()
+    if key >= Constants.staticListCount
+    {
+      setCollection()
+    }
     
     //Setting Notifications for Keyboard
     NotificationCenter.default.addObserver(
@@ -219,7 +235,6 @@ extension PopulateList
   func hideKeyboardWhenTappedAround() {
     let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     tap.cancelsTouchesInView = false
-    tap.view?.backgroundColor = .systemRed
     listItems.addGestureRecognizer(tap)
   }
   
@@ -262,21 +277,6 @@ extension PopulateList
     DispatchQueue.main.async { [self] in
       //Update UI on main thread
       view.backgroundColor = color
-      //Set background of table header
-      headerView.backgroundColor = color
-      //Set background for table view
-      listItems.backgroundColor = color
-      //Set background of collection view
-      wallpaperCollection?.backgroundColor = color
-      //Set background of all cells
-      let items = listItems.visibleCells
-      
-      for item in items{
-        let newCell = item as! ListItemCell
-        newCell.setBackgroundColor(color)
-      }
-      //Set New Item Bar
-      newItem.backgroundColor = color
     }
   }
 }
@@ -424,5 +424,22 @@ extension PopulateList: UICollectionViewDelegate, UICollectionViewDataSource
     let colorName = cell.getColorName()
     colorScreen(color)
     presenter?.setColor(colorName)
+  }
+}
+
+//MARK: Weather Related Functionalities
+extension PopulateList
+{
+  func setupWeatherBackground()
+  {
+    //Test this color scheme out
+    newItem.backgroundColor = .secondarySystemBackground
+    
+    guard let backgroundVideo = presenter?.getBackgroundView() else {
+      return
+    }
+    
+    view.addSubview(backgroundVideo)
+    view.sendSubviewToBack(backgroundVideo)
   }
 }

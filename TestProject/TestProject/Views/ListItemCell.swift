@@ -42,11 +42,6 @@ class ListItemCell: UITableViewCell {
     return itemKey ?? Constants.newListItemKey
   }
   
-  func setBackgroundColor(_ color: UIColor)
-  {
-    cellView.backgroundColor = color
-  }
-  
   @IBAction func tappedCheck(_ sender: UIButton) {
     
     let attrRedStrikethroughStyle = [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)]

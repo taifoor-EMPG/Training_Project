@@ -52,6 +52,7 @@ class Tester: UIViewController
     listItemTable.dataSource = self
     listItemTable.delegate = self
     
+    //instantiateCore()
     fetchFromCore()
   }
   
@@ -290,6 +291,115 @@ extension Tester
       counters[0].group = 0
       counters[0].list = 5
       counters[0].listItem = 0
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getListItems")
+    }
+  }
+  
+  private func instantiateCore()
+  {
+    let context = CoreDataManager.shared.persistentContainer.viewContext
+    do
+    {
+      let request = Group.fetchRequest() as NSFetchRequest<Group>
+      let groups = try context.fetch(request)
+      
+      for object in groups
+      {
+        context.delete(object)
+      }
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getGroups")
+    }
+    
+    do
+    {
+      let request = List.fetchRequest() as NSFetchRequest<List>
+      let lists = try context.fetch(request)
+      
+      for object in lists
+      {
+        context.delete(object)
+      }
+      
+      let myDay = List(context: context)
+      myDay.listKey = 0
+      myDay.name = "My Day"
+      myDay.isPermanent = true
+      myDay.color = "default"
+      
+      let important = List(context: context)
+      important.listKey = 1
+      important.name = "Important"
+      important.isPermanent = true
+      important.color = "default"
+      
+      let planned = List(context: context)
+      planned.listKey = 2
+      planned.name = "Planned"
+      planned.isPermanent = true
+      planned.color = "default"
+      
+      let assigned = List(context: context)
+      assigned.listKey = 3
+      assigned.name = "Assigned to me"
+      assigned.isPermanent = true
+      assigned.color = "default"
+      
+      let tasks = List(context: context)
+      tasks.listKey = 4
+      tasks.name = "Tasks"
+      tasks.isPermanent = true
+      tasks.color = "default"
+      
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getLists")
+    }
+    
+    do
+    {
+      let request = ListItem.fetchRequest() as NSFetchRequest<ListItem>
+      let listItems = try context.fetch(request)
+      
+      for object in listItems
+      {
+        context.delete(object)
+      }
+      try context.save()
+    }
+    catch
+    {
+      //Error Failed to Fetch Data
+      LoggingSystemFlow.printLog("ERROR: In Tester >> fetchFromCore >> func getListItems")
+    }
+    
+    do
+    {
+      let request = Counters.fetchRequest() as NSFetchRequest<Counters>
+      let counters = try context.fetch(request)
+      
+      for object in counters
+      {
+        context.delete(object)
+      }
+
+      let counter = Counters(context: context)
+      counter.list = 5
+      counter.group = 0
+      counter.listItem = 0
+      
       try context.save()
     }
     catch

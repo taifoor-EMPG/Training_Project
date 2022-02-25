@@ -8,10 +8,21 @@
 
 import UIKit
 
-class ProfileRouter
+class ProfileRouter: ProtocolPresenterToRouterProfile
 {
-    static func createModule()
-    {
+    static func createModule() -> UIViewController? {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "Profile") as! Profile
         
+        let source = DataRepository(plugin: CoreData())
+        
+        let presenter: ProtocolViewToPresenterProfile & ProtocolInteractorToPresenterProfile = ProfilePresenter(view: viewController, interactor: ProfileInteractor(source: source), router: ProfileRouter())
+        
+        presenter.initInteractor()
+        viewController.setPresenter(presenter)
+            
+        //Set Data Members Here
+        
+        return viewController
     }
 }

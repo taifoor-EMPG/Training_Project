@@ -7,31 +7,90 @@
 
 import UIKit
 
-class PopulateList: UIViewController, Proto_PTOV_PopulateList, UITableViewDelegate, UITableViewDataSource
+class PopulateList: UIViewController, ProtocolPresenterToViewPopulateList, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
     //DATA MEMBERS
     
-    var presenter: (Proto_ITOP_PopulateList & Proto_VTOP_PopulateList)?
+    private var presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?
     @IBOutlet weak var listItems: UITableView!
-    
+    @IBOutlet weak var listTitle: UITextField!
+    var currentTitle: String = ""
     //END OF DATA MEMBERS
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Misc Attribute Setup
-        
         setupUI()
+    }
+    
+    func setPresenter(_ presenter: (ProtocolInteractorToPresenterPopulateList & ProtocolViewToPresenterPopulateList)?)
+    {
+        self.presenter = presenter
     }
 }
 
+//Utilities Related Functionality
 extension PopulateList
 {
     private func setupUI()
     {
         //Set Table Attributes
-        //listItems.register(OptionalListCell.self, forCellReuseIdentifier: Constants.UIDefaults.labels.optionalListCell)
         listItems.delegate = self
         listItems.dataSource = self
+        currentTitle = (presenter?.getListName()) ?? Constants.emptyString
+        listTitle.text = currentTitle
+        listTitle.delegate = self
+        
+        var result = presenter?.allowEditing(currentTitle)
+        if result == nil || result == false
+        {
+            listTitle.isUserInteractionEnabled = false
+        }
+        else
+        {
+            listTitle.isUserInteractionEnabled = true
+        }
+        
+        result = presenter?.isFirstOpen()
+        
+        if result == true
+        {
+            listTitle.becomeFirstResponder()
+        }
+        else
+        {
+            listTitle.resignFirstResponder()
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        //String is Empty
+        if listTitle.text?.isEmpty == true
+        {
+            //Pop Error
+            Utilities.popAnError(self, 2)
+            return false
+        }
+        
+        if listTitle.text == currentTitle
+        {
+            //No Change in Text
+            listTitle.resignFirstResponder()
+            return true
+        }
+        else if presenter?.changeListTitle(oldTitle: currentTitle, newTitle: listTitle.text ?? Constants.emptyString) == true
+        {
+            //New List Name Approved by DB
+            currentTitle = listTitle.text ?? Constants.emptyString
+            listTitle.resignFirstResponder()
+            return true
+        }
+        
+        //Database did not allow a change
+        //Pop Error
+        Utilities.popAnError(self, 1)
+        return false
     }
 }
 
@@ -49,7 +108,7 @@ extension PopulateList
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = tableView.cellForRow(at: indexPath) as! ListItemCell
+        tableView.cellForRow(at: indexPath)
         presenter?.pushToEditText(itemNumber: indexPath.row)
     }
 }

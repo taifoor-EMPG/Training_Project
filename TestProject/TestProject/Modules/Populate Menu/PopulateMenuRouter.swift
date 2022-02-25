@@ -7,56 +7,72 @@
 
 import UIKit
 
-class PopulateMenuRouter: Proto_PTOR_PopulateMenu
+class PopulateMenuRouter: ProtocolPresenterToRouterPopulateMenu
 {
-    
     static func createModule() -> UINavigationController? {
-        
-        //This all should come from a Factory >> Dependency Injection
         
         let storyBoard: UIStoryboard = UIStoryboard(name: "Menu", bundle: nil)
         let viewController = storyBoard.instantiateViewController(withIdentifier: "MenuVC") as! MenuVC
         
         let NavigationController = UINavigationController(rootViewController: viewController)
         
-        let presenter: Proto_VTOP_PopulateMenu & Proto_ITOP_PopulateMenu = PopulateMenuPresenter()
+        let source = DataRepository(plugin: CoreData())
         
-        viewController.presenter = presenter
-        viewController.presenter?.router = PopulateMenuRouter()
-        viewController.presenter?.view = viewController
-        viewController.presenter?.interactor = PopulateMenuInteractor()
-        viewController.presenter?.interactor?.presenter = presenter
+        let presenter: ProtocolViewToPresenterPopulateMenu & ProtocolInteractorToPresenterPopulateMenu = PopulateMenuPresenter(view: viewController, interactor: PopulateMenuInteractor(source: source), router: PopulateMenuRouter())
+        
+        presenter.initInteractor()
+        viewController.setPresenter(presenter)
         
         return NavigationController
     }
     
-    //func pushToMovieDetail(on view: Proto_PTOV_PopulateMenu?, with: List) {
-        
-        //if let movieDetailViewController = AddNewListRouter.createModule(with: with)
-        
-            //let viewController = view as! MovieListViewController
-            //viewController.navigationController?.pushViewController(movieDetailViewController, animated: true)
-      
-    //}
-    
-    func pushToProfile() {
-        return
+    //Changes to Profile Screen
+    func pushToProfile(view: ProtocolPresenterToViewPopulateMenu?) {
+        if let profileVC = ProfileRouter.createModule()
+        {
+            let viewController = view as! MenuVC
+            viewController.present(profileVC, animated: true, completion: nil)
+        }
     }
     
-    func pushToSearch() {
-        return
+    //Changes to Search Screen
+    func pushToSearch(view: ProtocolPresenterToViewPopulateMenu?) {
+        
+        if let searchVC = SearchRouter.createModule()
+        {
+            let viewController = view as! MenuVC
+            searchVC.modalPresentationStyle = .fullScreen
+            viewController.present(searchVC, animated: true, completion: nil)
+        }
     }
     
-    func pushToOpenList(view: Proto_PTOV_PopulateMenu?, with listName: String)
+    func createGroupOptions() -> GroupOptions {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupOptions", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "GroupOptions") as! GroupOptions
+        return viewController
+    }
+    
+    func createGroupPrompt() -> GroupPrompt
     {
-        if let openListVC = PopulateListRouter.createModule(with: listName)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "GroupPrompt", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(withIdentifier: "GroupPrompt") as! GroupPrompt
+        return viewController
+    }
+    
+    //Wrapper Function
+    //Changes to OpenList - Also acts as NewList Creater
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String)
+    {
+        pushToOpenList(view: view, with: listName, editable: false)
+    }
+    
+    //Actual Implementation
+    func pushToOpenList(view: ProtocolPresenterToViewPopulateMenu?, with listName: String, editable: Bool) {
+        
+        if let openListVC = PopulateListRouter.createModule(with: listName, editable: editable)
         {
             let viewController = view as! MenuVC
             viewController.navigationController?.pushViewController(openListVC, animated: true)
         }
-    }
-    
-    func pushToAddNewList() {
-        return
     }
 }

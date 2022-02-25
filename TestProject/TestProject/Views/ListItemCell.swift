@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol ListItemCellProtocols
+{
+    func didTapChecked()
+}
+
+
+
+
 class ListItemCell: UITableViewCell {
 
     //DATA MEMBERS
@@ -15,6 +23,7 @@ class ListItemCell: UITableViewCell {
     @IBOutlet weak var checkMark: UIButton!
     private var status:Bool = false
     
+    private var delegate: ListItemCellProtocols?
     //END OF DATA MEMBERS
     
     
@@ -39,17 +48,17 @@ class ListItemCell: UITableViewCell {
         if status == false
         {
             status = true
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
             //Strike Through Text
-            let text = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
+          let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
             label.attributedText = text
         }
         else
         {
             status = false
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
             //Unstrike through text
-            let text = NSAttributedString(string: label.text!, attributes: attrBlueNoStrikethroughStyle)
+            let text = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrBlueNoStrikethroughStyle)
             label.attributedText = text
         }
     }
@@ -58,19 +67,21 @@ class ListItemCell: UITableViewCell {
     
     func setupCell(text: String, status: Bool)
     {
+        //self.delegate = reference
+        
         let attrRedStrikethroughStyle = [NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue)]
         
         label.text = text
         self.status = status
         if status == true
         {
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.checkedCircle), for: .normal)
-            let temp = NSAttributedString(string: label.text!, attributes: attrRedStrikethroughStyle)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.checkedCircle), for: .normal)
+            let temp = NSAttributedString(string: label.text ?? Constants.emptyString, attributes: attrRedStrikethroughStyle)
             label.attributedText = temp
         }
         else
         {
-            checkMark.setImage(UIImage(named: Constants.UIDefaults.images.uncheckedCircle), for: .normal)
+            checkMark.setImage(UIImage(named: Constants.UIDefaults.Images.uncheckedCircle), for: .normal)
         }
     }
   

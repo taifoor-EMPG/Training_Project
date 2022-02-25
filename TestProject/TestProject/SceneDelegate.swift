@@ -22,6 +22,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.frame = UIScreen.main.bounds
         
         let navigationController = PopulateMenuRouter.createModule()
+        
+        
+        //let storyBoard: UIStoryboard = UIStoryboard(name: "DBView", bundle: nil)
+        //let viewController = storyBoard.instantiateViewController(withIdentifier: "DBView") as! DBView
+        //window?.rootViewController = viewController
+        
+        
         window?.rootViewController = navigationController
         window!.makeKeyAndVisible()
     }

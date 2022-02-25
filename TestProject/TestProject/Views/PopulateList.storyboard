@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,21 +19,33 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="l5T-yG-0HY">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    List Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPo-2D-Ibi">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="ise-dY-pZu"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <color key="textColor" name="AccentColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JLU-zQ-gZw" userLabel="List Items Table">
-                                        <rect key="frame" x="0.0" y="50" width="414" height="718"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="768"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <view key="tableHeaderView" contentMode="scaleToFill" id="KfV-em-c34" userLabel="Table Header">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="List Title Here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5lA-1a-6rO" userLabel="List Title">
+                                                    <rect key="frame" x="15" y="0.0" width="384" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="kQo-QG-CJd"/>
+                                                    </constraints>
+                                                    <color key="textColor" systemColor="linkColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="5lA-1a-6rO" firstAttribute="leading" secondItem="KfV-em-c34" secondAttribute="leading" constant="15" id="Vez-Tw-XIE"/>
+                                                <constraint firstAttribute="trailing" secondItem="5lA-1a-6rO" secondAttribute="trailing" constant="15" id="d1Y-JT-Tak"/>
+                                                <constraint firstItem="5lA-1a-6rO" firstAttribute="top" secondItem="KfV-em-c34" secondAttribute="top" id="fb4-EO-tbv"/>
+                                            </constraints>
+                                        </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ListItemCell" rowHeight="50" id="rqV-xH-yjg" customClass="ListItemCell" customModule="TestProject" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
+                                                <rect key="frame" x="0.0" y="88.5" width="414" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rqV-xH-yjg" id="InQ-lC-bpZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -54,7 +65,7 @@
                                                                         <action selector="tappedCheck:" destination="rqV-xH-yjg" eventType="touchUpInside" id="9re-iD-NOL"/>
                                                                     </connections>
                                                                 </button>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List Item" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHq-Vo-woX">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="List Item" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHq-Vo-woX">
                                                                     <rect key="frame" x="50" y="0.0" width="324" height="50"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -97,14 +108,10 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="dPo-2D-Ibi" firstAttribute="leading" secondItem="l5T-yG-0HY" secondAttribute="leading" id="0Ob-OG-WTe"/>
-                                    <constraint firstItem="dPo-2D-Ibi" firstAttribute="top" secondItem="l5T-yG-0HY" secondAttribute="top" id="2bv-CV-MId"/>
-                                    <constraint firstItem="JLU-zQ-gZw" firstAttribute="top" secondItem="dPo-2D-Ibi" secondAttribute="bottom" id="5Ey-Pz-LuY"/>
                                     <constraint firstAttribute="trailing" secondItem="JLU-zQ-gZw" secondAttribute="trailing" id="5fy-Yg-CeC"/>
                                     <constraint firstItem="1Cf-wl-5hL" firstAttribute="leading" secondItem="l5T-yG-0HY" secondAttribute="leading" id="DZN-uZ-Mbu"/>
                                     <constraint firstItem="1Cf-wl-5hL" firstAttribute="top" secondItem="JLU-zQ-gZw" secondAttribute="bottom" id="K0r-p6-8Ds"/>
                                     <constraint firstAttribute="bottom" secondItem="1Cf-wl-5hL" secondAttribute="bottom" id="LoU-sp-wNv"/>
-                                    <constraint firstAttribute="trailing" secondItem="dPo-2D-Ibi" secondAttribute="trailing" id="bpf-af-03i"/>
                                     <constraint firstAttribute="trailing" secondItem="1Cf-wl-5hL" secondAttribute="trailing" id="eSR-YA-1q9"/>
                                     <constraint firstItem="JLU-zQ-gZw" firstAttribute="leading" secondItem="l5T-yG-0HY" secondAttribute="leading" id="kdy-Pt-jlD"/>
                                 </constraints>
@@ -121,6 +128,7 @@
                     </view>
                     <connections>
                         <outlet property="listItems" destination="JLU-zQ-gZw" id="GBX-T6-sUc"/>
+                        <outlet property="listTitle" destination="5lA-1a-6rO" id="RIN-3A-75C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -130,9 +138,9 @@
     </scenes>
     <resources>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
